@@ -1,5 +1,5 @@
 [build]
-  command = "hugo --source blog && cp -R blog-build blog"
+  command = "hugo --source build && cp -R blog"
   publish = "./"
 
   [build.environment]

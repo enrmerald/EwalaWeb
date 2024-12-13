@@ -3,7 +3,7 @@ languageCode = 'es_ES'
 title = 'Ewala IT Services Blog'
 theme = 'paper'
 
-publishDir = "../blog-build"
+publishDir = "../blog"
 
 [params]
   ewalalogo = 'https://ewalait.github.io/blogewala/images/ewala_w.png'
