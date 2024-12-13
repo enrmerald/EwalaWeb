@@ -40,7 +40,7 @@
   <!---->
   {{ if site.Params.monoDarkIcon }}{{ $dark_icon = "theme.svg" }}{{ end }}
   <!---->
-  <link rel="preload" as="image" href="{{ $dark_icon | relURL  }}" />
+  <link rel="preload" as="image" href="{{ $dark_icon | absURL  }}" />
 
   <!-- avatar -->
   {{ $avatar_url := $.Scratch.Get "avatar_url" }}
@@ -84,7 +84,7 @@
       rel="stylesheet">
 
   <!-- Etiqueta canonical para el SEO -->
-  <link rel="canonical" href="{{ .Site.Params.pageEwala | relURL  }}" />
+  <link rel="canonical" href="{{ .Site.Params.pageEwala | absURL  }}" />
   <!-- Etiqueta robots para el SEO -->
   {{ if or (eq .Type "tags") (eq .Type "categories") }}
   <meta name="robots" content="noindex, follow" />
