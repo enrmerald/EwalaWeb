@@ -1,9 +1,9 @@
-baseURL = 'https://www.ewala.es/blog/'
+baseURL = '/blog/'
 languageCode = 'es_ES'
 title = 'Ewala IT Services Blog'
 theme = 'paper'
 
-publishDir = "docs"
+publishDir = "../blog-build"
 
 [params]
   ewalalogo = 'https://ewalait.github.io/blogewala/images/ewala_w.png'
@@ -14,7 +14,7 @@ publishDir = "docs"
   linkedin = 'https://www.linkedin.com/company/e-wala-it-services'
   defaultpostimage = '/images/ewala.png'
   pageEwala = 'https://www.ewala.es/'
-  pageBlog = 'https://www.ewala.es/blog/'
+  pageBlog = '/blog/'
   ewalaBlogImg = '/images/hackerLogo.png'
   ewalaSecurityWizards = '/images/ewala_sec_wiz.png'
   generateTaxonomies = true

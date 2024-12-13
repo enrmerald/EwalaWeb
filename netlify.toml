@@ -1,12 +1,12 @@
 [build]
-  publish = "docs"
-  command = "hugo --gc --minify"
+  command = "hugo --source blog && cp -R blog-build blog"
+  publish = "./"
 
   [build.environment]
-    HUGO_VERSION = "0.139.0"
+    HUGO_VERSION = "latest"
 
 [context.production]
-  environment = { HUGO_VERSION = "0.139.0", HUGO_ENV = "production", HUGO_ENABLEGITINFO = "true" }
+  environment = { HUGO_VERSION = "latest", HUGO_ENV = "production", HUGO_ENABLEGITINFO = "true" }
 
 [context.split1]
   command = "hugo --gc --minify --enableGitInfo"
@@ -22,3 +22,8 @@
 
 [context.next.environment]
   HUGO_ENABLEGITINFO = "true"
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/:splat"
+  status = 200
