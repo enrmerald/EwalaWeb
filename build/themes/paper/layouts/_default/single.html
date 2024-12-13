@@ -22,7 +22,7 @@
   <section class="ewala-article-section">
     {{ if .Params.postimage }}
     <div class="post-image-detail-container">
-      <img src="{{ .Params.postimage }}" class="post-image-detail" alt="Post image">
+      <img src="{{ .Params.postimage | absURL }}" class="post-image-detail" alt="Post image">
     </div>
     {{ end }}{{ .Content }}
   </section>

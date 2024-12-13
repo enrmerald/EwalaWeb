@@ -57,9 +57,9 @@
     <div class="post-image-list-container">
       <a href="{{.Permalink}}">
         {{if .Params.postimage }}
-        <img src="{{.Params.postimage}}" class="post-image-list" />
+        <img src="{{ .Site.Params.baseURL }}{{.Params.postimage}}" class="post-image-list" />
         {{else}}
-        <img src="{{.Site.Params.defaultpostimage}}" class="post-image-list" />
+        <img src="{{ .Site.Params.baseURL }}{{.Site.Params.defaultpostimage}}" class="post-image-list" />
         {{end}}
       </a>
     </div>
