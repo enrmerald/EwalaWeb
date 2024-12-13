@@ -5,8 +5,11 @@ theme = 'paper'
 
 publishDir = "../blog/"
 
+relativeURLs = true
+canonifyURLs = false
+
 [params]
-  ewalalogo = 'https://ewalait.github.io/blogewala/images/ewala_w.png'
+  ewalalogo = '/images/ewala_w.png'
   ewalafavicon = '/images/favicon.png'
   color = 'light'
   ewalateam = '/images/logo-hacker.png'

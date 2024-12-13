@@ -42,11 +42,11 @@
 
   {{ if not .IsPage }}
   <div class="ciberseg-frontal">
-    <img class="cyberseg-img" src="{{ .Site.Params.ewalaBlogImg | relURL }}"
+    <img class="cyberseg-img" src="{{ .Site.Params.ewalaBlogImg | absURL }}"
       alt="Image of a Ewala's Cibersecurity Agent" />
     <div class="ciberseg-texts">
       <div>
-        <img src="{{ .Site.Params.ewalaSecurityWizards | relURL }}">
+        <img src="{{ .Site.Params.ewalaSecurityWizards | absURL }}">
         <h1>Blog de Ciberseguridad</h1>
       </div>
     </div>
