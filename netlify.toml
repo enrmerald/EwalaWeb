@@ -1,5 +1,5 @@
 [build]
-  command = "hugo --minify --source build --destination blog"
+  command = "hugo --minify --source build --destination build/docs && cp -R build/docs blog"
   publish = "./"
 
   [build.environment]
