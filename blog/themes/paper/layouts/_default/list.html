@@ -1,0 +1,112 @@
+{{ define "main" }}
+
+<!-- Tag Title -->
+{{ if and .Title (eq .Type "tags") }}
+<h1 class="mb-14 ewala-show-tag">Tag: #{{ .Title }}</h1>
+{{ end }}
+
+{{ if and .Title (eq .Type "categories") }}
+<h1 class="mb-14 ewala-show-category">Categoría: {{ .Title }}</h1>
+{{ end }}
+
+
+<!-- $pages -->
+{{ $pages := union .RegularPages .Sections }}<!---->
+{{ if .IsHome }}<!---->
+{{ $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}<!---->
+{{ end }}
+
+<!-- Articles -->
+{{ $paginator := .Paginate $pages }} {{ range $index, $page := $paginator.Pages
+}}<!---->
+
+<!-- avatar -->
+{{ if and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) }}<!---->
+
+{{ $avatar_url := $.Scratch.Get "avatar_url" }}<!---->
+{{ if or $avatar_url site.Params.name }}
+<div class="-mt-2 mb-12 flex items-center">
+  {{ if $avatar_url }}
+  <div
+    class="ltr:-ml-1 rtl:-mr-1 ltr:mr-5 rtl:ml-5 h-24 w-24 shrink-0 rounded-full border-[0.5px] border-black/10 bg-white/50 p-3 dark:!bg-white/90">
+    <img class="my-0 h-full w-full rounded-full !bg-black/5 hover:animate-spin dark:!bg-black/80"
+      src="{{ $avatar_url }}" alt="{{ site.Params.name | default site.Title }}" />
+  </div>
+  {{ end }}<!---->
+  {{ if site.Params.name }}
+  <div>
+    <div class="mb-1 mt-3 text-2xl font-medium text-black dark:text-white">
+      {{ site.Params.name }}
+    </div>
+    <div class="break-words">
+      {{ site.Params.bio | default (print `A personal blog by `
+      site.Params.name) }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}<!---->
+
+{{ end }}
+
+<section class="relative ewala-section">
+  {{ if gt .Weight 0 }}
+  <span class="mb-1 inline-block text-xs tracking-wider text-orange-500">Featured</span>
+  {{ end }}
+  <h2 class="ewala-title-link">
+    <div class="post-image-list-container">
+      <a href="{{.Permalink}}">
+        {{if .Params.postimage }}
+        <img src="{{.Params.postimage}}" class="post-image-list" />
+        {{else}}
+        <img src="{{.Site.Params.defaultpostimage}}" class="post-image-list" />
+        {{end}}
+      </a>
+    </div>
+    <a class="ewala-link" href="{{ .Permalink }}">{{ .Title }}</a>
+  </h2>
+
+  <time class="text-xs antialiased opacity-60">
+    {{ .Date | time.Format ":date_medium" }}  
+  </time>
+
+  {{ if .Params.author }}
+  {{ if .Params.authorlink }}
+  <p class="author-container">Autor: <a class="author-text" href="{{ .Params.authorlink }}"
+      title="Go to {{ .Params.authorlink}}">{{ .Params.author }}</a></p>
+  {{else}}
+  <p class="author-container">Autor: <span class="author-text" title="{{.Params.author}}">{{ .Params.author }}</span>
+  </p>
+  {{end}}
+  {{else}}
+  <p>Sin autor</p>
+  {{end}}
+
+  <div class="ewala-post-description">
+    <p>
+      {{.Params.description}}
+    </p>
+  </div>
+
+  <a class="ewala-read-more" href="{{ .Permalink}}">Leer más...</a>
+  <a class="inset-0 text-[0]" href="{{ .Permalink }}">{{ .Title }}</a>
+</section>
+{{ end }}
+
+<!-- Main Nav -->
+{{ if gt $paginator.TotalPages 1 }}
+<div class="ewala-post-paginator">
+  <div class="ewala-limit-width">
+    <nav class="mt-14 flex">
+      {{ if $paginator.HasPrev }}
+      <a class="ewala-button" href="{{ $paginator.Prev.URL }}">← {{ i18n "prev_page" }}</a>
+      {{ end }}<!---->
+      {{ if $paginator.HasNext }}
+      <a class="ml-auto ewala-button" href="{{ $paginator.Next.URL }}">{{ i18n "next_page" }} →</a>
+      {{ end }}
+    </nav>
+  </div>
+</div>
+{{ end }}<!---->
+
+{{ end }}

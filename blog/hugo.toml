@@ -1,0 +1,38 @@
+baseURL = 'https://www.ewala.es/blog/'
+languageCode = 'es_ES'
+title = 'Ewala IT Services Blog'
+theme = 'paper'
+
+publishDir = "docs"
+
+[params]
+  ewalalogo = 'https://ewalait.github.io/blogewala/images/ewala_w.png'
+  ewalafavicon = '/images/favicon.png'
+  color = 'light'
+  ewalateam = '/images/logo-hacker.png'
+  youtube = 'https://www.youtube.com/channel/UCMcvwAIxQNsI8WloxR9r_gg'
+  linkedin = 'https://www.linkedin.com/company/e-wala-it-services'
+  defaultpostimage = '/images/ewala.png'
+  pageEwala = 'https://www.ewala.es/'
+  pageBlog = 'https://www.ewala.es/blog/'
+  ewalaBlogImg = '/images/hackerLogo.png'
+  ewalaSecurityWizards = '/images/ewala_sec_wiz.png'
+  generateTaxonomies = true
+  
+  [params.seo]
+    description = "Blog sobre ciberseguridad, tecnología y más, por Ewala IT Services."
+    keywords = ["Ciberseguridad", "Ewala IT Services", "Tecnología", "Seguridad informática"]
+    ogImage = "/images/ewala.png"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[permalinks]
+  categories = "/categories/:slug/"
+  tags = "/tags/:slug/"
+
+[pagination]
+disableAliases = false
+pagerSize = 6
+path = 'page'

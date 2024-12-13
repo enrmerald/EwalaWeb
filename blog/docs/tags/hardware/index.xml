@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hardware on Ewala IT Services Blog</title>
+    <link>http://localhost:1313/tags/hardware/</link>
+    <description>Recent content in Hardware on Ewala IT Services Blog</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Thu, 24 Oct 2024 16:40:24 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Neotec</title>
+      <link>http://localhost:1313/posts/neotec/neotec/</link>
+      <pubDate>Thu, 24 Oct 2024 16:40:24 +0200</pubDate>
+      <guid>http://localhost:1313/posts/neotec/neotec/</guid>
+      <description>&lt;h2 id=&#34;neotec&#34;&gt;Neotec&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Neotec&lt;/strong&gt; es un proyecto destinado a proteger redes de equipos, actuando como si fuera un firewall avanzado, con capacidad para detectar conexiones peligrosas, y permitir o denegar el acceso a las mismas.&lt;/p&gt;&#xA;&lt;h2 id=&#34;defensa-clave-en-entornos-industriales&#34;&gt;Defensa clave en entornos industriales&lt;/h2&gt;&#xA;&lt;p&gt;Aplicación desarrollada por el departamento de I+D+i de &lt;strong&gt;Ewala&lt;/strong&gt; pensada para proteger los dispositivos industriales vulnerables que no pueden ser sustituídos ni actualizados.&lt;/p&gt;&#xA;&lt;h2 id=&#34;aprendizaje-automático&#34;&gt;Aprendizaje automático&lt;/h2&gt;&#xA;&lt;p&gt;La aplicación centra sus esfuerzos en aprender el comportamiento habitual de los dispositivos OT Legacy, lo cual permite detectar actividades anómalas a tiempo y detenerlas antes de que se produzca una interrupción en los procesos industriales.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

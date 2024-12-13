@@ -1,0 +1,77 @@
+<!doctype html>
+
+{{ $.Scratch.Delete "bg_color" }}<!---->
+{{ $.Scratch.Delete "social_list" }}<!---->
+{{ $.Scratch.Delete "avatar_url" }}<!---->
+
+<!-- bg_color -->
+{{ $color_map := dict "linen" "#faf8f1" "wheat" "#f8f5d7" "gray" "#fbfbfb"
+"light" "#fff"}}<!---->
+{{ $.Scratch.Set "bg_color" (index $color_map (site.Params.color | default
+(print "light"))) }}<!---->
+{{ $bg_color := $.Scratch.Get "bg_color" }}<!---->
+
+<!-- social_list -->
+{{ $social_params := slice "twitter" "github" "instagram" "linkedin" "mastodon"
+"threads" "rss" }}<!---->
+{{ range $social_params }}<!---->
+{{ if isset site.Params . }}<!---->
+{{ $.Scratch.Add "social_list" (slice .) }}<!---->
+{{ end }}<!---->
+{{ end }}<!---->
+
+<!-- avatar_url -->
+{{ if site.Params.avatar }}<!---->
+{{ if in site.Params.avatar "http" }}<!---->
+{{ $.Scratch.Set "avatar_url" site.Params.avatar }}<!---->
+{{ else }}<!---->
+{{ $official_cdn := "https://www.gravatar.com/avatar/" }}<!---->
+{{ $cdn := (site.Params.gravatarCdn | default $official_cdn) }}<!---->
+{{ $md5 := (md5 site.Params.avatar) }}<!---->
+{{ $avatar_url := print $cdn $md5 "?s=160&d=identicon" }}<!---->
+{{ $.Scratch.Set "avatar_url" $avatar_url }}<!---->
+{{ end }}<!---->
+{{ end }}<!---->
+
+<html class="not-ready lg:text-base" style="--bg: {{ $bg_color }}" lang="{{ or site.LanguageCode site.Language.Lang }}"
+  dir="{{ if site.Params.direction }}{{ site.Params.direction }}{{ else }}ltr{{ end }}">
+{{ partial "head.html" . }}
+
+<body class="text-black duration-200 ease-out dark:text-white">
+  {{ partial "header.html" . }}
+
+  {{ if not .IsPage }}
+  <div class="ciberseg-frontal">
+    <img class="cyberseg-img" src="{{ .Site.Params.ewalaBlogImg | relURL }}"
+      alt="Image of a Ewala's Cibersecurity Agent" />
+    <div class="ciberseg-texts">
+      <div>
+        <img src="{{ .Site.Params.ewalaSecurityWizards | relURL }}">
+        <h1>Blog de Ciberseguridad</h1>
+      </div>
+    </div>
+  </div>
+  {{end}}
+
+  {{ if or .IsHome (eq .Kind "404") (eq .Type "tags") (eq .Type "categories") }}
+  <main class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] px-8dark:prose-invert ewala-page-container">
+
+    <div class="ewala-sections-container">
+
+      {{ block "main" . }}{{ end }}
+
+    </div>
+
+  </main>
+  {{ else }}
+  <main class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100%-9rem)] px-8dark:prose-invert ewala-post-container">
+    <div class="ewala-post-container">
+      {{ block "post" . }}{{ end }}
+    </div>
+  </main>
+  {{ end }}
+
+  {{ partial "footer.html" . }}
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software on Ewala IT Services Blog</title>
+    <link>http://localhost:1313/tags/software/</link>
+    <description>Recent content in Software on Ewala IT Services Blog</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Mon, 28 Oct 2024 09:40:23 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Karont3</title>
+      <link>http://localhost:1313/posts/karont3/karont3/</link>
+      <pubDate>Mon, 28 Oct 2024 09:40:23 +0100</pubDate>
+      <guid>http://localhost:1313/posts/karont3/karont3/</guid>
+      <description>&lt;h2 id=&#34;karont3&#34;&gt;Karont3&lt;/h2&gt;&#xA;&lt;p&gt;Vigila a quien te vigila.&lt;/p&gt;&#xA;&lt;h2 id=&#34;threat-intelligence-observatorio-de-fugas-de-información&#34;&gt;Threat Intelligence: Observatorio de fugas de información&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Karont3&lt;/strong&gt; es una herramienta de Threat Intelligence desarrollada por el departamento de I+D+i de Ewala.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Karont3&lt;/strong&gt; monitoriza continuamente internet (Dark Web, redes sociales&amp;hellip;) en busca de información de  tu empresa que, de forma ilícita o accidental, ha salido de tu compañía y se encuentra a disposición de terceros que no deberían tener acceso a dicha información.&lt;/p&gt;&#xA;&lt;p&gt;La información fugada es una de las fuentes preferidas por los agentes maliciosos para generar ataques dirigidos a empresas.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Orf3o</title>
+      <link>http://localhost:1313/posts/orfeo/orfeo/</link>
+      <pubDate>Mon, 28 Oct 2024 09:39:54 +0100</pubDate>
+      <guid>http://localhost:1313/posts/orfeo/orfeo/</guid>
+      <description>&lt;h2 id=&#34;orf3o&#34;&gt;Orf3o&lt;/h2&gt;&#xA;&lt;h3 id=&#34;búsquedas-centralizadas&#34;&gt;Búsquedas centralizadas&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Orf3o&lt;/strong&gt; es una aplicación de &lt;strong&gt;Threat Intelligence&lt;/strong&gt; desarrollada por el departamento de I+D+i de &lt;strong&gt;Ewala&lt;/strong&gt; que permite buscar de manera centralizada indicadores de compromiso (IOCs), facilitando así la investigación en equipos de seguridad (Blue Teams, SOCs, Incident Response Teams).&lt;/p&gt;&#xA;&lt;h3 id=&#34;múltiples-orígenes&#34;&gt;Múltiples orígenes&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Orf3o&lt;/strong&gt; basa su efectividad en la incorporación de diversas fuentes de datos, incluyendo indicadores reportados por el propio equipo de analistas de Ewala.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Neotec</title>
+      <link>http://localhost:1313/posts/neotec/neotec/</link>
+      <pubDate>Thu, 24 Oct 2024 16:40:24 +0200</pubDate>
+      <guid>http://localhost:1313/posts/neotec/neotec/</guid>
+      <description>&lt;h2 id=&#34;neotec&#34;&gt;Neotec&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Neotec&lt;/strong&gt; es un proyecto destinado a proteger redes de equipos, actuando como si fuera un firewall avanzado, con capacidad para detectar conexiones peligrosas, y permitir o denegar el acceso a las mismas.&lt;/p&gt;&#xA;&lt;h2 id=&#34;defensa-clave-en-entornos-industriales&#34;&gt;Defensa clave en entornos industriales&lt;/h2&gt;&#xA;&lt;p&gt;Aplicación desarrollada por el departamento de I+D+i de &lt;strong&gt;Ewala&lt;/strong&gt; pensada para proteger los dispositivos industriales vulnerables que no pueden ser sustituídos ni actualizados.&lt;/p&gt;&#xA;&lt;h2 id=&#34;aprendizaje-automático&#34;&gt;Aprendizaje automático&lt;/h2&gt;&#xA;&lt;p&gt;La aplicación centra sus esfuerzos en aprender el comportamiento habitual de los dispositivos OT Legacy, lo cual permite detectar actividades anómalas a tiempo y detenerlas antes de que se produzca una interrupción en los procesos industriales.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
