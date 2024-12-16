@@ -1,6 +1,6 @@
 [build]
   command = "hugo --minify --source build --destination build/docs && cp -R build/docs blog"
-  publish = "./"
+  publish = "/"
 
   [build.environment]
     HUGO_VERSION = "0.137.1"

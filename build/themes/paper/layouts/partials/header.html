@@ -3,10 +3,10 @@
     <a class=" text-2xl font-medium" href="{{ .Site.Params.pageEwala }}"
       >
       <div class="topbar-cont">
-        <img src="{{ .Site.Params.ewalalogo }}" style="width: 100px; margin: auto;">
+        <img src="{{ .Site.Params.ewalalogo | relURL  }}" style="width: 100px; margin: auto;">
         </a>
         <div style="width: inherit;"></div>
-        <a class="link-topbar" href='{{ "/" | relURL }}' title="¡Visita nuestro blog!">
+        <a class="link-topbar" href='{{ "/" | relURL  }}' title="¡Visita nuestro blog!">
           <span>B</span>log
         </a>
 
