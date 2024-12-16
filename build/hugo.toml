@@ -6,17 +6,17 @@ theme = 'paper'
 publishDir = "./"
 
 [params]
-  ewalalogo = '/images/ewala_w.png'
-  ewalafavicon = '/images/favicon.png'
+  ewalalogo = '/blog/images/ewala_w.png'
+  ewalafavicon = '/blog/images/favicon.png'
   color = 'light'
-  ewalateam = '/images/logo-hacker.png'
+  ewalateam = '/blog/images/logo-hacker.png'
   youtube = 'https://www.youtube.com/channel/UCMcvwAIxQNsI8WloxR9r_gg'
   linkedin = 'https://www.linkedin.com/company/e-wala-it-services'
-  defaultpostimage = '/images/ewala.png'
+  defaultpostimage = '/blog/images/ewala.png'
   pageEwala = 'https://www.ewala.es/'
   pageBlog = '/blog/'
-  ewalaBlogImg = '/images/hackerLogo.png'
-  ewalaSecurityWizards = '/images/ewala_sec_wiz.png'
+  ewalaBlogImg = '/blog/images/hackerLogo.png'
+  ewalaSecurityWizards = '/blog/images/ewala_sec_wiz.png'
   generateTaxonomies = true
   
   [params.seo]

@@ -4,9 +4,9 @@ date: 2024-11-25T09:30:37.500Z
 categories: ["cybersecurity"]
 tags: ["AV", "EDR", "MDR", "Ciberseguridad avanzada", "Protección 24/7", "cybersecurity", "info"]
 developer: Ewala
-header_image: /images/ima-0001-02-av-edr-mdr.jpg
-postimage: /images/ima-0001-02-av-edr-mdr.jpg
-thumbnail: /images/ima-0001-02-av-edr-mdr.jpg
+header_image: /blog/images/ima-0001-02-av-edr-mdr.jpg
+postimage: /blog/images/ima-0001-02-av-edr-mdr.jpg
+thumbnail: /blog/images/ima-0001-02-av-edr-mdr.jpg
 author: Ewala
 authorlink: https://es.linkedin.com/company/e-wala-it-services
 subtitle: "Más allá del escudo digital: cómo proteger tu empresa en la nueva era de la ciberseguridad empresarial"

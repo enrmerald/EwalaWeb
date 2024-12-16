@@ -5,12 +5,11 @@ categories: ["cybersecurity"]
 tags: ["SOC-MDR", "Kit Digital", "Protección 24/7", "cybersecurity", "info"]
 developer: "Ewala"
 tagewala: "Las mejores soluciones de Ciberseguridad"
-header_image: /images/ima-0001-03-post-mdr-24-7.png
-postimage: /images/ima-0001-03-post-mdr-24-7.png
-thumbnail: /images/ima-0001-03-post-mdr-24-7.png
+header_image: /blog/images/ima-0001-03-post-mdr-24-7.png
+postimage: /blog/images/ima-0001-03-post-mdr-24-7.png
+thumbnail: /blog/images/ima-0001-03-post-mdr-24-7.png
 author: "Ewala"
 authorlink: "https://es.linkedin.com/company/e-wala-it-services"
-postimage: /images/ima-0001-03-post-mdr-24-7.png
 subtitle: "Protección integral con SOC-MDR 24/7; TikTok lo utiliza y tu empresa también puede acceder a este servicio de alto nivel, sin coste, a través de Kit Digital"
 description: " La prohibición de TikTok en Canadá resalta la necesidad de ciberseguridad continua. Protege tu empresa con SOC-MDR 24/7: monitorización, cumplimiento normativo y defensa avanzada, ahora accesible para PYMEs con el programa Kit Digital."
 ---

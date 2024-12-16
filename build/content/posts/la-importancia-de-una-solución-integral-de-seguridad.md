@@ -5,9 +5,9 @@ categories: [cybersecurity]
 tags: [Ciberseguridad,Ataques ransomware,SOC,SIEM y XDR,cybersecurity,info]
 developer: Ewala
 tagewala: cybersecurity
-header_image: /images/img-h61mej1faavdqn5omfqkx.jpg
-postimage: /images/img-h61mej1faavdqn5omfqkx.jpg
-thumbnail: /images/img-h61mej1faavdqn5omfqkx.jpg
+header_image: /blog/images/img-h61mej1faavdqn5omfqkx.jpg
+postimage: /blog/images/img-h61mej1faavdqn5omfqkx.jpg
+thumbnail: /blog/images/img-h61mej1faavdqn5omfqkx.jpg
 author: Ewala
 authorlink: https://es.linkedin.com/company/e-wala-it-services
 subtitle: "Cada día se hace más patente la necesidad de implementar sistemas
