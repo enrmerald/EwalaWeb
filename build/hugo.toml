@@ -5,9 +5,6 @@ theme = 'paper'
 
 publishDir = "./"
 
-relativeURLs = true
-canonifyURLs = false
-
 [params]
   ewalalogo = '/images/ewala_w.png'
   ewalafavicon = '/images/favicon.png'
