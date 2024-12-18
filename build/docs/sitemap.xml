@@ -6,46 +6,95 @@
  created with Free Online Sitemap Generator www.xml-sitemaps.com 
 -->
     <url>
-        <loc>https://blog.ewala.es/</loc>
+        <loc>https://www.ewala.es/blog/</loc>
         <lastmod>2024-11-07T07:16:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://blog.ewala.es/tags/cybersecurity/</loc>
+        <loc>https://www.ewala.es/blog/tags/cybersecurity/</loc>
         <lastmod>2024-11-07T07:16:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
+        <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://blog.ewala.es/tags/info/</loc>
+        <loc>https://www.ewala.es/blog/tags/info/</loc>
         <lastmod>2024-11-07T07:16:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.64</priority>
+        <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://blog.ewala.es/posts/la-importancia-de-una-soluci%C3%B3n-integral-de-seguridad/</loc>
+        <loc>https://www.ewala.es/blog/tags/av/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/ataques-ransomware/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/edr/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/kit-digital/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/mdr/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/protecci%C3%B3n-24/7/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/soc/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.ewala.es/blog/tags/soc-mdr/</loc>
+        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>
+            https://www.ewala.es/blog/posts/la-importancia-de-una-soluci%C3%B3n-integral-de-seguridad/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/la-ciberseguridad-en-la-era-de-los-ataques-digitales-protege-tu-empresa-24-7/</loc>
+            https://www.ewala.es/blog/posts/la-ciberseguridad-en-la-era-de-los-ataques-digitales-protege-tu-empresa-24-7/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
+            https://www.ewala.es/blog/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/2024-11-22-de-tiktok-a-tu-empresa-protecci%C3%B3n-integral-con-soc-mdr-24-7/</loc>
+            https://www.ewala.es/blog/posts/2024-11-22-de-tiktok-a-tu-empresa-protecci%C3%B3n-integral-con-soc-mdr-24-7/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
