@@ -1692,6 +1692,54 @@ section {
   }
 }
 
+/* Estilos generales para las cards de portfolio */
+.card-portfolio-details {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Animación de hover */
+.card-portfolio-details:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Integración con AOS */
+.card-portfolio-details[data-aos] {
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.card-portfolio-details h5 {
+  color: #7cc576 !important;
+  font-weight: 600 !important;
+  font-family: "Open Sans" !important;
+}
+
+
+/* Animaciones de entrada (AOS) */
+.card-portfolio-details[data-aos="fade-up"] {
+    transform: translateY(30px);
+}
+
+.card-portfolio-details[data-aos="fade-down"] {
+    transform: translateY(-30px);
+}
+
+.card-portfolio-details[data-aos="zoom-in"] {
+    transform: scale(0.7);
+
+}
+
+.card-portfolio-details[data-aos="flip-left"] {
+    transform: rotateY(-90deg);
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/

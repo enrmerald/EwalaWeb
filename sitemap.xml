@@ -11,60 +11,54 @@
     </url>
     <!-- Blog -->
     <url>
-        <loc>https://blog.ewala.es/</loc>
+        <loc>https://www.ewala.es/blog/</loc>
         <lastmod>2024-11-07T07:16:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://blog.ewala.es/posts/la-importancia-de-una-soluci%C3%B3n-integral-de-seguridad/</loc>
+        <loc>https://www.ewala.es/blog/posts/la-importancia-de-una-soluci%C3%B3n-integral-de-seguridad/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/la-ciberseguridad-en-la-era-de-los-ataques-digitales-protege-tu-empresa-24-7/</loc>
+            https://www.ewala.es/blog/posts/la-ciberseguridad-en-la-era-de-los-ataques-digitales-protege-tu-empresa-24-7/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
+            https://www.ewala.es/blog/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://blog.ewala.es/posts/2024-11-22-de-tiktok-a-tu-empresa-protecci%C3%B3n-integral-con-soc-mdr-24-7/</loc>
+            https://www.ewala.es/blog/posts/2024-11-22-de-tiktok-a-tu-empresa-protecci%C3%B3n-integral-con-soc-mdr-24-7/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <!-- Página de servicios -->
     <url>
-        <loc>https://www.ewala.es/kit-digital-ciberseguridad-gestionada.html</loc>
+        <loc>https://www.ewala.es/kit-digital-ciberseguridad-gestionada/</loc>
         <lastmod>2024-11-18T13:40:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- Otras páginas -->
     <url>
-        <loc>https://www.ewala.es/index.html</loc>
-        <lastmod>2024-11-07T13:40:46+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://www.ewala.es/kit-digital.html</loc>
+        <loc>https://www.ewala.es/kit-digital/</loc>
         <lastmod>2024-10-28T15:58:03+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://www.ewala.es/kit-consulting.html</loc>
+        <loc>https://www.ewala.es/kit-consulting/</loc>
         <lastmod>2024-10-28T15:57:37+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
@@ -88,17 +82,17 @@
     </url>
     <!-- Páginas de políticas -->
     <url>
-        <loc>https://www.ewala.es/politica-privacidad.html</loc>
+        <loc>https://www.ewala.es/politica-privacidad/</loc>
         <lastmod>2023-07-05T10:46:13+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://www.ewala.es/aviso-legal.html</loc>
+        <loc>https://www.ewala.es/aviso-legal/</loc>
         <lastmod>2023-07-05T10:46:13+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://www.ewala.es/politica-cookies.html</loc>
+        <loc>https://www.ewala.es/politica-cookies/</loc>
         <lastmod>2023-06-19T12:00:40+00:00</lastmod>
         <priority>0.80</priority>
     </url>
