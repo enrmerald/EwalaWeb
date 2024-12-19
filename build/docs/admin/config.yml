@@ -3,7 +3,7 @@ backend:
   repo: enrmerald/EwalaWeb
   branch: main
   base_url: ""
-  site_domain: "https://www.ewala.es/blog"
+  site_domain: "https://ewala.es/blog"
   
 local_backend: true
 

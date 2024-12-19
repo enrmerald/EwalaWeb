@@ -10,4 +10,4 @@ Disallow: /politicas/
 Disallow: /popup/
 
 # Sitemap
-Sitemap: https://www.ewala.es/sitemap.xml
+Sitemap: https://ewala.es/sitemap.xml
