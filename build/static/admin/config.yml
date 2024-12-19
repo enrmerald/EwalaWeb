@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   repo: enrmerald/EwalaWeb
-  branch: master
+  branch: main
   base_url: ""
   site_domain: "https://www.ewala.es/blog"
   
