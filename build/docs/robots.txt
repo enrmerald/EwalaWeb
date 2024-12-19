@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://blog.ewala.es/
+Sitemap: https://ewala.es/blog/sitemap.xml

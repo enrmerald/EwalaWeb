@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ciberseguridad Avanzada on Ewala IT Services Blog</title>
+    <link>//localhost:1313///blog/tags/ciberseguridad-avanzada/</link>
+    <description>Recent content in Ciberseguridad Avanzada on Ewala IT Services Blog</description>
+    <generator>Hugo</generator>
+    <language>es_ES</language>
+    <lastBuildDate>Mon, 25 Nov 2024 09:30:37 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313///blog/tags/ciberseguridad-avanzada/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ciberseguridad empresarial: diferencias entre AV, EDR y MDR</title>
+      <link>//localhost:1313///blog/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</link>
+      <pubDate>Mon, 25 Nov 2024 09:30:37 +0000</pubDate>
+      <guid>//localhost:1313///blog/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;h2 id=&#34;la-evolución-de-la-ciberseguridad-empresarial&#34;&gt;La evolución de la ciberseguridad empresarial&lt;/h2&gt;&#xA;&lt;p&gt;Las amenazas digitales evolucionan constantemente. Un reciente caso de Microsoft, donde se incautaron 240 dominios maliciosos, demuestra que las empresas necesitan protección más allá del antivirus tradicional.&lt;/p&gt;&#xA;&lt;h3 id=&#34;del-antivirus-al-mdr-la-nueva-era-de-la-protección-digital&#34;&gt;Del antivirus al MDR: La nueva era de la protección digital&lt;/h3&gt;&#xA;&lt;h4 id=&#34;qué-es-un-antivirus-y-por-qué-ya-no-es-suficiente&#34;&gt;¿Qué es un antivirus y por qué ya no es suficiente?&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Detecta malware conocido mediante firmas&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Protección reactiva y limitada&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;No identifica amenazas nuevas o comportamientos sospechosos&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
