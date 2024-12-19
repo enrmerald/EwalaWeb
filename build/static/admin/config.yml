@@ -7,15 +7,15 @@ backend:
   
 local_backend: true
 
-media_folder: "build/static/images/" # Carpeta para cargar imágenes
-public_folder: "blog/images" # Carpeta para mostrar imágenes en el sitio
+media_folder: "/blog/static/images/" # Carpeta para cargar imágenes
+public_folder: "/blog/images" # Carpeta para mostrar imágenes en el sitio
 
 publish_mode: simple
 
 collections:
   - name: "post"
     label: "Posts"
-    folder: "build/content/posts" # Carpeta donde se guardan los posts en Hugo
+    folder: "/blog/content/posts" # Carpeta donde se guardan los posts en Hugo
     create: true
     slug: "{{slug}}" # Usar el slug directamente para una URL limpia
     fields:
