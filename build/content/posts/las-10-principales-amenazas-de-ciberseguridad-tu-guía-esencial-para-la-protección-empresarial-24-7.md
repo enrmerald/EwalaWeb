@@ -5,9 +5,9 @@ date: 2024-12-19T10:40:40.035Z
 categories: []
 tags: []
 developer: Ewala
-header_image: /images/ima-0003-01-top-10-malware.webp
-postimage: /images/ima-0003-01-top-10-malware.webp
-thumbnail: /images/ima-0003-01-top-10-malware.webp
+header_image: /blog/images/ima-0003-01-top-10-malware.webp
+postimage: /blog//images/ima-0003-01-top-10-malware.webp
+thumbnail: /blog//images/ima-0003-01-top-10-malware.webp
 author: Ewala
 subtitle: "Monitorización 24/7: Tu Primera Línea de Defensae Amenazas
   Cibernéticas (CTI) del MS-ISAC, el panorama de las amenazas digitales sigue

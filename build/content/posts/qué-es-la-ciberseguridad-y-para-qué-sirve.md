@@ -10,9 +10,9 @@ tags:
   - info
   - siem
 developer: Ewala
-header_image: /images/ima-0001-01-que-es-ciberseguridad.webp
-postimage: /images/ima-0001-01-que-es-ciberseguridad.webp
-thumbnail: /images/ima-0001-01-que-es-ciberseguridad.webp
+header_image: /blog//images/ima-0001-01-que-es-ciberseguridad.webp
+postimage: /blog//images/ima-0001-01-que-es-ciberseguridad.webp
+thumbnail: /blog//images/ima-0001-01-que-es-ciberseguridad.webp
 author: Ewala
 subtitle: Descubre cómo la ciberseguridad protege tus datos y sistemas frente a
   las amenazas digitales actuales, garantizando la continuidad y seguridad de tu
