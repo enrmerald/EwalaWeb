@@ -1,14 +1,14 @@
 backend:
   name: git-gateway
   repo: enrmerald/EwalaWeb
-  branch: master
+  branch: main
   base_url: ""
   site_domain: "https://www.ewala.es/blog"
   
 local_backend: true
 
 media_folder: "static/images/" # Carpeta para cargar imágenes
-public_folder: "/images" # Carpeta para mostrar imágenes en el sitio
+public_folder: "blog/images" # Carpeta para mostrar imágenes en el sitio
 
 publish_mode: editorial_workflow
 
