@@ -28,6 +28,7 @@
   to = "/blog/:splat"
   status = 200
 
+# Redirigir subdominios y variantes HTTP a https://ewala.es
 [[redirects]]
   from = "https://www.ewala.es/*"
   to = "https://ewala.es/:splat"
@@ -46,8 +47,8 @@
   status = 301
   force = true
 
+# Redirigir solo la raíz con barra final a la raíz sin barra final
 [[redirects]]
-  from = "https://ewala.es/"
-  to = "https://ewala.es"
-  status = 301
-  force = true
+  from = "/"
+  to = "/"
+  status = 200
