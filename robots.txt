@@ -1,13 +1,5 @@
-# Bloquear solo áreas específicas
 User-agent: *
 Allow: /
-Disallow: /cgi-bin/
-Disallow: /contacto/
-Disallow: /forms/
-Disallow: /Otros/
-Disallow: /particles/
-Disallow: /politicas/
-Disallow: /popup/
 
 # Sitemap
 Sitemap: https://ewala.es/sitemap.xml

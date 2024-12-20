@@ -27,3 +27,8 @@
   from = "/blog/*"
   to = "/blog/:splat"
   status = 200
+
+[[redirects]]
+  from = "/blog/tags/*"
+  to = "/blog/tags/:splat/"
+  status = 200
