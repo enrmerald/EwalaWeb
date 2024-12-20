@@ -1,4 +1,4 @@
-baseURL = '/blog/'
+baseURL = 'https://ewala.es/blog/'
 languageCode = 'es_ES'
 title = 'Ewala IT Services Blog'
 theme = 'paper'
@@ -14,7 +14,7 @@ publishDir = "docs"
   linkedin = 'https://www.linkedin.com/company/e-wala-it-services'
   defaultpostimage = '/blog/images/ewala.png'
   pageEwala = 'https://ewala.es'
-  pageBlog = '/blog/'
+  pageBlog = 'https://ewala.es/blog/'
   ewalaBlogImg = '/blog/images/hackerLogo.png'
   ewalaSecurityWizards = '/blog/images/ewala_sec_wiz.png'
   generateTaxonomies = true
