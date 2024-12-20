@@ -27,33 +27,3 @@
   from = "/blog/*"
   to = "/blog/:splat"
   status = 200
-
-[[redirects]]
-  from = "https://www.ewala.es/*"
-  to = "https://ewala.es/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://www.ewala.es/*"
-  to = "https://ewala.es/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://ewala.es/*"
-  to = "https://ewala.es/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://ewala.es/"
-  to = "https://ewala.es"
-  status = 301
-  force = true
-
-# Redirigir solo la raíz con barra final a la raíz sin barra final
-[[redirects]]
-  from = "/"
-  to = "/"
-  status = 200
