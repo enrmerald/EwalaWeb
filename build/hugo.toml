@@ -10,7 +10,7 @@ publishDir = "docs"
   ewalafavicon = '/blog/images/favicon.png'
   color = 'light'
   ewalateam = '/blog/images/logo-hacker.png'
-  youtube = 'https://www.youtube.com/channel/UCMcvwAIxQNsI8WloxR9r_gg'
+  youtube = 'https://www.youtube.com/channel/UCMcvwAIxQNsI8WloxR9r_gg?cbrd=1'
   linkedin = 'https://www.linkedin.com/company/e-wala-it-services'
   defaultpostimage = '/blog/images/ewala.png'
   pageEwala = 'https://ewala.es'
