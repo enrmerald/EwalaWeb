@@ -28,7 +28,7 @@ description: >-
 ---
 <!--StartFragment-->
 
-¿Sabes qué es la ciberseguridad y de qué trata? Desde **[Ewala](https://ewala.es/)** te contamos por qué es importante proteger tus datos y tus sistemas de información en el mundo actual. 
+¿Sabes qué es la ciberseguridad y de qué trata? Desde **[Ewala](https://ewala.es)** te contamos por qué es importante proteger tus datos y tus sistemas de información en el mundo actual. 
 
 Es indispensable garantizar que nuestras actividades digitales sean seguras y eficientes. Esto nos afecta a todos ya seamos una empresa o un particular. 
 
@@ -79,7 +79,7 @@ Tiene la función de analizar los patrones anómalos y comportamientos sospechos
 
 También ayuda a cumplir con la normativa vigente y optimiza la gestión de incidentes, gracias al análisis de grandes volúmenes de información. 
 
-Como solución tecnológica avanzada, SIEM es fundamental en cualquier estrategia de ciberseguridad moderna. ¡También hay alternativas como el [](https://ewala.es/kit-digital-ciberseguridad-gestionada) [kit digital de ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada)! 
+Como solución tecnológica avanzada, SIEM es fundamental en cualquier estrategia de ciberseguridad moderna. ¡También hay alternativas como el [kit digital de ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada)! 
 
 ## **¿Mis archivos están seguros?** 
 

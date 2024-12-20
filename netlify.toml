@@ -27,3 +27,9 @@
   from = "/blog/*"
   to = "/blog/:splat"
   status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/:splat"
+  status = 200
+  force = true
