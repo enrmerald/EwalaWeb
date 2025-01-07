@@ -2086,6 +2086,12 @@ h1, h2, h3, h4, h5, .author-text, .credit,
   text-decoration: none;
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
+  display: block;
+  font-weight: bold;
+  color: var(--ewala-color);
+  text-overflow: ellipsis;
+
+  overflow: hidden;
 }
 
 .ewala-section {
@@ -2102,6 +2108,7 @@ h1, h2, h3, h4, h5, .author-text, .credit,
   flex-wrap: wrap;
   gap: 35px;
   justify-content: center;
+   align-items: stretch;
   padding: 10px 10px;
 }
 

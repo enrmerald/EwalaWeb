@@ -63,7 +63,7 @@
         {{end}}
       </a>
     </div>
-    <a class="ewala-link" href="{{ .Permalink }}">{{ .Title }}</a>
+    <a class="ewala-link" href="{{ .Permalink }}">{{ .Title | truncate 60 }}</a>
   </h2>
 
   <time class="text-xs antialiased opacity-60">
