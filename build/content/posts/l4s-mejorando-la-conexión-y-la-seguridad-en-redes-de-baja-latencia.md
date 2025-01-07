@@ -8,9 +8,9 @@ tags:
   - info
   - ciberseguridad
 developer: Ewala
-header_image: blog/images/ls4-protocolo.webp
-postimage: blog/images/ls4-protocolo.webp
-thumbnail: blog/images/ls4-protocolo.webp
+header_image: "/blog/images/ls4-protocolo.webp"
+postimage: "/blog/images/ls4-protocolo.webp"
+thumbnail: "/blog/images/ls4-protocolo.webp"
 author: Ewala
 subtitle: El protocolo L4S redefine la conectividad al optimizar la velocidad y
   la seguridad en aplicaciones críticas como videojuegos, streaming y realidad
