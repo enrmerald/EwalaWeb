@@ -39,8 +39,8 @@
   status = 301
 
 [[redirects]]
-  from = "https://ewala.es"
-  to = "https://ewala.es/"
+  from = "https://ewala.es/"
+  to = "https://ewala.es"
   status = 301
 
 [[redirects]]
