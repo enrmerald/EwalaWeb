@@ -41,7 +41,7 @@
 [[redirects]]
   from = "https://ewala.es"
   to = "https://ewala.es/"
-  force = true
+  status = 301
 
 [[redirects]]
   from = "/blog/*"
