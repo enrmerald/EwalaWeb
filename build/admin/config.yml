@@ -15,7 +15,7 @@ publish_mode: editorial_workflow
 collections:
   - name: "post"
     label: "Posts"
-    folder: "content/posts" # Carpeta donde se guardan los posts en Hugo
+    folder: "build\content\posts" # Carpeta donde se guardan los posts en Hugo
     create: true
     slug: "{{slug}}" # Usar el slug directamente para una URL limpia
     fields:
