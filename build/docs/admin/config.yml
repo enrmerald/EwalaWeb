@@ -20,6 +20,8 @@ collections:
     slug: "{{slug}}" # Usar el slug directamente para una URL limpia
     fields:
       - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Title SEO", name: "title_seo", widget: "string", required: true }
+      - { label: "Meta Descripción", name: "description_seo", widget: "string", required: true }
       - { label: "Date", name: "date", widget: "datetime", required: true }
       - { label: "Categories", name: "categories", widget: "list", required: true, default: [] }
       - { label: "Tags", name: "tags", widget: "list", required: true, default: [] }

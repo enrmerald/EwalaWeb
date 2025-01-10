@@ -1,10 +1,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJFWRZVCTC"></script>
@@ -26,9 +23,18 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-T48SB3HV');</script>
   <!-- End Google Tag Manager -->
-  
+
   <!-- title -->
-  <title>{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ site.Title }}</title>
+  <title>
+    {{ if not .IsHome }}
+    {{ with .Params.title_seo }}
+    {{ . }}
+    {{ else }}
+    {{ .Title }}
+    {{ end }} -
+    {{ end }}
+    {{ site.Title }}
+  </title>
 
   <!-- meta -->
   <meta name="theme-color" />
@@ -37,16 +43,16 @@
   {{ $site_author := or site.Author.name site.Params.name site.Title }}
   <!---->
   {{ if eq .Kind "page" }}
-  <meta name="description" content="{{ .Summary | default site.Params.description }}" />
+  <meta name="description" content="{{  default .Params.description_seo }}" />
   <meta name="author" content="{{ or .Params.author (or site.Author.name site.Title) }}" />
   {{ else }}
   <!---->
-  <meta
-    name="description"
-    content="{{ site.Params.description | default (print `A personal blog`) }}"
-  />
+  <meta name="description" content="{{ or .Params.subtitle site.Params.seo.description }}" />
   <meta name="author" content="{{ $site_author }}" />
   {{ end }}
+
+  {{ $keywords := site.Params.seo.keywords }}
+  <meta name="keywords" content="{{ delimit $keywords ',' }}">
 
   <!-- css & js -->
   {{ $main := resources.Get "main.css" }}
@@ -79,11 +85,7 @@
 
   <!-- highlight js -->
   {{ if and .IsPage (not site.Params.disableHLJS) }}
-  <script
-    defer
-    src="{{ `highlight.min.js` | absURL }}"
-    onload="hljs.initHighlightingOnLoad();"
-  ></script>
+  <script defer src="{{ `highlight.min.js` | absURL }}" onload="hljs.initHighlightingOnLoad();"></script>
   {{ end }}
 
   <!-- math -->
@@ -99,13 +101,14 @@
   <!-- -->
 
   <!-- Ewala Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 
-  <!-- Etiqueta canonical para el SEO -->
-  <link rel="canonical" href="{{ .Site.Params.pageEwala | absURL  }}" />
+
+
+
   <!-- Etiqueta robots para el SEO -->
   {{ if or (eq .Type "tags") (eq .Type "categories") }}
   <meta name="robots" content="noindex, follow" />
@@ -129,16 +132,14 @@
   {{ template "_internal/twitter_cards.html" . }}
   <!-- RSS -->
   {{ range .AlternativeOutputFormats }}
-  <link
-    rel="{{ .Rel }}"
-    type="{{ .MediaType.Type }}"
-    href="{{ .Permalink }}"
-    title="{{ site.Title }}"
-  />
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}" />
   {{ end }}
 
-  <!-- canonical -->
+  <!-- Etiqueta canonical para el SEO -->
   <link rel="canonical" href="{{ .Permalink }}" />
+
+  <meta property="og:image" content="{{ .Site.Params.Seo.ogImage | absURL }}" />
+
   {{ end }}
   <!---->
 </head>

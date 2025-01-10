@@ -1,5 +1,7 @@
 ---
 title: La importancia de una solución integral de seguridad
+title_seo: "Soluciones SIEM y XDR: Clave en Ciberseguridad"
+description_seo: "Los ataques ransomware exigen sistemas SIEM y XDR integrales. Protege tu empresa con SOC-MDR 24/7 y aprovecha el Kit Digital para un año de seguridad sin coste."
 date: 2024-12-05T08:28:14.697Z
 categories: [cybersecurity]
 tags: [Ciberseguridad,Ataques ransomware,SOC,SIEM y XDR,cybersecurity,info]

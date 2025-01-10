@@ -1,6 +1,6 @@
 baseURL = 'https://ewala.es/blog/'
 languageCode = 'es_ES'
-title = 'Ewala IT Services Blog'
+title = 'Blog Ewala'
 theme = 'paper'
 
 publishDir = "docs"

@@ -1,5 +1,7 @@
 ---
 title: "SOC - Monitorización 24/7"
+title_seo: "SOC 24/7: Protección Digital Total"
+description_seo: "Protege tu empresa con SOC-MDR 24/7: detección y respuesta ante ataques digitales. Aprovecha el Kit Digital para un año de seguridad continua sin coste."
 date: 2024-11-25T11:03:11.715Z
 categories: ["cybersecurity"]
 tags: ["SOC-MDR", "Kit Digital", "Protección 24/7", "cybersecurity", "info"]

@@ -1,5 +1,7 @@
 ---
 title: "Ciberseguridad empresarial: diferencias entre AV, EDR y MDR"
+title_seo: "AV, EDR y MDR: Protege tu empresa hoy"
+description_seo: "Descubre las diferencias entre AV, EDR y MDR. Avanza hacia una ciberseguridad empresarial robusta con protección 24/7 y expertos en seguridad."
 date: 2024-11-25T09:30:37.500Z
 categories: ["cybersecurity"]
 tags: ["AV", "EDR", "MDR", "Ciberseguridad avanzada", "Protección 24/7", "cybersecurity", "info"]

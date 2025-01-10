@@ -1,5 +1,7 @@
 ---
-title: "Qué es la ciberseguridad y para qué sirve "
+title: "Qué es la ciberseguridad y para qué sirve"
+title_seo: "Que es la ciberseguridad y para que sirve"
+description_seo: "Descubre qué es la ciberseguridad y cómo protege tus datos frente a amenazas digitales. Garantiza la seguridad y continuidad de tu empresa con soluciones avanzadas."
 date: 2024-12-19T09:42:15.453Z
 categories:
   - cybersecurity
