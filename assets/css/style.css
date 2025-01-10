@@ -869,8 +869,19 @@ section {
 /*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
+.portfolio-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
 .portfolio .portfolio-item {
   margin-bottom: 30px;
+  height: 300px; 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
 }
 
 .portfolio #portfolio-flters {
@@ -1022,6 +1033,24 @@ section {
   bottom: 15px;
   right: 15px;
 }
+
+.portfolio-item {
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas con espacio */
+  max-width: calc(33.333% - 20px);
+}
+@media (max-width: 768px) {
+  .portfolio-item {
+    flex: 1 1 calc(50% - 20px); /* Dos columnas en tablets */
+    max-width: calc(50% - 20px);
+  }
+}
+@media (max-width: 576px) {
+  .portfolio-item {
+    flex: 1 1 100%; /* Una columna en móviles */
+    max-width: 100%;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Testimonials
