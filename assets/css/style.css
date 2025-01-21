@@ -2107,3 +2107,20 @@ section {
   font-size: 1rem;
   color: #333;
 }
+
+
+.accordion-button {
+    background-color: #ffffff;
+    color: black;
+    transition: background-color 0.3s;  
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #00e58d;  
+    color: white;
+    font-weight: bold;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
