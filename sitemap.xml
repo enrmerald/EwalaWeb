@@ -9,16 +9,37 @@
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
+    <!-- Página de servicios -->
+    <url>
+        <loc>https://ewala.es/kit-digital-ciberseguridad-gestionada</loc>
+        <lastmod>2025-01-18T15:40:46+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.00</priority>
+    </url>
     <!-- Blog -->
     <url>
         <loc>https://ewala.es/blog/</loc>
-        <lastmod>2024-11-07T07:16:11+00:00</lastmod>
+        <lastmod>2025-01-13T11:16:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/la-importancia-de-una-soluci%C3%B3n-integral-de-seguridad/</loc>
+            https://ewala.es/blog/posts/xdr-vs-siem-la-solucion-para-tu-negocio/</loc>
+        <lastmod>2025-01-13T10:30:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/l4s-mejorando-la-conexion-y-la-seguridad-en-redes-de-baja-latencia/</loc>
+        <lastmod>2024-12-20T14:30:00+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/la-importancia-de-una-solucion-integral-de-seguridad/</loc>
         <lastmod>2024-12-05T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
@@ -26,44 +47,37 @@
     <url>
         <loc>
             https://ewala.es/blog/posts/la-ciberseguridad-en-la-era-de-los-ataques-digitales-protege-tu-empresa-24-7/</loc>
-        <lastmod>2024-12-05T12:00:00+00:00</lastmod>
+        <lastmod>2024-11-25T14:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/m%C3%A1s-all%C3%A1-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
-        <lastmod>2024-12-05T12:00:00+00:00</lastmod>
+            https://ewala.es/blog/posts/mas-alla-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</loc>
+        <lastmod>2024-11-25T12:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/2024-11-22-de-tiktok-a-tu-empresa-protecci%C3%B3n-integral-con-soc-mdr-24-7/</loc>
-        <lastmod>2024-12-05T12:00:00+00:00</lastmod>
+            https://ewala.es/blog/posts/2024-11-22-de-tiktok-a-tu-empresa-proteccion-integral-con-soc-mdr-24-7/</loc>
+        <lastmod>2024-11-22T10:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/qu%C3%A9-es-la-ciberseguridad-y-para-qu%C3%A9-sirve/</loc>
-        <lastmod>2024-12-12T09:00:00+00:00</lastmod>
+            https://ewala.es/blog/posts/que-es-la-ciberseguridad-y-para-que-sirve/</loc>
+        <lastmod>2024-12-19T09:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/las-10-principales-amenazas-de-ciberseguridad-tu-gu%C3%ADa-esencial-para-la-protecci%C3%B3n-empresarial-24-7/</loc>
-        <lastmod>2024-12-05T10:00:00+00:00</lastmod>
+            https://ewala.es/blog/posts/las-10-principales-amenazas-de-ciberseguridad-tu-guia-esencial-para-la-proteccion-empresarial-24-7/</loc>
+        <lastmod>2024-12-19T13:30:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
-    </url>
-    <!-- Página de servicios -->
-    <url>
-        <loc>https://ewala.es/kit-digital-ciberseguridad-gestionada</loc>
-        <lastmod>2024-11-18T13:40:46+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.00</priority>
     </url>
     <!-- Otras páginas -->
     <url>
