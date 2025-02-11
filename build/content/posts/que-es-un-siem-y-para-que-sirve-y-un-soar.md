@@ -1,5 +1,5 @@
 ---
-title: ¿Que es un SIEM y para que sirve? ¿Y un SOAR?
+title: ¿Qué es un SIEM y para qué sirve? ¿Y un SOAR?
 title_seo: "SIEM y SOAR: Que son y para que sirven"
 description_seo: Descubre qué es un SIEM y un SOAR, cómo protegen tu empresa
   contra ciberamenazas y su papel clave en un SOC moderno. Mejora tu seguridad
@@ -43,7 +43,7 @@ Un **SIEM** es una plataforma que permite gestionar la seguridad de la informaci
 
 La unión de estas tecnologías da lugar al **SIEM**, que no solo registra eventos, sino que también detecta patrones de ataques y puede activar **respuestas automatizadas** para mitigar riesgos rápidamente.
 
----
+
 
 ## ¿Cómo funciona un SIEM?
 
