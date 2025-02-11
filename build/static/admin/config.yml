@@ -7,7 +7,7 @@ backend:
   
 local_backend: true
 
-media_folder: "/blog/static/images/" # Carpeta para cargar imágenes
+media_folder: "./static/images/" # Carpeta para cargar imágenes
 public_folder: "/blog/images" # Carpeta para mostrar imágenes en el sitio
 
 publish_mode: simple
