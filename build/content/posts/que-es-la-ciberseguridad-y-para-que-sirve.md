@@ -1,8 +1,10 @@
 ---
-title: "Qué es la ciberseguridad y para qué sirve"
-title_seo: "Que es la ciberseguridad y para que sirve"
-description_seo: "Descubre qué es la ciberseguridad y cómo protege tus datos frente a amenazas digitales. Garantiza la seguridad y continuidad de tu empresa con soluciones avanzadas."
-date: 2024-12-19T09:42:15.453Z
+title: Qué es la ciberseguridad y para qué sirve
+title_seo: Que es la ciberseguridad y para que sirve
+description_seo: Descubre qué es la ciberseguridad y cómo protege tus datos
+  frente a amenazas digitales. Garantiza la seguridad y continuidad de tu
+  empresa con soluciones avanzadas.
+date: 2024-11-25T09:42:15.453Z
 categories:
   - cybersecurity
 tags:
@@ -121,7 +123,7 @@ No podemos olvidar que esta estrategia otorga ahorro económico, puesto que evit
 
 * **Malware**: Software malicioso como los virus. 
 * **Phishing**: Correos electrónicos o mensajes fraudulentos que intentan robar información. 
-* **Ataques DDoS**: Saturan los sistemas hasta inhabilitarlos. 
+* **Ataques DDoS** (denegación de servicio) : Saturan los sistemas hasta inhabilitarlos.
 * **Intrusiones en la red**: Intentos de acceso no autorizado. 
 * **Robo de datos**: filtración de información confidencial. 
 
