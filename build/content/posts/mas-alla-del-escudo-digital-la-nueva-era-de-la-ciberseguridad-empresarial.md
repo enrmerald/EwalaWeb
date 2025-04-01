@@ -2,7 +2,7 @@
 title: "Ciberseguridad empresarial: diferencias entre AV, EDR y MDR"
 title_seo: "AV, EDR y MDR: Protege tu empresa hoy"
 description_seo: "Descubre las diferencias entre AV, EDR y MDR. Avanza hacia una ciberseguridad empresarial robusta con protección 24/7 y expertos en seguridad."
-date: 2024-11-25T09:30:37.500Z
+date: 2024-12-05T08:28:14.000Z
 categories: ["cybersecurity"]
 tags: ["AV", "EDR", "MDR", "Ciberseguridad avanzada", "Protección 24/7", "cybersecurity", "info"]
 developer: Ewala
@@ -26,7 +26,7 @@ Las amenazas digitales evolucionan constantemente. Un reciente caso de Microsoft
 
 #### ¿Qué es un antivirus y por qué ya no es suficiente?
 
-- Detecta malware conocido mediante firmas
+- Detecta malware conocido comparándolo con una base de datos de amenazas previas
 
 - Protección reactiva y limitada
 
@@ -38,7 +38,7 @@ Las amenazas digitales evolucionan constantemente. Un reciente caso de Microsoft
 
 - Análisis de **comportamiento en tiempo real**.  
 - Detección **proactiva** de amenazas.  
-- Visibilidad completa del endpoint.  
+- Visibilidad completa del endpoint (cualquier dispositivo conectado a la red).  
 - Identificación de patrones sospechosos, incluso en amenazas avanzadas.
 
 

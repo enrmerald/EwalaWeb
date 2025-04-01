@@ -2,7 +2,7 @@
 title: "TikTok, Kit Digital y ciberseguridad"
 title_seo: "TikTok y Kit Digital: Ciberseguridad 24/7"
 description_seo: "Protege tu empresa como TikTok con SOC-MDR 24/7. Monitorización avanzada y defensa cibernética accesible para PYMEs a través de Kit Digital."
-date: 2024-11-22T13:07:26.595Z
+date: 2024-11-22T13:07:26.000Z
 categories: ["cybersecurity"]
 tags: ["SOC-MDR", "Kit Digital", "Protección 24/7", "cybersecurity", "info"]
 developer: "Ewala"

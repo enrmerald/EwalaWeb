@@ -4,7 +4,7 @@ title_seo: "XDR vs SIEM: ¿Qué solución necesita tu empresa?"
 description_seo: "XDR vs SIEM: ¿Te preguntas cuál es la solución adecuada para
   tu negocio? Te contamos todo lo que necesitas saber en este post de Ewala.
   ¡Entra ahora!"
-date: 2025-01-13T11:37:31.025Z
+date: 2024-11-25T09:42:15.000Z
 categories:
   - cybersecurity
 tags:

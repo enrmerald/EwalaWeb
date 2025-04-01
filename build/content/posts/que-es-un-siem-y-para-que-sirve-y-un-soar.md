@@ -4,7 +4,7 @@ title_seo: "SIEM y SOAR: Que son y para que sirven"
 description_seo: Descubre qué es un SIEM y un SOAR, cómo protegen tu empresa
   contra ciberamenazas y su papel clave en un SOC moderno. Mejora tu seguridad
   hoy con Ewala.
-date: 2025-02-11T09:18:00.021Z
+date: 2024-12-19T10:40:40.000Z
 categories:
   - ciberseguridad
   - gestión de incidentes

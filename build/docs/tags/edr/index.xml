@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EDR on Blog Ewala</title><link>https://ewala.es/blog/tags/edr/</link><description>Recent content in EDR on Blog Ewala</description><generator>Hugo</generator><language>es_ES</language><lastBuildDate>Mon, 25 Nov 2024 09:30:37 +0000</lastBuildDate><atom:link href="https://ewala.es/blog/tags/edr/index.xml" rel="self" type="application/rss+xml"/><item><title>Ciberseguridad empresarial: diferencias entre AV, EDR y MDR</title><link>https://ewala.es/blog/posts/mas-alla-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</link><pubDate>Mon, 25 Nov 2024 09:30:37 +0000</pubDate><guid>https://ewala.es/blog/posts/mas-alla-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</guid><description>&lt;!-- raw HTML omitted -->
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EDR on Blog Ewala</title><link>https://ewala.es/blog/tags/edr/</link><description>Recent content in EDR on Blog Ewala</description><generator>Hugo</generator><language>es_ES</language><lastBuildDate>Thu, 05 Dec 2024 08:28:14 +0000</lastBuildDate><atom:link href="https://ewala.es/blog/tags/edr/index.xml" rel="self" type="application/rss+xml"/><item><title>Ciberseguridad empresarial: diferencias entre AV, EDR y MDR</title><link>https://ewala.es/blog/posts/mas-alla-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</link><pubDate>Thu, 05 Dec 2024 08:28:14 +0000</pubDate><guid>https://ewala.es/blog/posts/mas-alla-del-escudo-digital-la-nueva-era-de-la-ciberseguridad-empresarial/</guid><description>&lt;!-- raw HTML omitted -->
 &lt;h2 id="la-evolución-de-la-ciberseguridad-empresarial">La evolución de la ciberseguridad empresarial&lt;/h2>
 &lt;p>Las amenazas digitales evolucionan constantemente. Un reciente caso de Microsoft, donde se incautaron 240 dominios maliciosos, demuestra que las empresas necesitan protección más allá del antivirus tradicional.&lt;/p>
 &lt;h3 id="del-antivirus-al-mdr-la-nueva-era-de-la-protección-digital">Del antivirus al MDR: La nueva era de la protección digital&lt;/h3>
 &lt;h4 id="qué-es-un-antivirus-y-por-qué-ya-no-es-suficiente">¿Qué es un antivirus y por qué ya no es suficiente?&lt;/h4>
 &lt;ul>
 &lt;li>
-&lt;p>Detecta malware conocido mediante firmas&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Protección reactiva y limitada&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>No identifica amenazas nuevas o comportamientos sospechosos&lt;/p></description></item></channel></rss>
+&lt;p>Detecta malware conocido comparándolo con una base de datos de amenazas previas&lt;/p></description></item></channel></rss>

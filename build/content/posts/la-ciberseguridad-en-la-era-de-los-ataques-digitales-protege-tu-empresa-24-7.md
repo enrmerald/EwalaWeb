@@ -2,7 +2,7 @@
 title: "SOC - Monitorización 24/7"
 title_seo: "SOC 24/7: Protección Digital Total"
 description_seo: "Protege tu empresa con SOC-MDR 24/7: detección y respuesta ante ataques digitales. Aprovecha el Kit Digital para un año de seguridad continua sin coste."
-date: 2024-11-25T11:03:11.715Z
+date: 2024-11-25T11:03:11.000Z
 categories: ["cybersecurity"]
 tags: ["SOC-MDR", "Kit Digital", "Protección 24/7", "cybersecurity", "info"]
 developer: Ewala
@@ -19,7 +19,7 @@ description: Los ciberdelincuentes perfeccionan sus tácticas con ataques
 ---
 <!--StartFragment-->
 
-## SOC - Monitorización 24/7: Protección en la era de los ataques digitales
+## SOC (Security Operations Centre) - Monitorización 24/7: Protección en la era de los ataques digitales
 
 Imagina esta situación: una mañana normal de trabajo, recibes una notificación urgente de la Agencia Tributaria. Es aparentemente una inspección fiscal para un contrato público valorado en 2,8 millones de euros. El documento parece legítimo, utiliza el formato oficial, y solicita un pago inmediato de 5.000€ en concepto de garantía de procedimiento administrativo. La presión del plazo de 48 horas y el riesgo de paralización del contrato te empuja a autorizar el pago sin verificar... acabas de caer en una estafa. 
 

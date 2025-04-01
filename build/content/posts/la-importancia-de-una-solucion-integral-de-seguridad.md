@@ -2,7 +2,7 @@
 title: La importancia de una solución integral de seguridad
 title_seo: "Soluciones SIEM y XDR: Clave en Ciberseguridad"
 description_seo: "Los ataques ransomware exigen sistemas SIEM y XDR integrales. Protege tu empresa con SOC-MDR 24/7 y aprovecha el Kit Digital para un año de seguridad sin coste."
-date: 2024-12-05T08:28:14.697Z
+date: 2024-12-20T13:45:50.000Z
 categories: [cybersecurity]
 tags: [Ciberseguridad,Ataques ransomware,SOC,SIEM y XDR,cybersecurity,info]
 developer: Ewala
@@ -21,11 +21,11 @@ Cada día se hace más patente la necesidad de implementar sistemas SIEM XDR que
 
 ## **La importancia de una solución integral de seguridad**
 
-El Centro de Operaciones de Ciberseguridad (COCS) publicó en prensa la noticia de que un departamento del CSIC había recibido un ataque ransomware. Este incidente pone en cuestión la efectividad de los sistemas actual de protección ante amenazas
+El Centro de Operaciones de Ciberseguridad (COCS) publicó en prensa la noticia de que un departamento del CSIC había recibido un ataque ransomware. Este incidente pone en cuestión la efectividad de los sistemas actuales de protección ante amenazas.
 
 Cada día se hace más patente la necesidad de implementar sistemas SIEM XDR que integren múltiples fuentes de información.
 
-Un SOC moderno debe unificar datos provenientes de firewalls, antivirus, sistemas EDR, aplicaciones corporativas y servicios cloud como Office365, ERPs y CRMs. Sin esta integración perdemos la habilidad de detener la amenaza cuando aún no se ha manifestado y ha alcanzado toda su capacidad destructiva.
+Un SOC moderno debe unificar datos provenientes de firewalls, antivirus, sistemas EDR, aplicaciones corporativas y servicios cloud como Office365, ERPs (Entreprise Resource Planning) y CRMs (Customer Relationship Management). Sin esta integración perdemos la habilidad de detener la amenaza cuando aún no se ha manifestado y ha alcanzado toda su capacidad destructiva.
 
 ### **Cumplimiento normativo y protección institucional**
 

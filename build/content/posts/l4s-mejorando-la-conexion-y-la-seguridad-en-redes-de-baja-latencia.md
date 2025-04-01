@@ -2,7 +2,7 @@
 title: "L4S: Mejorando la conexión y la seguridad en redes de baja latencia"
 title_seo: "L4S: La Revolución en Redes de Baja Latencia"
 description_seo: "Descubre cómo el protocolo L4S está transformando la conectividad, reduciendo la latencia y fortaleciendo la seguridad en redes críticas como videojuegos, streaming y realidad virtual."
-date: 2024-12-20T13:45:50.797Z
+date: 2025-02-11T09:18:00.000Z
 categories:
   - cybersecurity
 tags:
