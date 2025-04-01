@@ -24,18 +24,18 @@ description: En este artículo, te explicamos qué es un XDR, cómo funciona y p
   qué es una solución crucial para la protección cibernética de tu organización.
   Descubre cómo mejora la detección y respuesta ante incidentes de seguridad.
 ---
-# Qué es un XDR
+## Qué es un XDR
 
 ¿Te has preguntado **qué es un XDR**? Desde [Ewala](https://ewala.es/) te contaremos cómo esta tecnología, diseñada para mejorar la detección y respuesta ante incidentes de seguridad, es una de las principales líneas de protección en el mundo digital.  
 Las empresas necesitan soluciones avanzadas para protegerse a nivel cibernético. ¿A qué esperas para descubrir todos los secretos de la tecnología **E**xtended **D**etection and **R**esponse?  
 Es el momento de saber **cómo fortalecer la ciberseguridad** de tu empresa.
 
-## Qué es y cómo funciona
+### Qué es y cómo funciona
 
 En esencia, es una solución de seguridad innovadora, cuya función es **integrar y correlacionar datos** de múltiples fuentes.  
 XDR es una solución de detección y respuesta que va más allá del enfoque limitado de los EDR, que solo protegen endpoints, y de los SIEM, que se centran en la recopilación y correlación de eventos sin una respuesta automatizada. 
 
-## Principales características de XDR
+### Principales características de XDR
 
 A continuación, te presentamos las principales características de XDR.
 
@@ -46,7 +46,7 @@ A continuación, te presentamos las principales características de XDR.
 
 Te invitamos a conocer nuestro servicio que integra una solución XDR dentro del stack de herramientas de seguridad: ciberseguridad gestionada [ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada).
 
-## La seguridad informática con XDR
+### La seguridad informática con XDR
 
 Si hablamos de la seguridad informática y de cuál es el significado de XDR en ella, podemos destacar que hace referencia a la evolución de las soluciones convencionales de detección y respuesta.  
 Amplía la **protección a toda la infraestructura digital** de una organización o empresa.  
@@ -55,7 +55,7 @@ En la actualidad, las amenazas pueden aparecer por diferentes puntos de entrada.
 La tecnología XDR correlaciona los eventos de diversas plataformas con el fin de detectar patrones sospechosos.  
 En otras palabras, **se adelanta al ataque** antes de que ocasione graves problemas a la ciberseguridad.
 
-## XDR & SIEM/EDR
+### XDR & SIEM/EDR
 
 Antes hemos mencionado que el **software XDR** posee diferencias claras frente a otras herramientas de seguridad.  
 Pese a que tienen el mismo objetivo (proteger los sistemas informáticos), hay que subrayar los factores distintivos.  
@@ -63,11 +63,11 @@ A diferencia de un EDR, que opera de forma aislada en dispositivos individuales,
 Mientras que un SIEM depende de reglas y análisis retrospectivos, XDR aplica inteligencia artificial y automatización para responder de manera más rápida y precisa a las amenazas.  
 Infórmate con otro artículo de nuestro blog acerca de [XDR vs SIEM](https://ewala.es/blog/posts/xdr-vs-siem-la-solucion-para-tu-negocio/).
 
-### SIEM-XDR
+#### SIEM-XDR
 
 A pesar de su capacidad avanzada, XDR suele implementarse junto con un SIEM porque este proporciona almacenamiento a largo plazo, cumplimiento normativo y una visión más amplia de la seguridad organizacional. Mientras XDR detecta y responde de forma inmediata, el SIEM permite análisis profundos y la correlación de eventos históricos, creando una estrategia de seguridad más completa y efectiva.
 
-## Elige el software XDR para la protección de tu empresa
+### Elige el software XDR para la protección de tu empresa
 
 Ahora que ya sabes **qué significa XDR**, debes conocer las razones por las que implementarlo en tu empresa es recomendable.  
 Te proporciona beneficios que mejoran la eficiencia durante la detección y respuesta de ataques.
@@ -77,13 +77,13 @@ Te proporciona beneficios que mejoran la eficiencia durante la detección y resp
 - **Menos alertas** relacionadas con incidentes menores o falsos.
 - **Optimización de recursos** al reducir la carga de trabajo de los equipos de seguridad.
 
-## ¿Es XDR la solución adecuada para tu negocio?
+### ¿Es XDR la solución adecuada para tu negocio?
 
 Pese a que XDR **no reemplaza a otras herramientas, sino que las complementa** y sí puede convertirse en la opción ideal de tu empresa, sobre todo si buscas detección y respuesta rápida.  
 Somos conscientes de que elegir la mejor solución de ciberseguridad no es fácil.  
 Te invitamos a conocer nuestros servicios para recibir un enfoque personalizado que te **ayudará a proteger tu negocio** con las herramientas más avanzadas.
 
-## Ewala te cuenta qué es XDR
+### Ewala te cuenta qué es XDR
 
 Si consideras que te ha resultado de utilidad la información acerca de **qué es XDR**, anímate a conocernos.  
 En [Ewala](https://ewala.es/), te ayudamos a evaluar y mejorar sobre la ciberseguridad de tu compañía. Descubre cómo proteger tu empresa en un entorno donde las amenazas digitales evolucionan constantemente.  
