@@ -5,11 +5,19 @@
     <!-- Blog -->
     <url>
         <loc>https://ewala.es/blog/</loc>
-        <lastmod>2025-01-13T11:16:11+00:00</lastmod>
+        <lastmod>2025-04-01T19:39:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- POSTS BLOG -->
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/que-es-un-xdr-y-como-puede-proteger-tu-empresa/
+        </loc>
+        <lastmod>2025-04-01T19:39:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
     <url>
         <loc>https://ewala.es/blog/posts/que-es-un-siem-y-para-que-sirve-y-un-soar/</loc>
         <lastmod>2025-02-11T09:18:00.000Z</lastmod>
