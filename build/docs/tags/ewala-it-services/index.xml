@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ewala-It-Services on Blog Ewala</title>
+    <link>http://localhost:1313/blog/tags/ewala-it-services/</link>
+    <description>Recent content in Ewala-It-Services on Blog Ewala</description>
+    <generator>Hugo</generator>
+    <language>es_ES</language>
+    <lastBuildDate>Mon, 21 Apr 2025 18:28:14 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/tags/ewala-it-services/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sistemas y redes industriales OT</title>
+      <link>http://localhost:1313/blog/posts/sistemas-y-redes-industriales-ot/</link>
+      <pubDate>Mon, 21 Apr 2025 18:28:14 +0000</pubDate>
+      <guid>http://localhost:1313/blog/posts/sistemas-y-redes-industriales-ot/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;h2 id=&#34;sistemas-y-redes-industriales-ot&#34;&gt;Sistemas y redes industriales OT&lt;/h2&gt;&#xA;&lt;p&gt;Los sistemas OT se han convertido en un factor esencial para caminar hacia la transformación digital.&lt;/p&gt;&#xA;&lt;p&gt;Desde &lt;a href=&#34;https://ewala.es/&#34;&gt;Ewala&lt;/a&gt; te contaremos cuál es la relación entre redes IT y OT, de manera que puedas entender cómo se estructuran estas redes y qué tipo de retos supone la &lt;a href=&#34;https://ewala.es/kit-digital-ciberseguridad-gestionada&#34;&gt;ciberseguridad gestionada&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Vivimos en un mundo interconectado, donde es necesario asegurar la continuidad y seguridad de las operaciones de tu negocio.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

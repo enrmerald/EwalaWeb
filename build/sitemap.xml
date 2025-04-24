@@ -12,6 +12,14 @@
     <!-- POSTS BLOG -->
     <url>
         <loc>
+            https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/
+        </loc>
+        <lastmod>2025-04-24T08:09:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
             https://ewala.es/blog/posts/que-es-un-xdr-y-como-puede-proteger-tu-empresa/
         </loc>
         <lastmod>2025-04-01T19:39:00.000Z</lastmod>
