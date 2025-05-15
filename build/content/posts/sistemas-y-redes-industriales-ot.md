@@ -1,7 +1,7 @@
 ---
 title: "Sistemas y redes industriales OT"
 title_seo: "Ciberseguridad en redes y sistemas OT"
-description_seo: "Protege tu infraestructura industrial con estrategias de ciberseguridad OT. Conoce diferencias IT/OT y cómo lograr una red segura y conectada."
+description_seo: "Protege tu infraestructura industrial con estrategias de ciberseguridad OT. Conoce diferencias IT/OT y como lograr una red segura y conectada."
 date: 2025-04-21T18:28:14.000Z
 categories: ["ciberseguridad", "info", "industrial"]
 tags: ["ciberseguridad", "ciberseguridad-avanzada", "siem-y-xdr", "soc", "redes-ot", "sistemas-industriales", "ciberseguridad-industrial"]
