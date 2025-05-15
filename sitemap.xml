@@ -26,9 +26,17 @@
     <!-- POSTS BLOG -->
     <url>
         <loc>
+            https://ewala.es/blog/posts/que-es-un-soc-en-ciberseguridad/
+        </loc>
+        <lastmod>2025-05-15T16:40:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
             https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/
         </loc>
-        <lastmod>2025-04-24T08:09:00.000Z</lastmod>
+        <lastmod>2025-05-15T08:09:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
