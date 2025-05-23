@@ -36,7 +36,7 @@ Un servicio SOC-MDR 24/7 actúa como guardián permanente, integrando: 
 La protección no solo abarca las aplicaciones críticas del negocio, sino que además garantiza el cumplimiento de normativas esenciales: 
 
 - [ISO 27001](https://www.iso.org/about) para gestión de seguridad. 
-- Esquema Nacional de Seguridad ([ENS](https://ens.ccn.cni.es/es/que-es-el-ens)).
+- Esquema Nacional de Seguridad ([ENS](https://portal.mineco.gob.es/es-es/ministerio/estrategias/Paginas/Esquema_Nacional_de_Seguridad.aspx)).
 - Directiva NIS2 para infraestructuras críticas. 
 - Regulación DORA para resiliencia digital. 
 
