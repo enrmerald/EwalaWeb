@@ -5,14 +5,14 @@
     <!-- Página principal -->
     <url>
         <loc>https://ewala.es</loc>
-        <lastmod>2025-05-16T11:00:46+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- Página de servicios -->
     <url>
         <loc>https://ewala.es/kit-digital-ciberseguridad-gestionada</loc>
-        <lastmod>2025-05-16T11:00:46+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
@@ -110,13 +110,13 @@
     <!-- Otras páginas -->
     <url>
         <loc>https://ewala.es/kit-digital</loc>
-        <lastmod>2025-05-16T11:00:09+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://ewala.es/kit-consulting</loc>
-        <lastmod>2025-05-16T11:00:37+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -140,17 +140,17 @@
     <!-- Páginas de políticas -->
     <url>
         <loc>https://ewala.es/politica-privacidad</loc>
-        <lastmod>2025-05-16T11:00:13+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://ewala.es/aviso-legal</loc>
-        <lastmod>2025-05-16T10:46:13+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://ewala.es/politica-cookies</loc>
-        <lastmod>2025-05-16T11:00:40+00:00</lastmod>
+        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
         <priority>0.80</priority>
     </url>
 </urlset>
