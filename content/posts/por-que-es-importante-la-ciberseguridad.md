@@ -83,4 +83,4 @@ No importa qué estás buscando relacionado con la ciberseguridad, tenemos lo ne
 
 Si te ha resultado de utilidad la información acerca de **por qué es importante la ciberseguridad**, considera nuestros servicios para poner en marcha un diagnóstico de seguridad en tu empresa, que es el primer paso.
 
-Analizaremos y detallaremos cuáles son tus vulnerabilidades y riesgos actuales y, sobre todo, te proponemos un plan de acción calendarizado, **adaptado a tu contexto y tus recursos**. ¡[Contáctanos](https://ewala.es/#contacto) ya!
+Analizaremos y detallaremos cuáles son tus vulnerabilidades y riesgos actuales y, sobre todo, te proponemos un plan de acción calendarizado, **adaptado a tu contexto y tus recursos**. ¡[Contáctanos](https://ewala.es/#contact) ya!
