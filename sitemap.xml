@@ -26,6 +26,14 @@
     <!-- POSTS BLOG -->
     <url>
         <loc>
+            https://ewala.es/blog/posts/tendencias-ciberseguridad-2025/
+        </loc>
+        <lastmod>2025-07-25T15:05:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
             https://ewala.es/blog/posts/ndr-en-ot/
         </loc>
         <lastmod>2025-07-11T16:40:00.000Z</lastmod>
