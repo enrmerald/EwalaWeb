@@ -18,9 +18,9 @@ tags: [
 ]
 developer: "Ewala"
 tagewala: "Protege tus dispositivos IoT con múltiples capas de seguridad"
-header_image: /blog/images/IMG-0002-01-KEWOM-POST-IoT-Ciberseguridad.webp
-postimage: /blog/images/IMG-0002-01-KEWOM-POST-IoT-Ciberseguridad.webp
-thumbnail: /blog/images/IMG-0002-01-KEWOM-POST-IoT-Ciberseguridad.webp
+header_image: /blog/images/IMG-0001-01-dispositivos-IoT.webp
+postimage: /blog/images/IMG-0001-01-dispositivos-IoT.webp
+thumbnail: /blog/images/IMG-0001-01-dispositivos-IoT.webp
 author: "Ewala"
 authorlink: "https://es.linkedin.com/company/e-wala-it-services"
 subtitle: "Cómo los dispositivos IoT transforman la seguridad IT/OT y por qué necesitas múltiples capas de protección"

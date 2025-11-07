@@ -5,11 +5,19 @@
     <!-- Blog -->
     <url>
         <loc>https://ewala.es/blog/</loc>
-        <lastmod>2025-02-11T11:16:11+00:00</lastmod>
+        <lastmod>2025-11-07T15:20:11+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- POSTS BLOG -->
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad/
+        </loc>
+        <lastmod>2025-11-07T15:21:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
     <url>
         <loc>
             https://ewala.es/blog/posts/tendencias-ciberseguridad-2025/
