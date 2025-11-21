@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cumplimiento on Blog Ewala</title><link>https://ewala.es/blog/categories/cumplimiento/</link><description>Recent content in Cumplimiento on Blog Ewala</description><generator>Hugo</generator><language>es_ES</language><lastBuildDate>Fri, 21 Nov 2025 09:00:00 +0000</lastBuildDate><atom:link href="https://ewala.es/blog/categories/cumplimiento/index.xml" rel="self" type="application/rss+xml"/><item><title>Secure Score en Azure: guía para mejorar tu seguridad</title><link>https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/</link><pubDate>Fri, 21 Nov 2025 09:00:00 +0000</pubDate><guid>https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/</guid><description>&lt;h2 id="qué-es-el-secure-score"&gt;¿Qué es el Secure Score?&lt;/h2&gt;
+&lt;p&gt;En cloud, muchos problemas serios no vienen de “hackers ninja”, sino de ajustes mal puestos y controles básicos sin activar. En Azure, el camino más rápido para ordenar la casa es &lt;strong&gt;Microsoft Defender for Cloud&lt;/strong&gt; y su &lt;strong&gt;Secure Score&lt;/strong&gt;: piensa en él como un termómetro que reúne evidencias de configuración y te dice, de un vistazo, dónde puedes ganar seguridad.&lt;/p&gt;
+&lt;h2 id="cómo-funciona"&gt;¿Cómo funciona?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Defender te propone recomendaciones agrupadas por controles de seguridad.&lt;/li&gt;
+&lt;li&gt;Cada recomendación pesa distinto:
+&lt;ul&gt;
+&lt;li&gt;Si la aplicas en todos los recursos afectados, sumas todos sus puntos.&lt;/li&gt;
+&lt;li&gt;Si la aplicas a una parte, sumas puntos proporcionales.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;El resultado aparece como un porcentaje por suscripción y un total global.&lt;/li&gt;
+&lt;li&gt;Además, puedes ver la evolución en el tiempo para medir si tus cambios van en la dirección correcta.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Puedes combinar esta información con la visibilidad que ofrecen soluciones como un &lt;strong&gt;&lt;a href="https://ewala.es/blog/posts/que-es-un-siem-y-para-que-sirve-y-un-soar/"&gt;SIEM y SOAR&lt;/a&gt;&lt;/strong&gt;, para correlacionar eventos y priorizar alertas relevantes.&lt;/p&gt;</description></item></channel></rss>
