@@ -686,6 +686,10 @@ section {
   margin-bottom: 0;
 }
 
+.featured li {
+  font-size: 14px;
+}
+
 .featured .nav-link.active {
   box-shadow: 0px 0 25px rgba(0, 0, 0, 0.08);
 }
