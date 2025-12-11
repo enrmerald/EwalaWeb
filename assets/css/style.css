@@ -647,8 +647,17 @@ section {
 # Featured
 --------------------------------------------------------------*/
 .featured {
-  padding: 40px 0 0 0;
+  padding: 40px 0 20px 0;
   background: white;
+}
+
+.featured .rowNeotec {
+  display: flex;
+}
+
+.featured .row {
+  display: flex;
+  align-items: center;
 }
 
 .featured .nav-tabs {
@@ -2397,6 +2406,12 @@ input[name="carousel"] {
 #slide9:checked ~ .carousel-container .carousel-slides {
   transform: translateX(-800%);
 }
+#slide10:checked ~ .carousel-container .carousel-slides {
+  transform: translateX(-900%);
+}
+#slide11:checked ~ .carousel-container .carousel-slides {
+  transform: translateX(-1000%);
+}
 
 /* ===========================
    NAVEGACIÓN CON PUNTOS
@@ -2441,7 +2456,9 @@ input[name="carousel"] {
 #slide6:checked ~ .carousel-nav .nav-dot[for="slide6"],
 #slide7:checked ~ .carousel-nav .nav-dot[for="slide7"],
 #slide8:checked ~ .carousel-nav .nav-dot[for="slide8"],
-#slide9:checked ~ .carousel-nav .nav-dot[for="slide9"] {
+#slide9:checked ~ .carousel-nav .nav-dot[for="slide9"],
+#slide10:checked ~ .carousel-nav .nav-dot[for="slide10"],
+#slide11:checked ~ .carousel-nav .nav-dot[for="slide11"] {
   background: #7cc576;
   transform: scale(1.2);
   box-shadow: 0 0 0 3px rgba(124, 197, 118, 0.2);
