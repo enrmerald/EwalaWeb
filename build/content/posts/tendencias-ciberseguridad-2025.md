@@ -128,4 +128,4 @@ Desde **[Ewala](https://ewala.es/)** se recomienda una estrategia de **cibersegu
 
 La **ciberseguridad en 2025** requiere anticipación, visión y colaboración en todos los niveles de la empresa. **[Ewala](https://ewala.es/)** ayuda a construir entornos digitales más seguros, sostenibles y adaptados a los desafíos del futuro.
 
-[Contácta](https://ewala.es/contact) con **Ewala** y trabajemos juntos en tu estrategia de ciberseguridad  o descubre nuestro [**Kit Digital de Ciberseguridad Gestionada**](https://ewala.es/kit-digital-ciberseguridad-gestionada) para dar el siguiente paso en la protección de tu empresa.
+[Contácta](https://ewala.es/#contact) con **Ewala** y trabajemos juntos en tu estrategia de ciberseguridad  o descubre nuestro [**Kit Digital de Ciberseguridad Gestionada**](https://ewala.es/kit-digital-ciberseguridad-gestionada) para dar el siguiente paso en la protección de tu empresa.

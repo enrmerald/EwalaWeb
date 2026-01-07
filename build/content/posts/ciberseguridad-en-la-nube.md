@@ -69,7 +69,7 @@ Se basa en el **modelo de responsabilidad compartida**:
 5. **SIEM y SOAR** con IA para respuesta automática a incidentes.  
 6. **Cumplimiento activo**: RGPD, ISO 27017, NIST SP 800-144, ENS.  
 
-💡 Puedes leer más sobre esto en nuestro post de [Tendencias de ciberseguridad en 2025](https://ewala.es/blog/tendencias-ciberseguridad-2025).
+💡 Puedes leer más sobre esto en nuestro post de [Tendencias de ciberseguridad en 2025](https://ewala.es/blog/posts/tendencias-ciberseguridad-2025/).
 
 ---
 
@@ -78,4 +78,4 @@ Se basa en el **modelo de responsabilidad compartida**:
 En [Ewala](https://ewala.es/) entendemos que la **ciberseguridad en la nube** es un pilar esencial para cualquier empresa que quiera **innovar y crecer de forma segura**.  
 Ofrecemos soluciones **personalizadas**, alineadas con normativas y adaptadas a tu negocio.  
 
-Descubre nuestro [Kit de ciberseguridad gestionada](https://ewala.es/kit-ciberseguridad) y lleva tu protección cloud al siguiente nivel.
+Descubre nuestro [Kit de ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada) y lleva tu protección cloud al siguiente nivel.
