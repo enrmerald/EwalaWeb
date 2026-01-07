@@ -5,7 +5,7 @@
     <!-- Página principal -->
     <url>
         <loc>https://ewala.es</loc>
-        <lastmod>2025-11-07T15:21:00.000Z</lastmod>
+        <lastmod>2026-01-07T10:34:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
@@ -19,11 +19,27 @@
     <!-- Blog -->
     <url>
         <loc>https://ewala.es/blog/</loc>
-        <lastmod>2025-11-07T15:21:00.000Z</lastmod>
+        <lastmod>2026-01-07T10:33:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
-    <!-- POSTS BLOG -->
+    <!-- POSTS BLOG --> 
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/cpg-2-convergencia-it-ot/
+        </loc>
+        <lastmod>2026-01-07T09:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/ 
+        </loc>
+        <lastmod>2025-11-23T11:18:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
     <url>
         <loc>
             https://ewala.es/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad/
@@ -76,7 +92,7 @@
         <loc>
             https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/
         </loc>
-        <lastmod>2025-05-15T08:09:00.000Z</lastmod>
+        <lastmod>2025-04-21T08:09:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>

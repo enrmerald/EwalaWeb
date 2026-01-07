@@ -2,7 +2,7 @@
 title: "NDR en OT"
 title_seo: "Protección OT con NDR: Ciberseguridad eficaz"
 description_seo: "Descubre cómo NDR protege redes OT con monitoreo pasivo, análisis de protocolos industriales y detección precisa de amenazas."
-date: 2025-06-17T10:00:00.000Z
+date: 2025-07-11T16:40:00.000Z
 categories: ["ciberseguridad", "OT", "infraestructuras-críticas"]
 tags: ["ndr", "ciberseguridad-industrial", "OT", "sentryn3t", "protección-24", "ciberseguridad", "nis2", "iec-62443"]
 developer: "Ewala"

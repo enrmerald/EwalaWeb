@@ -2,7 +2,7 @@
 title: "CPG 2.0 y la convergencia IT/OT"
 title_seo: "CPG 2.0 y convergencia IT/OT en infraestructuras críticas"
 description_seo: "Analizamos CPG 2.0 de CISA y su impacto en la convergencia IT/OT, la detección avanzada y la ciberresiliencia en infraestructuras críticas."
-date: 2025-12-12T09:00:00.000Z
+date: 2026-07-01T09:00:00.000Z
 categories: ["ciberseguridad", "industrial", "ot", "cumplimiento"]
 tags: [
   "cpg-2-0",

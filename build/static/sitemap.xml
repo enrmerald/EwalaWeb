@@ -5,11 +5,35 @@
     <!-- Blog -->
     <url>
         <loc>https://ewala.es/blog/</loc>
-        <lastmod>2025-08-11T14:35:00.000Z</lastmod>
+        <lastmod>2026-01-07T10:33:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- POSTS BLOG -->
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/cpg-2-convergencia-it-ot/
+        </loc>
+        <lastmod>2026-01-07T09:00:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/
+        </loc>
+        <lastmod>2025-11-23T11:18:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad/
+        </loc>
+        <lastmod>2025-11-07T15:21:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
     <url>
         <loc>
             https://ewala.es/blog/posts/ciberseguridad-en-la-nube/
@@ -54,7 +78,7 @@
         <loc>
             https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/
         </loc>
-        <lastmod>2025-05-15T08:09:00.000Z</lastmod>
+        <lastmod>2025-04-21T08:09:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -124,66 +148,5 @@
         <lastmod>2024-12-19T13:30:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
-    </url>
-    <!-- TAGS -->
-    <url>
-        <loc>https://ewala.es/blog/tags/cybersecurity/</loc>
-        <lastmod>2024-11-07T07:16:11+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/info/</loc>
-        <lastmod>2024-11-07T07:16:11+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/av/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/ataques-ransomware/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/edr/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/kit-digital/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/mdr/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/protecci%C3%B3n-24/7/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/soc/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://ewala.es/blog/tags/soc-mdr/</loc>
-        <lastmod>2024-12-15T12:00:00+00:00</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
     </url>
 </urlset>
