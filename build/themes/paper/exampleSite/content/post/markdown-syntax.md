@@ -96,6 +96,7 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
     <html lang="en">
     <head>
       <meta charset="utf-8">
+<meta name="geo.country" content="ES"> <!-- Metadato de país -->
       <title>Example HTML5 Document</title>
     </head>
     <body>
@@ -111,6 +112,7 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
 <html lang="en">
 <head>
   <meta charset="utf-8">
+<meta name="geo.country" content="ES"> <!-- Metadato de país -->
   <title>Example HTML5 Document</title>
 </head>
 <body>

@@ -1,5 +1,5 @@
 baseURL = 'https://ewala.es/blog/'
-languageCode = 'es_ES'
+languageCode = 'es-ES'
 title = 'Blog Ewala'
 theme = 'paper'
 
