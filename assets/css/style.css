@@ -34,8 +34,16 @@ h6 {
 
 @media (prefers-reduced-motion: no-preference) {
   :root {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
+}
+
+:root{
+  --grc-primary: #7cc576;
+  --grc-primary-light: rgba(124,197,118,0.1);
+  --grc-dark: #151515;
+  --grc-text-muted: #666;
+  --grc-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 
 .ewala-color {
@@ -466,6 +474,14 @@ h6 {
   color: #fff;
 }
 
+#hero p {
+  margin: 0 0 40px 0;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+  color: #fff;
+}
+
 #hero h2 {
   color: #aeaeae;
   margin-bottom: 30px;
@@ -508,6 +524,16 @@ h6 {
   #hero h2 {
     line-height: 22px;
   }
+}
+
+#hero::before{
+ content:"";
+ position:absolute;
+ left:0;
+ right:0;
+ top:0;
+ bottom:0;
+ background:rgba(0,0,0,0.45);
 }
 
 /*--------------------------------------------------------------
@@ -940,199 +966,6 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Portfolio
---------------------------------------------------------------*/
- /* .portfolio {
-  padding: 60px 0;
-  background: linear-gradient(135deg, var(--bg-light) 0%, #e2e8f0 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.portfolio .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.portfolio .portfolio-item {
-  margin-bottom: 30px;
-  height: 300px; 
-  display: flex; 
-  justify-content: center;
-  align-items: center; 
-}
-
-.portfolio #portfolio-flters {
-  padding: 0;
-  margin: 0 auto 25px auto;
-  list-style: none;
-  text-align: center;
-}
-
-.portfolio #portfolio-flters li {
-  cursor: pointer;
-  display: inline-block;
-  padding: 10px 18px 12px 18px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  color: #555555;
-  transition: all 0.3s ease-in-out;
-  margin: 0 4px 10px 4px;
-  background: whitesmoke;
-  border-radius: 4px;
-}
-
-.portfolio #portfolio-flters li:hover,
-.portfolio #portfolio-flters li.filter-active {
-  background: #7cc576;
-  color: #fff;
-}
-
-.portfolio #portfolio-flters li:last-child {
-  margin-right: 0;
-}
-
-.portfolio .portfolio-wrap {
-  transition: 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.portfolio .portfolio-wrap::before {
-  content: "";
-  background: rgba(21, 21, 21, 0.6);
-  position: absolute;
-  left: 30px;
-  right: 30px;
-  top: 30px;
-  bottom: 30px;
-  transition: all ease-in-out 0.3s;
-  z-index: 2;
-  opacity: 0;
-}
-
-.portfolio .portfolio-wrap .portfolio-info {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-  z-index: 3;
-  transition: all ease-in-out 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.portfolio .portfolio-wrap .portfolio-info::before {
-  display: block;
-  content: "";
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  top: 35px;
-  left: 35px;
-  border-top: 3px solid #fff;
-  border-left: 3px solid #fff;
-  transition: all 0.5s ease 0s;
-  z-index: 9994;
-}
-
-.portfolio .portfolio-wrap .portfolio-info::after {
-  display: block;
-  content: "";
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  bottom: 35px;
-  right: 35px;
-  border-bottom: 3px solid #fff;
-  border-right: 3px solid #fff;
-  transition: all 0.5s ease 0s;
-  z-index: 9994;
-}
-
-.portfolio .portfolio-wrap .portfolio-info h4 {
-  font-size: 20px;
-  color: #fff;
-  font-weight: 600;
-}
-
-.portfolio .portfolio-wrap .portfolio-info p {
-  color: #ffffff;
-  font-size: 14px;
-  text-transform: uppercase;
-  padding: 0;
-  margin: 0;
-}
-
-.portfolio .portfolio-wrap .portfolio-links {
-  text-align: center;
-  z-index: 4;
-}
-
-.portfolio .portfolio-wrap .portfolio-links a {
-  color: #fff;
-  margin: 0 2px;
-  font-size: 28px;
-  display: inline-block;
-  transition: 0.3s;
-}
-
-.portfolio .portfolio-wrap .portfolio-links a:hover {
-  color: #7cc576;
-}
-
-.portfolio .portfolio-wrap:hover::before {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 1;
-}
-
-.portfolio .portfolio-wrap:hover .portfolio-info {
-  opacity: 1;
-}
-
-.portfolio .portfolio-wrap:hover .portfolio-info::before {
-  top: 15px;
-  left: 15px;
-}
-
-.portfolio .portfolio-wrap:hover .portfolio-info::after {
-  bottom: 15px;
-  right: 15px;
-}
-
-.portfolio-item {
-  flex: 1 1 calc(33.333% - 20px); Tres columnas con espacio 
-  max-width: calc(33.333% - 20px);
-}
-@media (max-width: 768px) {
-  .portfolio-item {
-    flex: 1 1 calc(50% - 20px);  Dos columnas en tablets 
-    max-width: calc(50% - 20px);
-  }
-}
-@media (max-width: 576px) {
-  .portfolio-item {
-    flex: 1 1 100%; /* Una columna en móviles 
-    max-width: 100%;
-  }
-} 
-*/
-
-/*--------------------------------------------------------------
 # Testimonials
 --------------------------------------------------------------*/
 .testimonials {
@@ -1457,63 +1290,6 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Frequently Asked Questions
---------------------------------------------------------------*/
-.faq .faq-list {
-  padding: 0;
-  list-style: none;
-}
-
-.faq .faq-list li {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
-.faq .faq-list a {
-  display: block;
-  position: relative;
-  font-family: #7cc576;
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 400;
-  padding-right: 25px;
-  cursor: pointer;
-}
-
-.faq .faq-list i {
-  font-size: 24px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.faq .faq-list p {
-  margin-bottom: 0;
-  padding: 10px 0 0 0;
-}
-
-.faq .faq-list .icon-show {
-  display: none;
-}
-
-.faq .faq-list a.collapsed {
-  color: #343a40;
-}
-
-.faq .faq-list a.collapsed:hover {
-  color: #7cc576;
-}
-
-.faq .faq-list a.collapsed .icon-show {
-  display: inline-block;
-}
-
-.faq .faq-list a.collapsed .icon-close {
-  display: none;
-}
-
-/*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
 .contact .info {
@@ -1670,6 +1446,64 @@ section {
   100% {
     transform: rotate(360deg);
   }
+}
+
+
+/*--------------------------------------------------------------
+# Frequently Asked Questions
+--------------------------------------------------------------*/
+.faq .faq-list {
+  padding: 0;
+  list-style: none;
+}
+
+.faq .faq-list li {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.faq .faq-list a {
+  display: block;
+  position: relative;
+  font-family: #7cc576;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  padding-right: 25px;
+  cursor: pointer;
+}
+
+.faq .faq-list i {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.faq .faq-list p {
+  margin-bottom: 0;
+  padding: 10px 0 0 0;
+}
+
+.faq .faq-list .icon-show {
+  display: none;
+}
+
+.faq .faq-list a.collapsed {
+  color: #343a40;
+}
+
+.faq .faq-list a.collapsed:hover {
+  color: #7cc576;
+}
+
+.faq .faq-list a.collapsed .icon-show {
+  display: inline-block;
+}
+
+.faq .faq-list a.collapsed .icon-close {
+  display: none;
 }
 
 /*--------------------------------------------------------------
@@ -2570,4 +2404,179 @@ input[name="carousel"] {
   width: 100%;          /* se adapta al 100% del padre */
   max-width: 500px;     /* tope de 500px en pantallas grandes */
   height: auto;         /* mantiene la proporción */
+}
+
+/* ===========================
+   GRC
+=========================== */
+.grc-hero {
+  background: linear-gradient(135deg, #fff 0%, var(--grc-primary-light) 100%);
+  padding: 100px 0 50px;
+  text-align: center;
+}
+
+.grc-section-alt {
+  background-color: rgba(124,197,118,0.05);
+}
+
+.grc-title-main {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--grc-dark);
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.grc-title-underline {
+  width: 80px;
+  height: 5px;
+  background: var(--grc-primary);
+  margin: 0 auto 30px;
+  border-radius: 3px;
+}
+
+.grc-text-intro {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: var(--grc-text-muted);
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* ===== CARDS ===== */
+.grc-card-large {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px;
+  margin-bottom: 35px;
+  box-shadow: var(--grc-shadow);
+  border-left: 6px solid var(--grc-primary);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.grc-card-large.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grc-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.grc-tag {
+  background: var(--grc-primary-light);
+  color: var(--grc-primary);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.grc-card-body {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+}
+
+.grc-card-body p {
+  text-align: justify;
+}
+
+
+.grc-subtitle {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: var(--grc-dark);
+}
+
+.grc-subsection {
+  color: var(--grc-primary);
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.grc-list-styled {
+  list-style: none;
+  padding: 0;
+}
+
+.grc-list-styled li {
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.grc-list-styled li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: var(--grc-primary);
+  font-weight: bold;
+  background: rgba(124,197,118,0.15);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+/* ===== GRC IMÁGENES RESPONSIVE ===== */
+.grc-image {
+  width: 100%;            /* ocupa todo el ancho de su contenedor */
+  height: auto;           /* mantiene proporción original */
+  max-width: 100%;        /* evita desbordes */
+  border-radius: 12px;    /* bordes redondeados */
+  box-shadow: none;
+  background-color: none;
+  margin: 20px 0;         /* separación vertical */
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.grc-image.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Opcional: limitar el ancho máximo si quieres que no ocupen toda la columna */
+.grc-info .grc-image {
+  max-width: 480px;       /* se puede ajustar según diseño */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .grc-card-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .grc-title-main {
+    font-size: 2.2rem;
+  }
+}
+
+/*--------------------------------------------------------------
+# GRC ANCHOR OFFSET
+--------------------------------------------------------------*/
+
+.grc-page #ENS,
+.grc-page #NIS2,
+.grc-page #ISO42001,
+.grc-page #ISO27001 {
+  scroll-margin-top: 90px;
 }

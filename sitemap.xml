@@ -5,14 +5,20 @@
     <!-- Página principal -->
     <url>
         <loc>https://ewala.es</loc>
-        <lastmod>2026-01-07T10:34:00.000Z</lastmod>
+        <lastmod>2026-03-12T12:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
     <!-- Página de servicios -->
     <url>
+        <loc>https://ewala.es/grc-gobernanza-riesgo-cumplimiento</loc>
+        <lastmod>2026-03-12T12:55:46+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.00</priority>
+    </url>
+    <url>
         <loc>https://ewala.es/kit-digital-ciberseguridad-gestionada</loc>
-        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
+        <lastmod>2026-03-12T12:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
@@ -166,13 +172,13 @@
     <!-- Otras páginas -->
     <url>
         <loc>https://ewala.es/kit-digital</loc>
-        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
+        <lastmod>2026-03-12T12:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://ewala.es/kit-consulting</loc>
-        <lastmod>2025-06-04T18:55:46+00:00</lastmod>
+        <lastmod>2026-03-12T12:55:46+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
@@ -186,12 +192,27 @@
         <loc>
             https://ewala.es/EWA-POL-0002-002.01-POLITICA%20MEDIOAMBIENTAL%20-%20Versi%C3%B3n%20Web.pdf</loc>
         <lastmod>2024-03-27T08:51:53+00:00</lastmod>
-        <priority>0.50</priority>
+        <priority>0.30</priority>
     </url>
     <url>
         <loc>https://ewala.es/PRO-0001-01-PROCEDIMIENTO_GESTION_CANAL_COMUNICACIONES.pdf</loc>
         <lastmod>2023-06-09T10:13:53+00:00</lastmod>
-        <priority>0.50</priority>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://ewala.es/PER-MED-0001-001.01-MEDIDAS%20DE%20CONCILIACI%C3%93N%20-%20P%C3%A1gina%20web.pdf</loc>
+        <lastmod>2026-03-12T10:13:53+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://ewala.es/Plan%20Antifraude.pdf</loc>
+        <lastmod>2026-03-12T10:13:53+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://ewala.es/POL-0001-00-SGI%20POLITICA%20DE%20SEGURIDAD%20DE%20LA%20INFORMACION.pdf</loc>
+        <lastmod>2026-03-12T10:13:53+00:00</lastmod>
+        <priority>0.30</priority>
     </url>
     <!-- Páginas de políticas -->
     <url>
