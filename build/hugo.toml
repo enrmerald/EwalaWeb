@@ -39,6 +39,10 @@ publishDir = "docs"
     ]
     ogImage = "/images/ewala.png"
 
+[author]
+  name = "Ewala Developers"
+  email = "soportedesarrollo@ewala.es"
+
 [taxonomies]
   category = "categories"
   tag = "tags"
@@ -48,6 +52,6 @@ publishDir = "docs"
   tags = "/tags/:slug/"
 
 [pagination]
-disableAliases = false
-pagerSize = 8
-path = 'page'
+  disableAliases = false
+  pagerSize = 8
+  path = 'page'
