@@ -6,6 +6,7 @@ theme = 'paper'
 publishDir = "docs"
 
 [params]
+  author = "Ewala Developers"
   ewalalogo = '/blog/images/ewala_w.png'
   ewalafavicon = '/blog/images/favicon.png'
   color = 'light'
