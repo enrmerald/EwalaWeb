@@ -29,7 +29,15 @@
         <changefreq>weekly</changefreq>
         <priority>1.00</priority>
     </url>
-    <!-- POSTS BLOG --> 
+    <!-- POSTS BLOG -->
+    <url>
+        <loc>
+            https://ewala.es/blog/posts/ataques-cadena-suministro-riesgo-invisible/
+        </loc>
+        <lastmod>2026-04-17T14:36:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
     <url>
         <loc>
             https://ewala.es/blog/posts/cpg-2-convergencia-it-ot/
