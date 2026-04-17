@@ -38,7 +38,7 @@ publishDir = "docs"
     "Malware",
     "Ransonware"
     ]
-    ogImage = "/images/ewala.png"
+    ogImage = "images/ewala.png"
 
 [author]
   name = "Ewala Developers"
