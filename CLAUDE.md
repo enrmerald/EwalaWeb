@@ -29,10 +29,20 @@ Para el sitio principal estático, servir los archivos con cualquier servidor lo
 
 ### Dualidad sitio estático / blog Hugo
 
-- La **raíz** del repo *es* el document root que se publica (`publish = "/"` en `netlify.toml`). Por eso los HTML sueltos (`index.html`, `kit-consulting.html`, …) son páginas navegables directamente.
+- La **raíz** del repo *es* el document root que se publica (`publish = "/"` en `netlify.toml`). Por eso los HTML sueltos (`index.html`, `kit-consulting.html`, `grc-gobernanza-riesgo-cumplimiento.html`, …) son páginas navegables directamente.
 - El **blog Hugo** vive en `build/` con su propio `hugo.toml`. Su `publishDir = "docs"` significa que Hugo genera `build/docs/`, y el script de Netlify copia ese directorio a `/blog/` en la raíz del sitio publicado. El `baseURL` del blog es `https://ewala.es/blog/`, así que cualquier enlace absoluto generado por el tema ya incluye ese prefijo.
-- Los posts del blog viven en `content/posts/` (en la raíz, **no** en `build/content/posts/`). Comprobar esto antes de añadir contenido: Hugo se ejecuta con `--source build`, así que la resolución de `content/` depende de cómo esté enlazada esa carpeta respecto a `build/`.
+- La carpeta `/blog/` que ves en producción **no está commiteada**: se genera en cada deploy mediante `cp -R build/docs blog`. No la crees manualmente en el repo.
+- Los posts del blog viven en `build/content/posts/` (Hugo se invoca con `--source build`, así que esa es la ubicación canónica). La carpeta `content/posts/` en la raíz del repo es **residual/legacy** y no se compila — no añadir contenido nuevo allí.
 - El tema Hugo es `paper`, ubicado en `build/themes/paper/`. Tiene su propio `package.json` y Tailwind para el tema — el sitio principal **no** usa Tailwind.
+
+### Contextos de build en Netlify
+
+Además del build por defecto, `netlify.toml` define comandos específicos para:
+- `context.split1`: `hugo --gc --minify --enableGitInfo` (producción alternativa)
+- `context.deploy-preview`: añade `--buildFuture -b $DEPLOY_PRIME_URL` — útil al revisar previews de PRs con posts de fecha futura
+- `context.branch-deploy`: usa `-b $DEPLOY_PRIME_URL` para que los enlaces apunten al preview
+
+Si un preview muestra URLs/enlaces rotos, revisar que el `baseURL` efectivo sea el del contexto correcto.
 
 ### Archivos HTML duplicados / variantes
 
@@ -58,3 +68,58 @@ En la raíz hay múltiples PDFs de políticas (código ético, medioambiental, s
 ## Idioma
 
 Todo el contenido de usuario está en español (`lang="es"`, `languageCode = 'es-ES'`). Mantener copy, comentarios de contenido y metadatos SEO en español.
+
+## Generación de metadatos SEO/SEM para posts del blog
+
+Cuando el usuario pida generar metadatos SEO para un post (habitualmente tras redactar o revisar un `.md` en `build/content/posts/`), adopta el rol de **experto en Marketing Digital especializado en SEO/SEM con conocimiento profundo en ciberseguridad y tecnología**.
+
+### Entregables obligatorios (siempre los cuatro, en este orden)
+
+1. **Title SEO** — **máximo 47 caracteres** (contar incluyendo espacios). Orientado a posicionamiento, debe incluir al menos una keyword relevante del post. Conciso, sin relleno.
+2. **Metadescripción SEO** — **máximo 160 caracteres**. Debe incluir keyword principal, proponer un beneficio/hook claro y, cuando encaje, un CTA suave.
+3. **Subtítulo** — alineado con el **título principal** del post (no con el Title SEO). Humano, enganchador, no optimizado para buscadores.
+4. **Descripción corta** — resumen de 1-2 frases del contenido del post; tono editorial, no SEO.
+
+> **Importante:** validar mentalmente el conteo de caracteres antes de entregar. Si un entregable se pasa del límite, reescribirlo — no entregarlo "casi dentro".
+
+### Fuentes de keywords
+
+Usar preferentemente las keywords ya establecidas en el blog (declaradas en `build/hugo.toml` bajo `[params.seo].keywords`) y ampliarlas con términos específicos del post cuando aporten valor semántico:
+
+```
+"Ciberseguridad", "Ewala IT Services", "Noticias Ciberseguridad",
+"Qué es la ciberseguridad", "Para qué sirve la ciberseguridad",
+"En qué consiste la ciberseguridad", "Qué es SIEM en ciberseguridad",
+"Qué significa ciberseguridad", "De qué trata la ciberseguridad",
+"Qué es la ciberseguridad y para qué sirve",
+"Ciberseguridad: por qué es importante",
+"Para qué sirve la ciberseguridad en las empresas",
+"Malware", "Ransomware"
+```
+
+### Taxonomías existentes (reutilizar antes de inventar nuevas)
+
+**Categorías** usadas en el blog:
+- `ciberseguridad`
+- `gestión-de-incidentes`
+- `tecnologías-de-seguridad`
+
+**Tags** usados en el blog:
+- `ataques-ransomware`, `ciberseguridad`, `ciberseguridad-avanzada`, `cybersecurity`
+- `edr`, `kit-digital`, `mdr`, `protección-24`, `siem-y-xdr`
+- `soc`, `soc-mdr`, `siem`, `soar`
+- `detección-de-amenazas`, `automatización-de-seguridad`, `seguridad-en-tiempo-real`
+- `centro-de-operaciones-de-seguridad`, `compliance`, `protección-de-datos`
+
+Si se propone una categoría o tag nuevos, justificar brevemente por qué no encaja con los existentes.
+
+### Formato de salida
+
+Devolver los cuatro entregables claramente etiquetados, indicando el **conteo de caracteres real** entre paréntesis para Title y Metadescripción. Ejemplo:
+
+```
+Title SEO (43/47): SOC vs MDR: qué elegir en ciberseguridad
+Metadescripción (152/160): Descubre cuándo conviene un SOC interno o un MDR gestionado 24/7…
+Subtítulo: Cuándo externalizar tu centro de operaciones de seguridad
+Descripción corta: Comparativa práctica entre SOC y MDR…
+```

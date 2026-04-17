@@ -1,101 +1,109 @@
-# Ewala.es WebPage
+# Ewala.es — Sitio web corporativo
 
-![Ewala Logo](assets/img/EWALA-5%201.png)
+Repositorio del sitio web oficial de **Ewala IT Services**, empresa de ciberseguridad IT e industrial. El sitio se publica en **[https://ewala.es](https://ewala.es)** y está desplegado en **Netlify**.
 
-## **Description**
-This repository contains the source code, resources, and configurations required for the official website of **Ewala**, a static platform designed to provide information about IT and industrial cybersecurity services.
+## Estructura del proyecto
 
-The website is hosted on **Azure Blob Storage** as a static site and utilizes **containers** for scalability and speed.
+El repositorio contiene dos partes diferenciadas que conviven en el mismo repo:
 
----
-
-## **Features**
-- **Static Website:**
-  - Fast and secure, built with **HTML**, **CSS**, **JavaScript**, and basic **PHP** support.
-- **Azure Hosting:**
-  - Deployed using **Azure Blob Storage** and **Azure App Services** to serve content efficiently.
-- **Optimization:**
-  - Resources are well-organized into directories for easier management.
-  - Supports popular libraries like Bootstrap, jQuery, and AOS.
-- **Responsive Design:**
-  - Optimized for mobile, tablet, and desktop devices.
-
----
-
-## **Project Structure**
-
-```bash
-webpage/
-├── assets/
-│   ├── css/
-│   ├── img/
-│   ├── js/
-│   └── vendor/
-├── contacto/
-├── forms/
-├── Otros/
-├── particles/
-├── popup/
-├── aviso-legal.html
-├── COE-0001-02-CODIGO_ETICO.pdf
-├── EWA-POL-0002-002.01-POLITICA MEDIOAMBIENTAL - Versión Web.pdf
-├── exposicion.html
-├── exposicion_.php
-├── faq.html
-├── HTML5-Contact-Form-PHP-master.zip
-├── index-con-crberopps.html
-├── index-con-popupkaront3.html
-├── index-old1.html
-├── index-old2.html
-├── index.html
-├── inner-page.html
+```
+/                          ← raíz = document root publicado en ewala.es
+├── index.html             ← página principal
+├── kit-digital.html
 ├── kit-consulting.html
 ├── kit-digital-ciberseguridad-gestionada.html
-├── kit-digital.html
-├── PAM-0001-08-Politica_Medioambiental_2023.pdf
-├── particles.json
-├── particles.json_
-├── PER-MED-0001-001.01-MEDIDAS DE CONCILIACIÓN - Página web.pdf
-├── politica-cookies.html
+├── grc-gobernanza-riesgo-cumplimiento.html
+├── faq.html
+├── aviso-legal.html
 ├── politica-privacidad.html
-├── PRO-0001-01-PROCEDIMIENTO_GESTION_CANAL_COMUNICACIONES.pdf
-├── README.md
+├── politica-cookies.html
+├── sitemap.xml            ← gestionado manualmente
 ├── robots.txt
-├── sitemap.xml
-└── test.html
+├── *.pdf                  ← políticas corporativas publicadas (no mover ni borrar)
+├── assets/
+│   ├── css/               ← estilos (.css y .min.css de cada archivo)
+│   ├── js/                ← scripts (app.js / app.min.js, main.js / main.min.js, …)
+│   ├── img/
+│   └── vendor/            ← Bootstrap, jQuery, AOS, Owl Carousel… (sin npm)
+├── particles/
+├── build/                 ← blog Hugo (ver sección Blog más abajo)
+└── netlify.toml           ← configuración de despliegue (fuente de verdad)
 ```
 
-## **Technologies Used**
-- **HTML5**: Semantic structure foundation.
-- **CSS3**: Responsive design and styling.
-- **JavaScript**: Interactivity and animations.
-- **PHP**: Basic forms and redirections.
-- **Azure Blob Storage**: Hosting static resources.
-- **Azure App Services**: Containerized deployment for the website.
+> Los archivos con sufijo `_` o `.old` en `assets/` son copias de respaldo — ignorar salvo petición explícita.
+> Los HTML con sufijos tipo `-con-popupkaront3` o `test.html` son variantes de trabajo, no páginas en producción.
 
----
+## Sitio principal estático
 
-## **How to Use**
-1. **Clone the repository:**  
-   ```bash
-   git clone https://github.com/username/ewala-webpage.git
-   ```
-2. **Edit the files:**  
-    Update the HTML, CSS, or JavaScript files as needed.
-3. **Local testing:**  
-    Use a local server to test changes (you can use _VSCode_'s **Live Server** extension)
-4. **Deploy on Azure:**  
-    Upload the updated files to Azure Blob Storage or the appropriate container.
+Las páginas de la raíz están construidas con **HTML5 + Bootstrap 5 + jQuery + AOS**. No existe proceso de build — los archivos se editan y despliegan tal cual.
 
+### Desarrollo local
 
-## **SEO and Configuration**
-- **robots.txt**: Configures how search engines interact with the site.
-- **sitemap.xml**: Ensures that all important pages are indexed properly.
-- **Metadata**: Included to optimize SEO.
+Usar cualquier servidor local. Con VSCode:
+- Instalar la extensión **Live Server** y pulsar "Go Live".
 
-## **Contributors**
-- **Ewala IT Services** - Development team.
+### Consideraciones al añadir páginas nuevas
 
-## **License**
-This project is copyrighted. All rights reserved to **Ewala IT Services**.
+1. Añadir la entrada correspondiente en `sitemap.xml`.
+2. Copiar el bloque de Google Analytics (`G-RJFWRZVCTC`) y Google Tag Manager (`GTM-T48SB3HV`) del `<head>` de cualquier página existente.
+3. Añadir el `<link rel="canonical">` correspondiente.
 
+### Estilos y scripts
+
+`assets/css/` y `assets/js/` tienen versiones fuente y minificadas del mismo archivo. Los HTML referencian la versión `.min`. Al editar, modificar **ambas versiones** (no hay pipeline de minificación automático).
+
+## Blog (Hugo)
+
+El blog vive en `build/` y se publica bajo `https://ewala.es/blog/`.
+
+```
+build/
+├── hugo.toml              ← configuración Hugo (baseURL, tema, parámetros)
+├── content/posts/         ← posts del blog en Markdown (aquí se añade contenido nuevo)
+├── themes/paper/          ← tema Hugo con Tailwind (su propio package.json)
+├── static/                ← imágenes y assets estáticos del blog
+└── docs/                  ← output generado por Hugo (no editar manualmente)
+```
+
+### Añadir un post
+
+1. Crear un archivo `.md` en `build/content/posts/` siguiendo el frontmatter de posts existentes.
+2. Previsualizar en local antes de publicar (ver más abajo).
+
+### Desarrollo local del blog
+
+```bash
+cd build
+hugo server -D          # -D incluye posts en draft; accesible en http://localhost:1313
+```
+
+### Build de producción
+
+```bash
+# Tal como lo ejecuta Netlify — requiere Hugo 0.157.0
+hugo --minify --source build --destination build/docs && cp -R build/docs blog
+```
+
+> La carpeta `/blog/` en producción **no está en el repo**: se genera en cada deploy mediante el `cp` anterior.
+
+## Despliegue
+
+El despliegue es **automático en Netlify** al hacer push a `main`. La configuración está en `netlify.toml`:
+
+- **Build command**: `hugo --minify --source build --destination build/docs && cp -R build/docs blog`
+- **Publish directory**: `/` (la raíz entera del repo es el document root)
+- **Hugo version**: 0.157.0 (fijada en `[build.environment]`)
+
+Los contextos `deploy-preview` y `branch-deploy` construyen con `-b $DEPLOY_PRIME_URL` para que los enlaces del blog apunten al preview correcto. Útil para revisar posts con fecha futura (añadir `--buildFuture`).
+
+Las redirecciones 301 de `www.` y `http://` a `https://ewala.es` están configuradas en `netlify.toml` — no en el servidor.
+
+## SEO
+
+- `sitemap.xml` y `robots.txt` en la raíz se gestionan **manualmente**.
+- El blog genera su propio `sitemap.xml` bajo `/blog/`.
+- Analytics: Google Analytics `G-RJFWRZVCTC` + GTM `GTM-T48SB3HV` en el `<head>` de cada página del sitio principal.
+
+## Licencia
+
+Copyright © Ewala IT Services. Todos los derechos reservados.
