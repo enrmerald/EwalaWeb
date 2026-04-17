@@ -69,6 +69,15 @@ En la raíz hay múltiples PDFs de políticas (código ético, medioambiental, s
 
 Todo el contenido de usuario está en español (`lang="es"`, `languageCode = 'es-ES'`). Mantener copy, comentarios de contenido y metadatos SEO en español.
 
+## Jerarquía de encabezados en posts del blog
+
+El tema Hugo `paper` ya renderiza el campo `title` del frontmatter como `<h1>` en la página. Por tanto:
+
+- **Nunca usar `#` (H1) en el cuerpo del post** — genera un H1 duplicado que penaliza SEO y accesibilidad.
+- El cuerpo debe comenzar directamente con `##` (H2) o con un párrafo introductorio.
+- La jerarquía correcta es: `##` → `###` → `####`, sin saltar niveles.
+- Al crear o revisar un post, verificar que no existe ningún `# ` (almohadilla + espacio) fuera del frontmatter.
+
 ## Generación de metadatos SEO/SEM para posts del blog
 
 Cuando el usuario pida generar metadatos SEO para un post (habitualmente tras redactar o revisar un `.md` en `build/content/posts/`), adopta el rol de **experto en Marketing Digital especializado en SEO/SEM con conocimiento profundo en ciberseguridad y tecnología**.

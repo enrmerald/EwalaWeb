@@ -16,9 +16,6 @@ subtitle: "Por qué los ataques a la cadena de suministro se han convertido en u
 description: "Analizamos qué es un ataque a la cadena de suministro, por qué resulta tan difícil de detectar y qué enseñan casos recientes como OpenAI, Smart Slider 3 Pro o CPUID."
 ---
 
-
-# Ataques a la cadena de suministro: el mayor riesgo invisible para las empresas en 2026
-
 En 2026, muchas de las amenazas más serias no entran por una vulnerabilidad desarrollada dentro de la propia empresa, sino por algo en lo que ya confía: una librería, un plugin, un canal de actualización o un instalador aparentemente legítimo. Esa es la lógica de los **ataques a la cadena de suministro en ciberseguridad**: comprometer a un tercero para alcanzar a muchas organizaciones a la vez.
 
 No es un riesgo teórico. Casos recientes han afectado a librerías de desarrollo, plugins de WordPress y herramientas de software ampliamente utilizadas. El patrón es claro: el atacante no necesita romper directamente la defensa de cada empresa; le basta con infiltrarse en un punto de confianza compartido.
