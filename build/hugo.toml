@@ -36,7 +36,19 @@ publishDir = "docs"
     "Ciberseguridad: por qué es importante",
     "Para qué sirve la ciberseguridad en las empresas",
     "Malware",
-    "Ransonware"
+    "Ransomware",
+    "Qué es un SOC en ciberseguridad",
+    "Qué es XDR",
+    "Ciberseguridad en la nube",
+    "Ciberseguridad industrial",
+    "Esquema Nacional de Seguridad",
+    "Qué es MDR",
+    "Qué es NDR",
+    "Qué es SOAR",
+    "Zero Trust ciberseguridad",
+    "Ataques cadena de suministro",
+    "Directiva NIS2",
+    "Seguridad IoT"
     ]
     ogImage = "images/ewala.png"
 

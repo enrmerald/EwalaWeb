@@ -2,7 +2,7 @@
 title: "Guía del ENS: cuándo es obligatorio y cómo adaptarse"
 title_seo: "ENS: cuándo es obligatorio y cómo adaptarse"
 description_seo: "Descubre cuándo el ENS es obligatorio, qué categoría aplica a tu sistema y cómo adaptar tu empresa paso a paso con enfoque práctico."
-date: 2026-04-22T09:00:00.000Z
+date: 2026-04-24T11:10:00.000Z
 categories: ["cumplimiento"]
 tags: ["ens", "compliance", "ciberseguridad-empresarial", "nis2", "siem"]
 developer: "Ewala"
