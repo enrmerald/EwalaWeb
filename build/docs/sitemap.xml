@@ -12,6 +12,14 @@
     <!-- POSTS BLOG -->
     <url>
         <loc>
+            https://ewala.es/blog/posts/que-es-el-ens/
+        </loc>
+        <lastmod>2026-04-30T13:50:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
             https://ewala.es/blog/posts/ens-cuando-es-obligatorio-y-como-adaptarse/
         </loc>
         <lastmod>2026-04-24T11:10:00.000Z</lastmod>
