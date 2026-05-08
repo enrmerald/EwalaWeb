@@ -265,7 +265,7 @@ Una empresa puede estar afectada por más de uno de estos marcos al mismo tiempo
 
 Por ejemplo, una organización puede utilizar ISO 27001 como base de gestión, estar afectada por NIS2 por su sector de actividad y necesitar ENS para prestar servicios a la Administración Pública.
 
-En el siguiente artículo de esta serie analizaremos con más detalle las diferencias entre [ENS e ISO 27001](#).
+En el siguiente artículo de esta serie analizaremos con más detalle las diferencias entre [ENS e ISO 27001](https://ewala.es/blog/posts/ens-vs-iso-27001-diferencias/).
 
 
 ## Beneficios del ENS para una empresa
