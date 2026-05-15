@@ -80,8 +80,8 @@ hugo server -D          # -D incluye posts en draft; accesible en http://localho
 ### Build de producción
 
 ```bash
-# Tal como lo ejecuta Netlify — requiere Hugo 0.157.0
-hugo --minify --source build --destination build/docs && cp -R build/docs blog
+cd build
+hugo --minify --destination ./docs
 ```
 
 > La carpeta `/blog/` en producción **no está en el repo**: se genera en cada deploy mediante el `cp` anterior.
