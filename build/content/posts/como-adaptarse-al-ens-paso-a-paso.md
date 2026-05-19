@@ -12,86 +12,51 @@ postimage: "/blog/images/IMG-0001-01-BLOG-Como adaptarse al ENS.png"
 thumbnail: "/blog/images/IMG-0001-01-BLOG-Como adaptarse al ENS.png"
 author: "Ewala"
 authorlink: "https://es.linkedin.com/company/e-wala-it-services"
-subtitle: "Una guía clara para entender cómo afrontar un proyecto de adecuación al Esquema Nacional de Seguridad sin perder el foco técnico, organizativo ni de negocio."
-description: "Adaptarse al ENS exige mucho más que preparar documentación. En esta guía explicamos cómo abordar el proceso paso a paso: identificar el alcance, categorizar sistemas, analizar riesgos, implantar medidas y acreditar la conformidad."
+subtitle: "Una guía clara y directa para entender cómo adaptar tu empresa al Esquema Nacional de Seguridad sin complicar el proceso más de la cuenta."
+description: "Adaptarse al ENS exige mucho más que preparar documentación. En esta guía explicamos los 9 pasos clave para definir el alcance, analizar riesgos, implantar medidas, recoger evidencias y acreditar la conformidad."
 ---
 
-## Cómo adaptarse al ENS paso a paso: guía práctica para empresas
+## Cómo adaptar tu empresa al ENS paso a paso
 
-Adaptarse al **Esquema Nacional de Seguridad (ENS)** no consiste únicamente en cumplir un requisito documental o superar una auditoría. Es un proceso estructurado que obliga a revisar cómo una organización protege sus sistemas, gestiona sus riesgos y demuestra que dispone de medidas de seguridad adecuadas.
+Si trabajas con la Administración Pública en España —o quieres empezar a hacerlo— hay tres letras que van a aparecer en tus pliegos tarde o temprano: **ENS**.
 
-Para muchas empresas, especialmente aquellas que trabajan con la Administración Pública o aspiran a hacerlo, el ENS se ha convertido en un requisito estratégico. El **Real Decreto 311/2022** actualiza el marco regulador e incorpora más de 70 medidas de seguridad estructuradas en tres grupos —organizativas, operacionales y de protección— aplicables según la categoría del sistema. No solo condiciona el acceso a determinados contratos y licitaciones, sino que también ayuda a construir una base sólida de **ciberseguridad empresarial**.
-
-Si todavía necesitas una visión general del marco, puedes consultar antes nuestros artículos sobre [qué es el ENS y por qué es obligatorio en España](https://ewala.es/blog/posts/que-es-el-ens/) y la [guía del ENS: cuándo es obligatorio y cómo adaptarse](https://ewala.es/blog/posts/ens-cuando-es-obligatorio-y-como-adaptarse/).
-
-En este artículo explicamos **cómo adaptarse al ENS paso a paso**, desde el análisis inicial hasta la declaración o certificación de conformidad.
-
-## Antes de empezar: qué significa realmente adaptarse al ENS
-
-Uno de los errores más habituales es pensar que la adecuación al ENS equivale a “conseguir un certificado”.
-
-En realidad, el proceso es más amplio. Adaptarse al ENS implica:
-
-- Identificar qué sistemas de información están afectados.
-- Determinar su categoría.
-- Analizar los riesgos que soportan.
-- Implantar las medidas organizativas, técnicas y operativas necesarias.
-- Preparar evidencias que demuestren el cumplimiento.
-- Mantener el sistema actualizado mediante un enfoque de mejora continua.
-
-Por tanto, el ENS debe entenderse como un proyecto de **gobierno, riesgo y cumplimiento**, no solo como una actuación puntual de auditoría.
+Y no, no es un trámite que resuelves con un par de PDFs y buena voluntad. El **Esquema Nacional de Seguridad** es un proyecto real de ciberseguridad que, bien llevado, deja a tu empresa mucho más protegida. Mal llevado, se convierte en un agujero de tiempo y dinero.
 
 Si quieres profundizar en este enfoque, puedes consultar también nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](https://ewala.es/grc-gobernanza-riesgo-cumplimiento).
 
-## Paso 1. Definir el alcance del proyecto ENS
+¿La buena noticia? Se puede resumir en **9 pasos**. Vamos a ello.
 
-El primer paso para adaptarse al ENS es delimitar correctamente el alcance.
+## Los 9 pasos para adaptarte al ENS
 
-No todas las áreas, aplicaciones o infraestructuras de una empresa tienen por qué estar dentro del mismo proyecto. El ENS se aplica a **sistemas de información concretos**, no necesariamente a toda la organización de forma global.
+### 1. Define el alcance
 
-Por eso, antes de iniciar la adecuación conviene responder a preguntas como:
+Primer paso y el que más gente se salta. Error.
 
-- Qué servicios presta la empresa.
-- Qué contratos, proyectos o licitaciones exigen cumplimiento ENS.
-- Qué sistemas soportan esos servicios.
-- Qué datos se procesan.
-- Qué terceros o proveedores intervienen.
-- Qué sedes, usuarios, dispositivos y plataformas quedan dentro del alcance.
+No tienes que aplicar el ENS a toda tu empresa. Solo a lo que está implicado en los contratos que lo exigen: los servicios, sistemas, datos y proveedores que forman parte de esa relación con la Administración.
 
-Una definición incorrecta del alcance puede provocar dos problemas opuestos: dejar fuera elementos críticos o sobredimensionar el proyecto de forma innecesaria.
+Ni más, porque inflarías el proyecto sin necesidad. Ni menos, porque la auditoría lo notará.
 
-## Paso 2. Realizar un análisis inicial o Gap Analysis
+**Ejemplo rápido:** desarrollas una plataforma para un ministerio. Esa plataforma, su infraestructura y sus proveedores cloud entran en alcance. Tu CRM interno para clientes privados, no.
 
-Una vez definido el alcance, el siguiente paso es conocer el punto de partida.
+### 2. Haz un Gap Analysis
 
-El **Gap Analysis** permite comparar la situación actual de la organización con las exigencias del ENS. Su objetivo es detectar qué medidas ya existen, cuáles están parcialmente implantadas y cuáles faltan por completo.
+Con el alcance claro, toca mirarse al espejo.
 
-En esta fase se revisan, entre otros aspectos:
+El **Gap Analysis** compara dónde estás con lo que pide el ENS: qué ya tienes, qué está a medias y qué falta por completo.
 
-- Políticas y procedimientos de seguridad.
-- Organización interna y asignación de responsabilidades.
-- Inventario de activos.
-- Control de accesos.
-- Gestión de copias de seguridad.
-- Registro y monitorización de eventos.
-- Gestión de incidentes.
-- Continuidad del servicio.
-- Relación con proveedores.
-- Gestión de vulnerabilidades.
+Lo habitual es descubrir que la parte técnica no va tan mal, pero que en documentación, roles formales y gestión de proveedores hay bastante hueco.
 
-Este análisis es clave porque permite transformar el ENS en una hoja de ruta realista. Sin él, muchas empresas acaban implantando medidas de forma desordenada o preparando documentación que no refleja su situación real.
+Que no cunda el pánico: para eso sirve el diagnóstico.
 
-## Paso 3. Categorizar el sistema de información
+### 3. Categoriza el sistema
 
-La categorización es uno de los pasos más importantes del proceso de adecuación.
-
-El ENS clasifica los sistemas de información en tres categorías:
+El ENS clasifica los sistemas en tres categorías:
 
 - **Básica**
 - **Media**
 - **Alta**
 
-La categoría depende del impacto que tendría un incidente sobre cinco dimensiones de seguridad:
+La categoría depende del impacto que tendría un incidente en cinco dimensiones:
 
 - Confidencialidad
 - Integridad
@@ -99,245 +64,143 @@ La categoría depende del impacto que tendría un incidente sobre cinco dimensio
 - Autenticidad
 - Trazabilidad
 
-El nivel más alto obtenido en cualquiera de estas dimensiones determina la categoría final del sistema.
+La dimensión con mayor impacto marca la categoría global. Y esa categoría define cuántos controles tendrás que cumplir.
 
-Este paso es decisivo porque condiciona:
+Un sistema de categoría **Alta** tiene bastantes más requisitos que uno **Básico**, así que aquí conviene ser honesto, pero no catastrofista.
 
-- El nivel de exigencia.
-- Las medidas de seguridad aplicables.
-- La profundidad del análisis de riesgos.
-- La documentación requerida.
-- El tipo de evaluación de conformidad.
+### 4. Analiza los riesgos
 
-En próximos artículos de esta serie profundizaremos en las **categorías del ENS: básica, media y alta**, una cuestión especialmente relevante para dimensionar correctamente un proyecto.
+Aquí entra la metodología formal. La más habitual en el mundo ENS es **MAGERIT**, aunque hay alternativas válidas.
 
-## Paso 4. Realizar el análisis y la gestión de riesgos
+La idea es identificar:
 
-Una vez categorizado el sistema, es necesario analizar los riesgos que pueden afectar a su seguridad.
+- Tus activos críticos.
+- Las amenazas reales.
+- Las vulnerabilidades que podrían explotarse.
+- El impacto de un incidente.
+- Los riesgos que merece la pena priorizar.
 
-El análisis de riesgos permite identificar:
+Hablamos de riesgos que pueden ir desde un **ransomware** hasta un portátil que alguien deja olvidado en un taxi o en un avión.
 
-- Qué activos son críticos.
-- Qué amenazas pueden comprometerlos.
-- Qué vulnerabilidades existen.
-- Qué impacto tendría un incidente.
-- Qué nivel de riesgo residual resulta aceptable.
+Este análisis te permite decidir dónde invertir primero, porque el presupuesto rara vez es infinito.
 
-Este trabajo no debe hacerse de forma aislada. Debe conectarse con la realidad operativa de la empresa y con las medidas que después se van a implantar.
+### 5. Diseña el Plan de Adecuación
 
-Un buen análisis de riesgos permite justificar decisiones, priorizar inversiones y evitar que la adecuación al ENS se convierta en un listado genérico de tareas sin criterio de negocio.
+Con el diagnóstico y los riesgos sobre la mesa, toca montar el plan.
 
-## Paso 5. Elaborar el Plan de Adecuación al ENS
+Las medidas del ENS se agrupan en tres grandes bloques:
 
-Con el diagnóstico y el análisis de riesgos completados, llega el momento de diseñar el **Plan de Adecuación**.
+#### Medidas organizativas
 
-Este documento organiza el proyecto y establece:
+Políticas, roles, comités y responsabilidades.
 
-- Medidas a implantar.
-- Prioridades.
-- Responsables.
-- Recursos necesarios.
-- Dependencias.
-- Calendario de ejecución.
-- Evidencias que deberán conservarse.
+Suena burocrático, pero sin gobernanza las medidas técnicas se quedan huérfanas.
 
-El plan debe ser práctico y ejecutable. No se trata de redactar una propuesta teórica, sino de construir una guía de trabajo que permita avanzar de forma ordenada.
+#### Medidas técnicas
 
-En esta fase es especialmente importante distinguir entre:
+Cifrado, control de accesos, copias de seguridad, bastionado y protección de los sistemas.
 
-### Medidas organizativas
+Es la parte que suele resultar más natural para los equipos técnicos.
 
-Relacionadas con la gobernanza y la gestión de la seguridad:
+#### Medidas operativas
 
-- Política de seguridad.
-- Roles y responsabilidades.
-- Normativa interna.
-- Gestión documental.
-- Revisión periódica.
-- Formación y concienciación.
+Monitorización, gestión de incidentes, mantenimiento y funcionamiento seguro en el día a día.
 
-### Medidas técnicas
+Aquí es donde se ve si la seguridad está realmente integrada o solo existe en los documentos.
 
-Vinculadas a la protección de los sistemas:
+### 6. Implanta las medidas
 
-- Control de accesos.
-- Autenticación robusta.
-- Cifrado.
-- Segmentación de redes.
-- Protección frente a malware.
-- Copias de seguridad.
-- Gestión de vulnerabilidades.
+La fase más intensa.
 
-### Medidas operativas
+Toca pasar del papel a la acción:
 
-Orientadas a mantener la seguridad en el día a día:
+- Autenticación multifactor.
+- Herramientas de detección.
+- Procedimientos operativos.
+- Formación al personal.
+- Refuerzo de la gestión de incidentes.
+- Mejora del control sobre proveedores.
 
-- Registro de actividad.
-- Monitorización.
-- Gestión de incidentes.
-- Continuidad del servicio.
-- Mantenimiento seguro.
-- Supervisión de proveedores.
+Según la situación de la empresa, puede tener sentido apoyarse en soluciones como **SIEM**, **EDR** o un servicio **SOC** externo si no existe equipo interno suficiente.
 
-## Paso 6. Implantar las medidas de seguridad
-
-La implantación suele ser la fase más extensa del proyecto.
-
-Aquí es donde la empresa transforma el plan en medidas reales. En algunos casos se tratará de formalizar procedimientos que ya existían. En otros, será necesario incorporar nuevas herramientas, redefinir procesos o reforzar capacidades técnicas.
-
-Por ejemplo, una organización puede necesitar:
-
-- Crear una política de control de accesos.
-- Implantar autenticación multifactor.
-- Mejorar el registro y conservación de logs.
-- Establecer un procedimiento de gestión de incidentes.
-- Revisar la política de copias de seguridad.
-- Formalizar el seguimiento de proveedores críticos.
-- Desplegar capacidades de detección y respuesta.
-
-En empresas con mayor complejidad tecnológica, soluciones como [SIEM y SOAR](https://ewala.es/blog/posts/que-es-un-siem-y-para-que-sirve-y-un-soar/), servicios de [SOC en ciberseguridad](https://ewala.es/blog/posts/que-es-un-soc-en-ciberseguridad/) o tecnologías de detección avanzada pueden ayudar a reforzar la monitorización, la trazabilidad y la respuesta ante incidentes.
+Un consejo: no intentes hacer todo a la vez. Prioriza lo que cierra los riesgos más altos y avanza por fases.
 
 También puede ser útil revisar nuestro análisis sobre [XDR vs SIEM: la solución para tu negocio](https://ewala.es/blog/posts/xdr-vs-siem-la-solucion-para-tu-negocio/), especialmente cuando la empresa necesita madurar sus capacidades de visibilidad y respuesta.
 
-## Paso 7. Preparar evidencias de cumplimiento
+### 7. Recoge evidencias
 
-Un proyecto ENS no se valida únicamente por lo que la empresa dice que hace, sino por lo que puede demostrar.
+Regla de oro de cualquier auditoría: **lo que no se puede demostrar, no existe**.
 
-Por eso, durante la adecuación es fundamental recopilar y mantener evidencias como:
+Hay que ir guardando evidencias desde el día uno:
 
-- Políticas aprobadas.
-- Procedimientos vigentes.
-- Registros de revisiones.
-- Inventarios actualizados.
-- Informes de análisis de riesgos.
-- Evidencias de formación.
-- Logs de actividad.
-- Informes de copias de seguridad.
-- Registros de incidentes.
-- Pruebas de continuidad.
-- Contratos y cláusulas de seguridad con proveedores.
+- Logs.
+- Informes de backup.
+- Políticas firmadas.
+- Registros de formación.
+- Actas de comités.
+- Revisiones de accesos.
+- Informes de incidencias.
+- Evidencias de controles implantados.
 
-Esta fase es especialmente importante cuando el sistema debe superar una auditoría externa.
+No esperes a que la auditoría esté encima para empezar a buscar documentos por los cajones.
 
-## Paso 8. Declaración o certificación de conformidad
+### 8. Declaración o Certificación
 
-Una vez implantadas las medidas, el sistema debe acreditar su conformidad con el ENS.
+El examen final depende de la categoría del sistema.
 
-La forma de hacerlo depende de su categoría:
+#### Sistemas de categoría Básica
 
-### Sistemas de categoría básica
+Se acredita la conformidad mediante una **Declaración de Conformidad**, basada en una autoevaluación documentada.
 
-Pueden acreditar la conformidad mediante una **Declaración de Conformidad**, basada en una autoevaluación del propio sistema.
+#### Sistemas de categoría Media o Alta
 
-### Sistemas de categoría media o alta
+Se requiere una **Certificación de Conformidad** tras una auditoría externa.
 
-Deben superar una **auditoría formal** realizada por una entidad de certificación habilitada, con el objetivo de obtener la **Certificación de Conformidad**.
+No todos los proyectos ENS terminan en el mismo tipo de validación, y entender esta diferencia desde el principio evita expectativas equivocadas.
 
-Esta diferencia es clave, porque no todos los proyectos ENS exigen el mismo recorrido ni la misma carga de validación externa.
+### 9. Mantenimiento continuo
 
-## Paso 9. Mantener el cumplimiento en el tiempo
+Obtener el sello no es el final.
 
-La adecuación al ENS no termina con la declaración o la certificación.
+El ENS exige un ciclo vivo:
 
-El marco exige una lógica de mejora continua. Esto implica revisar periódicamente:
+- Revisión de riesgos.
+- Actualización de medidas.
+- Seguimiento de cambios tecnológicos.
+- Revisión de proveedores.
+- Auditorías periódicas.
+- Mejora continua.
 
-- Cambios en el alcance.
-- Nuevos riesgos.
-- Evolución tecnológica.
-- Incidentes ocurridos.
-- Cambios normativos o contractuales.
-- Medidas que han quedado obsoletas.
-- Resultados de auditorías o revisiones internas.
+Las empresas que tratan el ENS como un proyecto con fecha de cierre suelen llevarse sorpresas desagradables en la renovación.
 
-Además, los sistemas de categoría media y alta están sujetos a auditorías periódicas, por lo que la organización debe mantener su sistema preparado y actualizado.
+## 4 errores que vemos constantemente
 
-La seguridad no se conserva por haber superado una evaluación una vez, sino por sostener una disciplina de revisión y mejora.
+| El error | La consecuencia |
+|---|---|
+| Empezar redactando documentos sin definir el alcance | Políticas genéricas que hay que rehacer |
+| Creer que es solo cosa de IT | Sin Dirección, RRHH, Legal y Compras, los controles organizativos se quedan en el cajón |
+| Olvidarse de los proveedores | Muchos incidentes nacen en terceros o entornos cloud que nadie incluyó en el alcance |
+| Tratarlo como un evento puntual | Sin mantenimiento, la certificación pierde valor y los riesgos vuelven |
 
-## Errores habituales al adaptarse al ENS
+## ENS + ISO 27001 + NIS2: mejor juntos
 
-En proyectos de adecuación al ENS es frecuente encontrar problemas que retrasan el proceso o reducen su eficacia.
+Si ya conoces **ISO 27001** o estás pendiente de **NIS2**, buenas noticias: los tres marcos comparten mucho ADN.
 
-### Empezar por la documentación sin analizar el alcance
+La clave está en pensar en la integración desde el principio, no en intentar encajar piezas después.
 
-Antes de redactar políticas o procedimientos, es imprescindible saber qué sistemas están afectados y qué nivel de exigencia aplica.
+Un enfoque bien planteado permite:
 
-### Confundir el ENS con una certificación aislada
-
-La certificación puede ser el resultado final, pero el verdadero objetivo es implantar un modelo de seguridad sólido y demostrable.
-
-### No implicar a las áreas de negocio
-
-El ENS no pertenece solo al departamento técnico. Afecta a dirección, compras, recursos humanos, legal y operaciones.
-
-### Infravalorar la gestión de proveedores
-
-Muchas brechas de cumplimiento aparecen en servicios externalizados, entornos cloud o proveedores tecnológicos sin controles suficientemente formalizados.
-
-Este punto enlaza con una preocupación creciente en ciberseguridad: los [ataques a la cadena de suministro](https://ewala.es/blog/posts/ataques-cadena-suministro-riesgo-invisible/).
-
-### Tratar el proyecto como algo puntual
-
-Sin mantenimiento, revisión y mejora continua, la adecuación pierde valor y el riesgo vuelve a aumentar.
-
-## ENS, ISO 27001 y NIS2: cómo encaja todo
-
-Muchas empresas que se adaptan al ENS también se plantean su relación con otros marcos como **ISO 27001** o **NIS2**.
-
-Aunque no son equivalentes, sí pueden formar parte de una misma estrategia GRC.
-
-La ISO 27001 aporta una estructura internacional de gestión de la seguridad de la información. El ENS establece requisitos concretos aplicables a sistemas vinculados al sector público español. NIS2, por su parte, impulsa mayores exigencias de gestión de riesgos y resiliencia en entidades esenciales e importantes.
-
-Por eso, una empresa puede necesitar:
-
-- ENS para trabajar con la Administración Pública.
-- ISO 27001 para reforzar su sistema de gestión y su posición comercial.
-- NIS2 si opera en sectores afectados por la directiva.
+- Reutilizar controles.
+- Aprovechar evidencias existentes.
+- Evitar duplicidades.
+- Construir una estrategia GRC más coherente.
 
 Si quieres profundizar en esta comparativa, puedes consultar nuestro artículo sobre [ENS vs ISO 27001: diferencias, requisitos y cuál elegir](https://ewala.es/blog/posts/ens-vs-iso-27001-diferencias/).
 
-## Preguntas frecuentes sobre cómo adaptarse al ENS
+## ¿Necesitas ayuda?
 
-### ¿Cuál es el primer paso para adaptarse al ENS?
+En [Ewala](https://ewala.es/) combinamos consultoría de cumplimiento con capacidad técnica propia en **SOC** y **MSSP**.
 
-El primer paso es definir correctamente el alcance: identificar qué sistemas, servicios, contratos y activos están afectados.
-
-### ¿Es obligatorio hacer un Gap Analysis?
-
-No siempre se denomina así formalmente, pero realizar un análisis inicial de situación es esencial para conocer el punto de partida y planificar la adecuación.
-
-### ¿Qué determina si necesito declaración o certificación?
-
-La categoría del sistema. Los sistemas de categoría básica pueden emitir una Declaración de Conformidad, mientras que los de categoría media o alta requieren Certificación de Conformidad mediante auditoría.
-
-### ¿Cuánto tiempo lleva adaptarse al ENS?
-
-Depende del alcance, la madurez inicial, la categoría del sistema y la complejidad organizativa. Una empresa con procesos ya estructurados partirá con ventaja frente a otra que deba construir desde cero su modelo de seguridad.
-
-### ¿Puedo usar ISO 27001 como base para adaptarme al ENS?
-
-Sí. Ambos marcos tienen puntos comunes, aunque ISO 27001 no sustituye al ENS. Puede servir como base de gestión para acelerar parte del trabajo.
-
-### ¿Qué ocurre después de obtener la conformidad?
-
-La empresa debe mantener las medidas implantadas, revisar riesgos, actualizar evidencias y continuar con un modelo de mejora continua.
-
-## Ewala: adaptación al ENS con enfoque técnico y de negocio
-
-En [Ewala](https://ewala.es/)) ayudamos a las organizaciones a abordar la adecuación al ENS de forma ordenada, eficiente y alineada con sus objetivos de negocio.
-
-Nuestro enfoque combina:
-
-- Análisis de alcance.
-- Gap Analysis.
-- Categorización de sistemas.
-- Análisis de riesgos.
-- Definición del plan de adecuación.
-- Implantación de medidas.
-- Preparación para declaración o certificación.
-- Acompañamiento en mejora continua.
-
-No se trata solo de cumplir, sino de construir una base de seguridad que reduzca riesgos, refuerce la confianza y permita afrontar con garantías nuevas exigencias regulatorias y contractuales.
-
-Si tu empresa necesita adaptarse al ENS, participar en licitaciones públicas o reforzar su estrategia de cumplimiento, podemos ayudarte a definir el camino más eficiente.
+No solo te ayudamos a obtener la certificación: hacemos que la seguridad funcione en tu día a día.
 
 Descubre nuestro servicio de [GRC: Gobernanza, Riesgo y Cumplimiento](https://ewala.es/grc-gobernanza-riesgo-cumplimiento).
