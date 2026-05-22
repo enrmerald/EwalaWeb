@@ -1,1 +1,27 @@
 /* Place custom css here. */
+
+/* Figura centrada — img es display:block por Tailwind Preflight, text-align no funciona */
+figure.figure-center img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure.figure-center figcaption {
+  text-align: center;
+}
+
+/* Figura secundaria de tamaño reducido */
+figure.figure-small {
+  max-width: 55%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure.figure-small img {
+  width: 100%;
+  height: auto;
+}
+
+figure.figure-small figcaption {
+  text-align: left !important;
+}

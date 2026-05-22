@@ -1,0 +1,119 @@
+---
+title: "LIVET: tecnología para impulsar una ganadería extensiva más eficiente, conectada y sostenible"
+title_seo: "LIVET | Digitalización inteligente de la ganadería extensiva"
+description_seo: "Conoce LIVET, la plataforma de Ewala para digitalizar la ganadería extensiva con app offline, trazabilidad, analítica económica, SIGPAC e integración IoT."
+date: 2026-05-22T10:30:00.000Z
+categories: ["innovación"]
+tags: ["livet", "ganadería-extensiva", "digitalización", "iot", "sigpac", "trazabilidad", "ciberseguridad", "guardians"]
+developer: "Ewala"
+tagewala: "Digitalización segura de la ganadería extensiva"
+header_image: "/blog/images/ewala-livet-ganaderia-rural-digitalizacion.png"
+postimage: "/blog/images/ewala-livet-ganaderia-rural-digitalizacion.png"
+thumbnail: "/blog/images/ewala-livet-ganaderia-rural-digitalizacion.png"
+author: "Ewala"
+authorlink: "https://es.linkedin.com/company/e-wala-it-services"
+subtitle: "Una plataforma digital modular para mejorar la gestión operativa, la trazabilidad y la toma de decisiones en explotaciones de ganadería extensiva."
+description: "LIVET es la plataforma de Ewala para impulsar una ganadería extensiva más eficiente, conectada y sostenible mediante app offline-first, trazabilidad, analítica económica, SIGPAC e integración IoT."
+---
+
+La ganadería extensiva es una actividad esencial para el territorio, la producción alimentaria y la conservación del medio rural. Sin embargo, sigue conviviendo con una realidad compleja: explotaciones dispersas, conectividad irregular, registros manuales, más exigencias administrativas y una presión creciente sobre los márgenes. La tecnología puede ayudar a resolver parte de estos retos, pero solo cuando se diseña desde el terreno y pensando en quienes la utilizarán cada día.
+
+Con esa convicción nace **LIVET**, la plataforma de [Ewala](https://ewala.es) para la digitalización inteligente de la ganadería extensiva. Se trata de una solución concebida para mejorar la gestión operativa, reforzar la trazabilidad, facilitar el cumplimiento y aportar más información para tomar decisiones económicas y productivas con mayor criterio.
+
+El proyecto se desarrolla actualmente en el marco del programa europeo **[GUARDIANS](https://ewala.es/#guardians)**, con una aproximación basada en la co-creación junto a ganaderos de la zona, la utilidad real y la seguridad desde el diseño.
+
+## Ganadería extensiva: un sector esencial que necesita herramientas mejor adaptadas
+
+La gestión de una explotación extensiva exige coordinar mucha información a la vez. Animales, parcelas, tratamientos, estados reproductivos, alertas sanitarias, movimientos, compras, ventas, proveedores y documentación conviven en el día a día de una actividad que, en muchos casos, todavía depende de registros físicos, tareas repetitivas o herramientas desconectadas entre sí.
+
+Esa fragmentación genera pérdidas de tiempo, aumenta el riesgo de error y dificulta tener una visión completa de la explotación. El problema se acentúa en entornos rurales o de montaña, donde la conectividad no siempre está garantizada y donde desplazarse para resolver una incidencia o comprobar un dato tiene un coste real.
+
+A ello se suma una cuestión clave: la rentabilidad. La evolución de los costes, las decisiones de compra, el manejo de lotes, la relación con proveedores y la planificación sanitaria o reproductiva tienen un impacto directo en la competitividad de la explotación.
+
+Digitalizar no puede limitarse a sustituir papel por pantallas; debe ayudar a trabajar mejor y a decidir mejor.
+
+{{< figure src="/blog/images/IMG-0001-01-BLOG-Panel_Login-sin_fondo.png" alt="Plataforma LIVET para la digitalización inteligente de la ganadería extensiva" caption="LIVET centraliza la información clave de la explotación ganadera para facilitar la gestión, la trazabilidad y la toma de decisiones." class="figure-center" >}}
+
+## Qué es LIVET
+
+**LIVET — Livestock Innovation and Virtual Ecosystem for Tracking —** es una plataforma digital modular orientada a modernizar la gestión de la ganadería extensiva.
+
+Combina:
+
+- Una plataforma web para análisis, planificación y control.
+- Una aplicación móvil offline-first pensada para el trabajo en campo.
+- Una capa de integración opcional con [dispositivos IoT](https://ewala.es/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad/), como collares GPS o sensores de parto.
+- Funcionalidades de trazabilidad, seguimiento operativo y analítica económica.
+
+LIVET centraliza en un único entorno información crítica de la explotación: historial de animales, estados reproductivos y sanitarios, tratamientos, alertas, compras y ventas, proveedores, parcelas, inventario y métricas económicas. También incorpora gestión multiusuario, registro de acciones y una arquitectura preparada para crecer de forma progresiva.
+
+El objetivo es claro: convertir información dispersa en una herramienta práctica de gestión y apoyo a la toma de decisiones.
+
+## Una solución nacida del campo
+
+LIVET no surge como una propuesta tecnológica cerrada, sino como una plataforma construida a partir de necesidades reales detectadas en explotaciones ganaderas. Esa forma de trabajar ha sido determinante para priorizar funcionalidades útiles y evitar desarrollos alejados de la operativa diaria.
+
+Entre las capacidades más relevantes de LIVET destacan:
+
+- **Escaneo de crotales con el móvil**, para reducir errores y agilizar la identificación de animales.
+- **Funcionamiento offline**, con sincronización posterior cuando vuelve la cobertura.
+- **Integración con SIGPAC**, para aportar contexto territorial y facilitar la gestión de parcelas.
+- **Control reproductivo y sanitario**, con seguimiento de eventos y alertas.
+- **Analítica económica por lote, animal y proveedor**, orientada a mejorar la visibilidad sobre la rentabilidad.
+- **Integración IoT opcional y modular**, incorporando sensórica cuando aporta valor sin convertirla en una barrera de adopción.
+
+Esta aproximación permite que LIVET sea una solución ambiciosa, pero al mismo tiempo realista: útil desde fases tempranas, adaptable a distintos grados de digitalización y pensada para evolucionar con el mercado.
+
+## Una propuesta pionera
+
+En el mercado existen soluciones centradas en funcionalidades concretas, como la localización de ganado, el vallado virtual o la monitorización puntual de ciertos indicadores. LIVET plantea una visión más amplia: una capa integral de gestión y decisión para la ganadería extensiva.
+
+Su propuesta diferencial se apoya en cinco pilares.
+
+### 1. Digitalización operativa con impacto real
+
+LIVET reduce tareas manuales, mejora la organización de la información y facilita una trazabilidad más clara de la actividad diaria.
+
+### 2. Diseño offline-first
+
+La conectividad limitada no se considera una excepción, sino una condición habitual en muchos entornos rurales. La aplicación está preparada para seguir funcionando en campo y sincronizar después.
+
+### 3. Analítica económica integrada
+
+La plataforma no solo ayuda a gestionar animales y procesos, sino también a comprender mejor la dimensión económica de la explotación.
+
+### 4. IoT opcional y modular
+
+La tecnología se incorpora de forma proporcionada. LIVET puede integrarse con dispositivos conectados, pero no depende de una arquitectura rígida ni de un despliegue costoso para aportar valor.
+
+### 5. Ciberseguridad y control del dato desde el diseño
+
+En Ewala entendemos que la digitalización del sector agroganadero debe construirse sobre bases sólidas de seguridad, trazabilidad y soberanía del dato. La información de una explotación tiene valor estratégico, y por eso LIVET incorpora esta visión desde su arquitectura.
+
+La seguridad no es un añadido posterior, sino parte de la propuesta de producto.
+
+## GUARDIANS y la oportunidad de Test Before Invest
+
+LIVET se desarrolla gracias a la **[Open Call #1 – Co-Creation](https://guardians-project.eu/call/open-call-1-co-creation/)** del proyecto europeo [GUARDIANS](https://guardians-project.eu/), que impulsa soluciones digitales para el sector agroganadero construidas junto a sus usuarios reales.
+
+Este marco ha permitido avanzar desde la definición inicial del producto hasta una solución con requisitos claros, una arquitectura validada y una hoja de ruta orientada a mercado.
+
+Ahora se abre una nueva fase con la **[Open Call #2 – Test Before Invest](https://guardians-project.eu/call/open-call-2-test-before-invest/)**, destinada a que nuevas explotaciones prueben y validen las tecnologías desarrolladas. En el caso de LIVET, esta oportunidad se dirige a explotaciones de ganadería extensiva interesadas en experimentar con una herramienta de gestión digital adaptada a su realidad.
+
+## Una apuesta por el medio rural
+
+[Ewala](https://ewala.es) es una empresa tecnológica asturiana especializada en ciberseguridad, innovación aplicada y desarrollo de soluciones propias. Desde nuestro departamento de I+D+i trabajamos para convertir conocimiento técnico en productos que respondan a retos concretos del mercado y de la sociedad.
+
+La apuesta por LIVET forma parte de esa visión. Creemos que el medio rural necesita tecnología diseñada a su medida: robusta, accesible, segura y orientada a generar valor. Apostar por la digitalización ganadera es también apostar por la competitividad del territorio, por la eficiencia de los recursos y por nuevas oportunidades de desarrollo económico desde Asturias.
+
+LIVET lleva esa filosofía a un producto concreto: una solución que reduce fricciones, mejora la trazabilidad, apoya una gestión más eficiente y pone la tecnología al servicio de quienes sostienen una parte esencial del tejido productivo.
+
+## Tecnología que nace en Asturias y mira más lejos
+
+Con LIVET queremos contribuir a que la ganadería extensiva disponga de herramientas digitales a la altura de sus retos. Herramientas que simplifiquen el trabajo, refuercen el criterio profesional y aporten visibilidad allí donde antes había información fragmentada.
+
+Ese es el camino que estamos construyendo: menos papel, más trazabilidad; menos incertidumbre, más información; menos decisiones a ciegas, más control sobre la explotación.
+
+LIVET nace en Asturias, pero tiene vocación de crecer. De crecer con el sector, con nuevas explotaciones, con nuevas funcionalidades y con una ambición clara: convertirse en una referencia en la digitalización segura de la ganadería extensiva.
+
+{{< figure src="/blog/images/IMG-0001-01-GUARD-Cartel-LIVET.png" alt="Cartel de la convocatoria GUARDIANS Test Before Invest" caption="Convocatoria GUARDIANS para la validación de tecnologías digitales en el sector agroganadero." class="figure-small" >}}

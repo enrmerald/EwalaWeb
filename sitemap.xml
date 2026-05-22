@@ -32,6 +32,14 @@
     <!-- POSTS BLOG -->
     <url>
         <loc>
+            https://ewala.es/blog/posts/livet-digitalizacion-ganaderia-extensiva/
+        </loc>
+        <lastmod>2026-05-22T10:30:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
             https://ewala.es/blog/posts/como-adaptarse-al-ens-paso-a-paso/
         </loc>
         <lastmod>2026-05-15T12:40:00.000Z</lastmod>

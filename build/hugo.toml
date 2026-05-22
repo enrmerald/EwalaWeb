@@ -22,41 +22,7 @@ publishDir = "docs"
   
   [params.seo]
     description = "Blog sobre ciberseguridad, tecnología y más, por Ewala IT Services."
-    keywords = [
-    "Ciberseguridad",
-    "Ewala IT Services",
-    "Noticias Ciberseguridad",
-    "Qué es la ciberseguridad",
-    "Para qué sirve la ciberseguridad",
-    "En qué consiste la ciberseguridad",
-    "Qué es SIEM en ciberseguridad",
-    "Qué significa ciberseguridad",
-    "De qué trata la ciberseguridad",
-    "Qué es la ciberseguridad y para qué sirve",
-    "Ciberseguridad: por qué es importante",
-    "Para qué sirve la ciberseguridad en las empresas",
-    "Malware",
-    "Ransomware",
-    "Qué es un SOC en ciberseguridad",
-    "Qué es XDR",
-    "Ciberseguridad en la nube",
-    "Ciberseguridad industrial",
-    "Esquema Nacional de Seguridad",
-    "ENS",
-    "Cumplimiento normativo",
-    "GRC",
-    "Gobernanza riesgo y cumplimiento",
-    "Cómo adaptarse al ENS",
-    "Certificación ENS",
-    "ISO 27001",
-    "Qué es MDR",
-    "Qué es NDR",
-    "Qué es SOAR",
-    "Zero Trust ciberseguridad",
-    "Ataques cadena de suministro",
-    "Directiva NIS2",
-    "Seguridad IoT"
-    ]
+    keywords = ["Ciberseguridad","Ewala IT Services","Noticias Ciberseguridad","Qué es la ciberseguridad","Para qué sirve la ciberseguridad","En qué consiste la ciberseguridad","Qué es SIEM en ciberseguridad","Qué significa ciberseguridad","De qué trata la ciberseguridad","Qué es la ciberseguridad y para qué sirve","Ciberseguridad: por qué es importante","Para qué sirve la ciberseguridad en las empresas","Malware","Ransomware","Qué es un SOC en ciberseguridad","Qué es XDR","Ciberseguridad en la nube","Ciberseguridad industrial","Esquema Nacional de Seguridad","ENS","Cumplimiento normativo","GRC","Gobernanza riesgo y cumplimiento","Cómo adaptarse al ENS","Certificación ENS","ISO 27001","Qué es MDR","Qué es NDR","Qué es SOAR","Zero Trust ciberseguridad","Ataques cadena de suministro","Directiva NIS2","Seguridad IoT"]
     ogImage = "images/ewala.png"
 
 [author]
