@@ -2580,3 +2580,98 @@ input[name="carousel"] {
 .grc-page #ISO27001 {
   scroll-margin-top: 90px;
 }
+
+/*--------------------------------------------------------------
+# Error 404
+--------------------------------------------------------------*/
+@keyframes error404FadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.error-404 {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.error-404 > .container > div {
+  animation: error404FadeUp 0.65s ease both;
+}
+
+.error-404 .error-code {
+  font-size: clamp(100px, 20vw, 180px);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(135deg, #7cc576 0%, #00c4a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.error-404 .error-title {
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 700;
+  color: #7cc576;
+  margin-bottom: 16px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 2px 12px rgba(124, 197, 118, 0.25);
+}
+
+.error-404 .error-desc {
+  color: #959595;
+  font-size: 17px;
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.error-404 .btn-home {
+  display: inline-block;
+  background: linear-gradient(135deg, #009cea 0%, #00c4a0 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.error-404 .btn-home:hover {
+  opacity: 0.88;
+  color: #fff;
+  text-decoration: none;
+}
+
+.error-404 .quick-links {
+  margin-top: 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 32px;
+}
+
+.error-404 .quick-links span {
+  color: #aaa;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.error-404 .quick-links a {
+  color: #666;
+  font-size: 14px;
+  margin: 0 12px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.error-404 .quick-links a:hover {
+  color: #7cc576;
+}

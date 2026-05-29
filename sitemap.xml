@@ -88,7 +88,7 @@
     </url>
     <url>
         <loc>
-            https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/ 
+            https://ewala.es/blog/posts/como-subir-tu-secure-score-en-azure-y-acelerar-el-cumplimiento/
         </loc>
         <lastmod>2025-11-23T11:18:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -261,6 +261,12 @@
         <loc>https://ewala.es/POL-0001-00-SGI%20POLITICA%20DE%20SEGURIDAD%20DE%20LA%20INFORMACION.pdf</loc>
         <lastmod>2026-03-12T10:13:53+00:00</lastmod>
         <priority>0.30</priority>
+    </url>
+    <!-- Página de error -->
+    <url>
+        <loc>https://ewala.es/404</loc>
+        <lastmod>2026-05-29T09:00:00+02:00</lastmod>
+        <priority>0.10</priority>
     </url>
     <!-- Páginas de políticas -->
     <url>

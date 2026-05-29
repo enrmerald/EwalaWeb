@@ -16,7 +16,7 @@ El despliegue se hace en **Netlify** (ver `netlify.toml`). El README.md menciona
 No existe `package.json` en la raíz ni pipeline de test/lint. El único build real es el del blog Hugo:
 
 ```bash
-# Build del blog (tal como lo ejecuta Netlify — requiere Hugo 0.157.0)
+# Build del blog (tal como lo ejecuta Netlify — requiere Hugo 0.162.0)
 hugo --minify --source build --destination build/docs && cp -R build/docs blog
 
 # Desarrollo local del blog (dentro de build/)
