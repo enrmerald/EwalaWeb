@@ -3,3 +3,4 @@ Allow: /
 
 # Sitemap
 Sitemap: https://ewala.es/sitemap.xml
+Sitemap: https://ewala.es/blog/sitemap.xml
