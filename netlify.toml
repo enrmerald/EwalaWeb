@@ -1,0 +1,89 @@
+# Netlify · ewala.es · sitio 100 % estático (Next.js output: 'export') + Netlify Functions.
+#
+# Next genera todo el HTML en build (carpeta out/) y lo sirve el CDN de Netlify. Lo único
+# que ejecuta código en servidor son las funciones de netlify/functions/, que Netlify
+# despliega aparte: Next no las compila ni las conoce.
+#
+# IMPORTANTE: redirects(), rewrites() y headers() de next.config NO funcionan con
+# output: 'export'. Todas las redirecciones y cabeceras viven en este fichero.
+
+[build]
+  command = "corepack enable && pnpm install --frozen-lockfile && pnpm build"
+  publish = "out"
+  functions = "netlify/functions"
+
+[build.environment]
+  # Mismas versiones que .nvmrc y package.json (packageManager / engines).
+  NODE_VERSION = "24.18.0"
+  PNPM_VERSION = "12.6.0"
+  # No es opcional: sin ella el plugin de Next de Netlify puede montar funciones SSR
+  # y convertir en híbrido un sitio que queremos estático.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[functions]
+  node_bundler = "esbuild"
+
+# ── Cabeceras ────────────────────────────────────────────────────────────────
+# Netlify aplica TODAS las reglas [[headers]] que casan con una ruta y concatena las
+# cabeceras con el mismo nombre. Por eso Cache-Control NO se pone nunca en "/*".
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    # Un año, con subdominios. SIN `preload` a propósito: entrar en la lista precargada
+    # de los navegadores es prácticamente irreversible y obliga a HTTPS en todo
+    # subdominio presente y futuro. Es una decisión de infraestructura, no una cabecera más.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # CSP en modo informe (no bloquea). Se amplía en el paso de GTM/Cookiebot con sus
+    # dominios y un sumidero de informes (/api/csp-report). No pasar a bloqueo sin
+    # medir con tráfico real: una CSP escrita de memoria rompe la página en silencio.
+    #   'unsafe-inline' en script-src es obligatorio por Next: cada página exportada
+    #   lleva scripts en línea (__next_f.push) y sin servidor no hay nonce por petición.
+    #   Hoy la web no carga ningún recurso externo: todo es 'self' (las fuentes las
+    #   auto-aloja next/font en /_next/static/media).
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+
+# Activos con hash en el nombre (JS, CSS, fuentes): un año, inmutables.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Favicons: cambian muy poco, una semana.
+[[headers]]
+  for = "/favicon/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Imagen Open Graph generada por Next (app/[locale]/opengraph-image.tsx). Se exporta como
+# fichero SIN extensión y Netlify deduce el Content-Type por la extensión: sin esto,
+# LinkedIn/WhatsApp/X podrían no mostrar la vista previa.
+[[headers]]
+  for = "/es/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/en/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+# El resto (HTML, PDFs, imágenes de public/) usa el valor por defecto de Netlify:
+# "public, max-age=0, must-revalidate" + ETag. Así cada despliegue se ve al instante.
+
+# ── 404 única. SIEMPRE AL FINAL del fichero: Netlify evalúa las reglas de arriba
+# abajo y un comodín por encima de una ruta real se la come. Sin `force`, solo actúa
+# cuando no existe un fichero real en out/. ─────────────────────────────────────
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
