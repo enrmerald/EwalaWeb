@@ -8,6 +8,8 @@ import { Footer } from '@/components/ewala/footer'
 import { HeroInterior } from '@/components/ewala/hero-interior'
 import { ContactForm } from '@/components/ewala/contact-form'
 import { ContactRail } from '@/components/ewala/contact-rail'
+import { JsonLd } from '@/components/ewala/json-ld'
+import { breadcrumbJsonLd } from '@/lib/jsonld'
 
 export async function generateMetadata(
   {
@@ -45,16 +47,19 @@ export default async function ContactoPage({
   const { locale } = await params
   const dict = await getDictionary(locale)
 
+  const breadcrumbs = [
+    { label: dict.contact.breadcrumbHome, href: localizedPath(locale, '/') },
+    { label: dict.contact.breadcrumbContact },
+  ]
+
   return (
     <main className="min-h-screen bg-section-dark">
+      <JsonLd data={breadcrumbJsonLd(locale, breadcrumbs)} />
       <Header locale={locale} />
 
       <HeroInterior
         locale={locale}
-        breadcrumbs={[
-          { label: dict.contact.breadcrumbHome, href: localizedPath(locale, '/') },
-          { label: dict.contact.breadcrumbContact },
-        ]}
+        breadcrumbs={breadcrumbs}
         title={dict.contact.heroTitle}
         titleHighlight={dict.contact.heroTitleHighlight}
         subtitle={dict.contact.heroSubtitle}

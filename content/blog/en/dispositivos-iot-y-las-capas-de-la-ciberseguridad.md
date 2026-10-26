@@ -41,7 +41,7 @@ From [Ewala's](/en/) point of view, as a Managed Cybersecurity Service Provider 
 
 We would also have more layers of security across both environments, for example: a perimeter firewall, EDR on endpoints with an operating system, along with specific email protections (anti-phishing, sandboxing, anti-malware, etc.), a **SIEM+SOAR** that integrates and monitors all generated logs, backups, and a security team analyzing all this information in real time.
 
-If you want to dive deeper into SIEM or SOAR, you can read our article on **what a SIEM and a SOAR are**.
+A **SIEM** centralises and correlates security events, while a **SOAR** automates the response based on them.
 
 ## The real world: shadow IT/OT and poorly segmented networks
 

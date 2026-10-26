@@ -1,4 +1,13 @@
 {
+  "notFound": {
+    "metaTitle": "Página no encontrada | Ewala",
+    "code": "404 · PÁGINA NO ENCONTRADA",
+    "title": "No encontramos esta página",
+    "description": "Puede que la dirección esté mal escrita o que la página se haya movido. Desde aquí puedes volver al inicio o escribirnos.",
+    "home": "Ir a la página principal",
+    "contact": "Contactar",
+    "otherLanguage": "English version"
+  },
   "meta": {
     "title": "Ewala | Ciberseguridad OT/IoT con IA | SentryN3t NDR",
     "description": "Ewala es una startup europea de ciberseguridad industrial. SentryN3t Protection detecta anomalías en redes OT/IoT con machine learning y asistente de IA."
@@ -381,7 +390,8 @@
     "opensNewTab": "se abre en una pestaña nueva",
     "social": {
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "youtube": "YouTube"
     },
     "sections": [
       {
@@ -940,7 +950,7 @@
     "privacy": {
       "meta": {
         "title": "Política de privacidad | Ewala",
-        "description": "Política de privacidad de www.ewala.es: responsable del tratamiento, finalidades, bases jurídicas, destinatarios, plazos de conservación y derechos de las personas interesadas."
+        "description": "Política de privacidad de ewala.es: responsable, finalidades y bases jurídicas del tratamiento, destinatarios, plazos de conservación y tus derechos."
       },
       "breadcrumb": "Política de privacidad",
       "title": "Política de privacidad",
@@ -1573,7 +1583,7 @@
     "cookies": {
       "meta": {
         "title": "Política de cookies | Ewala",
-        "description": "Política de cookies de www.ewala.es: qué cookies se utilizan, con qué finalidad, quién las instala, cuánto duran y cómo aceptarlas, rechazarlas o retirar el consentimiento."
+        "description": "Política de cookies de ewala.es: qué cookies usamos, su finalidad, quién las instala, cuánto duran y cómo aceptarlas, rechazarlas o retirar tu consentimiento."
       },
       "breadcrumb": "Política de cookies",
       "title": "Política de cookies",

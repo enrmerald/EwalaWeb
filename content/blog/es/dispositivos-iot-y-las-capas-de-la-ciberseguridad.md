@@ -38,7 +38,7 @@ Desde el punto de vista de [Ewala](/es/), que es el de un Proveedor de Servicios
 
 Además, tendríamos más capas de seguridad en los dos entornos, por ejemplo: Firewall perimetral, EDR en endpoints con sistema operativo, junto con protecciones específicas en el correo electrónico (antiphishing, sandboxing, antimalware, etc.), un **SIEM+SOAR** que integre y monitorice todos los logs generados, copias de seguridad y un equipo de seguridad que analice en tiempo real toda esta información.  
 
-Si quieres profundizar más sobre los SIEM o SOAR, puedes leer nuestro artículo sobre **qué es un SIEM y un SOAR**
+Un **SIEM** centraliza y correlaciona los eventos de seguridad, y un **SOAR** automatiza la respuesta a partir de ellos.
 
 ## El mundo real: shadow IT/OT y redes mal segmentadas
 En un mundo ideal… pero en el mundo real lo que nos encontramos son entornos con más saltos entre las distintas redes de los que deberían, y en los que es difícil encontrar una red en la que todos los dispositivos sean claramente de IT o de OT. A ello unimos que tampoco solemos tener todas las capas de seguridad que nos gustaría, que continuamente se están conectando dispositivos nuevos a la red y que nos encontramos con zonas de sombra (shadow IT-OT), es decir, dispositivos conectados sin conocimiento del área de seguridad o sin gestión adecuada, y el reto de “defenderse” empieza a ser bastante complicado.

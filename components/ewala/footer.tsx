@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import * as Accordion from "@radix-ui/react-accordion"
-import { Linkedin, Github, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
+import { Linkedin, Github, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
 import { useTranslations } from "@/i18n/client"
 import { GA_MEASUREMENT_ID, OPEN_EVENT } from "@/lib/consent"
 import { SOCIAL_LINKS } from "@/lib/site"
@@ -21,6 +21,7 @@ function SocialLinks() {
   const profiles = [
     { label: t("social.linkedin"), href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
     { label: t("social.github"), href: SOCIAL_LINKS.github, Icon: Github },
+    { label: t("social.youtube"), href: SOCIAL_LINKS.youtube, Icon: Youtube },
   ]
   return (
     <>
@@ -101,7 +102,8 @@ export function Footer() {
   }))
   const badges = t.raw("badges") as string[]
   const pathname = usePathname()
-  const locale = pathname.split("/")[1] || "es"
+  // En la 404 global la ruta puede ser cualquier cosa (/xyz/…): solo se acepta un idioma válido.
+  const locale = pathname.split("/")[1] === "en" ? "en" : "es"
 
   function resolveHref(href: string) {
     if (!href.startsWith("/")) return href // externos

@@ -70,7 +70,7 @@ Amenazas modernas, malware evasivo y movimientos laterales silenciosos hacen ins
 
 Por eso, CPG 2.0 conecta directamente con modelos de **monitorización 24/7**, donde servicios como un **SOC-MDR** permiten correlacionar eventos IT y OT y distinguir fallos operativos de incidentes reales.
 
-Si quieres profundizar en este modelo, te recomendamos nuestro artículo sobre **qué es un SOC en ciberseguridad**.
+Un **SOC** (Centro de Operaciones de Seguridad) es la pieza que hace posible este modelo: supervisa la red de forma continua y coordina la respuesta ante incidentes.
 
 
 ## SentryN3t: NDR diseñado para cumplir CPG 2.0 sin interferencias
@@ -87,7 +87,7 @@ En **Ewala**, estas necesidades han guiado el desarrollo de **SentryN3t**, nuest
 - Detección de anomalías mediante análisis de comportamiento, alineada con las metas *Identify* y *Detect* de CPG 2.0.  
 - Respuesta sin interrupción, facilitando la contención antes de que el incidente afecte a la operación.
 
-Este enfoque complementa otras capas como **SIEM, SOAR o XDR**, tal y como analizamos en **XDR vs SIEM: la solución para tu negocio**.
+Este enfoque complementa otras capas como **SIEM, SOAR o XDR**.
 
 
 ## De la normativa a la ciberresiliencia

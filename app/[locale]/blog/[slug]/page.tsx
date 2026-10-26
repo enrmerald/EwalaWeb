@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getDictionary, isLocale } from '@/i18n/config'
+import { getDictionary, isLocale, defaultLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/config'
 import { Header } from '@/components/ewala/header'
 import { Footer } from '@/components/ewala/footer'
@@ -33,8 +33,13 @@ export async function generateMetadata({
   if (!post) return {}
 
   const availableLocales = getLocalesForSlug(slug)
-  const canonical = `/${locale}/blog/${slug}`
-  const languages = Object.fromEntries(availableLocales.map((l) => [l, `/${l}/blog/${slug}`]))
+  const canonical = `/${locale}/blog/${slug}/`
+  // x-default → idioma por defecto si el artículo existe en él; si no, el primero disponible.
+  const xDefault = availableLocales.includes(defaultLocale) ? defaultLocale : availableLocales[0]
+  const languages = Object.fromEntries([
+    ...availableLocales.map((l) => [l, `/${l}/blog/${slug}/`]),
+    ...(xDefault ? [['x-default', `/${xDefault}/blog/${slug}/`]] : []),
+  ])
 
   return {
     title: post.titleSeo,

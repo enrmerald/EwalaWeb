@@ -1,28 +1,16 @@
 import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
-import { Space_Mono, Noto_Sans } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { I18nProvider } from '@/i18n/client'
 import { locales, getDictionary, alternatesFor, isLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/config'
-import { SITE_URL } from '@/lib/site'
-import { organizationJsonLd } from '@/lib/jsonld'
+import { SITE_URL, IS_PRODUCTION_DEPLOY } from '@/lib/site'
+import { organizationJsonLd, websiteJsonLd } from '@/lib/jsonld'
 import { JsonLd } from '@/components/ewala/json-ld'
 import { CookieConsent } from '@/components/ewala/cookie-consent'
 import { GA_MEASUREMENT_ID } from '@/lib/consent'
+import { spaceMono, notoSans } from '@/app/fonts'
 import '@/app/globals.css'
-
-const spaceMono = Space_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
-})
-
-const notoSans = Noto_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-noto-sans',
-})
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -50,6 +38,7 @@ export async function generateMetadata({
       ],
       apple: '/favicon/apple-touch-icon.png',
     },
+    manifest: '/favicon/site.webmanifest',
     alternates: {
       canonical: alt.canonical,
       languages: alt.languages,
@@ -62,6 +51,10 @@ export async function generateMetadata({
       type: 'website',
       siteName: 'Ewala',
     },
+    // Explícito: las páginas no lo redefinen y Next completa title/description/imagen desde openGraph.
+    twitter: { card: 'summary_large_image' },
+    // Previews y ramas de Netlify: nunca indexables (ver IS_PRODUCTION_DEPLOY en lib/site.ts).
+    ...(IS_PRODUCTION_DEPLOY ? {} : { robots: { index: false, follow: false } }),
     // Solo se emite si el cliente facilita el código de verificación (NEXT_PUBLIC_*).
     // Pendiente: pedir el código real de Google Search Console.
     ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
@@ -97,7 +90,8 @@ export default async function LocaleLayout({
       className={`bg-section-dark ${spaceMono.variable} ${notoSans.variable}`}
     >
       <body className="font-sans antialiased bg-section-dark">
-        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={organizationJsonLd(locale)} />
+        <JsonLd data={websiteJsonLd(locale)} />
         <I18nProvider locale={locale} messages={clientMessages}>
           {children}
           {/* GA4 solo se carga tras el consentimiento (lib/consent.ts). Sin ID de medición no hay banner ni script. */}

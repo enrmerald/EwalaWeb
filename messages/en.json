@@ -1,4 +1,13 @@
 {
+  "notFound": {
+    "metaTitle": "Page not found | Ewala",
+    "code": "404 · PAGE NOT FOUND",
+    "title": "We can't find this page",
+    "description": "The address may be mistyped or the page may have moved. From here you can go back to the home page or contact us.",
+    "home": "Go to the home page",
+    "contact": "Contact us",
+    "otherLanguage": "Versión en español"
+  },
   "meta": {
     "title": "Ewala | OT/IoT Cybersecurity with AI | SentryN3t NDR",
     "description": "Ewala is a European industrial cybersecurity startup. SentryN3t Protection detects anomalies in OT/IoT networks with machine learning and an AI assistant."
@@ -224,7 +233,8 @@
     "opensNewTab": "opens in a new tab",
     "social": {
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "youtube": "YouTube"
     },
     "sections": [
       {
