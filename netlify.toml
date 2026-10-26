@@ -80,6 +80,323 @@
 # El resto (HTML, PDFs, imágenes de public/) usa el valor por defecto de Netlify:
 # "public, max-age=0, must-revalidate" + ETag. Así cada despliegue se ve al instante.
 
+# ── Redirecciones ────────────────────────────────────────────────────────────
+# Netlify evalúa las reglas DE ARRIBA ABAJO y aplica la primera que casa: las reglas
+# concretas van siempre antes que los comodines (/*).
+#
+# Notas para quien edite esto:
+#   - Netlify normaliza la barra final al comparar `from`: "/kit-digital" casa también
+#     con "/kit-digital/". Las variantes ".html" sí hay que listarlas aparte.
+#   - `force = true` hace que la regla gane aunque exista un fichero real en out/.
+#     NUNCA usar force en una regla "/x" → "/x/" (se redirige a sí misma: bucle).
+#   - Inventario de URLs antiguas: `git show origin/backup-web-antigua:sitemap.xml`.
+
+# 1) Dominio canónico: todo a https://ewala.es (además de configurarlo en
+#    Domain management → Primary domain y Force HTTPS en el panel de Netlify).
+[[redirects]]
+  from = "https://www.ewala.es/*"
+  to = "https://ewala.es/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.ewala.es/*"
+  to = "https://ewala.es/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://ewala.es/*"
+  to = "https://ewala.es/:splat"
+  status = 301
+  force = true
+
+# 2) Raíz → idioma por defecto. `force` porque out/index.html existe (es solo un
+#    respaldo en cliente generado por app/page.tsx).
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/es/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index"
+  to = "/es/"
+  status = 301
+  force = true
+
+# 3) Páginas legales de la web antigua → equivalentes nuevas.
+[[redirects]]
+  from = "/politica-privacidad"
+  to = "/es/privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-privacidad.html"
+  to = "/es/privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal.html"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-cookies"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-cookies.html"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+# 4) Blog: los 4 artículos que existen en la web nueva conservan su posicionamiento
+#    con un 301 directo (sin saltos intermedios). DEBEN ir antes del comodín /blog/*.
+[[redirects]]
+  from = "/blog"
+  to = "/es/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/cpg-2-convergencia-it-ot"
+  to = "/es/blog/cpg-2-convergencia-it-ot/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad"
+  to = "/es/blog/dispositivos-iot-y-las-capas-de-la-ciberseguridad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/ndr-en-ot"
+  to = "/es/blog/ndr-en-ot/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/sistemas-y-redes-industriales-ot"
+  to = "/es/blog/sistemas-y-redes-industriales-ot/"
+  status = 301
+  force = true
+
+# El sitemap del blog estaba dado de alta en Search Console: se envía al nuevo.
+[[redirects]]
+  from = "/blog/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
+
+# 5) Contenido retirado de forma permanente → 410 Gone (Google lo desindexa antes que
+#    un 404). Se sirve public/410.html con el estado 410.
+#
+#    Resto del blog Hugo: 22 artículos no migrados, slugs históricos (con tildes,
+#    "livet--…", "2024-11-22-…"), /blog/tags/*, /blog/categories/*, /blog/page/*,
+#    RSS (/blog/index.xml), CMS (/blog/admin/*) e imágenes del tema.
+[[redirects]]
+  from = "/blog/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Landings antiguas (decisión: no se migran).
+[[redirects]]
+  from = "/kit-digital"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-digital.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-consulting"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-consulting.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-digital-ciberseguridad-gestionada"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-digital-ciberseguridad-gestionada.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/grc-gobernanza-riesgo-cumplimiento"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/grc-gobernanza-riesgo-cumplimiento.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Copias de trabajo y plantillas que la web antigua publicaba sin querer.
+[[redirects]]
+  from = "/index-con-popupkaront3"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/index-con-popupkaront3.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/faq"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/inner-page"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/inner-page.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/test"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/test.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Activos y ficheros internos de la web antigua. Ninguna de estas carpetas existe en la
+# web nueva (comprobado contra out/: _next, es, en, favicon, recursos, sellos, team,
+# capturas-sentry). Si alguna vez se crea una con estos nombres, quitar su regla.
+[[redirects]]
+  from = "/assets/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/particles/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/particles.json"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/sitemap.xsd"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/static/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# 6) PDFs. El sitemap antiguo enlazaba una versión "-00-" de la política de seguridad
+#    que nunca existió; se envía a la vigente ("-01-"). La política medioambiental
+#    de 2023 se retiró (sustituida por EWA-POL-0002).
+[[redirects]]
+  from = "/POL-0001-00-SGI POLITICA DE SEGURIDAD DE LA INFORMACION.pdf"
+  to = "/POL-0001-01-SGI%20POLITICA%20DE%20SEGURIDAD%20DE%20LA%20INFORMACION.pdf"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/PAM-0001-08-Politica_Medioambiental_2023.pdf"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# 7) La URL /404 estaba en el sitemap antiguo: que responda 404 de verdad, no 200
+#    (también si se pide el fichero directamente). Es una reescritura, no un bucle.
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/404.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # ── 404 única. SIEMPRE AL FINAL del fichero: Netlify evalúa las reglas de arriba
 # abajo y un comodín por encima de una ruta real se la come. Sin `force`, solo actúa
 # cuando no existe un fichero real en out/. ─────────────────────────────────────
