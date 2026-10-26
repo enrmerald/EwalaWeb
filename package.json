@@ -13,7 +13,9 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint .",
-    "typecheck": "pnpm content:build && next typegen && tsc --noEmit"
+    "typecheck": "pnpm content:build && next typegen && tsc --noEmit",
+    "verify:seo": "node scripts/verificar-seo.mjs out",
+    "verify:redirects": "node scripts/verificar-redirecciones.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

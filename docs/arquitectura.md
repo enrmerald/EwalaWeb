@@ -9,12 +9,18 @@ Este proyecto tiene **dos fases de ejecución completamente separadas**:
 
 | Fase | Cuándo ocurre | Qué corre | Output |
 |---|---|---|---|
-| **Pipeline de build** | `pnpm build` en CI/local | Node.js (una vez, desechable) | Archivos estáticos en `out/` |
-| **Runtime** | Navegador del usuario | React + JS del bundle | Interactividad, hydration |
+| **Pipeline de build** | `pnpm build` en Netlify/local | Node.js (una vez, desechable) | Archivos estáticos en `out/` |
+| **Runtime (navegador)** | Navegador del usuario | React + JS del bundle | Interactividad, hydration |
+| **Runtime (funciones)** | Petición a `/api/*` | Netlify Functions (`netlify/functions/*.mts`) | Respuesta JSON |
 
-**No existe ningún proceso Node.js en producción.** El CDN sirve los archivos de `out/`
-directamente. Cualquier código que asuma un servidor activo (middleware, cookies de request,
-headers HTTP, API routes) es incompatible con este modelo y romperá el build o el despliegue.
+**Next.js no tiene ningún proceso en producción.** El CDN de Netlify sirve los archivos de `out/`
+directamente. Cualquier código **de Next** que asuma un servidor activo (middleware, cookies de request,
+headers HTTP, API routes, Server Actions) es incompatible con este modelo y romperá el build.
+
+La única excepción controlada son las **Netlify Functions** de `netlify/functions/`: código de servidor
+que Netlify despliega aparte (Next no las compila ni las conoce) y que se expone como `/api/*` mediante
+reglas de `netlify.toml`. Hoy hay dos: `contact.mts` (formulario → Resend) y `csp-report.mts`
+(sumidero de informes CSP). Ver «Formularios y envío de email».
 
 Lo que corre **solo en el pipeline de build** (una vez, nunca en producción):
 
@@ -24,8 +30,9 @@ Lo que corre **solo en el pipeline de build** (una vez, nunca en producción):
 - `getDictionary(locale)` (en `i18n/config.ts`) → `import()` dinámico de `messages/{locale}.json`.
   Lo invocan los Server Components (`page.tsx`, `layout.tsx`) durante el build.
 
-`pnpm start` **no se usa**: el proyecto genera HTML estático (`output: 'export'`) que se despliega
-en un CDN (Cloudflare Pages, Netlify, Vercel static). No hay servidor Node.js en runtime.
+`pnpm start` **no existe**: el proyecto genera HTML estático (`output: 'export'`) que se despliega en
+**Netlify** (`netlify.toml`, con `NETLIFY_NEXT_PLUGIN_SKIP=true` para que el plugin de Next no lo
+convierta en SSR). Redirecciones, cabeceras y caché viven en `netlify.toml`, no en `next.config`.
 
 ## Landing de producto — hoy un solo producto, con tabs preparados
 
@@ -57,9 +64,11 @@ garantizando SEO e indexabilidad para los dos productos.
    ```tsx
    style={{ '--brand': cfg.accent, '--brand-foreground': cfg.accentForeground }}
    ```
-   Compone las 8 sub-secciones: `ProductHero`, `ProductMetrics`, `ProductShowcase`,
-   `ProductCapabilities`, `ProductSectors`, `ProductInnovation`, `ProductTestimonial`,
-   `ProductFinalCta`. Todas son Server Components puros en `components/ewala/sections/`.
+   Compone 6 sub-secciones: `ProductHero`, `ProductHowItWorks`, `ProductMetrics`, `ProductShowcase`,
+   `ProductSectors` y `ProductFinalCta`. Todas son Server Components puros en
+   `components/ewala/sections/`. `ProductCapabilities` y `ProductInnovation` están retiradas de la
+   landing (se conservan para una futura página de producto). El testimonio se eliminó: no era de
+   un cliente real.
 
 3. **`ProductExperience`** (isla cliente). **Hoy** solo devuelve el slot del único producto. En el
    diseño con tabs (`@radix-ui/react-tabs`) gestionaba qué producto está activo: leía el hash
@@ -102,17 +111,16 @@ Para añadir un segundo producto: añadir su entrada a `PRODUCTS`, ampliar `Prod
 
 ## Internacionalización (i18n) — implementación propia
 
-**No se usa `next-intl`** (pese a que quede un `next-intl.config.ts` remanente en la raíz y el
-paquete en `node_modules`; ninguno se importa desde el código fuente). La i18n es un módulo propio
-y minimalista en `i18n/`:
+**No se usa `next-intl`** (ni está instalado). La i18n es un módulo propio y minimalista en `i18n/`:
 
 - **`i18n/config.ts`**: `locales = ['es','en']`, `defaultLocale = 'es'`,
   `PAGES = ['/', '/blog', '/contacto', '/compania', '/privacidad', '/aviso-legal', '/cookies']` (las
   páginas **públicas e indexables**: alimentan el sitemap; la página oculta de carteles y financiación
   no está aquí a propósito). No hay slugs por idioma: `/en/privacidad` usa el mismo slug que `/es/privacidad`.
   - `getDictionary(locale)` → `import()` dinámico del JSON de mensajes (build-time).
+  - `isLocale(value)` acota un `string` de Next a `Locale` (los segmentos dinámicos llegan como `string`).
   - `localizedPath(locale, path)` y `alternatesFor(path, locale)` → construyen el **canonical
-    autorreferenciado** (`/{locale}{path}`) y `languages` (hreflang, incluye `x-default` → español)
+    autorreferenciado** (`/{locale}{path}/`, con barra final) y `languages` (hreflang, incluye `x-default` → español)
     para `generateMetadata`. `locale` es obligatorio: un canonical de `/en` apuntando a `/es`
     haría que Google tratara la versión inglesa como duplicado.
 - **`i18n/client.tsx`** (`"use client"`): `I18nProvider` (React Context con un slice de `Messages`)
@@ -132,14 +140,14 @@ y minimalista en `i18n/`:
 1. `app/[locale]/page.tsx` y `app/[locale]/layout.tsx` son **Server Components async** que llaman
    `getDictionary(locale)` en build.
 2. `page.tsx` pasa los slices de producto a `ProductLanding` por props: `content={dict.products.sentryn3t}`.
-   `ProductLanding` los reparte entre sus 8 sub-secciones: `<ProductHero t={content.hero} />`, etc.
+   `ProductLanding` los reparte entre sus sub-secciones: `<ProductHero t={content.hero} />`, etc.
 3. Los **Server Components de sección** (`components/ewala/sections/`) reciben su slice tipado
    como `Messages['products']['sentryn3t']['hero']`, etc. No usan contexto ni hooks.
-4. Solo `Header`, `Footer`, `MobileStickyCta` y `CookieConsent` consumen mensajes vía contexto (`useTranslations`).
+4. Solo `Header`, `Footer` y `MobileStickyCta` consumen mensajes vía contexto (`useTranslations`).
    `ProductExperience` y `FloatingProductTabs` reciben `ui` por props desde `page.tsx`. Otras islas
    (`ContactForm`, `HeroScreenshotCarousel`, `BlogFiltro`) reciben sus textos por props.
 5. El `layout.tsx` pasa a `I18nProvider` **solo** los namespaces de las islas que usan contexto:
-   `{ nav, footer, mobileCta, cookieBanner }` (cada uno de `dict`) → eso es lo único que
+   `{ nav, footer, mobileCta }` (cada uno de `dict`) → eso es lo único que
    viaja al cliente como JSON para hydration.
 
 ### Cambio de idioma
@@ -155,27 +163,36 @@ Páginas públicas actuales: home, `/blog` (+ `/blog/[slug]`), `/contacto`, `/co
 página pública nueva:
 1. `app/[locale]/[ruta]/page.tsx`, con `generateMetadata` que use `alternatesFor('/ruta', locale)` y,
    si define `openGraph`, `pageOpenGraph(parent, …)` de `lib/metadata.ts`.
-2. Añadir la ruta a `PAGES` en `i18n/config.ts` (entra sola en `app/sitemap.ts`).
+2. Añadir la ruta a `PAGES` en `i18n/config.ts` (entra sola en `app/sitemap.ts`) y su fecha en
+   `PAGE_LAST_MODIFIED` de `app/sitemap.ts`.
 3. Añadir las claves en **ambos** `messages/es.json` y `messages/en.json`.
 4. Usar `HeroInterior` (aporta el único `<h1>`) y, si procede, `JsonLd` con `breadcrumbJsonLd`.
 
-`app/sitemap.ts` (PAGES × locales + artículos del blog) y `app/robots.ts` (`Allow: /` + sitemap) son
-estáticos (`dynamic = 'force-static'`). El dominio sale de `lib/site.ts` (`NEXT_PUBLIC_SITE_URL`, por
-defecto `https://ewala.es`, pendiente de confirmar con el cliente).
+`app/sitemap.ts` (PAGES × locales + artículos del blog, con hreflang y `lastmod` fijo por página) y
+`app/robots.ts` son estáticos (`dynamic = 'force-static'`). El dominio sale de `lib/site.ts`
+(`NEXT_PUBLIC_SITE_URL`, por defecto `https://ewala.es`). Con `trailingSlash: true`, todas las URLs
+(canonical, hreflang, sitemap, JSON-LD) terminan en `/`; `localizedPath()` y `withTrailingSlash()` lo
+garantizan donde Next no lo hace solo.
 
 ## SEO y metadatos
 
-- El layout fija `metadataBase`, `title`/`description`, `alternates` y `openGraph` (con `url`,
-  `siteName`, `type` y la imagen de `opengraph-image.tsx`). Emite el JSON-LD `Organization`.
+- El layout fija `metadataBase`, `title`/`description`, `alternates`, `openGraph` (con `url`,
+  `siteName`, `type` y la imagen de `opengraph-image.tsx`), `manifest` y `twitter: { card }`. Emite el
+  JSON-LD `Organization` (con `@id`, CIF, logo, contacto y `sameAs` = `SOCIAL_LINKS`) y `WebSite`.
 - **Next no fusiona objetos entre layout y página.** Si una página define `openGraph` (o `alternates`),
   sustituye al del layout entero. Por eso las páginas interiores usan `pageOpenGraph()`, que hereda
   `siteName`, `type` e imagen del layout y solo pisa título, descripción, locale y URL.
-- **No** definir `twitter` en el layout: lo heredarían todas las páginas con el título de la home.
-  `twitter:card` lo deriva Next (`summary_large_image` si hay imagen).
+- `twitter` en el layout lleva **solo** `card`: título, descripción e imagen los completa Next desde el
+  `openGraph` de cada página (si se pusiera `twitter.title` en el layout, todas heredarían el de la home).
+- **Previews no indexables:** si el build no es de producción (`CONTEXT` de Netlify distinto de
+  `production`, ver `IS_PRODUCTION_DEPLOY` en `lib/site.ts`), todas las páginas llevan `noindex` y
+  `robots.txt` es `Disallow: /`.
+- `app/not-found.tsx` es la 404 global (`out/404.html`): monta su propio `<html lang="es">` porque el
+  layout raíz es transparente.
 - Posicionamiento de la empresa en textos públicos: *startup europea de ciberseguridad industrial,
   redes OT/IoT, machine learning y asistente de IA*. LIVET no se menciona (ni navbar, ni footer, ni
   meta, ni JSON-LD, ni `/compania`).
-- El JSON-LD es solo en español (vive en el layout y no depende del idioma).
+- Auditoría automática: `pnpm build && pnpm verify:seo` (`scripts/verificar-seo.mjs`).
 
 ## Páginas legales
 
@@ -197,9 +214,9 @@ las tres páginas comparten un único renderizador. Los textos admiten `**negrit
 |---|---|
 | Datos legales | Ewala IT Services S.L., CIF B42987651, `rgpd@ewala.es`, Registro Mercantil de Asturias (Tomo 4434, Folio 214, Inscripción 1, hoja AS-57378), tribunales de Gijón |
 | Conservación de CV | 24 meses (la web antigua de Ewala); ISN usa 1 año |
-| Formspree | Se cita como encargado del formulario de contacto y como transferencia a EE. UU. (apartados 10 y 12 de privacidad). No se afirma certificación DPF: «cuando el destinatario esté adherido… o, en su defecto, Cláusulas Contractuales Tipo» |
-| Cookies | Sin Google Tag Manager (se carga `gtag.js` directo); la tabla incluye `_ga`, `_ga_<ID>` y la clave propia `ewala-cookie-consent` |
-| Registro del consentimiento | ISN afirma conservarlo en servidor (art. 7.1 RGPD). Aquí se guarda solo en el navegador y el texto lo dice así; acreditarlo en servidor chocaría con la regla de cero servidor |
+| Formulario de contacto | Netlify, Inc. (alojamiento y función) y Resend, Inc. (envío de correo) se citan como encargados y como transferencia a EE. UU. (apartados 10 y 12 de privacidad). No se afirma certificación DPF: «cuando el destinatario esté adherido… o, en su defecto, Cláusulas Contractuales Tipo» |
+| Cookies | GA4 a través de Google Tag Manager; banner de Cookiebot (Usercentrics A/S). La tabla incluye `_ga`, `_ga_<ID>` y la cookie técnica `CookieConsent` |
+| Registro del consentimiento | Lo conserva Cookiebot en servidores de la UE (art. 7.1 RGPD) y el texto lo dice así |
 | Contenido que **no** se copió | El último párrafo de la política de cookies antigua («esta web no utiliza cookies») contradecía el resto del documento |
 
 Mantenimiento: actualizar `legal.*.updated` (ES y EN) al cambiar un texto; revisar privacidad y cookies si
@@ -207,37 +224,31 @@ cambian proveedores, plazos o cookies; y pasar por asesoría jurídica antes de 
 
 ## Consentimiento de cookies y GA4
 
-Hay una única fuente de cookies no técnicas: Google Analytics 4. El diseño evita que ningún script o
-cookie de Google exista **antes** de que el usuario consienta:
+La web solo carga **Google Tag Manager** (`GTM-KG3ZWVWW`). GA4 y el banner de **Cookiebot** se
+configuran **dentro del contenedor**, no en el código. Nada no esencial funciona sin consentimiento:
 
-- `app/[locale]/layout.tsx` ya no inyecta `gtag.js`. Monta `CookieConsent` (isla cliente) solo si
-  `GA_MEASUREMENT_ID` (de `lib/consent.ts`) no está vacío. Esa constante valida `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-  con `/^G-[A-Z0-9]{4,}$/`: el valor acaba en una URL y en un script inline, así que un formato distinto
-  se trata como «sin ID».
-- `CookieConsent` lee el estado con `useSyncExternalStore(subscribe, readRawConsent, () => 'ssr')`. En el
-  servidor y durante la hidratación no pinta nada (sin desajuste de hidratación y sin banner pre-renderizado
-  en el HTML estático). Solo inyecta `next/script` con `gtag.js` cuando `analytics === true`.
-- Persistencia: `localStorage['ewala-cookie-consent'] = {v:1, analytics, ts}`. Se considera inválido si
-  falta, no es JSON, `v !== 1`, `analytics` no es booleano, `ts` es futuro o tiene más de 365 días; en todos
-  esos casos (y si el almacenamiento lanza) se actúa como «sin consentimiento» y se vuelve a mostrar el banner.
-- Retirada: `revokeAnalytics()` fija `window['ga-disable-<ID>']=true` y expira `_ga`, `_ga_*` y `_gid` en el
-  dominio actual y en los dominios padre. Es idempotente.
-- Accesibilidad: `role="dialog"` no modal, foco al abrir, Esc cierra **sin** consentir, botones aceptar y
-  rechazar con idéntico estilo y tamaño, casilla de analítica sin premarcar.
-- El footer reabre el panel con `window.dispatchEvent(new Event(OPEN_EVENT))`; el enlace solo se muestra
-  si hay ID.
+- `public/gtm.js` (cargado por `components/ewala/analytics.tsx` en el `<head>` de todas las páginas, más
+  el `<noscript>` tras `<body>`) fija **Consent Mode v2 con todo denegado por defecto** y después carga
+  el contenedor. El ID está en `lib/analytics.ts` y en `public/gtm.js`: deben coincidir.
+- En GTM, la etiqueta de GA4 exige el consentimiento `analytics_storage` y solo se dispara en el host
+  `ewala.es` (las previews de Netlify no ensucian las estadísticas). Cookiebot se instala con su
+  plantilla oficial (activador *Consent Initialization*), con los mismos valores por defecto (denegado).
+- El footer muestra «Preferencias de cookies» **solo si Cookiebot está cargado** (`window.Cookiebot`,
+  evento `CookiebotOnLoad`) y lo reabre con `Cookiebot.renew()`.
+- La CSP (`netlify.toml`) ya permite los dominios de GTM, GA4 y Cookiebot. Va en modo **Report-Only** y
+  los informes llegan a `netlify/functions/csp-report.mts` (Netlify → Logs → Functions).
 
-Comprobación mínima tras tocar esta zona: con `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TEST12345`, primera visita
-sin ninguna petición a `googletagmanager.com`; rechazar no carga nada; aceptar sí; un registro caducado
-vuelve a mostrar el banner. Sin la variable, `out/` no debe contener ni el ID ni etiquetas de Google.
+Comprobación mínima tras tocar esta zona: en DevTools, el `dataLayer` debe tener `consent default` antes
+de `gtm.js`; sin aceptar, *Application → Cookies* no debe tener `_ga`; aceptando en Cookiebot, sí.
+⛔ Cookiebot debe estar publicado en el contenedor **antes** de pasar la web a producción.
 
 ## Interruptores por entorno
 
 `lib/features.ts` centraliza los interruptores `NEXT_PUBLIC_*` de funcionalidad (se incrustan en build; un
 único punto de lectura). Hoy: `SHOW_DEMO_CTA` (`NEXT_PUBLIC_SHOW_DEMO_CTA === 'true'`, **por defecto
 oculto**), que gobierna «Solicitar demo» (navbar escritorio y móvil), «Solicita una demo» (hero), el botón
-principal del CTA final (oculto → «Contáctanos»), los botones «Descargar cómo funciona una PoC» (que hoy
-apuntan a `#`) y la opción «Demo SentryN3t» del selector del formulario. Se conservan las claves de texto
+principal del CTA final (oculto → «Contáctanos»), los botones «Descargar cómo funciona una PoC» (que, sin
+documento todavía, llevan a contacto con `?need=demo`) y la opción «Demo SentryN3t» del selector del formulario. Se conservan las claves de texto
 en los JSON para poder reactivarlos sin reescribir nada.
 
 ## Sellos y reconocimientos (home)
@@ -266,9 +277,9 @@ Está pensada para que **solo se entre escribiendo la URL**:
 | Sin JSON-LD propio | Solo el `Organization` del layout |
 
 **Es discreción, no control de acceso**: la ruta aparece en `_next/static/*/_ssgManifest.js` y quien
-tenga el enlace entra. Si hiciera falta acceso restringido real, hay que ponerlo en el hosting
-(Cloudflare Access, auth básica…); opcionalmente una cabecera `X-Robots-Tag: noindex` en el CDN refuerza
-el `noindex`.
+tenga el enlace entra. Si hiciera falta acceso restringido real, hay que ponerlo en Netlify (protección
+por contraseña del sitio o Netlify Identity); opcionalmente una cabecera `X-Robots-Tag: noindex` en
+`netlify.toml` refuerza el `noindex`.
 
 Componentes: `posters-grid.tsx` y `funding-banner.tsx`. Assets en `public/recursos/` (carteles y logos
 Kit).
@@ -286,7 +297,7 @@ antigua en caché no sirva otra proporción. Las bandas negras inferiores no coi
 porque cada diseño original las tenía distintas.
 
 > `/recursos` fue la página anterior de carteles y banner Kit; se eliminó y su contenido pasó aquí.
-> En el export estático no hay redirects: si estuvo indexada, redirigir en el hosting.
+> Nunca llegó a publicarse en ewala.es, así que no necesita redirección.
 
 ## Carrusel de partners
 
@@ -299,8 +310,15 @@ foco; con `prefers-reduced-motion` se detiene y se oculta la copia (`.logo-marqu
 
 ## Seguridad — por qué estas reglas
 
-El proyecto compila a HTML/CSS/JS estático; no hay servidor Node.js en producción. Mantenerlo así
-elimina superficie de ataque entera (no hay endpoints, no hay secretos en runtime, no hay sesiones).
+El proyecto compila a HTML/CSS/JS estático; Next no tiene servidor en producción. Mantenerlo así
+elimina superficie de ataque entera (no hay sesiones ni secretos en el bundle). Los únicos endpoints son
+las dos Netlify Functions (`/api/contact`, `/api/csp-report`), pequeñas, sin dependencias externas y con
+sus propias defensas (ver «Formularios y envío de email»).
+
+Cabeceras de seguridad (todas en `netlify.toml`): HSTS de 1 año sin `preload`, `X-Frame-Options: DENY`,
+`nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y CSP en modo `Report-Only` con sumidero.
+`'unsafe-inline'` en `script-src` es obligatorio por Next (scripts de hidratación en línea, sin nonce al no
+haber servidor): con él la CSP es higiene y no una defensa completa frente a XSS.
 
 ### Prohibiciones absolutas (revertir en cualquier PR que las introduzca)
 
@@ -312,68 +330,83 @@ elimina superficie de ataque entera (no hay endpoints, no hay secretos en runtim
 | `createNextIntlPlugin` en `next.config.mjs` | Wrapper del server pipeline |
 | Detección de idioma por `Accept-Language`/cookies | No determinista entre CDN/bot/navegador |
 | `'use server'`, Server Actions, `headers()`, `cookies()` | Requieren runtime Node.js |
-| `app/api/` routes | Incompatible con `output: 'export'` |
+| `app/api/` routes | Incompatible con `output: 'export'`. Los endpoints van en `netlify/functions/` |
 | `fetch()` con `{ cache: 'no-store' }` en componentes | Requiere runtime para revalidar |
 | Dependencias de servidor (drivers BD, ORMs) | Rompen el build con `output: 'export'` |
-| Secretos en código (API keys, tokens) | Todo el bundle es público |
+| Secretos en código o en `NEXT_PUBLIC_*` | Todo el bundle es público. Los secretos (p. ej. `RESEND_API_KEY`) solo como variables de Netlify con scope «Functions» |
+| `import` de `node_modules` en `netlify/` | La función dejaría de ser autocontenida (en Windows, además, `netlify dev` no puede servirla) |
 
 ### Permitido y seguro
 
-- `fetch()` desde el cliente a servicios externos con CORS habilitado.
-- Variables `NEXT_PUBLIC_*` para URLs/IDs públicos de terceros (no secretos): Formspree, GA4, `SITE_URL` e
+- `fetch()` desde el cliente a las funciones propias (`/api/*`, mismo origen) o a servicios con CORS.
+- Variables `NEXT_PUBLIC_*` para valores públicos: `SITE_URL`, verificación de Search Console e
   interruptores de funcionalidad.
-- `localStorage` solo para el consentimiento de cookies (siempre con `try/catch`; nunca para datos de usuario).
-- Scripts de terceros (GA4) únicamente tras consentimiento explícito.
-- Formularios que envíen a un SaaS de email (Resend, Formspree, Web3Forms…).
+- Scripts de terceros solo a través de GTM y gobernados por Consent Mode/Cookiebot.
+- Nuevas Netlify Functions con extensión **`.mts`** (con `.ts` Netlify las trataría como CommonJS con la
+  firma antigua de Lambda), helpers en `netlify/lib/` y su ruta `/api/*` en `netlify.toml`.
 
 ## Formularios y envío de email
 
-El formulario de contacto (`/{locale}/contacto`, `components/ewala/contact-form.tsx`) **no usa
-una API Route propia**. Envía directamente desde el cliente (isla `"use client"`) a
-**[Formspree](https://formspree.io/)** mediante un `POST` JSON a
-`https://formspree.io/f/{NEXT_PUBLIC_FORMSPREE_FORM_ID}` — decisión ya tomada, no una opción
-entre varias:
+El formulario de contacto (`/{locale}/contacto`, `components/ewala/contact-form.tsx`) envía un `POST`
+JSON a **`/api/contact`**, que `netlify.toml` reescribe a la Netlify Function
+`netlify/functions/contact.mts`. La función manda un correo con **[Resend](https://resend.com)** al
+buzón de Ewala.
 
-- El Form ID se lee de la variable pública `NEXT_PUBLIC_FORMSPREE_FORM_ID` (obligatoriamente
-  `NEXT_PUBLIC_*`: no hay servidor que la mantenga en secreto, todo el bundle es público).
-  Se documenta sin valor real en `.env.local.example`; el valor real vive solo en `.env.local`
-  (gitignored) y en las env vars del CDN.
-- Si la variable está vacía (aún no hay cuenta de Formspree creada), el formulario **sigue
-  renderizando y validando con normalidad**, pero al enviar muestra un aviso discreto en la UI
-  de que el envío no está configurado todavía — así se puede revisar y probar visualmente el
-  formulario antes de tener el Form ID real. No se lanza ningún error de consola en producción
-  por esto.
-- Anti-spam con **honeypot** (`company_website`, oculto por posición absoluta fuera de pantalla,
-  nunca `display:none`, con `aria-hidden` y `tabIndex={-1}` para no afectar a lectores de
-  pantalla ni a la navegación por teclado). Si el bot lo rellena, el formulario simula un envío
-  correcto sin hacer la petición real.
-- Validación en cliente con `zod` + `react-hook-form` + `@hookform/resolvers` (ya en
-  `dependencies`) antes de cualquier `fetch`.
-- **Protección de datos:** Formspree (EE. UU.) recibe nombre, email, empresa, mensaje, etc., y actúa como
-  encargado del tratamiento; consta en la política de privacidad (apartados 10 y 12) y en el bloque
-  informativo del formulario (`contact.rail.dataProtection`, con enlace a `/privacidad`). Si se cambia de
-  proveedor o se añaden campos, actualizar esos textos. La casilla «He leído y acepto la política de
-  privacidad» enlaza a `/{locale}/privacidad`.
+```
+navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──▶ contact.mts ──fetch──▶ API de Resend
+                                                                        │
+                                       contrato compartido: lib/contact.ts (límites, need, tipos)
+```
+
+- **Cliente** (`lib/contact-client.ts`): genera `submissionId` (UUID) y `renderedAt` al montar, valida con
+  `zod` + `react-hook-form`, espera el tiempo mínimo antispam si hace falta y traduce la respuesta a
+  mensajes (`validation`, `rateLimited`, `network`, `unavailable`, `generic`). Muestra la referencia y,
+  en modo prueba, un aviso.
+- **Función** (`contact.mts` + `netlify/lib/`):
+  - `http.ts`: solo `POST` JSON ≤ 32 KB; rechaza `Sec-Fetch-Site` ≠ `same-origin` (CSRF); log sin datos
+    personales.
+  - `contact-validation.ts`: validación estricta **sin dependencias** (lista blanca de campos, longitudes de
+    `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).
+  - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y envío en < 3 s →
+    responde éxito sin enviar.
+  - `resend.ts`: `fetch` a la API de Resend con `Idempotency-Key` (sin duplicados por doble clic), timeout de
+    3,5 s y un reintento solo ante errores transitorios. `Reply-To` = email del visitante.
+  - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) + texto; **todo** dato del formulario pasa
+    por `esc()`.
+  - Sin `RESEND_API_KEY`, `RESEND_FROM` o `CONTACT_MAILBOX_TO` → **modo prueba** (`delivery: "skipped"`).
+    Si Resend falla → **503**, nunca un falso éxito.
+- **Variables** (Netlify → Environment variables, scope «Functions»): `RESEND_API_KEY` (secreto),
+  `RESEND_FROM`, `CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT` (`production` o el nombre del entorno, que se
+  añade al asunto). Documentadas en `.env.local.example`.
+- **Protección de datos:** Netlify (alojamiento y función) y Resend (envío) actúan como encargados, con
+  transferencia a EE. UU.; consta en la política de privacidad (apartados 10 y 12) y en el bloque
+  informativo del formulario (`contact.rail.dataProtection`). Si se cambia de proveedor o se añaden
+  campos, actualizar esos textos. La casilla de privacidad enlaza a `/{locale}/privacidad`.
 - La opción «Demo SentryN3t» del selector `need` y `?need=demo` dependen de `SHOW_DEMO_CTA`
   (`lib/features.ts`).
 
 ## Notas de configuración
 
-- **`next.config.mjs`**: `output: 'export'` (HTML estático), `typescript.ignoreBuildErrors: true`
-  (el build no garantiza tipos — ejecutar `pnpm exec tsc --noEmit` aparte, tras el build) e
-  `images.unoptimized: true` (necesario para export estático).
+- **`next.config.mjs`**: `output: 'export'` (HTML estático), `trailingSlash: true` (cada página es
+  `carpeta/index.html` y las URLs terminan en `/`), `poweredByHeader: false`,
+  `typescript.ignoreBuildErrors: false` (el build comprueba tipos) e `images.unoptimized: true`
+  (necesario para export estático).
+- **`netlify.toml`**: build (`corepack enable && pnpm install --frozen-lockfile && pnpm build`, Node 24.18,
+  pnpm 12.6, `NETLIFY_NEXT_PLUGIN_SKIP`), rutas de las funciones, redirecciones 301/410 de la web antigua,
+  cabeceras de seguridad y caché, y la 404 final. Las reglas se evalúan de arriba abajo.
 - **`eslint.config.mjs`**: flat config con `eslint-config-next` (core-web-vitals + typescript). Ignora
-  `.next`, `out`, `_livet-spa`, `src/generated` y `components/ui` (shadcn). Las reglas del React
+  `.next`, `out`, `.netlify`, `_livet-spa`, `src/generated` y `components/ui` (shadcn). Las reglas del React
   Compiler (`set-state-in-effect`, `immutability`, `purity`) están como aviso porque el proyecto no
   usa el compilador.
 - **`pnpm-workspace.yaml`**: `allowBuilds` habilita `@parcel/watcher` y `@swc/core`, y desactiva
   el build nativo de `sharp` y de `unrs-resolver` (pnpm 12 bloquea los scripts de dependencias nuevas).
 - **`postcss.config.mjs`**: único plugin `@tailwindcss/postcss` (Tailwind v4).
-- **`tsconfig.json`**: alias `@/*` → raíz del proyecto. `target: ES6`, `strict: true`, `noEmit`.
+- **`tsconfig.json`**: alias `@/*` → raíz del proyecto (no disponible en `netlify/`, que usa rutas
+  relativas). `target: ES6`, `strict: true`, `noEmit`; incluye `**/*.mts` para comprobar las funciones.
 - **`components.json`**: shadcn estilo `new-york`, `baseColor: neutral`, `cssVariables: true`,
   iconos `lucide`, `rsc: true`. Aliases `@/components`, `@/lib`, `@/components/ui`, `@/hooks`.
-- **`next-intl.config.ts`**: remanente sin uso; candidato a borrar.
 - **`styles/globals.css`**: remanente **no importado**; editar siempre `app/globals.css`.
-- **`messages/es_old.json` / `en_old.json`**: históricos, no se importan.
-- **`IMPLEMENTATION_PLAN.md`** y **`docs/guia-home-tabs-producto.md`**: documentos de planificación
-  anteriores; describen el diseño con dos productos y pueden no reflejar el estado actual.
+- **`docs/historico/IMPLEMENTATION_PLAN-i18n.md`** y **`docs/guia-home-tabs-producto.md`**: documentos de
+  planificación anteriores; describen el diseño con dos productos y pueden no reflejar el estado actual.
+- **`docs/assets-origen/public-sin-uso/`**: imágenes que estaban en `public/` sin usarse; se conservan
+  fuera de la web publicada.
