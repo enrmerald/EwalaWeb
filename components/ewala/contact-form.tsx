@@ -306,7 +306,7 @@ export function ContactForm({ t, locale }: ContactFormProps) {
           />
           <label htmlFor="privacy" className="text-sm text-white/70 leading-relaxed">
             {t.privacy.label}{' '}
-            <a href={`/${locale}/privacidad`} className="text-[var(--primary)] hover:underline">
+            <a href={`/${locale}/privacidad/`} className="text-[var(--primary)] hover:underline">
               {t.privacy.linkLabel}
             </a>
           </label>

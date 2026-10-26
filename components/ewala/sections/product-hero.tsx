@@ -86,7 +86,7 @@ export function ProductHero({ t, active, locale }: ProductHeroProps) {
 
             <div className="flex flex-col sm:flex-row gap-3 mt-8 whitespace-nowrap">
               <a
-                href={`/${locale}/contacto`}
+                href={`/${locale}/contacto/`}
                 className="bg-[var(--brand)] text-[var(--brand-foreground)] font-semibold px-8 py-4 rounded-xl text-base shadow-xl shadow-[color-mix(in_oklab,var(--brand)_25%,transparent)] hover:shadow-[color-mix(in_oklab,var(--brand)_40%,transparent)] transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2.5"
               >
                 {t.ctaPrimary}

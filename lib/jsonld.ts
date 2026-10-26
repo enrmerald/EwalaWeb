@@ -1,4 +1,4 @@
-import { SITE_URL } from './site'
+import { SITE_URL, withTrailingSlash } from './site'
 
 export interface JsonLdBreadcrumb {
   label: string
@@ -39,7 +39,9 @@ export function breadcrumbJsonLd(locale: string, crumbs: JsonLdBreadcrumb[]) {
       '@type': 'ListItem',
       position: i + 1,
       name: crumb.label,
-      ...(crumb.href ? { item: `${SITE_URL}${crumb.href.startsWith('/') ? '' : `/${locale}/`}${crumb.href}` } : {}),
+      ...(crumb.href
+        ? { item: `${SITE_URL}${withTrailingSlash(crumb.href.startsWith('/') ? crumb.href : `/${locale}/${crumb.href}`)}` }
+        : {}),
     })),
   }
 }
@@ -76,7 +78,7 @@ export function blogPostingJsonLd(post: BlogPostingInput) {
         url: `${SITE_URL}/logo_ewala_negro.png`,
       },
     },
-    mainEntityOfPage: `${SITE_URL}/${post.locale}/blog/${post.slug}`,
+    mainEntityOfPage: `${SITE_URL}/${post.locale}/blog/${post.slug}/`,
     articleSection: post.category,
     keywords: post.tags.join(', '),
     ...(post.image ? { image: post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}` } : {}),

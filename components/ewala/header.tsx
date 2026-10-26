@@ -273,7 +273,7 @@ export function Header({ locale }: HeaderProps) {
     .filter((product) => !product.hidden)
   const SECTOR_HREF = `/${locale}#sectors`
   // Orden fijo de messages/*.json → nav.mobile_items: Soluciones, Sectores, Compañía, Blog, Contacto.
-  const MOBILE_SIMPLE_HREFS = ["#", "#", `/${locale}/compania`, `/${locale}/blog`, `/${locale}/contacto`]
+  const MOBILE_SIMPLE_HREFS = ["#", "#", `/${locale}/compania/`, `/${locale}/blog/`, `/${locale}/contacto/`]
 
   const altLocale: Locale = locale === "es" ? "en" : "es"
 
@@ -338,19 +338,19 @@ export function Header({ locale }: HeaderProps) {
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <DesktopSimpleLink href={`/${locale}/compania`} scrolled={isScrolled}>
+                <DesktopSimpleLink href={`/${locale}/compania/`} scrolled={isScrolled}>
                   {t("company")}
                 </DesktopSimpleLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <DesktopSimpleLink href={`/${locale}/blog`} scrolled={isScrolled}>
+                <DesktopSimpleLink href={`/${locale}/blog/`} scrolled={isScrolled}>
                   {t("blog")}
                 </DesktopSimpleLink>
               </NavigationMenu.Item>
 
               <NavigationMenu.Item>
-                <DesktopSimpleLink href={`/${locale}/contacto`} scrolled={isScrolled}>
+                <DesktopSimpleLink href={`/${locale}/contacto/`} scrolled={isScrolled}>
                   {t("contact")}
                 </DesktopSimpleLink>
               </NavigationMenu.Item>
@@ -372,7 +372,7 @@ export function Header({ locale }: HeaderProps) {
 
             {SHOW_DEMO_CTA && (
               <Link
-                href={`/${locale}/contacto`}
+                href={`/${locale}/contacto/`}
                 className="hidden rounded-xl bg-[var(--primary)] px-5 py-2.5 font-mono text-sm font-semibold text-on-light shadow-lg shadow-[var(--primary)]/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-[var(--primary)]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:scale-[0.99] lg:inline-flex"
               >
                 {t("cta")}
@@ -488,7 +488,7 @@ export function Header({ locale }: HeaderProps) {
               <div className="mt-8 space-y-3 border-t border-white/[0.08] pt-8">
                 {SHOW_DEMO_CTA && (
                   <Link
-                    href={`/${locale}/contacto`}
+                    href={`/${locale}/contacto/`}
                     className="block w-full rounded-xl bg-[var(--primary)] px-6 py-4 text-center font-mono font-semibold text-on-light shadow-lg shadow-[var(--primary)]/15 transition-all duration-200 hover:shadow-[var(--primary)]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 active:scale-[0.99]"
                     onClick={() => setMobileMenuOpen(false)}
                   >

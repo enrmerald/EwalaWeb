@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getDictionary } from '@/i18n/config'
+import { getDictionary, isLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/config'
 import { Header } from '@/components/ewala/header'
 import { Footer } from '@/components/ewala/footer'
@@ -18,7 +18,8 @@ import {
 } from '@/lib/blog'
 import type { BlogCategory } from '@/lib/blog'
 
-export function generateStaticParams({ params }: { params: { locale: Locale } }) {
+export function generateStaticParams({ params }: { params: { locale: string } }) {
+  if (!isLocale(params.locale)) return []
   return getAllPosts(params.locale).map((post) => ({ slug: post.slug }))
 }
 

@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     getAllPosts(locale).map((post) => ({
-      url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+      url: `${SITE_URL}/${locale}/blog/${post.slug}/`,
       lastModified: new Date(post.date),
     })),
   )

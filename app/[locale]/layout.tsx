@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Space_Mono, Noto_Sans } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { I18nProvider } from '@/i18n/client'
-import { locales, getDictionary, alternatesFor } from '@/i18n/config'
+import { locales, getDictionary, alternatesFor, isLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/config'
 import { SITE_URL } from '@/lib/site'
 import { organizationJsonLd } from '@/lib/jsonld'
@@ -75,11 +75,11 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
 
-  if (!locales.includes(locale)) notFound()
+  if (!isLocale(locale)) notFound()
 
   const dict = await getDictionary(locale)
 

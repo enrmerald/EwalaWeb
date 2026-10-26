@@ -39,7 +39,7 @@ function ShowcaseBento({ t, locale }: { t: ProductLanding['showcase']; locale: L
 
         <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <a
-            href={`/${locale}/contacto`}
+            href={`/${locale}/contacto/`}
             className="bg-[var(--brand)] text-[var(--brand-foreground)] font-semibold px-6 py-3 rounded-xl text-sm shadow-lg shadow-[color-mix(in_oklab,var(--brand)_20%,transparent)] transition-all hover:scale-[1.02] inline-flex items-center justify-center gap-2"
           >
             {t.ctaPrimary}
@@ -124,7 +124,7 @@ function ShowcaseFlow({ t, locale }: { t: ProductLanding['showcase']; locale: Lo
 
         <div className="flex flex-col sm:flex-row gap-3 mt-8">
           <a
-            href={`/${locale}/contacto`}
+            href={`/${locale}/contacto/`}
             className="bg-[var(--brand)] text-[var(--brand-foreground)] font-semibold px-6 py-3 rounded-xl text-sm shadow-lg shadow-[color-mix(in_oklab,var(--brand)_20%,transparent)] transition-all hover:scale-[1.02] inline-flex items-center justify-center gap-2"
           >
             {t.ctaPrimary}

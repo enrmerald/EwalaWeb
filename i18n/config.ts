@@ -4,6 +4,11 @@ export const locales = ['es', 'en'] as const
 export type Locale = (typeof locales)[number]
 export const defaultLocale: Locale = 'es'
 
+// Next.js tipa los segmentos dinámicos como `string`; esto los acota a un Locale soportado.
+export function isLocale(value: string): value is Locale {
+  return (locales as readonly string[]).includes(value)
+}
+
 export const PAGES = [
   '/',
   '/blog',
@@ -23,7 +28,8 @@ export async function getDictionary(locale: Locale): Promise<Messages> {
 }
 
 export function localizedPath(locale: Locale, path: Page = '/'): string {
-  return `/${locale}${path === '/' ? '' : path}`
+  // Con barra final: coincide con las URLs servidas (trailingSlash: true) y las canónicas.
+  return `/${locale}${path === '/' ? '' : path}/`
 }
 
 /**

@@ -30,7 +30,7 @@ export function ProductFinalCta({ t, locale }: ProductFinalCtaProps) {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
           <a
-            href={`/${locale}/contacto`}
+            href={`/${locale}/contacto/`}
             className="bg-[var(--brand)] text-[var(--brand-foreground)] font-bold px-8 py-4 rounded-xl text-base shadow-[0_8px_32px_color-mix(in_oklab,var(--brand)_30%,transparent)] hover:brightness-110 transition-all hover:scale-[1.02] inline-flex items-center justify-center gap-2"
           >
             {/* Sin demo activa, el botón principal pasa a «Contáctanos» (mismo destino). */}

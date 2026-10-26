@@ -119,7 +119,7 @@ export default async function CompanyPage({
             {c.ctaHeadline}
           </h2>
           <a
-            href={`/${locale}/contacto`}
+            href={`/${locale}/contacto/`}
             className="inline-flex items-center justify-center gap-2 bg-[var(--primary-foreground)] text-[var(--primary)] font-bold px-8 py-4 rounded-xl text-base mt-6 hover:brightness-110 transition-all hover:scale-[1.02]"
           >
             {c.ctaButton}
