@@ -4,6 +4,7 @@ import { I18nProvider } from '@/i18n/client'
 import { getDictionary, defaultLocale } from '@/i18n/config'
 import { Header } from '@/components/ewala/header'
 import { Footer } from '@/components/ewala/footer'
+import { GtmScript, GtmNoScript } from '@/components/ewala/analytics'
 import { spaceMono, notoSans } from '@/app/fonts'
 import '@/app/globals.css'
 
@@ -31,10 +32,9 @@ export default async function NotFound() {
   return (
     <html lang={locale} className={`bg-section-dark ${spaceMono.variable} ${notoSans.variable}`}>
       <body className="font-sans antialiased bg-section-dark">
-        <I18nProvider
-          locale={locale}
-          messages={{ nav: dict.nav, footer: dict.footer, mobileCta: dict.mobileCta, cookieBanner: dict.cookieBanner }}
-        >
+        <GtmNoScript />
+        <GtmScript />
+        <I18nProvider locale={locale} messages={{ nav: dict.nav, footer: dict.footer, mobileCta: dict.mobileCta }}>
           <main className="min-h-screen bg-section-dark">
             <Header locale={locale} />
             <section className="flex min-h-[70vh] items-center px-4 pt-32 pb-20 sm:px-6 lg:px-8">

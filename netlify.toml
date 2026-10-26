@@ -41,14 +41,19 @@
     # de los navegadores es prácticamente irreversible y obliga a HTTPS en todo
     # subdominio presente y futuro. Es una decisión de infraestructura, no una cabecera más.
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    # CSP en modo informe (no bloquea). Se amplía en el paso de GTM/Cookiebot con sus
-    # dominios y un sumidero de informes (/api/csp-report). No pasar a bloqueo sin
-    # medir con tráfico real: una CSP escrita de memoria rompe la página en silencio.
-    #   'unsafe-inline' en script-src es obligatorio por Next: cada página exportada
-    #   lleva scripts en línea (__next_f.push) y sin servidor no hay nonce por petición.
-    #   Hoy la web no carga ningún recurso externo: todo es 'self' (las fuentes las
-    #   auto-aloja next/font en /_next/static/media).
-    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+    # Destino de los informes de la CSP (grupo "csp" de `report-to`). El `report-uri` clásico
+    # apunta al mismo sitio para navegadores sin Reporting API.
+    Reporting-Endpoints = "csp=\"/api/csp-report\""
+    # CSP en modo INFORME (no bloquea): las infracciones llegan a netlify/functions/csp-report.mts
+    # (Netlify → Logs → Functions). No pasar a `Content-Security-Policy` (bloqueo) sin revisar
+    # antes esos informes con tráfico real: una CSP escrita de memoria rompe la web en silencio.
+    #   script-src   'unsafe-inline' es obligatorio por Next (scripts de hidratación en línea y
+    #                sin servidor no hay nonce). GTM sirve gtm.js/gtag.js; Cookiebot su uc.js.
+    #   connect-src  balizas de GA4 (varios subdominios según región) y API de Cookiebot.
+    #   img-src      píxel de respaldo de GA/GTM e imágenes del banner de Cookiebot.
+    #   frame-src    iframe <noscript> de GTM y el de Cookiebot.
+    #   Las fuentes las auto-aloja next/font (/_next/static/media): font-src 'self'.
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.cookiebot.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; frame-src https://www.googletagmanager.com https://consentcdn.cookiebot.com; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests; report-uri /api/csp-report; report-to csp"
 
 # Activos con hash en el nombre (JS, CSS, fuentes): un año, inmutables.
 [[headers]]
@@ -90,6 +95,14 @@
 #   - `force = true` hace que la regla gane aunque exista un fichero real en out/.
 #     NUNCA usar force en una regla "/x" → "/x/" (se redirige a sí misma: bucle).
 #   - Inventario de URLs antiguas: `git show origin/backup-web-antigua:sitemap.xml`.
+
+# 0) API propia (Netlify Functions), mismo origen: sin CORS. Va la primera para que ninguna
+#    regla de abajo la intercepte.
+[[redirects]]
+  from = "/api/csp-report"
+  to = "/.netlify/functions/csp-report"
+  status = 200
+  force = true
 
 # 1) Dominio canónico: todo a https://ewala.es (además de configurarlo en
 #    Domain management → Primary domain y Force HTTPS en el panel de Netlify).

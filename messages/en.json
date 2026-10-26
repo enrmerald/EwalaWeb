@@ -287,21 +287,6 @@
     "text": "Talk to Expert",
     "platform": "Platform"
   },
-  "cookieBanner": {
-    "title": "We use cookies",
-    "description": "We use technical storage to remember your choice and, only if you accept, Google Analytics cookies to improve the website. You can accept, reject or configure them: rejecting is as easy as accepting.",
-    "policyLink": "Cookie policy",
-    "acceptAll": "Accept all",
-    "rejectAll": "Reject all",
-    "configure": "Configure",
-    "panelTitle": "Cookie preferences",
-    "necessaryLabel": "Technical (necessary)",
-    "necessaryDesc": "Essential to remember your choice about cookies. Always active.",
-    "analyticsLabel": "Analytics",
-    "analyticsDesc": "Google Analytics 4 (Google Ireland Limited). They let us count visits and understand in aggregate how the website is used.",
-    "save": "Save preferences",
-    "close": "Close"
-  },
   "blog": {
     "meta": {
       "title": "Blog | Ewala",
@@ -1426,7 +1411,7 @@
       "breadcrumb": "Cookie policy",
       "title": "Cookie policy",
       "subtitle": "Which cookies www.ewala.es uses, for what purpose, who sets them and for how long, and how you can accept, reject or withdraw your consent at any time. Courtesy translation: the Spanish version prevails in case of discrepancy.",
-      "updated": "October 21, 2026",
+      "updated": "October 26, 2026",
       "sections": [
         {
           "title": "Party responsible for installing cookies",
@@ -1462,7 +1447,7 @@
             },
             {
               "type": "p",
-              "text": "This website uses its own technical storage, necessary to remember your choice about cookies, and, only if you consent, third-party cookies to analyse its use in order to improve it. No cookies are used for advertising purposes or to build profiles from your browsing habits. The only third party that sets cookies on this website is Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland), as the provider of Google Analytics; its terms and privacy information are available at [policies.google.com](https://policies.google.com)."
+              "text": "This website uses a technical cookie, necessary to remember your choice about cookies, and, only if you consent, third-party cookies to analyse its use in order to improve it. No cookies are used for advertising purposes or to build profiles from your browsing habits. The analytics cookies are set by Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland), as the provider of Google Analytics, through Google Tag Manager; its terms and privacy information are available at [policies.google.com](https://policies.google.com). The cookie notice and preferences panel are provided by Usercentrics A/S (Cookiebot), based in Denmark, as data processor."
             }
           ]
         },
@@ -1471,7 +1456,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "When you first access this website, a cookie notice is displayed that lets you decide freely on their use, with the same ease for accepting as for rejecting: \"Accept all\", \"Reject all\" and \"Configure\" (access to the preferences panel). Rejecting cookies is as easy as accepting them."
+              "text": "When you first access this website, a cookie notice is displayed that lets you decide freely on their use, with the same ease for accepting as for rejecting: you can accept them all, reject them all or configure your choice by category in the preferences panel. Rejecting cookies is as easy as accepting them."
             },
             {
               "type": "p",
@@ -1491,7 +1476,7 @@
             },
             {
               "type": "p",
-              "text": "Your choice and the date you made it are stored in your browser’s local storage, not on our servers. It therefore applies only to the browser and device from which you make it, and to the ewala.es domain."
+              "text": "Your choice and the date you made it are stored in a technical cookie (CookieConsent) in your browser. In addition, Cookiebot keeps a record of your consent (a random identifier, the date, the options chosen and your anonymised IP address) so that it can be proven, as required by the GDPR. Your choice applies only to the browser and device from which you make it, and to the ewala.es domain."
             },
             {
               "type": "p",
@@ -1612,8 +1597,8 @@
                   "Analytics"
                 ],
                 [
-                  "ewala-cookie-consent (local storage)",
-                  "Ewala (first party)",
+                  "CookieConsent",
+                  "Ewala (first party), managed by Usercentrics A/S (Cookiebot)",
                   "Remember your choice about cookies and the date you made it.",
                   "12 months",
                   "Technical"
@@ -1635,7 +1620,7 @@
             },
             {
               "type": "p",
-              "text": "The provider of the analytics cookies is Google Ireland Limited, based in the European Union. The data may be processed by Google LLC in the United States, an entity certified under the EU-US Data Privacy Framework, declared adequate by the European Commission through Implementing Decision (EU) 2023/1795 of July 10, 2023. As a complementary safeguard, the Standard Contractual Clauses signed with Google apply."
+              "text": "The provider of the analytics cookies is Google Ireland Limited, based in the European Union. The data may be processed by Google LLC in the United States, an entity certified under the EU-US Data Privacy Framework, declared adequate by the European Commission through Implementing Decision (EU) 2023/1795 of July 10, 2023. As a complementary safeguard, the Standard Contractual Clauses signed with Google apply. Usercentrics A/S (Cookiebot) processes consent records on servers located in the European Union."
             },
             {
               "type": "p",

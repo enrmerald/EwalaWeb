@@ -449,21 +449,6 @@
     "text": "Hablar con un experto",
     "platform": "Plataforma"
   },
-  "cookieBanner": {
-    "title": "Utilizamos cookies",
-    "description": "Usamos almacenamiento técnico para recordar tu elección y, solo si lo aceptas, cookies de análisis de Google Analytics para mejorar la web. Puedes aceptarlas, rechazarlas o configurarlas: rechazar es tan fácil como aceptar.",
-    "policyLink": "Política de cookies",
-    "acceptAll": "Aceptar todas",
-    "rejectAll": "Rechazar todas",
-    "configure": "Configurar",
-    "panelTitle": "Preferencias de cookies",
-    "necessaryLabel": "Técnicas (necesarias)",
-    "necessaryDesc": "Imprescindibles para recordar tu elección sobre las cookies. Siempre activas.",
-    "analyticsLabel": "Analíticas",
-    "analyticsDesc": "Google Analytics 4 (Google Ireland Limited). Permiten contar visitas y entender de forma agregada cómo se usa la web.",
-    "save": "Guardar preferencias",
-    "close": "Cerrar"
-  },
   "blog": {
     "meta": {
       "title": "Blog | Ewala",
@@ -1588,7 +1573,7 @@
       "breadcrumb": "Política de cookies",
       "title": "Política de cookies",
       "subtitle": "Qué cookies utiliza www.ewala.es, con qué finalidad, quién las instala y durante cuánto tiempo, y cómo puedes aceptarlas, rechazarlas o retirar tu consentimiento en cualquier momento.",
-      "updated": "21 de octubre de 2026",
+      "updated": "26 de octubre de 2026",
       "sections": [
         {
           "title": "Responsable de la instalación de cookies",
@@ -1624,7 +1609,7 @@
             },
             {
               "type": "p",
-              "text": "Este sitio web utiliza almacenamiento técnico propio, necesario para recordar tu elección sobre las cookies, y, solo si lo consientes, cookies de terceros para analizar su uso con el fin de mejorarlo. No se utilizan cookies con fines publicitarios ni para elaborar perfiles a partir de tus hábitos de navegación. El único tercero que instala cookies en esta web es Google Ireland Limited (Gordon House, Barrow Street, Dublín 4, Irlanda), como proveedor de Google Analytics; sus condiciones y su información sobre privacidad están disponibles en [policies.google.com](https://policies.google.com)."
+              "text": "Este sitio web utiliza una cookie técnica, necesaria para recordar tu elección sobre las cookies, y, solo si lo consientes, cookies de terceros para analizar su uso con el fin de mejorarlo. No se utilizan cookies con fines publicitarios ni para elaborar perfiles a partir de tus hábitos de navegación. Las cookies de análisis las instala Google Ireland Limited (Gordon House, Barrow Street, Dublín 4, Irlanda), como proveedor de Google Analytics, a través de Google Tag Manager; sus condiciones y su información sobre privacidad están disponibles en [policies.google.com](https://policies.google.com). El aviso y el panel de preferencias de cookies los presta Usercentrics A/S (Cookiebot), con sede en Dinamarca, como encargado del tratamiento."
             }
           ]
         },
@@ -1633,7 +1618,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Al acceder por primera vez a este sitio web se muestra un aviso de cookies que te permite decidir libremente sobre su uso, con las mismas facilidades para aceptar que para rechazar: «Aceptar todas», «Rechazar todas» y «Configurar» (acceso al panel de preferencias). Rechazar las cookies es tan sencillo como aceptarlas."
+              "text": "Al acceder por primera vez a este sitio web se muestra un aviso de cookies que te permite decidir libremente sobre su uso, con las mismas facilidades para aceptar que para rechazar: puedes aceptarlas todas, rechazarlas todas o configurar tu elección por categorías en el panel de preferencias. Rechazar las cookies es tan sencillo como aceptarlas."
             },
             {
               "type": "p",
@@ -1653,7 +1638,7 @@
             },
             {
               "type": "p",
-              "text": "Tu elección y la fecha en que la prestaste se guardan en el almacenamiento local de tu navegador, no en nuestros servidores. Por ello se aplica únicamente al navegador y al dispositivo desde los que la realizas, y al dominio ewala.es."
+              "text": "Tu elección y la fecha en que la prestaste se guardan en una cookie técnica (CookieConsent) en tu navegador. Además, Cookiebot conserva un registro de tu consentimiento (un identificador aleatorio, la fecha, las opciones elegidas y tu dirección IP anonimizada) para poder acreditar que se obtuvo, como exige el RGPD. Tu elección se aplica únicamente al navegador y al dispositivo desde los que la realizas, y al dominio ewala.es."
             },
             {
               "type": "p",
@@ -1774,8 +1759,8 @@
                   "Analítica"
                 ],
                 [
-                  "ewala-cookie-consent (almacenamiento local)",
-                  "Ewala (propio)",
+                  "CookieConsent",
+                  "Ewala (propia), gestionada por Usercentrics A/S (Cookiebot)",
                   "Recordar tu elección sobre las cookies y la fecha en que la hiciste.",
                   "12 meses",
                   "Técnica"
@@ -1797,7 +1782,7 @@
             },
             {
               "type": "p",
-              "text": "El proveedor de las cookies de análisis es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad certificada en el marco EU-US Data Privacy Framework, declarado adecuado por la Comisión Europea mediante Decisión de Ejecución (UE) 2023/1795, de 10 de julio de 2023. Como garantía complementaria son de aplicación las Cláusulas Contractuales Tipo suscritas con Google."
+              "text": "El proveedor de las cookies de análisis es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad certificada en el marco EU-US Data Privacy Framework, declarado adecuado por la Comisión Europea mediante Decisión de Ejecución (UE) 2023/1795, de 10 de julio de 2023. Como garantía complementaria son de aplicación las Cláusulas Contractuales Tipo suscritas con Google. Usercentrics A/S (Cookiebot) trata los registros de consentimiento en servidores ubicados en la Unión Europea."
             },
             {
               "type": "p",

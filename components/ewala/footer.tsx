@@ -2,14 +2,14 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useSyncExternalStore } from "react"
 import { usePathname } from "next/navigation"
 import * as Accordion from "@radix-ui/react-accordion"
 import { Linkedin, Github, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
 import { useTranslations } from "@/i18n/client"
-import { GA_MEASUREMENT_ID, OPEN_EVENT } from "@/lib/consent"
 import { SOCIAL_LINKS } from "@/lib/site"
 
-// `action: "cookie-settings"` = botón que reabre el panel de cookies (sin href).
+// `action: "cookie-settings"` = botón que reabre el panel de Cookiebot (sin href).
 type FooterLink = { label: string; href?: string; action?: "cookie-settings" }
 
 const NAV_LINK_CLASS = "text-sm text-white/60 hover:text-white transition-colors"
@@ -81,11 +81,23 @@ function FooterNavLink({ href, children }: { href: string; children: React.React
   )
 }
 
+// Banner de cookies: Cookiebot, cargado desde el contenedor GTM. Expone `window.Cookiebot` y lanza
+// el evento `CookiebotOnLoad` al estar listo.
+type CookiebotApi = { renew: () => void }
+const getCookiebot = () => (window as unknown as { Cookiebot?: CookiebotApi }).Cookiebot
+const subscribeCookiebot = (onChange: () => void) => {
+  window.addEventListener("CookiebotOnLoad", onChange)
+  return () => window.removeEventListener("CookiebotOnLoad", onChange)
+}
+
+/** «Preferencias de cookies»: reabre el panel de Cookiebot. Oculto mientras Cookiebot no esté cargado. */
 function CookieSettingsButton({ children }: { children: React.ReactNode }) {
+  const available = useSyncExternalStore(subscribeCookiebot, () => Boolean(getCookiebot()), () => false)
+  if (!available) return null
   return (
     <button
       type="button"
-      onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}
+      onClick={() => getCookiebot()?.renew()}
       className={`${NAV_LINK_CLASS} text-left`}
     >
       {children}
@@ -95,11 +107,7 @@ function CookieSettingsButton({ children }: { children: React.ReactNode }) {
 
 export function Footer() {
   const t = useTranslations("footer")
-  // Sin ID de GA4 no hay banner ni cookies de analítica: el enlace «Preferencias de cookies» no tiene nada que abrir.
-  const sections = (t.raw("sections") as Array<{ title: string; links: FooterLink[] }>).map((section) => ({
-    ...section,
-    links: section.links.filter((link) => link.action !== "cookie-settings" || GA_MEASUREMENT_ID),
-  }))
+  const sections = t.raw("sections") as Array<{ title: string; links: FooterLink[] }>
   const badges = t.raw("badges") as string[]
   const pathname = usePathname()
   // En la 404 global la ruta puede ser cualquier cosa (/xyz/…): solo se acepta un idioma válido.

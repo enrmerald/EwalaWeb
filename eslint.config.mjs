@@ -10,6 +10,7 @@ const eslintConfig = [
     ignores: [
       '.next/**',
       'out/**',
+      '.netlify/**', // generado por la CLI de Netlify (netlify dev / netlify build)
       'node_modules/**',
       '_livet-spa/**',
       'src/generated/**',
