@@ -113,7 +113,7 @@ export function ProductCapabilities({ t }: ProductCapabilitiesProps) {
 
               {cap.hasCta && (
                 <a
-                  href="#"
+                  href="#showcase"
                   className="inline-flex items-center gap-1 text-[var(--brand)] text-sm font-medium mt-4 hover:gap-2 transition-all"
                 >
                   {t.cta}

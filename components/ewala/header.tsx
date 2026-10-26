@@ -268,12 +268,18 @@ export function Header({ locale }: HeaderProps) {
     .map(({ hidden, ...product }, index) => ({
       ...product,
       hidden,
-      ...(PRODUCT_CONFIG[index] ?? { icon: Shield, href: "#" }),
+      ...(PRODUCT_CONFIG[index] ?? { icon: Shield, href: `/${locale}/#showcase` }),
     }))
     .filter((product) => !product.hidden)
   const SECTOR_HREF = `/${locale}#sectors`
   // Orden fijo de messages/*.json → nav.mobile_items: Soluciones, Sectores, Compañía, Blog, Contacto.
-  const MOBILE_SIMPLE_HREFS = ["#", "#", `/${locale}/compania/`, `/${locale}/blog/`, `/${locale}/contacto/`]
+  const MOBILE_SIMPLE_HREFS = [
+    `/${locale}/#showcase`,
+    SECTOR_HREF,
+    `/${locale}/compania/`,
+    `/${locale}/blog/`,
+    `/${locale}/contacto/`,
+  ]
 
   const altLocale: Locale = locale === "es" ? "en" : "es"
 
@@ -474,7 +480,7 @@ export function Header({ locale }: HeaderProps) {
                       </>
                     ) : (
                       <a
-                        href={MOBILE_SIMPLE_HREFS[index] ?? "#"}
+                        href={MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`}
                         className="block py-4 font-mono text-lg font-medium text-white/80 transition-colors duration-200 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
                         onClick={() => setMobileMenuOpen(false)}
                       >

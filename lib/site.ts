@@ -1,6 +1,12 @@
 // Dominio de producción. Se puede sobrescribir con NEXT_PUBLIC_SITE_URL (p. ej. en previews de Netlify).
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ewala.es'
 
+// Perfiles oficiales confirmados por Ewala (footer y, más adelante, `sameAs` del JSON-LD).
+export const SOCIAL_LINKS = {
+  linkedin: 'https://www.linkedin.com/company/e-wala-it-services',
+  github: 'https://github.com/EwalaIT',
+} as const
+
 /**
  * Añade la barra final a una ruta interna (trailingSlash: true en next.config.mjs), respetando
  * ?query y #ancla. No toca rutas de fichero (/doc.pdf, /sitemap.xml).

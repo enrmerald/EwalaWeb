@@ -207,15 +207,6 @@
         ]
       },
 
-      "testimonial": {
-        "sectionLabel": "WHAT OUR CLIENTS SAY",
-        "quote": "\"SentryN3t Protection gave us visibility into our OT network that we never had before. Within the first week of deployment, it detected two legacy devices communicating outside expected parameters, something our previous tools completely missed.\"",
-        "authorInitials": "JM",
-        "authorName": "Javier M.",
-        "authorRole": "Head of OT Security, Industrial Manufacturing Group",
-        "badges": ["Aligned with NIS2", "EU R&D Backed", "Explainable AI, No Black Boxes"]
-      },
-
       "finalCta": {
         "headline": "Do You Know What's Happening on Your OT Network Right Now?",
         "description": "Most industrial attacks go undetected for weeks or months. Our team can show you in 30 minutes what visibility you have and what you're missing.",
@@ -228,10 +219,9 @@
   },
   "footer": {
     "tagline": "European startup developing industrial cybersecurity solutions to protect OT/IoT networks, built on machine learning and an AI assistant.",
-    "newsletter_label": "Stay informed on OT threats",
-    "newsletter_placeholder": "your@email.com",
-    "newsletter_cta": "Subscribe",
     "copyright": "© 2026 Ewala IT Services S.L. | European industrial cybersecurity",
+    "pdfTag": "PDF · ES",
+    "opensNewTab": "opens in a new tab",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub"
@@ -267,6 +257,17 @@
           { "label": "Privacy Policy", "href": "/privacidad" },
           { "label": "Cookie Policy", "href": "/cookies" },
           { "label": "Cookie preferences", "action": "cookie-settings" }
+        ]
+      },
+      {
+        "title": "Policies",
+        "links": [
+          { "label": "Code of ethics", "href": "/COE-0001-02-CODIGO_ETICO.pdf" },
+          { "label": "Information security policy", "href": "/POL-0001-01-SGI POLITICA DE SEGURIDAD DE LA INFORMACION.pdf" },
+          { "label": "Environmental policy", "href": "/EWA-POL-0002-002.01-POLITICA MEDIOAMBIENTAL - Versión Web.pdf" },
+          { "label": "Whistleblowing channel", "href": "/PRO-0001-01-PROCEDIMIENTO_GESTION_CANAL_COMUNICACIONES.pdf" },
+          { "label": "Work-life balance measures", "href": "/PER-MED-0001-001.01-MEDIDAS DE CONCILIACIÓN - Página web.pdf" },
+          { "label": "Anti-fraud plan", "href": "/Plan Antifraude.pdf" }
         ]
       }
     ],

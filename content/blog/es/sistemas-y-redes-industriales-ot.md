@@ -12,13 +12,12 @@ imageAlt: "Sistemas y redes industriales OT"
 author: "Ewala"
 ---
 
-<!--StartFragment-->
 
 ## Sistemas y redes industriales OT
 
 Los sistemas OT se han convertido en un factor esencial para caminar hacia la transformación digital.
 
-Desde [Ewala](https://ewala.es/) te contaremos cuál es la relación entre redes IT y OT, de manera que puedas entender cómo se estructuran estas redes y qué tipo de retos supone la [ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada)
+Desde [Ewala](/es/) te contaremos cuál es la relación entre redes IT y OT, de manera que puedas entender cómo se estructuran estas redes y qué tipo de retos supone la ciberseguridad gestionada
 
 Vivimos en un mundo interconectado, donde es necesario asegurar la continuidad y seguridad de las operaciones de tu negocio.
 
@@ -28,7 +27,7 @@ Los sistemas OT (de Operational Technology, o Tecnología Operativa en español)
 
 Las redes OT sirven para conectar sensores, PLCs, sistemas SCADA o DCS, que están presentes en la mayoría de los sectores: energía, transporte, logística y muchos otros.
 
-Mientras que la ciberseguridad IT se centra en la CONFIDENCIALIDAD, OT la [ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada) busca garantizar la DISPONIBILIDAD, basada en la seguridad física y lógica en busca de la continuidad de los procesos operativos.
+Mientras que la ciberseguridad IT se centra en la CONFIDENCIALIDAD, OT la ciberseguridad gestionada busca garantizar la DISPONIBILIDAD, basada en la seguridad física y lógica en busca de la continuidad de los procesos operativos.
 
 Los dispositivos OT, además, utilizan protocolos de comunicación propios, diseñados específicamente para entornos industriales. Estos protocolos permiten la transmisión de datos entre sensores, controladores y sistemas de supervisión en tiempo real, con alta fiabilidad y en condiciones operativas exigentes. Algunos de los más utilizados son Modbus, uno de los protocolos más extendidos, disponible en variantes como Modbus RTU (comunicación serie) o Modbus TCP (sobre redes IP); PROFIBUS y PROFINET, ampliamente usados en sistemas de automatización industrial, especialmente con equipos Siemens; BACnet, habitual en sistemas de control de edificios; DNP3, utilizado en infraestructuras eléctricas; y OPC-UA, que permite una comunicación más estandarizada e interoperable. Muchos de estos protocolos, sin embargo, fueron diseñados sin tener en cuenta requisitos modernos de ciberseguridad, lo que los convierte en un vector de riesgo en entornos OT conectados.
 
@@ -55,7 +54,7 @@ La segmentación física y lógica de la red se convierte así en la primera med
 
 En este contexto, lo más adecuado no es mantener una separación total entre IT y OT, sino avanzar hacia una convergencia controlada entre ambas redes. Esto permite aprovechar el valor de los datos generados por los dispositivos industriales para optimizar procesos, mejorar la toma de decisiones y aumentar la competitividad. Sin embargo, esta integración debe ir siempre acompañada de mecanismos de protección específicos.
 
-En [Ewala](https://ewala.es/), conocemos las mejores estrategias para lograr una segmentación eficaz, una monitorización continua y una seguridad adaptada al contexto industrial. Porque la clave no está en elegir entre integración o protección, sino en encontrar el equilibrio inteligente entre ambas.
+En [Ewala](/es/), conocemos las mejores estrategias para lograr una segmentación eficaz, una monitorización continua y una seguridad adaptada al contexto industrial. Porque la clave no está en elegir entre integración o protección, sino en encontrar el equilibrio inteligente entre ambas.
 
 ## Componentes clave de una red OT
 
@@ -71,7 +70,7 @@ Las redes OT se caracterizan por su arquitectura robusta y adaptabilidad al ento
 
 ## La ciberseguridad en redes IT y OT
 
-En [Ewala](https://ewala.es/) entendemos la ciberseguridad OT como una estrategia integral, no como una acción puntual. Apostamos por un enfoque estructurado, que abarca desde el diseño de la red hasta la respuesta ante incidentes, con el objetivo de minimizar la superficie de exposición frente a amenazas que comprometen los procesos y dispositivos industriales.
+En [Ewala](/es/) entendemos la ciberseguridad OT como una estrategia integral, no como una acción puntual. Apostamos por un enfoque estructurado, que abarca desde el diseño de la red hasta la respuesta ante incidentes, con el objetivo de minimizar la superficie de exposición frente a amenazas que comprometen los procesos y dispositivos industriales.
 
 ### ¿Qué elementos conforman esta estrategia?
 
@@ -89,7 +88,7 @@ Diseñamos y optimizamos infraestructuras OT con enfoque 4.0, priorizando la seg
 
 #### Implantación tecnológica
 
-Incluimos herramientas avanzadas de [ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada) y servicios gestionados que permiten al cliente delegar la administración y supervisión de sus sistemas de defensa. Soluciones adaptadas a cada entorno, siempre actualizadas y eficaces.
+Incluimos herramientas avanzadas de ciberseguridad gestionada y servicios gestionados que permiten al cliente delegar la administración y supervisión de sus sistemas de defensa. Soluciones adaptadas a cada entorno, siempre actualizadas y eficaces.
 
 #### Respuesta ante incidentes
 
@@ -97,7 +96,7 @@ Nuestro servicio CyberSOC monitoriza redes OT en tiempo real, detectando patrone
 
 ## ¿Quieres una estrategia de ciberseguridad industrial?
 
-En [Ewala](https://ewala.es/) te ofrecemos todo esto y mucho más, incluyendo nuestro [kit digital de ciberseguridad gestionada](https://ewala.es/kit-digital-ciberseguridad-gestionada). Te acompañamos desde la evaluación inicial hasta la protección continua de tus activos industriales.
+En [Ewala](/es/) te ofrecemos todo esto y mucho más. Te acompañamos desde la evaluación inicial hasta la protección continua de tus activos industriales.
 
 ## Beneficios de contar con un especialista en ciberseguridad industrial - OT
 
@@ -107,8 +106,7 @@ Además, un especialista es clave para diseñar arquitecturas segmentadas, imple
 
 ## Ewala y ciberseguridad en sistemas OT
 
-En [Ewala](https://ewala.es/) combinamos la experiencia práctica en proyectos de consultoría en ciberseguridad industrial con el impulso innovador de nuestro departamento de I+D+i. Fruto de este trabajo nace SentryN3t Protection, una herramienta desarrollada por nuestro equipo para ofrecer control total y visibilidad sobre redes OT, adaptándose a los entornos más exigentes.
+En [Ewala](/es/) combinamos la experiencia práctica en proyectos de consultoría en ciberseguridad industrial con el impulso innovador de nuestro departamento de I+D+i. Fruto de este trabajo nace SentryN3t Protection, una herramienta desarrollada por nuestro equipo para ofrecer control total y visibilidad sobre redes OT, adaptándose a los entornos más exigentes.
 
 Si quieres saber cómo proteger tus sistemas y optimizar una de las mejores inversiones que tu empresa puede hacer (invertir en ciberseguridad OT), no dudes en consultarnos. Estaremos encantados de asesorarte.
 
-<!--EndFragment-->

@@ -92,7 +92,7 @@ export function ProductSectors({ t }: ProductSectorsProps) {
                 {/* Call To Action inferior */}
                 <div className="pt-5 mt-4 border-t border-white/[0.08]">
                   <a
-                    href="#"
+                    href="#showcase"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--brand)] group-hover:text-white transition-colors"
                   >
                     <span>{t.cta}</span>

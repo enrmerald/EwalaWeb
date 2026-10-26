@@ -34,7 +34,7 @@ export default async function LocalePage({
       <LogoCarousel t={dict.logoCarousel} />
       <SealsGrid t={dict.sellos} />
       <Footer />
-      <MobileStickyCta />
+      <MobileStickyCta locale={locale} />
     </main>
   )
 }

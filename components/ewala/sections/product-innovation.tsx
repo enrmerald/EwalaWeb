@@ -178,7 +178,7 @@ export function ProductInnovation({ t }: ProductInnovationProps) {
             </div>
 
             <a
-              href="#"
+              href="#showcase"
               className="inline-flex items-center gap-2 mt-8 border border-white/25 text-white hover:bg-white/[0.06] font-semibold px-6 py-3 rounded-xl text-sm transition-all"
             >
               {t.cta}

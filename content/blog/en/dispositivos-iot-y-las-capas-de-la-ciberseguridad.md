@@ -27,7 +27,7 @@ author: "Ewala"
 
 We tend to talk about cybersecurity in the singular, but the truth is the concept is very broad, so it would be more accurate to talk about a company's different security policies and measures, in the plural.
 
-Defending hybrid environments (where on-premises servers, cloud services, web applications, constantly evolving technologies, and industrial networks like the ones we explain in our article on **[OT systems and networks](https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/)** all coexist) is, without a doubt, a continuously evolving challenge.
+Defending hybrid environments (where on-premises servers, cloud services, web applications, constantly evolving technologies, and industrial networks like the ones we explain in our article on **[OT systems and networks](/en/blog/sistemas-y-redes-industriales-ot/)** all coexist) is, without a doubt, a continuously evolving challenge.
 
 ## IoT in companies: small devices, big risks
 
@@ -37,11 +37,11 @@ We're talking about everything from PLCs, temperature sensors, IP cameras, clima
 
 ## What a truly secure IT/OT network would look like
 
-From [Ewala's](https://ewala.es/) point of view, as a Managed Cybersecurity Service Provider (MSSP), in an ideal world a company would have two fully isolated networks (IT and OT), with the IT network segmented via its own VLAN for IoT devices, and an NDR deployed in OT that monitors network traffic, including traffic from the IoT devices on that network.
+From [Ewala's](/en/) point of view, as a Managed Cybersecurity Service Provider (MSSP), in an ideal world a company would have two fully isolated networks (IT and OT), with the IT network segmented via its own VLAN for IoT devices, and an NDR deployed in OT that monitors network traffic, including traffic from the IoT devices on that network.
 
 We would also have more layers of security across both environments, for example: a perimeter firewall, EDR on endpoints with an operating system, along with specific email protections (anti-phishing, sandboxing, anti-malware, etc.), a **SIEM+SOAR** that integrates and monitors all generated logs, backups, and a security team analyzing all this information in real time.
 
-If you want to dive deeper into SIEM or SOAR, you can read our article on **[what a SIEM and a SOAR are](https://ewala.es/blog/posts/que-es-un-siem-y-para-que-sirve-y-un-soar/)**.
+If you want to dive deeper into SIEM or SOAR, you can read our article on **what a SIEM and a SOAR are**.
 
 ## The real world: shadow IT/OT and poorly segmented networks
 
@@ -53,7 +53,7 @@ There are no magic solutions; what matters most is that company leadership becom
 
 We started with IoT devices, talked about corporate networks and protection measures, and we want to end by focusing on **NDR (Network Detection and Response)**.
 
-An [NDR](https://ewala.es/blog/posts/ndr-en-ot/) is a solution that continuously monitors network traffic (east-west and north-south) to identify anomalous behavior, intrusions, or lateral movement by an attacker. Unlike traditional signature-based detection systems (such as an IDS/IPS), an NDR mainly uses behavioral analysis, artificial intelligence, and machine learning to detect unknown or advanced attacks.
+An [NDR](/en/blog/ndr-en-ot/) is a solution that continuously monitors network traffic (east-west and north-south) to identify anomalous behavior, intrusions, or lateral movement by an attacker. Unlike traditional signature-based detection systems (such as an IDS/IPS), an NDR mainly uses behavioral analysis, artificial intelligence, and machine learning to detect unknown or advanced attacks.
 
 ### A simple way to understand an NDR
 
@@ -65,7 +65,7 @@ But the current reality is that IT also has many devices of this type, so NDR is
 
 ## Ewala's NDR: SentryN3t
 
-At [Ewala](https://ewala.es/) we've spent several years listening to the market and developing our own NDR technology.
+At [Ewala](/en/) we've spent several years listening to the market and developing our own NDR technology.
 
 As we said, it's important to know what to protect, so our **NDR first performs continuous asset discovery**.
 
@@ -81,4 +81,4 @@ By the way, our NDR is called **SentryN3t**, and it's developed entirely within 
 
 Nowadays, many companies already have more connected IoT devices than traditional computers, which makes protecting this hybrid ecosystem an urgent need. Adopting technologies like NDR not only improves network visibility but also helps prioritize real risks and act before an incident impacts operations.
 
-For more information or to see how it works on your network, request a demo or get in [touch](https://ewala.es/#contact) with us with no obligation.
+For more information or to see how it works on your network, request a demo or get in [touch](/en/contacto/) with us with no obligation.

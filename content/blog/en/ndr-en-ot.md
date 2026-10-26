@@ -103,6 +103,6 @@ Adding an NDR to an OT network isn't just a sound technical decision: it's a **p
 
 ### Ewala solutions: OT protection without interference
 
-At **[Ewala](https://ewala.es/)**, these ideas are at the core of the design of [**SentryN3t Protection**](https://ewala.es/#sentryn3t), our solution for passive monitoring and **critical infrastructure cyber-protection**.
+At **[Ewala](/en/)**, these ideas are at the core of the design of [**SentryN3t Protection**](/en/#showcase), our solution for passive monitoring and **critical infrastructure cyber-protection**.
 Want to know how it can be applied to your case?
-[Contact us](https://ewala.es/#contact) and we'll show you.
+[Contact us](/en/contacto/) and we'll show you.

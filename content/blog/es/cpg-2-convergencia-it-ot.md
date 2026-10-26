@@ -37,7 +37,7 @@ CISA deja claro que la ciberseguridad ya no es solo una cuestión técnica, sino
 
 La **meta 1.A** exige definir roles claros y, sobre todo, establecer **colaboración continua entre equipos IT y OT**. Esto rompe con los silos tradicionales que siguen existiendo en sectores como energía, manufactura o transporte.
 
-Esta visión conecta directamente con lo que ya venimos analizando en nuestro artículo sobre **[sistemas y redes industriales OT](https://ewala.es/blog/posts/sistemas-y-redes-industriales-ot/)**.
+Esta visión conecta directamente con lo que ya venimos analizando en nuestro artículo sobre **[sistemas y redes industriales OT](/es/blog/sistemas-y-redes-industriales-ot/)**.
 
 
 ## Protección en entornos donde IT y OT chocan
@@ -60,7 +60,7 @@ La reciente publicación de avisos críticos en sistemas de **Siemens**, **Johns
 
 Cuando detener una operación no es viable, CISA valida el uso de **controles compensatorios**, donde la **segmentación de red** y la **monitorización continua** se convierten en barreras clave.
 
-Este enfoque se alinea con el uso de tecnologías de detección avanzada como las que explicamos en **[NDR en entornos OT](https://ewala.es/blog/posts/ndr-en-ot/)**.
+Este enfoque se alinea con el uso de tecnologías de detección avanzada como las que explicamos en **[NDR en entornos OT](/es/blog/ndr-en-ot/)**.
 
 
 ## Detectar antes de que sea tarde: visibilidad y respuesta
@@ -70,7 +70,7 @@ Amenazas modernas, malware evasivo y movimientos laterales silenciosos hacen ins
 
 Por eso, CPG 2.0 conecta directamente con modelos de **monitorización 24/7**, donde servicios como un **SOC-MDR** permiten correlacionar eventos IT y OT y distinguir fallos operativos de incidentes reales.
 
-Si quieres profundizar en este modelo, te recomendamos nuestro artículo sobre **[qué es un SOC en ciberseguridad](https://ewala.es/blog/posts/que-es-un-soc-en-ciberseguridad/)**.
+Si quieres profundizar en este modelo, te recomendamos nuestro artículo sobre **qué es un SOC en ciberseguridad**.
 
 
 ## SentryN3t: NDR diseñado para cumplir CPG 2.0 sin interferencias
@@ -87,7 +87,7 @@ En **Ewala**, estas necesidades han guiado el desarrollo de **SentryN3t**, nuest
 - Detección de anomalías mediante análisis de comportamiento, alineada con las metas *Identify* y *Detect* de CPG 2.0.  
 - Respuesta sin interrupción, facilitando la contención antes de que el incidente afecte a la operación.
 
-Este enfoque complementa otras capas como **SIEM, SOAR o XDR**, tal y como analizamos en **[XDR vs SIEM: la solución para tu negocio](https://ewala.es/blog/posts/xdr-vs-siem-la-solucion-para-tu-negocio/)**.
+Este enfoque complementa otras capas como **SIEM, SOAR o XDR**, tal y como analizamos en **XDR vs SIEM: la solución para tu negocio**.
 
 
 ## De la normativa a la ciberresiliencia
@@ -98,4 +98,4 @@ La diferencia entre una alerta controlada y una crisis está en **gobernanza, vi
 En **Ewala**, ayudamos a las organizaciones a **reforzar sus infraestructuras IT y OT**, combinando consultoría especializada con tecnología propia como **SentryN3t**, y facilitando el cumplimiento de **NIS2, ISO 27001 y ENS** a través de medidas técnicas efectivas y medibles.
 
 ¿Quieres evaluar tu madurez frente a **CPG 2.0** y la convergencia IT/OT?  
-**[Contacta con nosotros](https://ewala.es/#contact)** y te ayudamos a construir una estrategia alineada con la realidad de tu infraestructura.
+**[Contacta con nosotros](/es/contacto/)** y te ayudamos a construir una estrategia alineada con la realidad de tu infraestructura.

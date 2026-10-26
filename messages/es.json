@@ -361,18 +361,6 @@
           }
         ]
       },
-      "testimonial": {
-        "sectionLabel": "LO QUE DICEN NUESTROS CLIENTES",
-        "quote": "\"SentryN3t Protection nos dio una visibilidad de nuestra red OT que nunca antes habíamos tenido. En la primera semana de despliegue, detectó dos dispositivos legacy comunicándose fuera de los parámetros esperados, algo que nuestras herramientas anteriores habían pasado completamente por alto.\"",
-        "authorInitials": "JM",
-        "authorName": "Javier M.",
-        "authorRole": "Responsable de Seguridad OT, Grupo Industrial Manufacturero",
-        "badges": [
-          "Alineado con NIS2",
-          "Respaldado por I+D europeo",
-          "IA explicable, sin cajas negras"
-        ]
-      },
       "finalCta": {
         "headline": "¿Sabes qué está ocurriendo ahora mismo en tu red OT?",
         "description": "La mayoría de los ataques industriales permanecen sin detectar durante semanas o meses. Nuestro equipo puede mostrarte en 30 minutos qué visibilidad tienes y qué te falta.",
@@ -388,10 +376,9 @@
   },
   "footer": {
     "tagline": "Startup europea que desarrolla soluciones de ciberseguridad industrial para proteger redes OT/IoT, basadas en machine learning y con asistente de IA.",
-    "newsletter_label": "Mantente informado sobre amenazas OT",
-    "newsletter_placeholder": "tu@email.com",
-    "newsletter_cta": "Suscribirse",
     "copyright": "© 2026 Ewala IT Services S.L. | Ciberseguridad industrial europea",
+    "pdfTag": "PDF",
+    "opensNewTab": "se abre en una pestaña nueva",
     "social": {
       "linkedin": "LinkedIn",
       "github": "GitHub"
@@ -427,6 +414,17 @@
           { "label": "Política de privacidad", "href": "/privacidad" },
           { "label": "Política de cookies", "href": "/cookies" },
           { "label": "Preferencias de cookies", "action": "cookie-settings" }
+        ]
+      },
+      {
+        "title": "Políticas",
+        "links": [
+          { "label": "Código ético", "href": "/COE-0001-02-CODIGO_ETICO.pdf" },
+          { "label": "Política de seguridad de la información", "href": "/POL-0001-01-SGI POLITICA DE SEGURIDAD DE LA INFORMACION.pdf" },
+          { "label": "Política medioambiental", "href": "/EWA-POL-0002-002.01-POLITICA MEDIOAMBIENTAL - Versión Web.pdf" },
+          { "label": "Canal de comunicaciones", "href": "/PRO-0001-01-PROCEDIMIENTO_GESTION_CANAL_COMUNICACIONES.pdf" },
+          { "label": "Medidas de conciliación", "href": "/PER-MED-0001-001.01-MEDIDAS DE CONCILIACIÓN - Página web.pdf" },
+          { "label": "Plan antifraude", "href": "/Plan Antifraude.pdf" }
         ]
       }
     ],

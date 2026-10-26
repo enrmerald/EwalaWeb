@@ -45,10 +45,11 @@ function ShowcaseBento({ t, locale }: { t: ProductLanding['showcase']; locale: L
             {t.ctaPrimary}
             <ArrowRight className="w-4 h-4" />
           </a>
-          {/* Descarga de PoC sin destino todavía (href="#"): oculta junto con la demo. */}
+          {/* PoC: oculta junto con la demo. Sin documento descargable todavía, lleva a Contacto con
+              «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href="#"
+              href={`/${locale}/contacto/?need=demo`}
               className="text-white/70 hover:text-white font-medium px-6 py-3 text-sm transition-colors inline-flex items-center gap-2"
             >
               {t.ctaSecondary}
@@ -130,10 +131,11 @@ function ShowcaseFlow({ t, locale }: { t: ProductLanding['showcase']; locale: Lo
             {t.ctaPrimary}
             <ArrowRight className="w-4 h-4" />
           </a>
-          {/* Descarga de PoC sin destino todavía (href="#"): oculta junto con la demo. */}
+          {/* PoC: oculta junto con la demo. Sin documento descargable todavía, lleva a Contacto con
+              «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href="#"
+              href={`/${locale}/contacto/?need=demo`}
               className="text-white/70 hover:text-white font-medium px-6 py-3 text-sm transition-colors inline-flex items-center gap-2"
             >
               {t.ctaSecondary}

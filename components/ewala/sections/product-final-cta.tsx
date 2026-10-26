@@ -37,10 +37,11 @@ export function ProductFinalCta({ t, locale }: ProductFinalCtaProps) {
             {SHOW_DEMO_CTA ? t.ctaPrimary : t.ctaContact}
             <ArrowRight className="w-5 h-5" />
           </a>
-          {/* Descarga de PoC sin destino todavía (href="#"): oculta junto con la demo. */}
+          {/* PoC: oculta junto con la demo. Sin documento descargable todavía, lleva a Contacto con
+              «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href="#"
+              href={`/${locale}/contacto/?need=demo`}
               className="border border-white/30 text-white hover:bg-white/[0.06] hover:border-white/50 font-semibold px-8 py-4 rounded-xl text-base transition-all inline-flex items-center justify-center"
             >
               {t.ctaSecondary}

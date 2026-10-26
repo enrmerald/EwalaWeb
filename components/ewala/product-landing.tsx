@@ -13,9 +13,6 @@ import { ProductSectors } from './sections/product-sectors'
 // ProductInnovation: retirada de la landing (DOC-0003-02) por densa/redundante con los sellos de
 // certificación. Componente y contenido se conservan por si se reutilizan en una página "Compañía".
 // import { ProductInnovation } from './sections/product-innovation'
-// ProductTestimonial: en cuarentena hasta validar con el cliente real la autenticidad y el
-// consentimiento de la cita (DOC-0003-02). No borrar sin visto bueno de dirección/marketing.
-// import { ProductTestimonial } from './sections/product-testimonial'
 import { ProductFinalCta } from './sections/product-final-cta'
 
 interface ProductLandingProps {
