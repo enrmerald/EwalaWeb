@@ -660,14 +660,19 @@
       "submit": "Enviar mensaje",
       "submitting": "Enviando…",
       "retry": "Reintentar",
-      "notConfigured": "El envío aún no está configurado. Este formulario se activará en breve.",
       "success": {
         "title": "Mensaje enviado",
-        "description": "Gracias por contactar con Ewala. Te responderemos en menos de 24h laborables."
+        "description": "Gracias por contactar con Ewala. Te responderemos en menos de 24h laborables.",
+        "reference": "Referencia de tu consulta: {reference}",
+        "testMode": "Modo de prueba: el formulario funciona, pero el envío de correo aún no está configurado, así que este mensaje no ha llegado a nadie."
       },
       "error": {
         "title": "No se pudo enviar el mensaje",
-        "description": "Ha ocurrido un error al enviar el formulario. Inténtalo de nuevo o escríbenos directamente por email."
+        "description": "Ha ocurrido un error al enviar el formulario. Inténtalo de nuevo o escríbenos directamente a info@ewala.es.",
+        "validation": "Revisa los campos marcados: alguno no es válido.",
+        "rateLimited": "Demasiados intentos seguidos. Espera un minuto e inténtalo de nuevo.",
+        "network": "No hemos podido conectar. Comprueba tu conexión e inténtalo de nuevo.",
+        "unavailable": "No hemos podido registrar tu consulta por un fallo de nuestra parte. Escríbenos a info@ewala.es o llámanos al +34 984 10 90 69."
       },
       "validation": {
         "firstNameMin": "El nombre debe tener al menos 2 caracteres.",
@@ -676,8 +681,11 @@
         "companyMin": "El nombre de la empresa debe tener al menos 2 caracteres.",
         "companyMax": "El nombre de la empresa no puede superar los 80 caracteres.",
         "emailInvalid": "Introduce un email válido.",
+        "phoneInvalid": "Introduce un teléfono válido (solo números, espacios, +, guiones y paréntesis; máximo 32).",
+        "roleMax": "El cargo no puede superar los 80 caracteres.",
         "needRequired": "Selecciona qué necesitas.",
-        "messageMax": "El mensaje no puede superar los 1000 caracteres."
+        "messageMax": "El mensaje no puede superar los 1000 caracteres.",
+        "invalid": "Revisa este campo."
       }
     },
     "rail": {
@@ -717,7 +725,7 @@
         "controller": "Responsable: Ewala IT Services S.L.",
         "purpose": "Finalidad: gestionar tu solicitud de contacto.",
         "legitimation": "Legitimación: consentimiento del interesado.",
-        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Formspree (EE. UU.), proveedor del servicio de formularios. No se ceden datos a otros terceros, salvo obligación legal.",
+        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Netlify (alojamiento de la web) y Resend (envío del correo), con sede en EE. UU., que actúan como encargados del tratamiento. No se ceden datos a otros terceros, salvo obligación legal.",
         "rights": "Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a rgpd@ewala.es.",
         "moreInfo": "Más información en la política de privacidad"
       }
@@ -940,7 +948,7 @@
       "breadcrumb": "Política de privacidad",
       "title": "Política de privacidad",
       "subtitle": "Cómo trata Ewala IT Services S.L. los datos personales que se facilitan a través de este sitio web y de otros canales de comunicación, conforme al RGPD y a la LOPDGDD.",
-      "updated": "21 de octubre de 2026",
+      "updated": "26 de octubre de 2026",
       "sections": [
         {
           "title": "Contenido y conformidad",
@@ -1314,11 +1322,11 @@
                 },
                 {
                   "term": "Categorías de destinatarios",
-                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Formspree, Inc. (Estados Unidos), que actúa como encargado del tratamiento. También, las demás categorías indicadas en los apartados anteriores cuando resulte aplicable."
+                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Netlify, Inc. (alojamiento de la web y procesamiento del formulario) y Resend, Inc. (envío del correo electrónico), ambos con sede en Estados Unidos, que actúan como encargados del tratamiento. También, las demás categorías indicadas en los apartados anteriores cuando resulte aplicable."
                 },
                 {
                   "term": "Transferencias internacionales",
-                  "def": "El envío del formulario de contacto implica una transferencia a Formspree, Inc. (Estados Unidos), conforme a las garantías indicadas en el apartado 12."
+                  "def": "El envío del formulario de contacto implica una transferencia a Netlify, Inc. y Resend, Inc. (Estados Unidos), conforme a las garantías indicadas en el apartado 12."
                 },
                 {
                   "term": "Plazos de conservación",
@@ -1350,7 +1358,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Con carácter general, Ewala no realiza transferencias internacionales de datos personales, salvo las derivadas del uso de proveedores con sede en Estados Unidos: Formspree, Inc., para la gestión del formulario de contacto, y Google LLC, para la analítica web, esta última solo si el Usuario ha prestado su consentimiento (véase la [Política de Cookies](/cookies))."
+              "text": "Con carácter general, Ewala no realiza transferencias internacionales de datos personales, salvo las derivadas del uso de proveedores con sede en Estados Unidos: Netlify, Inc. y Resend, Inc., para la gestión del formulario de contacto, y Google LLC, para la analítica web, esta última solo si el Usuario ha prestado su consentimiento (véase la [Política de Cookies](/cookies))."
             },
             {
               "type": "p",

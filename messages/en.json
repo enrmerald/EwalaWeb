@@ -498,14 +498,19 @@
       "submit": "Send message",
       "submitting": "Sending…",
       "retry": "Retry",
-      "notConfigured": "Sending is not configured yet. This form will be enabled shortly.",
       "success": {
         "title": "Message sent",
-        "description": "Thanks for contacting Ewala. We'll reply within 24 business hours."
+        "description": "Thanks for contacting Ewala. We'll reply within 24 business hours.",
+        "reference": "Your enquiry reference: {reference}",
+        "testMode": "Test mode: the form works, but email delivery is not configured yet, so this message has not reached anyone."
       },
       "error": {
         "title": "The message could not be sent",
-        "description": "An error occurred while sending the form. Please try again or email us directly."
+        "description": "An error occurred while sending the form. Please try again or email us directly at info@ewala.es.",
+        "validation": "Please check the highlighted fields: some are not valid.",
+        "rateLimited": "Too many attempts in a row. Wait a minute and try again.",
+        "network": "We couldn't connect. Check your connection and try again.",
+        "unavailable": "We couldn't register your enquiry due to an error on our side. Email us at info@ewala.es or call +34 984 10 90 69."
       },
       "validation": {
         "firstNameMin": "First name must be at least 2 characters.",
@@ -514,8 +519,11 @@
         "companyMin": "Company name must be at least 2 characters.",
         "companyMax": "Company name cannot exceed 80 characters.",
         "emailInvalid": "Enter a valid email address.",
+        "phoneInvalid": "Enter a valid phone number (digits, spaces, +, hyphens and brackets only; up to 32).",
+        "roleMax": "Role cannot exceed 80 characters.",
         "needRequired": "Select what you need.",
-        "messageMax": "Message cannot exceed 1000 characters."
+        "messageMax": "Message cannot exceed 1000 characters.",
+        "invalid": "Please check this field."
       }
     },
     "rail": {
@@ -555,7 +563,7 @@
         "controller": "Controller: Ewala IT Services S.L.",
         "purpose": "Purpose: to handle your contact request.",
         "legitimation": "Legal basis: consent of the data subject.",
-        "recipients": "Recipients: the form submission is handled through Formspree (USA), the form service provider. No data is shared with other third parties, except when legally required.",
+        "recipients": "Recipients: the form submission is handled through Netlify (website hosting) and Resend (email delivery), based in the USA, acting as data processors. No data is shared with other third parties, except when legally required.",
         "rights": "Rights: access, rectification, erasure, objection, restriction and portability, by writing to rgpd@ewala.es.",
         "moreInfo": "More information in the privacy policy"
       }
@@ -778,7 +786,7 @@
       "breadcrumb": "Privacy policy",
       "title": "Privacy policy",
       "subtitle": "How Ewala IT Services S.L. processes the personal data provided through this website and other communication channels, in accordance with the GDPR and Spanish data protection law. Courtesy translation: the Spanish version prevails in case of discrepancy.",
-      "updated": "October 21, 2026",
+      "updated": "October 26, 2026",
       "sections": [
         {
           "title": "Content and compliance",
@@ -1152,11 +1160,11 @@
                 },
                 {
                   "term": "Categories of recipients",
-                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Formspree, Inc. (United States), which acts as data processor. Also, the other categories indicated in the previous sections where applicable."
+                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc. (website hosting and form processing) and Resend, Inc. (email delivery), both based in the United States, acting as data processors. Also, the other categories indicated in the previous sections where applicable."
                 },
                 {
                   "term": "International transfers",
-                  "def": "Submitting the contact form involves a transfer to Formspree, Inc. (United States), under the safeguards described in section 12."
+                  "def": "Submitting the contact form involves a transfer to Netlify, Inc. and Resend, Inc. (United States), under the safeguards described in section 12."
                 },
                 {
                   "term": "Retention periods",
@@ -1188,7 +1196,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "In general, Ewala does not carry out international transfers of personal data, except those arising from the use of providers based in the United States: Formspree, Inc., for handling the contact form, and Google LLC, for web analytics, the latter only if the User has given consent (see the [Cookie Policy](/cookies))."
+              "text": "In general, Ewala does not carry out international transfers of personal data, except those arising from the use of providers based in the United States: Netlify, Inc. and Resend, Inc., for handling the contact form, and Google LLC, for web analytics, the latter only if the User has given consent (see the [Cookie Policy](/cookies))."
             },
             {
               "type": "p",

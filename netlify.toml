@@ -104,6 +104,21 @@
   status = 200
   force = true
 
+# Formulario de contacto → Resend (netlify/functions/contact.mts).
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+  force = true
+  # Límite en el borde de Netlify: corta el abuso ANTES de invocar la función (no gasta
+  # ejecuciones ni cuota de Resend). 10 envíos por minuto e IP es holgado a propósito: detrás de
+  # una IP puede haber una oficina entera. Lo que filtra bots es el honeypot y el tiempo mínimo.
+  # ⚠️ El plan Free de Netlify admite 2 reglas rate_limit por proyecto; window_size: 1-180 s.
+  [redirects.rate_limit]
+    window_limit = 10
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
+
 # 1) Dominio canónico: todo a https://ewala.es (además de configurarlo en
 #    Domain management → Primary domain y Force HTTPS en el panel de Netlify).
 [[redirects]]
