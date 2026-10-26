@@ -1,11 +1,33 @@
 # Dependencias
 node_modules/
 
+# Build de Next.js (export estático) y caché
+.next/
+out/
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Contenido del blog generado en build time (scripts/build-blog-content.mjs) — no se versiona
+src/generated/
+
+# Netlify CLI (netlify dev / netlify build)
+.netlify/
+
 # Variables de entorno (nunca versionar secretos)
 .env
 .env*.local
 
-# Sistema operativo / editores
+# Herramientas locales
+graphify-out/
+
+# Restos del sandbox de v0
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+
+# Sistema operativo / editores / logs
 .DS_Store
 Thumbs.db
 *.log
