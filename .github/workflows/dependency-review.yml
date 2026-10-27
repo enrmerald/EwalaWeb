@@ -38,3 +38,9 @@ jobs:
           # (Tailwind, PostCSS, ESLint…) se ejecutan en el build de Netlify y en el CI.
           fail-on-scopes: runtime, development
           comment-summary-in-pr: never
+          # Riesgo aceptado y acotado a ESTE aviso (no a todo zod): zod 3.25.76 (GHSA-mrhx-c7xc-m3w5,
+          # consumo de memoria al validar arrays enormes sin límite). Solo se usa en contact-form.tsx,
+          # en el navegador del propio usuario, con campos de texto; la función de Netlify no lo usa.
+          # La corrección existe solo en zod 4 (salto de major, junto con @hookform/resolvers).
+          # Retirar esta línea al migrar a zod 4.
+          allow-ghsas: GHSA-mrhx-c7xc-m3w5
