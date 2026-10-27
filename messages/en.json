@@ -474,12 +474,11 @@
         "label": "What do you need?",
         "placeholder": "Select an option",
         "options": {
-          "demo": "SentryN3t Demo",
-          "livet": "Interested in LIVET",
-          "mssp": "MSSP",
-          "compliance": "NIS2 / ENS Compliance",
-          "licensing": "Licensing / Software",
-          "other": "Other"
+          "demo": "SentryN3t demo",
+          "pricing": "SentryN3t pricing and licensing",
+          "integration": "Integration and deployment in my OT network",
+          "compliance": "SentryN3t for NIS2 / ENS / IEC 62443",
+          "other": "Other enquiry"
         }
       },
       "message": {

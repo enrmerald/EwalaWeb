@@ -636,12 +636,11 @@
         "label": "¿Qué necesitas?",
         "placeholder": "Selecciona una opción",
         "options": {
-          "demo": "Demo SentryN3t",
-          "livet": "Interés en LIVET",
-          "mssp": "MSSP",
-          "compliance": "Cumplimiento NIS2 / ENS",
-          "licensing": "Licencias / Software",
-          "other": "Otro"
+          "demo": "Demo de SentryN3t",
+          "pricing": "Precios y licencias de SentryN3t",
+          "integration": "Integración y despliegue en mi red OT",
+          "compliance": "SentryN3t para NIS2 / ENS / IEC 62443",
+          "other": "Otra consulta"
         }
       },
       "message": {

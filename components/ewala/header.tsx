@@ -257,10 +257,10 @@ export function Header({ locale }: HeaderProps) {
   // Mapeo posicional con messages/*.json → nav.products_list (mismo orden).
   // SentryN3t es el único producto con landing real hoy. LIVET vive en una SPA independiente aún en
   // construcción (ver _livet-spa/README.md) y está oculto con `hidden: true`; si se vuelve a mostrar,
-  // su enlace lleva a Contacto con el interés preseleccionado. MSSP lo presta SecNorth Labs (web externa).
+  // su enlace lleva a Contacto (el formulario ya no tiene opción LIVET). MSSP lo presta SecNorth Labs (web externa).
   const PRODUCT_CONFIG: Array<Pick<ProductItem, "icon" | "href" | "external">> = [
     { icon: SentryN3tIcon, href: `/${locale}#showcase` },
-    { icon: RadioTower, href: `/${locale}/contacto?need=livet` },
+    { icon: RadioTower, href: `/${locale}/contacto` },
     { icon: Users, href: "https://secnorthlabs.eu/", external: true },
   ]
 

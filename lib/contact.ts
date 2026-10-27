@@ -9,7 +9,7 @@
 export const CONTACT_ENDPOINT = '/api/contact'
 
 /** Valores de «¿Qué necesitas?». Las etiquetas viven en messages/*.json → contact.form.need.options. */
-export const NEED_VALUES = ['demo', 'livet', 'mssp', 'compliance', 'licensing', 'other'] as const
+export const NEED_VALUES = ['demo', 'pricing', 'integration', 'compliance', 'other'] as const
 export type NeedValue = (typeof NEED_VALUES)[number]
 
 /** Límites de longitud: el cliente los valida para dar feedback y el servidor los impone. */
