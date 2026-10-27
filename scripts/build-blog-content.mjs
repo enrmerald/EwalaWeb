@@ -1,5 +1,5 @@
 // Script de pipeline de build (NO runtime): lee content/blog/{locale}/*.md, valida el front
-// matter con zod, convierte Markdown -> HTML con marked y escribe src/generated/blog.json.
+// matter con zod, convierte Markdown -> HTML (scripts/lib/blog-markdown.mjs) y escribe src/generated/blog.json.
 //
 // Se ejecuta en Node del pipeline de build (predev/prebuild), nunca en producción — el proyecto
 // exporta HTML estático (`output: 'export'`, ver next.config.mjs). src/generated/ no se versiona
@@ -11,8 +11,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
-import { marked } from 'marked'
 import { z } from 'zod'
+import { renderMarkdown } from './lib/blog-markdown.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
@@ -87,83 +87,6 @@ const frontMatterSchema = z.object({
   author: z.string().default('Ewala'),
   draft: z.boolean().optional().default(false),
 })
-
-function slugify(text) {
-  return text
-    .toString()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-+|-+$)/g, '')
-}
-
-/** Texto plano de los tokens inline de un encabezado (sin marcado, HTML en bruto ni entidades). */
-const plainTextOf = (tokens) =>
-  tokens.map((t) => (t.type === 'html' ? '' : t.tokens ? plainTextOf(t.tokens) : (t.text ?? ''))).join('')
-
-const escapeHtml = (text) =>
-  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-
-/**
- * ¿Es seguro enlazar/cargar este destino? Solo http(s), mailto (enlaces) y rutas del propio sitio o
- * relativas. Rechaza `javascript:`, `data:`, `vbscript:`… y `//otro-host`. Antes de mirar el esquema se
- * quitan espacios y caracteres de control (`java\tscript:` lo interpretan los navegadores como
- * `javascript:`).
- */
-function isSafeUrl(href, { allowMailto }) {
-  const url = String(href).replace(/[\u0000- \u007f-\u009f]/g, '')
-  if (url === '' || url.startsWith('//')) return false
-  const scheme = /^([a-z][a-z0-9+.-]*):/i.exec(url)?.[1]?.toLowerCase()
-  if (!scheme) return true // ruta relativa, absoluta del sitio o ancla (#…)
-  return scheme === 'https' || scheme === 'http' || (allowMailto && scheme === 'mailto')
-}
-
-/**
- * Renderiza Markdown -> HTML añadiendo `id` slugificado a cada heading (para anclas de TOC),
- * evitando colisiones de id dentro del mismo artículo.
- *
- * Seguridad: el HTML resultante se inyecta con dangerouslySetInnerHTML (components/ewala/blog-articulo.tsx).
- * Hoy el Markdown lo escribe el equipo, pero basta una contribución externa para convertirlo en XSS
- * almacenado en ewala.es, así que aquí se bloquea: el HTML en bruto se escapa (se ve como texto, para
- * que quien escribe lo note) y los enlaces/imágenes con esquemas peligrosos se reducen a su texto.
- */
-function renderMarkdown(markdown) {
-  const renderer = new marked.Renderer()
-  const seenIds = new Map()
-  const headings = [] // `##` del artículo, para el índice (TOC): { id, text }
-  const base = new marked.Renderer()
-
-  renderer.html = ({ text }) => escapeHtml(text)
-
-  renderer.link = function link(token) {
-    if (!isSafeUrl(token.href, { allowMailto: true })) return this.parser.parseInline(token.tokens)
-    const out = base.link.call(this, token)
-    // Enlaces a otros sitios: sin acceso a window.opener ni Referer completo.
-    return /^https?:/i.test(token.href.trim()) ? out.replace('<a ', '<a rel="noopener noreferrer" ') : out
-  }
-
-  renderer.image = function image(token) {
-    if (!isSafeUrl(token.href, { allowMailto: false })) return escapeHtml(token.text)
-    return base.image.call(this, token)
-  }
-
-  renderer.heading = function heading({ tokens, depth }) {
-    const html = this.parser.parseInline(tokens)
-    // Texto plano sacado de los tokens, no quitando etiquetas del HTML: sin entidades (`&#39;`) en el
-    // índice ni en el id, y sin depender de una expresión regular sobre HTML.
-    const text = plainTextOf(tokens).replace(/\s+/g, ' ').trim()
-    let id = slugify(text)
-    const count = seenIds.get(id) ?? 0
-    seenIds.set(id, count + 1)
-    if (count > 0) id = `${id}-${count}`
-    if (depth === 2) headings.push({ id, text })
-    return `<h${depth} id="${id}">${html}</h${depth}>\n`
-  }
-
-  return { html: marked.parse(markdown, { renderer }), headings }
-}
 
 function countWords(markdown) {
   const plain = markdown

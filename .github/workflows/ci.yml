@@ -58,6 +58,11 @@ jobs:
       - name: Auditoría SEO
         run: pnpm verify:seo
 
+      # El cuerpo de los artículos se inyecta con dangerouslySetInnerHTML: comprueba que el saneado
+      # del Markdown no deja pasar enlaces ni imágenes peligrosos (ni con entidades HTML).
+      - name: Auditoría del saneado del blog
+        run: pnpm verify:blog
+
       # La clave de Resend (re_…) solo debe vivir en las variables de Netlify, nunca en el bundle público.
       - name: Comprobar que out/ no contiene claves de Resend
         run: |
