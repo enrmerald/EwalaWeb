@@ -173,6 +173,9 @@ author: "Ewala"
 draft: false                     # opcional
 ```
 
+- El build **falla** (nombrando fichero y campo) si `date` no es una fecha real `AAAA-MM-DD`, o si `image`
+  no es una ruta ASCII que exista en `public/` con exactamente las mismas mayúsculas (Netlify sirve desde
+  Linux, donde `/Foto.PNG` y `/foto.png` son ficheros distintos).
 - **Nunca `#` (H1) en el cuerpo**: el `title` ya se pinta como `<h1>`. El cuerpo empieza con párrafo o
   `##`, y la jerarquía es `##` → `###` → `####` sin saltar niveles.
 - Enlaces internos **relativos** y con barra final (`/es/blog/ndr-en-ot/`, `/es/contacto/`), nunca

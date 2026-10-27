@@ -17,6 +17,7 @@ import { z } from 'zod'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const CONTENT_DIR = path.join(ROOT, 'content', 'blog')
+const PUBLIC_DIR = path.join(ROOT, 'public')
 const OUT_DIR = path.join(ROOT, 'src', 'generated')
 const OUT_FILE = path.join(OUT_DIR, 'blog.json')
 
@@ -26,18 +27,62 @@ const WORDS_PER_MINUTE = 200
 // Enum cerrado de categorías. Ampliar aquí si se añaden nuevas.
 const CATEGORIES = ['nis2', 'ot-iot', 'mssp', 'idi']
 
+/** `AAAA-MM-DD` y además una fecha real (rechaza 2026-02-31). El resto del código asume este formato. */
+const isRealIsoDate = (value) => {
+  const d = new Date(`${value}T00:00:00Z`)
+  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === value
+}
+
+/**
+ * ¿Existe el fichero en public/ con EXACTAMENTE ese nombre (mayúsculas incluidas)? Netlify sirve desde
+ * Linux, donde `/Foto.PNG` y `/foto.png` son ficheros distintos: en Windows una ruta con otra
+ * capitalización «funcionaría» en local y daría 404 en producción.
+ */
+function existsInPublic(urlPath) {
+  const parts = urlPath.slice(1).split('/')
+  let dir = PUBLIC_DIR
+  for (const [i, part] of parts.entries()) {
+    let entries
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true })
+    } catch {
+      return false
+    }
+    const entry = part ? entries.find((e) => e.name === part) : undefined
+    if (!entry) return false
+    if (i < parts.length - 1) {
+      if (!entry.isDirectory()) return false
+      dir = path.join(dir, part)
+    } else if (!entry.isFile()) return false
+  }
+  return true
+}
+
 const frontMatterSchema = z.object({
   title: z.string().min(1, 'title es obligatorio'),
   titleSeo: z.string().min(1, 'titleSeo es obligatorio'),
   subtitle: z.string().optional(),
   description: z.string().min(1, 'description es obligatorio'),
   descriptionSeo: z.string().min(1, 'descriptionSeo es obligatorio'),
-  date: z
-    .string()
-    .refine((v) => !Number.isNaN(Date.parse(v)), { message: 'date debe ser una fecha ISO 8601 válida' }),
+  // YAML convierte `date: 2026-10-03` (sin comillas) en un Date: se normaliza a AAAA-MM-DD.
+  date: z.preprocess(
+    (v) => (v instanceof Date && !Number.isNaN(v.getTime()) ? v.toISOString().slice(0, 10) : v),
+    z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, 'date debe tener el formato AAAA-MM-DD (p. ej. "2026-10-03")')
+      .refine(isRealIsoDate, { message: 'date no es una fecha real del calendario' }),
+  ),
   category: z.enum(CATEGORIES),
   tags: z.array(z.string()).default([]),
-  image: z.string().optional(),
+  // Ruta absoluta del sitio, solo ASCII (sin espacios, tildes ni ñ), de un fichero que exista en public/.
+  image: z
+    .string()
+    .regex(
+      /^\/[A-Za-z0-9][A-Za-z0-9._/-]*$/,
+      'image debe ser una ruta absoluta ASCII, sin espacios ni tildes, p. ej. "/mi-imagen.webp"',
+    )
+    .refine(existsInPublic, { message: 'image no existe en public/ (¿mayúsculas distintas o falta el fichero?)' })
+    .optional(),
   imageAlt: z.string().optional(),
   author: z.string().default('Ewala'),
   draft: z.boolean().optional().default(false),
