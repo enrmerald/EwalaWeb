@@ -90,9 +90,14 @@ for (const locale of locales) {
   for (const post of postsOf(locale)) {
     checkDate(post.date, `date del artículo ${locale}/${post.slug}`)
     // Solo se anuncian los idiomas donde el artículo existe: una traducción sin publicar sería un 404.
-    const alternates = locales
-      .filter((l) => postsOf(l).some((p) => p.slug === post.slug))
-      .map((l) => [l, absolute(`/${l}/blog/${post.slug}/`)])
+    const available = locales.filter((l) => postsOf(l).some((p) => p.slug === post.slug))
+    // Misma regla que app/[locale]/blog/[slug]/page.tsx: x-default → idioma por defecto si existe; si
+    // no, el primero disponible. El sitemap tiene que coincidir con el hreflang del propio HTML.
+    const xDefault = available.includes(defaultLocale) ? defaultLocale : available[0]
+    const alternates = [
+      ...available.map((l) => [l, absolute(`/${l}/blog/${post.slug}/`)]),
+      ['x-default', absolute(`/${xDefault}/blog/${post.slug}/`)],
+    ]
     entries.push({
       loc: absolute(`/${locale}/blog/${post.slug}/`),
       lastmod: post.date,

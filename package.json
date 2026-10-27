@@ -17,6 +17,7 @@
     "typecheck": "pnpm content:build && next typegen && tsc --noEmit",
     "verify:i18n": "node scripts/verificar-i18n.mjs",
     "verify:seo": "node scripts/verificar-seo.mjs out",
+    "verify:sitemap": "node --no-warnings scripts/verificar-sitemaps.mjs out",
     "verify:blog": "node scripts/verificar-saneado-blog.mjs",
     "verify:redirects": "node scripts/verificar-redirecciones.mjs"
   },
