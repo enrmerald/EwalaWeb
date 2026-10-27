@@ -358,7 +358,9 @@ navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──
                                        contrato compartido: lib/contact.ts (límites, need, tipos)
 ```
 
-- **Cliente** (`lib/contact-client.ts`): genera `submissionId` (UUID) y `renderedAt` al montar, valida con
+- **Cliente** (`lib/contact-client.ts`): genera `submissionId` (UUID) al montar y mide el tiempo de relleno con
+  `performance.now()` (reloj monotónico; se envía como `elapsedMs`, nunca una hora absoluta: el reloj del
+  visitante no tiene por qué coincidir con el del servidor), valida con
   `zod` + `react-hook-form`, espera el tiempo mínimo antispam si hace falta y traduce la respuesta a
   mensajes (`validation`, `rateLimited`, `network`, `unavailable`, `generic`). Muestra la referencia y,
   en modo prueba, un aviso.
@@ -367,7 +369,7 @@ navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──
     personales.
   - `contact-validation.ts`: validación estricta **sin dependencias** (lista blanca de campos, longitudes de
     `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).
-  - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y envío en < 3 s →
+  - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y `elapsedMs` < 3000 →
     responde éxito sin enviar.
   - `resend.ts`: `fetch` a la API de Resend con `Idempotency-Key` (sin duplicados por doble clic), timeout de
     3,5 s y un reintento solo ante errores transitorios. `Reply-To` = email del visitante.

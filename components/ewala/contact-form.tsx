@@ -16,7 +16,7 @@ import {
   type ContactErrorCode,
   type NeedValue,
 } from '@/lib/contact'
-import { newSubmissionId, submitContact, waitForMinimumFillTime } from '@/lib/contact-client'
+import { fillClock, newSubmissionId, submitContact, waitForMinimumFillTime } from '@/lib/contact-client'
 
 type ContactFormMessages = Messages['contact']['form']
 
@@ -75,11 +75,11 @@ export function ContactForm({ t, locale }: ContactFormProps) {
   const [result, setResult] = useState<{ reference: string; testMode: boolean } | null>(null)
   // Se fijan al montar (no en el render): con export estático el render ocurre en el build y
   // quedarían congelados con la fecha del build y el mismo identificador para todo el mundo.
-  const renderedAt = useRef(0)
+  const mountedAt = useRef(0)
   const submissionId = useRef('')
 
   useEffect(() => {
-    renderedAt.current = Date.now()
+    mountedAt.current = fillClock()
     submissionId.current = newSubmissionId()
   }, [])
 
@@ -123,12 +123,12 @@ export function ContactForm({ t, locale }: ContactFormProps) {
 
   async function onSubmit(values: ContactFormValues) {
     setStatus('loading')
-    await waitForMinimumFillTime(renderedAt.current)
+    const elapsedMs = await waitForMinimumFillTime(mountedAt.current)
 
     const response = await submitContact({
       submissionId: submissionId.current || newSubmissionId(),
       locale,
-      renderedAt: renderedAt.current,
+      elapsedMs,
       firstName: values.firstName,
       lastName: values.lastName ?? '',
       company: values.company,

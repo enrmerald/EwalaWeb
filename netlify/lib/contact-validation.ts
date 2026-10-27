@@ -5,7 +5,7 @@
  * Reglas: lista blanca de campos (cualquier campo extra se rechaza), tipos exactos, longitudes de
  * lib/contact.ts y sin caracteres de control en campos de una línea (anti inyección de cabeceras).
  */
-import { CONTACT_LIMITS as L, NEED_VALUES, PHONE_PATTERN, type ContactRequest } from '../../lib/contact'
+import { CONTACT_LIMITS as L, MAX_ELAPSED_MS, NEED_VALUES, PHONE_PATTERN, type ContactRequest } from '../../lib/contact'
 
 const SINGLE_LINE = /^[^\p{Cc}]*$/u
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
@@ -13,7 +13,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const EMAIL = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]{2,}$/
 
 const ALLOWED_KEYS = new Set<keyof ContactRequest>([
-  'submissionId', 'locale', 'renderedAt', 'firstName', 'lastName', 'company', 'email',
+  'submissionId', 'locale', 'elapsedMs', 'firstName', 'lastName', 'company', 'email',
   'phone', 'role', 'need', 'message', 'privacy', 'marketing', 'website',
 ])
 
@@ -40,8 +40,10 @@ export function validateContact(input: unknown): ValidationResult {
 
   const submissionId = typeof o.submissionId === 'string' && UUID.test(o.submissionId) ? o.submissionId : (bad('submissionId'), '')
   const locale = o.locale === 'es' || o.locale === 'en' ? o.locale : (bad('locale'), 'es')
-  const renderedAt =
-    typeof o.renderedAt === 'number' && Number.isInteger(o.renderedAt) && o.renderedAt >= 0 ? o.renderedAt : (bad('renderedAt'), 0)
+  const elapsedMs =
+    typeof o.elapsedMs === 'number' && Number.isInteger(o.elapsedMs) && o.elapsedMs >= 0 && o.elapsedMs <= MAX_ELAPSED_MS
+      ? o.elapsedMs
+      : (bad('elapsedMs'), 0)
 
   const firstName = line('firstName', L.firstName.min, L.firstName.max, true) ?? ''
   const lastName = line('lastName', 0, L.lastName.max, false)
@@ -72,7 +74,7 @@ export function validateContact(input: unknown): ValidationResult {
   return {
     ok: true,
     data: {
-      submissionId, locale, renderedAt, firstName, lastName, company, email, phone, role, need, message,
+      submissionId, locale, elapsedMs, firstName, lastName, company, email, phone, role, need, message,
       privacy: true, marketing: o.marketing as boolean, website: o.website as string,
     },
   }

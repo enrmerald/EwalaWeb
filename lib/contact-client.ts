@@ -10,13 +10,18 @@ export function newSubmissionId(): string {
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
 }
 
+/** Instante de referencia para medir el tiempo de relleno (reloj monotónico, inmune a cambios de hora). */
+export const fillClock = (): number => performance.now()
+
 /**
  * Si una persona rellena el formulario (por autocompletado) en menos del tiempo mínimo antispam,
- * se espera lo que falta en vez de dejar que el servidor descarte el envío.
+ * se espera lo que falta en vez de dejar que el servidor descarte el envío. Devuelve los
+ * milisegundos totales transcurridos desde `mountedAt`, que es lo que se envía como `elapsedMs`.
  */
-export async function waitForMinimumFillTime(renderedAt: number): Promise<void> {
-  const remaining = MIN_FILL_SECONDS * 1000 + 250 - (Date.now() - renderedAt)
+export async function waitForMinimumFillTime(mountedAt: number): Promise<number> {
+  const remaining = MIN_FILL_SECONDS * 1000 + 250 - (fillClock() - mountedAt)
   if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining))
+  return Math.round(fillClock() - mountedAt)
 }
 
 export async function submitContact(payload: ContactRequest): Promise<ContactResponse> {

@@ -41,10 +41,9 @@ export default async function handler(request: Request): Promise<Response> {
     log({ type: 'contact', submissionId: data.submissionId, locale: data.locale, status, ms: Date.now() - started })
 
   // Antispam: honeypot relleno o envío más rápido que una persona. Se responde éxito igualmente
-  // para no dar pistas al bot. (Si el reloj del cliente va adelantado, la diferencia es negativa:
-  // no se puede comprobar y se deja pasar.)
-  const elapsedSeconds = (Date.now() - data.renderedAt) / 1000
-  if (data.website.trim() !== '' || (elapsedSeconds >= 0 && elapsedSeconds < MIN_FILL_SECONDS)) {
+  // para no dar pistas al bot. El tiempo lo mide el navegador con un reloj monotónico (elapsedMs):
+  // no se compara con la hora del servidor, así que un reloj desajustado no descarta envíos reales.
+  if (data.website.trim() !== '' || data.elapsedMs < MIN_FILL_SECONDS * 1000) {
     trace('discarded_antispam')
     return json({ ok: true, reference, delivery: 'skipped' })
   }

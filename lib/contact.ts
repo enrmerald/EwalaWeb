@@ -29,11 +29,19 @@ export const PHONE_PATTERN = /^[+\d\s().-]*$/
 /** Tiempo mínimo entre que se pinta el formulario y se envía: por debajo, casi seguro es un bot. */
 export const MIN_FILL_SECONDS = 3
 
+/** Tope razonable de `elapsedMs` (24 h): un valor mayor no lo envía un navegador real. */
+export const MAX_ELAPSED_MS = 24 * 60 * 60 * 1000
+
 /** Cuerpo JSON que el navegador envía a CONTACT_ENDPOINT. */
 export interface ContactRequest {
   submissionId: string
   locale: 'es' | 'en'
-  renderedAt: number
+  /**
+   * Milisegundos entre que se montó el formulario y se envió, medidos en el navegador con un reloj
+   * monotónico (`performance.now()`). No es una hora absoluta: así no depende de que el reloj del
+   * visitante coincida con el del servidor.
+   */
+  elapsedMs: number
   firstName: string
   lastName?: string
   company: string
