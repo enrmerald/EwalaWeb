@@ -16,8 +16,9 @@ const TOC_MIN_HEADINGS = 4
  * Server Component: metadatos del artículo (categoría, fecha, minutos, autor), índice (TOC)
  * automático cuando hay 4 o más `<h2>`, y cuerpo renderizado desde el HTML generado en build
  * (`scripts/build-blog-content.mjs`). `dangerouslySetInnerHTML` es seguro aquí: el HTML procede
- * del propio pipeline de build sobre Markdown de confianza en `content/blog/`, nunca de input
- * de usuario en runtime.
+ * del propio pipeline de build sobre Markdown en `content/blog/`, nunca de input de usuario en
+ * runtime, y ese pipeline escapa el HTML en bruto y descarta enlaces/imágenes con esquemas
+ * peligrosos (javascript:, data:…), de modo que no depende de que el Markdown sea de confianza.
  */
 export function BlogArticulo({ post, headings, categoryLabel, readingMinutesLabel, authorLabel, tocLabel }: BlogArticuloProps) {
   const minutesLabel = readingMinutesLabel.replace('{minutes}', String(post.readingMinutes))
@@ -64,6 +65,7 @@ export function BlogArticulo({ post, headings, categoryLabel, readingMinutesLabe
 
         <div
           className="mt-10 [&>h2]:text-2xl [&>h2]:font-mono [&>h2]:font-semibold [&>h2]:text-white [&>h2]:mt-12 [&>h2]:mb-4 [&>h2:first-child]:mt-0 [&>h3]:text-xl [&>h3]:font-mono [&>h3]:font-semibold [&>h3]:text-white [&>h3]:mt-8 [&>h3]:mb-3 [&>p]:text-white/80 [&>p]:leading-relaxed [&>p]:mb-5 [&>p]:text-justify [&>p]:hyphens-auto [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:text-white/80 [&>ul]:mb-5 [&>ul>li]:mb-2 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:text-white/80 [&>ol]:mb-5 [&_strong]:text-white [&_strong]:font-semibold [&_a]:text-[var(--primary)] [&_a]:underline [&_a]:underline-offset-2 [&>hr]:border-white/10 [&>hr]:my-10"
+          // eslint-disable-next-line react/no-danger -- HTML de build-blog-content.mjs, que escapa HTML en bruto y esquemas peligrosos
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
       </div>

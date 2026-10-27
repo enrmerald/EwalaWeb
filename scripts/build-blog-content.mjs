@@ -99,13 +99,50 @@ function slugify(text) {
     .replace(/(^-+|-+$)/g, '')
 }
 
+const escapeHtml = (text) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+
+/**
+ * ¿Es seguro enlazar/cargar este destino? Solo http(s), mailto (enlaces) y rutas del propio sitio o
+ * relativas. Rechaza `javascript:`, `data:`, `vbscript:`… y `//otro-host`. Antes de mirar el esquema se
+ * quitan espacios y caracteres de control (`java\tscript:` lo interpretan los navegadores como
+ * `javascript:`).
+ */
+function isSafeUrl(href, { allowMailto }) {
+  const url = String(href).replace(/[\u0000- \u007f-\u009f]/g, '')
+  if (url === '' || url.startsWith('//')) return false
+  const scheme = /^([a-z][a-z0-9+.-]*):/i.exec(url)?.[1]?.toLowerCase()
+  if (!scheme) return true // ruta relativa, absoluta del sitio o ancla (#…)
+  return scheme === 'https' || scheme === 'http' || (allowMailto && scheme === 'mailto')
+}
+
 /**
  * Renderiza Markdown -> HTML añadiendo `id` slugificado a cada heading (para anclas de TOC),
  * evitando colisiones de id dentro del mismo artículo.
+ *
+ * Seguridad: el HTML resultante se inyecta con dangerouslySetInnerHTML (components/ewala/blog-articulo.tsx).
+ * Hoy el Markdown lo escribe el equipo, pero basta una contribución externa para convertirlo en XSS
+ * almacenado en ewala.es, así que aquí se bloquea: el HTML en bruto se escapa (se ve como texto, para
+ * que quien escribe lo note) y los enlaces/imágenes con esquemas peligrosos se reducen a su texto.
  */
 function renderMarkdown(markdown) {
   const renderer = new marked.Renderer()
   const seenIds = new Map()
+  const base = new marked.Renderer()
+
+  renderer.html = ({ text }) => escapeHtml(text)
+
+  renderer.link = function link(token) {
+    if (!isSafeUrl(token.href, { allowMailto: true })) return this.parser.parseInline(token.tokens)
+    const out = base.link.call(this, token)
+    // Enlaces a otros sitios: sin acceso a window.opener ni Referer completo.
+    return /^https?:/i.test(token.href.trim()) ? out.replace('<a ', '<a rel="noopener noreferrer" ') : out
+  }
+
+  renderer.image = function image(token) {
+    if (!isSafeUrl(token.href, { allowMailto: false })) return escapeHtml(token.text)
+    return base.image.call(this, token)
+  }
 
   renderer.heading = function heading({ tokens, depth }) {
     const html = this.parser.parseInline(tokens)

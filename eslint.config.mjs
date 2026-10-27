@@ -19,6 +19,13 @@ const eslintConfig = [
     ],
   },
   {
+    // dangerouslySetInnerHTML solo con una justificación escrita en el propio `eslint-disable`
+    // (hoy: components/ewala/json-ld.tsx y blog-articulo.tsx). components/ui ya queda fuera del lint.
+    rules: {
+      'react/no-danger': 'error',
+    },
+  },
+  {
     // Reglas del React Compiler (eslint-plugin-react-hooks v6+). El proyecto no usa el compilador,
     // así que se dejan como aviso: siguen visibles pero no rompen `pnpm lint`.
     // Hallazgos previos: hooks/use-mobile.ts (setState en effect) e i18n/client.tsx (t.raw = …).

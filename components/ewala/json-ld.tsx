@@ -5,6 +5,7 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger -- JSON propio con "<" escapado: no puede cerrar el <script>
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
     />
   )
