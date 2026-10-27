@@ -38,7 +38,25 @@ const contentHash = (d: ContactRequest) =>
     .digest('hex')
     .slice(0, 16)
 
+/** Ruta pública del formulario. Netlify la sirve por `config.path` y por la regla de netlify.toml. */
+const CONTACT_PATH = '/api/contact'
+
+/**
+ * Límite de envíos en el borde de Netlify, ANTES de ejecutar la función. Va aquí (y no solo en la
+ * regla de redirección de netlify.toml) porque Netlify aplica los límites de funciones a la ruta de la
+ * función. Debe ser un literal: Netlify lo lee del código sin ejecutarlo. El plan Free admite 2 reglas.
+ */
+export const config = {
+  path: '/api/contact',
+  rateLimit: { windowLimit: 10, windowSize: 60, aggregateBy: ['ip', 'domain'] },
+}
+
 export default async function handler(request: Request): Promise<Response> {
+  // La función sigue siendo alcanzable en /.netlify/functions/contact, donde no aplica la regla de
+  // redirección de netlify.toml. Solo se atiende la ruta pública; el resto se trata como inexistente.
+  const pathname = new URL(request.url).pathname.replace(/\/+$/, '')
+  if (pathname !== CONTACT_PATH) return fail('generic', 404)
+
   const started = Date.now()
   const pre = await readJsonRequest(request)
   if ('response' in pre) return pre.response

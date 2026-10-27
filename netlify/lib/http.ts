@@ -12,6 +12,8 @@ const BASE_HEADERS = {
   'Cache-Control': 'no-store',
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'no-referrer',
+  // La respuesta es JSON: nunca debe ejecutar ni cargar nada ni enmarcarse.
+  'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
 } as const
 
 export function json(body: unknown, status = 200, extra: Record<string, string> = {}): Response {
@@ -22,10 +24,26 @@ export function fail(error: ContactErrorCode, status: number, fields?: Record<st
   return json({ ok: false, error, ...(fields ? { fields } : {}) }, status)
 }
 
+/** Origen de la petición: acepta `Sec-Fetch-Site: same-origin` o, sin él, un `Origin` del mismo host. */
+function isSameOrigin(request: Request): boolean {
+  const site = request.headers.get('sec-fetch-site')
+  if (site) return site === 'same-origin'
+  // Navegadores antiguos sin Fetch Metadata: un POST con fetch siempre lleva `Origin`.
+  const origin = request.headers.get('origin')
+  if (!origin) return false
+  try {
+    return new URL(origin).host === new URL(request.url).host
+  } catch {
+    return false
+  }
+}
+
 /**
  * Comprobaciones previas a leer el cuerpo: método, tipo, tamaño y origen.
  * `Sec-Fetch-Site` lo pone el navegador y no se puede falsificar desde JavaScript: si existe y no
- * es "same-origin", la petición viene de otra web (CSRF). Las herramientas como curl no lo envían.
+ * es "same-origin", la petición viene de otra web (CSRF). Si falta (navegador antiguo, curl) se exige
+ * un `Origin` del mismo host. Es contención de scripts ingenuos y de CSRF, NO autenticación: un cliente
+ * que no sea un navegador puede falsificar estas cabeceras; el freno al abuso es el rate limit.
  */
 export async function readJsonRequest(request: Request): Promise<{ response: Response } | { body: unknown }> {
   if (request.method !== 'POST') {
@@ -37,8 +55,7 @@ export async function readJsonRequest(request: Request): Promise<{ response: Res
   const declared = Number(request.headers.get('content-length') ?? '0')
   if (declared > MAX_BODY_BYTES) return { response: fail('validation', 413) }
 
-  const site = request.headers.get('sec-fetch-site')
-  if (site && site !== 'same-origin') return { response: fail('generic', 403) }
+  if (!isSameOrigin(request)) return { response: fail('generic', 403) }
 
   const raw = await request.text()
   if (raw.length > MAX_BODY_BYTES) return { response: fail('validation', 413) }

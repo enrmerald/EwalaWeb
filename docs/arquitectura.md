@@ -365,7 +365,14 @@ navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──
   mensajes (`validation`, `rateLimited`, `network`, `unavailable`, `generic`). Muestra la referencia y,
   en modo prueba, un aviso.
 - **Función** (`contact.mts` + `netlify/lib/`):
-  - `http.ts`: solo `POST` JSON ≤ 32 KB; rechaza `Sec-Fetch-Site` ≠ `same-origin` (CSRF); log sin datos
+  - Ruta y límite: `contact.mts` exporta `config` (`path: '/api/contact'` + `rateLimit` 10/min/IP) y solo
+    atiende esa ruta; en cualquier otra (p. ej. `/.netlify/functions/contact`, donde no aplicaría la
+    regla de netlify.toml) responde 404. Además de ese límite hay otro en la regla `/api/contact` de
+    `netlify.toml` (el plan Free admite 2 reglas por proyecto).
+  - `http.ts`: solo `POST` JSON ≤ 32 KB; origen: `Sec-Fetch-Site` debe ser `same-origin` o, si falta
+    (navegador antiguo, curl), `Origin` del mismo host, si no 403 (CSRF y scripts ingenuos; **no es
+    autenticación**: un cliente que no sea navegador puede falsificar las cabeceras, el freno al abuso
+    es el rate limit); las respuestas JSON llevan `Content-Security-Policy: default-src 'none'`; log sin datos
     personales.
   - `contact-validation.ts`: validación estricta **sin dependencias** (lista blanca de campos, longitudes de
     `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).

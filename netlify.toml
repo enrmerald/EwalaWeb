@@ -114,6 +114,8 @@
   # ejecuciones ni cuota de Resend). 10 envíos por minuto e IP es holgado a propósito: detrás de
   # una IP puede haber una oficina entera. Lo que filtra bots es el honeypot y el tiempo mínimo.
   # ⚠️ El plan Free de Netlify admite 2 reglas rate_limit por proyecto; window_size: 1-180 s.
+  # contact.mts declara además su propio `rateLimit` en `config` (ruta de la función) y rechaza con 404
+  # cualquier ruta que no sea /api/contact, porque /.netlify/functions/contact esquivaría esta regla.
   [redirects.rate_limit]
     window_limit = 10
     window_size = 60
