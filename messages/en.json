@@ -1,0 +1,1714 @@
+{
+  "notFound": {
+    "metaTitle": "Page not found | Ewala",
+    "code": "404 · PAGE NOT FOUND",
+    "title": "We can't find this page",
+    "description": "The address may be mistyped or the page may have moved. From here you can go back to the home page or contact us.",
+    "home": "Go to the home page",
+    "contact": "Contact us",
+    "otherLanguage": "Versión en español"
+  },
+  "meta": {
+    "title": "Ewala | OT/IoT Cybersecurity with AI | SentryN3t NDR",
+    "description": "Ewala is a European industrial cybersecurity startup. SentryN3t Protection detects anomalies in OT/IoT networks with machine learning and an AI assistant."
+  },
+  "nav": {
+    "solutions": "Solutions",
+    "products": "Products",
+    "sectors": "Sectors",
+    "company": "Company",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cta": "Request Demo",
+    "products_list": [
+      { "name": "SentryN3t Protection", "badge": "NDR", "badgeTitle": "Network Detection & Response", "description": "AI/ML anomaly detection for OT/IoT/IT networks" },
+      { "name": "LIVET", "hidden": true, "description": "Secure extensive livestock management, built for cybersecurity from the ground up" },
+      { "name": "MSSP Services", "description": "Integration and monitoring of SentryN3t and other managed cybersecurity services" }
+    ],
+    "sectors_list": [
+      { "name": "Critical Infrastructure", "description": "OT protection for essential and important entities under NIS2" },
+      { "name": "Agri-Food", "description": "OT cybersecurity for food and livestock industry" },
+      { "name": "Industry & Manufacturing", "description": "Visibility and detection across warehouses and production lines" }
+    ],
+    "mobile_items": [
+      { "name": "Solutions", "hasDropdown": true },
+      { "name": "Sectors", "hasDropdown": true },
+      { "name": "Company", "hasDropdown": false },
+      { "name": "Blog", "hasDropdown": false },
+      { "name": "Contact", "hasDropdown": false }
+    ]
+  },
+  "logoCarousel": {
+    "trusted": "Backed by ecosystem partners and institutions",
+    "seals": [
+      { "name": "INCIBE", "href": "https://catalogo.incibe.es/search?page=0&size=5&text=Ewala", "alt": "Registered company with INCIBE" },
+      { "name": "CCI", "href": "https://www.cci-es.org/", "alt": "Member of the Industrial Cybersecurity Center" },
+      { "name": "Industria 4.0", "href": "https://www.asturiasindustria40.es/", "alt": "Industry 4.0 facilitator" },
+      { "name": "Femetal Industry", "href": "https://metaindustry4.com/es/", "alt": "Femetal Industry partner company" },
+      { "name": "Cluster TIC Asturias", "href": "https://clustertic.net/", "alt": "Member of Cluster TIC Asturias" },
+      { "name": "AsturCon Tech", "href": "https://asturcon.tech/", "alt": "AsturCON Tech" }
+    ]
+  },
+  "products": {
+    "ui": {
+      "tab_sentryn3t": "Industrial Cybersecurity",
+      "tab_sentryn3t_subtitle": "SentryN3t Protection",
+      "aria_label": "Select product"
+    },
+
+    "sentryn3t": {
+      "label": "SentryN3t Protection",
+
+      "hero": {
+        "badges": ["Aligned with NIS2 & IEC 62443", "AI & ML Detection and Analysis", "100% European Product", "Integrates with your existing tools"],
+        "logoAlt": "SentryN3t Protection logo",
+        "logoTagline": "Network Detection & Response",
+        "headlineParts": [ "Protect What", "Cannot Afford", "to Stop" ],
+        "description": "Protect your network with ML and an AI assistant. Detect traffic anomalies in real time and inventory every device and system in your OT/IoT environment.",
+        "ctaPrimary": "Contact Us",
+        "ctaSecondary": "Request a Demo",
+        "stats": [
+          { "value": "API & Syslog", "label": "Integrate SentryN3t with the rest of your stack" },
+          { "value": "100%",         "label": "European technology: European digital sovereignty" },
+          { "value": "NIS2",         "label": "Aligned with NIS2 OT visibility requirements" },
+          { "value": "IEC 62443",    "label": "Aligned with IEC 62443 controls and requirements" }
+        ],
+        "carousel": {
+          "label": "SentryN3t platform screenshots",
+          "prev": "Previous screenshot",
+          "next": "Next screenshot",
+          "pause": "Pause carousel",
+          "play": "Resume carousel",
+          "goTo": "Go to screenshot {n} of {total}",
+          "slideOf": "{n} of {total}",
+          "expand": "Enlarge screenshot",
+          "close": "Close enlarged view",
+          "dialogTitle": "Enlarged view of SentryN3t screenshots",
+          "slides": [
+            {
+              "src": "/capturas-sentry/carrusel/sentryn3t-login-en.webp",
+              "hd": "/capturas-sentry/carrusel/sentryn3t-login-en-hd.webp",
+              "alt": "SentryN3t sign-in screen with AI assistant, asset inventory and ML anomaly detection",
+              "caption": "Secure access",
+              "position": "center"
+            },
+            {
+              "src": "/capturas-sentry/carrusel/sentryn3t-panel-control-en.webp",
+              "hd": "/capturas-sentry/carrusel/sentryn3t-panel-control-en-hd.webp",
+              "alt": "SentryN3t dashboard showing known, unknown and blocked hosts and OT network traffic volume",
+              "caption": "Dashboard",
+              "position": "top"
+            },
+            {
+              "src": "/capturas-sentry/carrusel/sentryn3t-trafico-geolocalizacion-en.webp",
+              "hd": "/capturas-sentry/carrusel/sentryn3t-trafico-geolocalizacion-en-hd.webp",
+              "alt": "SentryN3t network traffic analysis: top talkers and geolocation of Internet servers",
+              "caption": "Traffic and geolocation",
+              "position": "center"
+            },
+            {
+              "src": "/capturas-sentry/carrusel/sentryn3t-conexiones-red-en.webp",
+              "hd": "/capturas-sentry/carrusel/sentryn3t-conexiones-red-en-hd.webp",
+              "alt": "SentryN3t network connection map between private segments and destination countries, by IP type",
+              "caption": "Network connection map",
+              "position": "center"
+            }
+          ]
+        }
+      },
+
+      "howItWorks": {
+        "sectionLabel": "HOW IT WORKS",
+        "headline": "From visibility to response in three steps",
+        "steps": [
+          { "title": "Discover", "description": "Automatic inventory of every IT, OT and IoT asset on your network, agentless." },
+          { "title": "Detect", "description": "Our ML models learn how your network works and then identify anomalous behavior before it becomes an incident." },
+          { "title": "Respond", "description": "Actionable, explainable alerts from our AI assistant, with severity, context and evidence." }
+        ]
+      },
+      "metrics": {
+        "items": [
+          { "value": "API & Syslog", "label": "Integrate SentryN3t with the rest of your stack" },
+          { "value": "100%",         "label": "European technology: European digital sovereignty" },
+          { "value": "NIS2",         "label": "Aligned with NIS2 OT visibility requirements" },
+          { "value": "IEC 62443",    "label": "Aligned with IEC 62443 controls and requirements" }
+        ],
+        "quote": "\"OT threats don't keep office hours. Neither does SentryN3t.\""
+      },
+
+      "showcase": {
+        "variant": "bento",
+        "eyebrow": "The Challenge: IT/OT Convergence & NIS2",
+        "headline": "Your OT network is not an office network. Your cybersecurity shouldn't be either.",
+        "description": "OT systems were never designed to be connected. PLCs, HMIs, and industrial sensors are invisible to traditional IT tools, and attackers know it. SentryN3t Protection monitors your industrial network in real time, using machine learning to detect behavioral anomalies across all OT, IoT, and IT/OT converged assets, before they become incidents.",
+        "ctaPrimary": "Request a PoC",
+        "ctaSecondary": "Download How a PoC Works",
+        "tags": ["Industrial OT", "Critical Infrastructure", "Agri-Food", "Manufacturing & Industry"],
+        "cards": [
+          { "title": "Real-Time Traffic Analysis",     "description": "Monitors every packet and flow across OT/IT segments, with no agents required on industrial devices" },
+          { "title": "ML Anomaly Engine",              "description": "ML models learn what's normal on your network and detect any deviation, including unknown threats" },
+          { "title": "Automatic Asset Inventory",      "description": "Discovers and classifies every connected device: PLC, HMI, RTU, IIoT sensors, legacy assets" },
+          { "title": "Actionable Alerts with Context and AI Assistant", "description": "Explainable AI alerts with severity, affected asset, evidence, and assignable response workflow" },
+          { "title": "Multi-Tenant Architecture for MSSP", "description": "Multi-tenant architecture ready for MSSP with strict per-client data isolation" },
+          { "title": "NIS2 Compliance Support", "description": "Asset inventory, network visibility, and event traceability to support your NIS2 compliance" }
+        ]
+      },
+
+      "capabilities": {
+        "sectionLabel": "PLATFORM CAPABILITIES",
+        "headline": "The Six Core Capabilities to Protect Industrial Infrastructure",
+        "subheadline": "From full asset visibility to regulatory compliance, in a single platform built for real OT environments.",
+        "cta": "Learn more",
+        "items": [
+          {
+            "title": "OT/IoT Asset Inventory & Visibility",
+            "description": "You can't protect what you can't see. SentryN3t auto-discovers and classifies every device on your network (PLCs, HMIs, RTUs, IIoT sensors, and legacy assets), agentless and without disrupting operations."
+          },
+          {
+            "title": "Signatureless Anomaly Detection",
+            "description": "No signatures. Our AI engine learns the normal behavior of every device on your network and detects any deviation (unusual traffic, unknown connections, lateral movement), including threats never seen before."
+          },
+          {
+            "title": "OT Vulnerability & Exposure Management",
+            "description": "Prioritize only the vulnerabilities that are actually exploitable in your environment. SentryN3t correlates your asset inventory with OT-specific threat intelligence so you act where it matters most."
+          },
+          {
+            "title": "Secure Remote Access for Vendors & Third Parties",
+            "description": "Uncontrolled third-party access is one of the top OT attack vectors. Monitor and control remote access to industrial systems and detect unauthorized vendor connections before they create an incident."
+          },
+          {
+            "title": "Support for NIS2 Requirements",
+            "description": "NIS2 requires knowing what assets you have, what's happening on your network, and being able to prove it. SentryN3t covers the technical pillars of that requirement (inventory, detection and event traceability) without replacing the compliance work your organization must own."
+          },
+          {
+            "title": "SaaS, On-Premise, or Air-Gapped Deployment",
+            "description": "Many critical OT environments cannot connect to the cloud. SentryN3t deploys as SaaS, on-premise, or fully air-gapped, meeting the strictest security requirements of defense and critical infrastructure."
+          }
+        ]
+      },
+
+      "sectors": {
+        "headline": "Designed for Environments Where Failure Is Not an Option",
+        "subheadline": "Every sector has its own protocols, assets, and regulations. SentryN3t Protection adapts to your operational reality.",
+        "cta": "Explore solution",
+        "items": [
+          { "name": "Industry & Manufacturing", "tag": "NIS2 · IEC 62443", "problem": "An unplanned production halt costs tens of thousands of euros per hour. Protect PLCs, SCADA, and sensor networks from ransomware, lateral movement, and supply chain attacks." },
+          { "name": "Agri-Food", "tag": "NIS2", "problem": "Connected processing lines and cold chain systems are increasingly targeted in ransomware campaigns. OT cybersecurity for food and livestock industry." },
+          { "name": "Energy", "tag": "NIS2", "problem": "Continuity and resilience of essential services with 24/7 monitoring. Zero tolerance for unplanned outages under NIS2." },
+          { "name": "Healthcare", "tag": "NIS2", "problem": "Protection of connected systems and devices and continuity of care against OT/IoT threats in healthcare environments." },
+          { "name": "Supply Chain", "tag": "NIS2", "problem": "Control of suppliers and third parties: a central requirement of the NIS2 directive to reduce inherited supply-chain risk." },
+          { "name": "Public Administration", "tag": "ENS", "problem": "ENS compliance, secure remote access, and citizen data protection in converged environments. Air-gapped deployment available for installations with sovereignty requirements." },
+          { "name": "Finance & Insurance", "tag": "DORA", "problem": "Digital operational resilience and third-party risk management under DORA, with continuous visibility over critical connected systems." }
+        ]
+      },
+
+      "innovation": {
+        "variant": "terminal",
+        "sectionLabel": "INNOVATION & R&D",
+        "headline": "Technology Born From Real Research, Not Marketing",
+        "description1": "SentryN3t Protection emerges from years of applied research in AI anomaly detection, time-series analysis, and IoT security, developed in active partnership with the University of Oviedo and backed by EU-funded innovation and national defense programs.",
+        "description2": "Our AI laboratory is not a feature: it is the foundation. Every detection model can be retrained, validated, and explained. No black boxes. No external vendor dependencies.",
+        "cta": "Read About Our Technology",
+        "proofPoints": [
+          { "title": "EU-Funded Projects",     "description": "Active participant in European innovation and defense cybersecurity research programs" },
+          { "title": "University Partnership", "description": "AI anomaly detection research with University of Oviedo Computer Science department" },
+          { "title": "ATD 2026 Program",       "description": "Recipient of competitive national R&D funding for industrial NDR with explainable AI" }
+        ]
+      },
+
+      "finalCta": {
+        "headline": "Do You Know What's Happening on Your OT Network Right Now?",
+        "description": "Most industrial attacks go undetected for weeks or months. Our team can show you in 30 minutes what visibility you have and what you're missing.",
+        "ctaPrimary": "Request a Demo",
+        "ctaContact": "Contact us",
+        "ctaSecondary": "Download How a PoC Works",
+        "checks": ["No commitment required", "OT cybersecurity & NIS2 experts on call"]
+      }
+    }
+  },
+  "footer": {
+    "tagline": "European startup developing industrial cybersecurity solutions to protect OT/IoT networks, built on machine learning and an AI assistant.",
+    "copyright": "© 2026 Ewala IT Services S.L. | European industrial cybersecurity",
+    "pdfTag": "PDF · ES",
+    "opensNewTab": "opens in a new tab",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "youtube": "YouTube"
+    },
+    "sections": [
+      {
+        "title": "Solutions",
+        "links": [
+          { "label": "SentryN3t Protection", "href": "/#showcase" },
+          { "label": "MSSP Services", "href": "https://secnorthlabs.eu/" }
+        ]
+      },
+      {
+        "title": "Sectors",
+        "links": [
+          { "label": "Critical Infrastructure", "href": "/#sectors" },
+          { "label": "Agri-Food", "href": "/#sectors" },
+          { "label": "Industry & Manufacturing", "href": "/#sectors" }
+        ]
+      },
+      {
+        "title": "Ewala",
+        "links": [
+          { "label": "Company", "href": "/compania" },
+          { "label": "Blog", "href": "/blog" },
+          { "label": "Contact", "href": "/contacto" }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          { "label": "Legal Notice", "href": "/aviso-legal" },
+          { "label": "Privacy Policy", "href": "/privacidad" },
+          { "label": "Cookie Policy", "href": "/cookies" },
+          { "label": "Cookie preferences", "action": "cookie-settings" }
+        ]
+      },
+      {
+        "title": "Policies",
+        "links": [
+          { "label": "Code of ethics", "href": "/COE-0001-02-CODIGO_ETICO.pdf" },
+          { "label": "Information security policy", "href": "/POL-0001-01-SGI POLITICA DE SEGURIDAD DE LA INFORMACION.pdf" },
+          { "label": "Environmental policy", "href": "/EWA-POL-0002-002.01-POLITICA MEDIOAMBIENTAL - Versión Web.pdf" },
+          { "label": "Whistleblowing channel", "href": "/PRO-0001-01-PROCEDIMIENTO_GESTION_CANAL_COMUNICACIONES.pdf" },
+          { "label": "Work-life balance measures", "href": "/PER-MED-0001-001.01-MEDIDAS DE CONCILIACIÓN - Página web.pdf" },
+          { "label": "Anti-fraud plan", "href": "/Plan Antifraude.pdf" }
+        ]
+      }
+    ],
+    "badges": ["GDPR", "NIS2", "ENS", "EU R&D"]
+  },
+  "mobileCta": {
+    "text": "Talk to Expert",
+    "platform": "Platform"
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog | Ewala",
+      "description": "Articles on OT/IoT cybersecurity, NIS2 and IT/OT convergence from Ewala IT Services."
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "heroTitle": "The",
+    "heroTitleHighlight": "blog",
+    "heroSubtitle": "OT/IoT cybersecurity, compliance and innovation explained by the Ewala team.",
+    "featuredLabel": "Featured",
+    "allCategoriesLabel": "All",
+    "readingMinutesLabel": "{minutes} min read",
+    "relatedLabel": "Related articles",
+    "tocLabel": "Contents",
+    "authorLabel": "By",
+    "emptyState": "No articles published in this language yet.",
+    "categories": {
+      "nis2": "NIS2",
+      "ot-iot": "OT/IoT",
+      "mssp": "MSSP",
+      "idi": "R&D"
+    }
+  },
+  "sellos": {
+    "meta": {
+      "title": "European projects and funding | Ewala",
+      "description": "Posters of the European projects and public funding of Ewala IT Services."
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Projects and funding",
+    "heroTitle": "European projects and funding",
+    "heroSubtitle": "The European research and innovation projects and public funding programmes Ewala takes part in.",
+    "sealsHeading": "Recognitions and quality seals",
+    "seals": [
+      {
+        "id": "pyme-innovadora",
+        "name": "Innovative SME",
+        "description": "Spanish Government seal recognising small and medium-sized companies with innovative activity.",
+        "validity": "Valid from 4 March 2026 to 3 March 2029",
+        "href": "https://aplicaciones.ciencia.gob.es/pyi/infoPYI.do?cif=B42987651",
+        "hrefLabel": "Verify in the official registry",
+        "alt": "Innovative SME seal (Pyme innovadora)",
+        "emblemAlt": "Government of Spain, Ministry of Science, Innovation and Universities"
+      },
+      {
+        "id": "empresa-emergente",
+        "name": "Emerging company",
+        "description": "Certified as an emerging company by ENISA, Ministry of Industry and Tourism.",
+        "href": "https://www.enisa.es/",
+        "hrefLabel": "More information",
+        "alt": "ENISA seal: certified as an emerging company, Ministry of Industry and Tourism"
+      },
+      {
+        "id": "eibt",
+        "name": "EiBT",
+        "description": "Technology-based innovative company recognised by ANCES.",
+        "href": "https://www.ceei.es/sites/content/?r=3fuztbxkpolxuxjmkaw7",
+        "hrefLabel": "More information",
+        "alt": "EiBT seal: technology-based innovative company recognised by ANCES"
+      },
+      {
+        "id": "spain-101",
+        "name": "Spain 101",
+        "description": "Company distinguished in the TOP 101 of Spain Up Nation 2025.",
+        "href": "https://www.top101spainupnation.com/empresas-top101-2025/",
+        "hrefLabel": "View the list",
+        "alt": "TOP 101 Spain Up Nation 2025 seal"
+      },
+      {
+        "id": "igualdad",
+        "name": "Mark of excellence in equality",
+        "description": "Asturian Mark of Excellence in Equality.",
+        "href": "https://iam.asturias.es/-/publicadas-la-concesion-y-renovacion-de-la-marca-asturiana-de-excelencia-en-igualdad",
+        "hrefLabel": "More information",
+        "alt": "Asturian Mark of Excellence in Equality"
+      },
+      {
+        "id": "premios-industria-40",
+        "name": "Industria 4.0 Awards 2025",
+        "description": "Recognition received at the 2025 edition of the Industria 4.0 Awards.",
+        "alt": "Industria 4.0 Awards 2025 logo, with Caja Rural de Asturias and CTIC Centro Tecnológico"
+      }
+    ],
+    "postersHeading": "European research and innovation projects",
+    "postersIntro": "Posters of the European research and innovation projects Ewala takes part in.",
+    "posters": [
+      {
+        "src": "/recursos/DOC-0006-01-ELIAS-Cartel-LUCIA-1080x761.webp",
+        "width": 1080,
+        "height": 761,
+        "title": "LUCIA - ELIAS",
+        "alt": "LUCIA - ELIAS · European Union Research & Innovation Programme"
+      },
+      {
+        "src": "/recursos/IMG-0001-01-FIELD-Cartel-GRIAL-1080x761.webp",
+        "width": 1080,
+        "height": 761,
+        "title": "GRIAL - ENFIELD",
+        "alt": "ENFIELD - GRIAL · European Union Research & Innovation Programme"
+      },
+      {
+        "src": "/recursos/IMG-0001-01-GUAR-Cartel-LIVET-1080x761.webp",
+        "width": 1080,
+        "height": 761,
+        "title": "LIVET - GUARDIANS",
+        "alt": "LIVET - GUARDIANS · European Union Research & Innovation Programme"
+      }
+    ],
+    "fundingBanner": {
+      "headline": "European public funding",
+      "description": "Ewala IT Services S.L. is a certified Digitalising Agent under the Kit Digital and Kit Consulting programmes, funded by the European Union (NextGenerationEU), within the Recovery, Transformation and Resilience Plan, and managed by Red.es, under the Ministry for Digital Transformation and Public Service.",
+      "logos": [
+        {
+          "src": "/recursos/CONBANDERA_KITDIGITAL.png",
+          "width": 3252,
+          "height": 303,
+          "alt": "Kit Digital: Funded by the European Union · NextGenerationEU · Recovery, Transformation and Resilience Plan"
+        },
+        {
+          "src": "/recursos/CONBANDERA_KITCONSULTING.webp",
+          "width": 2994,
+          "height": 299,
+          "alt": "Kit Consulting: Funded by the European Union · NextGenerationEU · Recovery, Transformation and Resilience Plan"
+        }
+      ]
+    }
+  },
+  "company": {
+    "meta": {
+      "title": "Company | Ewala",
+      "description": "Ewala is a European technology company specialized in industrial cybersecurity, secure development and applied artificial intelligence."
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbCompany": "Company",
+    "heroTitle": "European technology",
+    "heroTitleHighlight": "with a purpose",
+    "heroSubtitle": "European startup developing industrial cybersecurity solutions to protect OT/IoT networks, built on machine learning and an AI assistant.",
+    "introSectionLabel": "WHO WE ARE",
+    "introHeadline": "Cybersecurity, secure development and applied AI",
+    "intro1": "Ewala IT Services S.L. is a technology company specialized in cybersecurity, secure software development and applied artificial intelligence for strategic sectors. We develop SentryN3t Protection, our AI-powered anomaly detection platform for OT/IoT networks.",
+    "intro2": "Our work is grounded in real applied research, not marketing: we actively collaborate with the University of Oviedo and take part in innovation programs funded by the European Union and by national R&D programs.",
+    "proofPointsLabel": "INNOVATION & R&D",
+    "certificationsLabel": "PARTNERS AND COLLABORATING ORGANISATIONS",
+    "ctaHeadline": "Want to know more about how we work?",
+    "ctaButton": "Contact Ewala"
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact | Ewala",
+      "description": "Talk to the Ewala team about SentryN3t, MSSP or NIS2/ENS compliance. We reply within 24 business hours."
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbContact": "Contact",
+    "heroTitle": "Let's talk about your",
+    "heroTitleHighlight": "OT/IoT cybersecurity",
+    "heroSubtitle": "Tell us about your case and we'll get back to you within 24 business hours with next steps.",
+    "form": {
+      "sectionLabel": "Contact form",
+      "firstName": {
+        "label": "First name",
+        "placeholder": "Your first name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Your last name (optional)"
+      },
+      "company": {
+        "label": "Company",
+        "placeholder": "Your company name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@company.com"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+1 000 000 0000 (optional)"
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Your role (optional)"
+      },
+      "need": {
+        "label": "What do you need?",
+        "placeholder": "Select an option",
+        "options": {
+          "demo": "SentryN3t demo",
+          "pricing": "SentryN3t pricing and licensing",
+          "integration": "Integration and deployment in my OT network",
+          "compliance": "SentryN3t for NIS2 / ENS / IEC 62443",
+          "other": "Other enquiry"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Briefly tell us what you need (optional)",
+        "counter": "{count}/1000"
+      },
+      "privacy": {
+        "label": "I have read and accept the",
+        "linkLabel": "privacy policy",
+        "error": "You must accept the privacy policy to continue."
+      },
+      "marketing": {
+        "label": "I want to receive product updates and content from Ewala by email."
+      },
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "retry": "Retry",
+      "success": {
+        "title": "Message sent",
+        "description": "Thanks for contacting Ewala. We'll reply within 24 business hours.",
+        "reference": "Your enquiry reference: {reference}",
+        "testMode": "Test mode: the form works, but email delivery is not configured yet, so this message has not reached anyone."
+      },
+      "error": {
+        "title": "The message could not be sent",
+        "description": "An error occurred while sending the form. Please try again or email us directly at info@ewala.es.",
+        "validation": "Please check the highlighted fields: some are not valid.",
+        "rateLimited": "Too many attempts in a row. Wait a minute and try again.",
+        "network": "We couldn't connect. Check your connection and try again.",
+        "unavailable": "We couldn't register your enquiry due to an error on our side. Email us at info@ewala.es or call +34 984 10 90 69."
+      },
+      "validation": {
+        "firstNameMin": "First name must be at least 2 characters.",
+        "firstNameMax": "First name cannot exceed 40 characters.",
+        "lastNameMax": "Last name cannot exceed 60 characters.",
+        "companyMin": "Company name must be at least 2 characters.",
+        "companyMax": "Company name cannot exceed 80 characters.",
+        "emailInvalid": "Enter a valid email address.",
+        "phoneInvalid": "Enter a valid phone number (digits, spaces, +, hyphens and brackets only; up to 32).",
+        "roleMax": "Role cannot exceed 80 characters.",
+        "needRequired": "Select what you need.",
+        "messageMax": "Message cannot exceed 1000 characters.",
+        "invalid": "Please check this field."
+      }
+    },
+    "rail": {
+      "directContact": {
+        "title": "Direct contact",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "addressLabel": "Address",
+        "hoursLabel": "Hours",
+        "email": "info@ewala.es",
+        "phone": "+34 984 10 90 69",
+        "address": "Calle Peña Brava nº 21, Office 1B, Silvota Industrial Estate, 33192 Llanera, Asturias, Spain",
+        "hours": [
+          { "period": "September 15 to June 15", "detail": "Monday to Thursday, 8:00 AM to 6:00 PM. Friday, 8:00 AM to 3:00 PM." },
+          { "period": "June 15 to September 15 (summer hours)", "detail": "Monday to Friday, 8:00 AM to 3:00 PM." }
+        ]
+      },
+      "whatHappensNext": {
+        "title": "What happens next",
+        "steps": [
+          {
+            "title": "We contact you",
+            "description": "A member of the Ewala team replies within 24 business hours."
+          },
+          {
+            "title": "Quick assessment",
+            "description": "We talk through your OT/IoT infrastructure and compliance needs."
+          },
+          {
+            "title": "Tailored proposal",
+            "description": "We prepare a demo, licensing or MSSP proposal fitted to your case."
+          }
+        ]
+      },
+      "dataProtection": {
+        "summary": "Basic data protection information",
+        "controller": "Controller: Ewala IT Services S.L.",
+        "purpose": "Purpose: to handle your contact request.",
+        "legitimation": "Legal basis: consent of the data subject.",
+        "recipients": "Recipients: the form submission is handled through Netlify (website hosting) and Resend (email delivery), based in the USA, acting as data processors. No data is shared with other third parties, except when legally required.",
+        "rights": "Rights: access, rectification, erasure, objection, restriction and portability, by writing to rgpd@ewala.es.",
+        "moreInfo": "More information in the privacy policy"
+      }
+    }
+  },
+  "legal": {
+    "common": {
+      "breadcrumbHome": "Home",
+      "updatedLabel": "Last updated",
+      "tocLabel": "Contents"
+    },
+    "notice": {
+      "meta": {
+        "title": "Legal notice | Ewala",
+        "description": "Legal notice for www.ewala.es: owner identification, terms of use, intellectual property, disclaimer of liability and governing law."
+      },
+      "breadcrumb": "Legal notice",
+      "title": "Legal notice",
+      "subtitle": "Identification of the owner of www.ewala.es and terms of access and use, pursuant to article 10 of the Spanish LSSI-CE. Courtesy translation: the Spanish version prevails in case of discrepancy.",
+      "updated": "October 21, 2026",
+      "sections": [
+        {
+          "title": "Identification of the website owner",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Pursuant to article 10 of Spanish Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSICE), the following identification details of the owner of this website are provided."
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Owner",
+                  "def": "Ewala IT Services S.L. (hereinafter, \"Ewala\")"
+                },
+                {
+                  "term": "Registered office",
+                  "def": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+                },
+                {
+                  "term": "Tax ID (C.I.F.)",
+                  "def": "B42987651"
+                },
+                {
+                  "term": "Telephone",
+                  "def": "[+34 984 10 90 69](tel:+34984109069) (08:00-19:00, Spanish time)"
+                },
+                {
+                  "term": "Email",
+                  "def": "[info@ewala.es](mailto:info@ewala.es)"
+                },
+                {
+                  "term": "Registry details",
+                  "def": "Registered in the Commercial Registry of Asturias, Volume 4434, Folio 214, Entry 1, sheet AS-57378."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "For matters relating to the protection of personal data, data subjects may contact [rgpd@ewala.es](mailto:rgpd@ewala.es)."
+            }
+          ]
+        },
+        {
+          "title": "Purpose",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "This Legal Notice governs access to, browsing and use of the website www.ewala.es (hereinafter, \"the Website\"), made available to users by Ewala in compliance with the LSSICE."
+            },
+            {
+              "type": "p",
+              "text": "Visiting and using the Website confers the status of user (hereinafter, the \"User\") and implies full and unreserved acceptance of all the conditions set out in this Legal Notice, in the [Privacy Policy](/privacidad) and in the [Cookie Policy](/cookies), which together make up the complete legal information of the Website."
+            },
+            {
+              "type": "p",
+              "text": "Ewala reserves the right to modify at any time the presentation, configuration, content and conditions of access and use of the Website. The User should read this Legal Notice carefully each time they access the Website, as its terms may change. If the User does not agree with the terms set out, they must refrain from browsing and using the Website."
+            }
+          ]
+        },
+        {
+          "title": "Intellectual and industrial property rights",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala is the owner or, where applicable, holds the corresponding licences over the intellectual and industrial property exploitation rights of the Website and of the elements it contains."
+            },
+            {
+              "type": "p",
+              "text": "All content of the Website, including but not limited to images, photographs, documents, software, texts, graphics, trademarks, logos, distinctive signs, colour combinations, structure and design (hereinafter, the \"Content\"), is the intellectual and industrial property of Ewala or its licensors. Access to and use of the Website does not grant the User any right over them."
+            },
+            {
+              "type": "p",
+              "text": "In accordance with Royal Legislative Decree 1/1996, of April 12, approving the consolidated text of the Spanish Intellectual Property Law, the reproduction, distribution and public communication, including making available, of all or part of the Content for commercial purposes, in any medium and by any technical means, without the prior express authorisation of the owner is expressly prohibited, except for uses covered by the limits provided by law."
+            },
+            {
+              "type": "p",
+              "text": "The User shall refrain from removing, altering, circumventing or tampering with any protection device or security system installed on the Website."
+            }
+          ]
+        },
+        {
+          "title": "Links to third-party websites",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The Website may contain links or hyperlinks providing access to independent third-party websites. Ewala exercises no control over those websites or their content and therefore accepts no liability for them."
+            },
+            {
+              "type": "p",
+              "text": "The inclusion of links to third-party sites does not imply approval, association or endorsement by Ewala. Ewala does not guarantee that the links are accurate at the time of access or that the linked sites are operational at all times."
+            },
+            {
+              "type": "p",
+              "text": "Ewala shall not be liable for the information the User accesses through such links, unless it has actual knowledge that the activity or information they lead to is unlawful or infringes the goods or rights of a third party eligible for compensation, in which case it will act diligently to remove or disable the corresponding link."
+            }
+          ]
+        },
+        {
+          "title": "Terms of use",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The User undertakes to make correct use of the Website in accordance with applicable law and this Legal Notice."
+            },
+            {
+              "type": "p",
+              "text": "Use of the Website for purposes harmful to the goods or interests of Ewala or third parties, or that in any other way overload, damage or disable the networks, servers and other computer equipment or software products and applications of Ewala or third parties, is expressly prohibited."
+            },
+            {
+              "type": "p",
+              "text": "In particular, and without prejudice to the foregoing, the User shall refrain from carrying out on the Website or on the systems that support it any penetration testing, vulnerability scanning, port scanning, reverse engineering or similar activity without the prior, express and written authorisation of Ewala, as provided in articles 197 bis and 264 et seq. of the Spanish Criminal Code."
+            },
+            {
+              "type": "p",
+              "text": "The User shall be liable to Ewala or to third parties for any damages that may result from breach of these obligations."
+            }
+          ]
+        },
+        {
+          "title": "Disclaimer of liability",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala does not guarantee that the content of the Website is free of errors or permanently up to date, although it declares that it will take reasonable measures to correct errors, update content and keep the Website working properly."
+            },
+            {
+              "type": "p",
+              "text": "Ewala is not responsible for:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Damages arising from the presence of viruses, malware or any other harmful computer element on the Website or on the server that provides it. It is the User’s responsibility to have adequate tools to detect and protect against harmful software.",
+                "Damages arising from failures, interruptions or disconnections in telecommunications networks, power supplies or any other third-party service affecting the availability of the Website.",
+                "The truthfulness, accuracy, suitability or timeliness of content provided by third parties, Ewala being exempt from any contractual or non-contractual liability towards Users who make use of it."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Educational, technical or research content published on the Website is purely informative and does not constitute professional advice or a guarantee of results. Its application by the User is at the User’s sole responsibility and creates no contractual relationship with Ewala."
+            },
+            {
+              "type": "p",
+              "text": "If the User becomes aware of unlawful content or content that may infringe third-party rights, the User must notify Ewala immediately using the contact details given in section 1, so that it can take appropriate measures. Receipt of such a notice does not constitute, under the LSSICE, actual knowledge of the activities or content indicated by the sender."
+            }
+          ]
+        },
+        {
+          "title": "Data protection",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In accordance with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD), all personal data provided while using the Website will be processed as set out in the [Privacy Policy](/privacidad), accessible through a link at the bottom of the Website."
+            }
+          ]
+        },
+        {
+          "title": "Cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The Website uses cookies. For more information about the cookies used, their purposes and how to manage them, please see the [Cookie Policy](/cookies), accessible through a link at the bottom of the Website."
+            }
+          ]
+        },
+        {
+          "title": "Partial invalidity",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If any provision of this Legal Notice is declared null or unenforceable, in whole or in part, by any court, tribunal or competent administrative body, such nullity or unenforceability shall not affect the remaining provisions, which shall remain fully effective and binding."
+            }
+          ]
+        },
+        {
+          "title": "Governing law and jurisdiction",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "This Legal Notice is governed by Spanish law."
+            },
+            {
+              "type": "p",
+              "text": "For the resolution of any dispute arising from access to or use of the Website, the parties submit to the Courts and Tribunals of Gijón (Spain), except where applicable regulations impose a different jurisdiction, in particular consumer and user protection regulations."
+            },
+            {
+              "type": "p",
+              "text": "Ewala states its willingness to resolve any dispute amicably beforehand."
+            }
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "meta": {
+        "title": "Privacy policy | Ewala",
+        "description": "Privacy policy of www.ewala.es: data controller, purposes, legal bases, recipients, retention periods and data subject rights."
+      },
+      "breadcrumb": "Privacy policy",
+      "title": "Privacy policy",
+      "subtitle": "How Ewala IT Services S.L. processes the personal data provided through this website and other communication channels, in accordance with the GDPR and Spanish data protection law. Courtesy translation: the Spanish version prevails in case of discrepancy.",
+      "updated": "October 26, 2026",
+      "sections": [
+        {
+          "title": "Content and compliance",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In compliance with Regulation (EU) 2016/679 of the European Parliament and of the Council of April 27, 2016, on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (\"GDPR\"), Spanish Organic Law 3/2018 of December 5 on the Protection of Personal Data and the Guarantee of Digital Rights (\"LOPDGDD\"), and other applicable data protection regulations."
+            },
+            {
+              "type": "p",
+              "text": "This Privacy and Personal Data Protection Policy (hereinafter, the \"Privacy Policy\") applies to the personal data provided through the website www.ewala.es (hereinafter, the \"Website\"), as well as through any other communication channel made available by Ewala IT Services S.L. (hereinafter, \"Ewala\" or \"the company\")."
+            },
+            {
+              "type": "p",
+              "text": "Any reference to the \"Website\" shall also be understood as a reference to www.ewala.es or any of its subdomains, related domains or dependent web pages."
+            },
+            {
+              "type": "p",
+              "text": "\"User\" means the person who accesses, uses or browses the Website."
+            },
+            {
+              "type": "p",
+              "text": "The User freely and voluntarily decides to provide their personal data through the Website or the various communication channels available. Where data is requested through forms or other means, certain personal data may be required in order to respond to and process the request."
+            },
+            {
+              "type": "p",
+              "text": "The complete legal information of the Website is made up, jointly, of the [Legal Notice](/aviso-legal), this Privacy Policy and the [Cookie Policy](/cookies), documents accessible through a link at the bottom of the Website (hereinafter, the \"Complete Legal Information\"). The legal information of the Website must be interpreted jointly with all the documents mentioned."
+            },
+            {
+              "type": "p",
+              "text": "Where personal data is requested through forms, the User will be provided with a table of basic data protection information, as well as an acceptance checkbox stating that they have read and accept this Privacy Policy, with a direct link to it."
+            },
+            {
+              "type": "p",
+              "text": "Users are advised to read the Complete Legal Information in full on a regular basis, as its content may be subject to changes, which will be duly published with reference to their version and date."
+            }
+          ]
+        },
+        {
+          "title": "Identification of the data controller and contact details",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In compliance with applicable regulations, you are informed that the controller of the data provided is:"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Owner",
+                  "def": "Ewala IT Services S.L."
+                },
+                {
+                  "term": "Tax ID (C.I.F.)",
+                  "def": "B42987651"
+                },
+                {
+                  "term": "Address",
+                  "def": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+                },
+                {
+                  "term": "General email",
+                  "def": "[info@ewala.es](mailto:info@ewala.es)"
+                },
+                {
+                  "term": "Data protection email",
+                  "def": "[rgpd@ewala.es](mailto:rgpd@ewala.es)"
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "To exercise data protection rights, data subjects may contact the postal or email address above, following the procedure described in section 13."
+            }
+          ]
+        },
+        {
+          "title": "Principles applicable to the processing of personal data",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala applies the principles set out in article 5 of the GDPR to the processing of personal data:"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Lawfulness, fairness and transparency",
+                  "def": "Personal data is processed lawfully, fairly and in a transparent manner in relation to the data subject."
+                },
+                {
+                  "term": "Purpose limitation",
+                  "def": "Data is collected for specified, explicit and legitimate purposes and is not further processed in a manner incompatible with those purposes."
+                },
+                {
+                  "term": "Data minimisation",
+                  "def": "Data is adequate, relevant and limited to what is necessary in relation to the purposes for which it is processed."
+                },
+                {
+                  "term": "Accuracy",
+                  "def": "Data is accurate and, where necessary, kept up to date. Reasonable steps will be taken to ensure that inaccurate data is erased or rectified without delay."
+                },
+                {
+                  "term": "Storage limitation",
+                  "def": "Data is kept in a form which permits identification of data subjects for no longer than is necessary for the purposes of the processing."
+                },
+                {
+                  "term": "Integrity and confidentiality",
+                  "def": "Data is processed in a manner that ensures appropriate security through appropriate technical and organisational measures."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Ewala as data processor",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In the course of providing its cybersecurity, technological innovation and IT services, Ewala may act as a data processor on behalf of its customers, processing personal data in accordance with the customer’s documented instructions and the data processing agreement (DPA) signed between the parties."
+            },
+            {
+              "type": "p",
+              "text": "In such cases, the customer acts as data controller and Ewala undertakes to comply with the obligations set out in article 28 of the GDPR, including the application of appropriate technical and organisational measures, limiting processing to the controller’s instructions, the duty of confidentiality of authorised personnel, the sub-processor regime, assisting the controller in complying with its obligations and the deletion or return of data at the end of the service, unless retention is required by law."
+            },
+            {
+              "type": "p",
+              "text": "Ewala will not access or process its customers’ personal data for purposes other than those set out in the corresponding data processing agreement."
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding customers",
+          "blocks": [
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Data comes from what is provided in the commercial and contractual relationship: quotes, contracts, invoices, requests, emails and any other communication arising from the customer relationship. The categories of data processed include: identification data (first name, surname, ID/tax ID, position), contact data (address, telephone, email), commercial data (services contracted, proposals, quotes), economic, financial and banking data (invoicing, payment method, payment history) and technical data arising from the provision of the service (IP addresses, activity logs, configurations)."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "Contracting of products and/or services and their management, provision and support of the contracted services, incident management, invoicing and collection, and preparation of aggregated and anonymised statistical reports on the company’s activity."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Performance of a contract or pre-contractual measures (art. 6.1.b GDPR), compliance with legal, tax and accounting obligations (art. 6.1.c GDPR) and legitimate interest in processing the data of contact persons of legal entities, sole traders and professionals (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Tax, accounting and labour advisers; the Spanish Tax Agency (AEAT) and other competent Public Administrations; financial institutions for the management of collections and payments; professionals and providers whose involvement is necessary to provide the service, with a data processing agreement in place; and, where legally required, State Security Forces and Bodies and Courts and Tribunals."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "None are generally foreseen. Where they are necessary to provide the service, the safeguards described in section 12 will apply."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "For the duration of the contractual relationship and, afterwards, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out with customer data."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding supplier management",
+          "blocks": [
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Data comes from the commercial and contractual relationship with suppliers. The categories of data include: identification data (first name, surname, ID/tax ID, position), contact data (address, telephone, email), commercial data (proposals, contracts, terms), economic, financial and banking data (account details, invoices, payment history) and supplier performance evaluations."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "Management of the relationship with suppliers, approval, selection and evaluation, contract management, invoicing and compliance with payment obligations."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Performance of a contract (art. 6.1.b GDPR), compliance with tax and accounting obligations (art. 6.1.c GDPR) and legitimate interest in administrative management and in processing the data of contact persons of legal entities (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Tax and accounting advisers, AEAT and financial institutions."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "None are generally foreseen. Should they become necessary, the safeguards described in section 12 will apply."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "For the duration of the contractual relationship and, afterwards, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding recruitment and receipt of résumés",
+          "blocks": [
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Data comes from applications received through recruitment processes, unsolicited résumés or professional job platforms. The categories of data include: identification data (first name, surname, ID/NIE), contact data (address, telephone, email, professional profile), academic data (education, degrees, certifications), professional data (experience, references, technical skills) and data arising from the evaluation and selection processes."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "Evaluating applications in recruitment and hiring processes: receipt and assessment of résumés, conducting interviews and tests and maintaining a talent pool."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Consent of the data subject, expressed by voluntarily submitting their application (art. 6.1.a GDPR), and adoption of pre-contractual measures at the request of the data subject (art. 6.1.b GDPR). Maintaining the talent pool is based on the candidate’s consent, which may be withdrawn at any time."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Internal Ewala staff involved in recruitment processes and, where applicable, providers of application management platforms with a data processing agreement in place. No data is disclosed to third parties for any other purpose."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "None are generally foreseen. Should they become necessary, the safeguards described in section 12 will apply."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "Candidates’ data will be kept for a maximum of twenty-four (24) months from receipt or last update. After that period, if the résumé has not been updated or used, it will be securely deleted, unless it must be kept for longer to comply with a legal obligation or for the establishment, exercise or defence of legal claims. If the candidate is hired as a result of the selection process, their data will become part of their employment file."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out in recruitment processes."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding sending and receiving emails",
+          "blocks": [
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Data comes from emails sent and received by Ewala through its corporate email accounts. Any information or personal data included in those emails is incorporated into the company’s processing systems."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "To manage, handle and respond to enquiries raised and to maintain the relationship generated through corporate email. Providing data by email is voluntary; depending on the subject, only the necessary data will be requested, so refusing to provide mandatory data may prevent the request from being handled or the service from being provided."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Performance of the contract or services requested (art. 6.1.b GDPR), consent expressed by sending the email (art. 6.1.a GDPR), compliance with legal obligations (art. 6.1.c GDPR) and legitimate interest in processing the contact data of legal entities, sole traders and professionals (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Third parties to whom disclosure is necessary by legal obligation or arising from the relationship itself; Public Administrations with competence in the matter; State Security Forces and Bodies; Courts and Tribunals; and service providers with which Ewala has signed the corresponding data processing agreement."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "None are generally foreseen. Should they become necessary, the safeguards described in section 12 will apply."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "For the duration of the relationship and, afterwards, for the periods legally established for compliance with legal obligations or for the establishment, exercise or defence of legal claims."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding electronic commercial communications",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In compliance with article 21 of Spanish Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSICE), the GDPR and the LOPDGDD:"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Email address and, where applicable, first name, surname, company and professional position."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "Sending electronic commercial communications about Ewala’s products, services, news and activities."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Consent of the data subject (art. 6.1.a GDPR). For customers, sending communications about products or services similar to those originally contracted is based on the company’s legitimate interest (art. 6.1.f GDPR), under the terms of article 21.2 LSSICE. Every communication will offer the recipient the possibility to object to the processing."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Providers of electronic communication sending and management services, with a data processing agreement in place."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "None are generally foreseen. Should they become necessary, the safeguards described in section 12 will apply."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "Data will be kept as long as the data subject does not withdraw consent or object to the processing and, afterwards, for the period necessary to demonstrate compliance with applicable legal obligations."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Data subjects may unsubscribe from commercial communications at any time, easily and free of charge, by sending an email to [rgpd@ewala.es](mailto:rgpd@ewala.es) or through the unsubscribe link included in each communication."
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding data obtained through use and management of the Website",
+          "blocks": [
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Controller",
+                  "def": "Ewala IT Services S.L. (contact details in section 2)."
+                },
+                {
+                  "term": "Data processed and source",
+                  "def": "Data comes from completing the contact forms and using the means of communication available on the Website. The data processed includes first name, surname, location, email, telephone, company, IP address and message content, as well as information obtained through cookies, which, unless technical, are only installed with the User’s prior consent. Where fields are marked with an asterisk (*) or indicated as mandatory, completing them is necessary; if they are not provided, Ewala may not accept or handle the enquiry."
+                },
+                {
+                  "term": "Purpose",
+                  "def": "To manage, handle and respond to enquiries received through the Website, as well as to send administrative, technical, organisational or commercial information about the products and services that are the subject of the request, and to prepare aggregated and anonymised statistical reports on the use of the Website."
+                },
+                {
+                  "term": "Legal basis",
+                  "def": "Consent of the data subject (art. 6.1.a GDPR), adoption of pre-contractual measures at the request of the data subject (art. 6.1.b GDPR) and legitimate interest in processing professional contact data (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                },
+                {
+                  "term": "Categories of recipients",
+                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc. (website hosting and form processing) and Resend, Inc. (email delivery), both based in the United States, acting as data processors. Also, the other categories indicated in the previous sections where applicable."
+                },
+                {
+                  "term": "International transfers",
+                  "def": "Submitting the contact form involves a transfer to Netlify, Inc. and Resend, Inc. (United States), under the safeguards described in section 12."
+                },
+                {
+                  "term": "Retention periods",
+                  "def": "For the time necessary to handle the enquiry and, afterwards, for the periods legally established for compliance with legal obligations or for the establishment, exercise or defence of legal claims."
+                },
+                {
+                  "term": "Automated decisions",
+                  "def": "No automated decision-making or profiling is carried out."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Data protection information regarding the use of cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The Website uses cookies. The categories of data processed include online identifiers, browsing data and user preferences. Cookies that are not strictly necessary, such as Google Analytics analytics cookies, are only installed with the User’s prior consent."
+            },
+            {
+              "type": "p",
+              "text": "The purpose, legal basis, categories of cookies used, recipients and how to manage them are detailed in the [Cookie Policy](/cookies), accessible through a link at the bottom of the Website."
+            }
+          ]
+        },
+        {
+          "title": "International data transfers",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In general, Ewala does not carry out international transfers of personal data, except those arising from the use of providers based in the United States: Netlify, Inc. and Resend, Inc., for handling the contact form, and Google LLC, for web analytics, the latter only if the User has given consent (see the [Cookie Policy](/cookies))."
+            },
+            {
+              "type": "p",
+              "text": "Should personal data be transferred internationally as a result of its processing, such transfers will be carried out in accordance with applicable data protection regulations and, in particular, to countries whose level of protection has been declared adequate by an Adequacy Decision adopted by the European Commission, including, where the recipient has joined it, the EU-US Data Privacy Framework (Implementing Decision (EU) 2023/1795)."
+            },
+            {
+              "type": "p",
+              "text": "Where the European Commission has not adopted an Adequacy Decision for a given country or recipient, Ewala will adopt other safeguards provided for in data protection regulations, in particular by signing Standard Contractual Clauses, accompanied, where appropriate, by any supplementary measures that may be necessary."
+            }
+          ]
+        },
+        {
+          "title": "Data protection rights",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala informs data subjects of the existence of the following rights:"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Right of access",
+                  "def": "To obtain confirmation of whether personal data concerning you is being processed and, if so, to access it and the information on the purposes of the processing, the categories of data, the recipients, the expected retention periods, the existence of other rights and the source of the data where it was not obtained from the data subject."
+                },
+                {
+                  "term": "Right to rectification",
+                  "def": "To obtain rectification of inaccurate personal data or completion of incomplete data."
+                },
+                {
+                  "term": "Right to erasure",
+                  "def": "To obtain erasure of data when it is no longer necessary for the purposes for which it was collected, consent is withdrawn, you object to the processing, the data has been unlawfully processed or must be erased to comply with a legal obligation."
+                },
+                {
+                  "term": "Right to restriction of processing",
+                  "def": "To obtain restriction of processing when the accuracy of the data is contested, the processing is unlawful, the data is no longer needed by the controller but the data subject needs it for legal claims, or the data subject has objected to the processing."
+                },
+                {
+                  "term": "Right to data portability",
+                  "def": "To receive the personal data provided in a structured, commonly used and machine-readable format and to transmit it to another controller, where the processing is based on consent or on the performance of a contract and is carried out by automated means."
+                },
+                {
+                  "term": "Right to object",
+                  "def": "To object at any time, on grounds relating to your particular situation, to the processing of your personal data based on legitimate interest, as well as, in all cases and without needing to give reasons, to processing for direct marketing purposes."
+                },
+                {
+                  "term": "Right not to be subject to automated individual decisions",
+                  "def": "Not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects or similarly significantly affects you."
+                },
+                {
+                  "term": "Right to withdraw consent",
+                  "def": "To withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal."
+                },
+                {
+                  "term": "Right to lodge a complaint with a supervisory authority",
+                  "def": "Data subjects may lodge a complaint with the Spanish Data Protection Agency (AEPD) (C/ Jorge Juan 6, 28001 Madrid, Spain — [www.aepd.es](https://www.aepd.es)), especially where they have not obtained satisfaction in the exercise of their rights."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "**How to exercise your rights**"
+            },
+            {
+              "type": "p",
+              "text": "Rights may be exercised before Ewala, free of charge, by either of the following means:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Letter addressed to: Ewala IT Services S.L., Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain.",
+                "Email to: [rgpd@ewala.es](mailto:rgpd@ewala.es)"
+              ]
+            },
+            {
+              "type": "p",
+              "text": "To exercise rights, the data subject must provide:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "A signed written request stating the right they wish to exercise.",
+                "A copy of their identity document (national ID, passport or equivalent), only where there are reasonable doubts about the applicant’s identity.",
+                "If acting through a representative: documentation proving the representation (power of attorney, express authorisation or proof of parental authority or guardianship)."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Ewala will handle requests within a maximum of one month from receipt, which may be extended by two further months in the case of complex or numerous requests, informing the data subject of the extension within the first month. Ewala may request additional information when necessary to verify the applicant’s identity or to locate the data covered by the request."
+            }
+          ]
+        },
+        {
+          "title": "Data quality and accuracy",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala only requests personal data that is adequate, relevant and not excessive in relation to the purpose for which it is processed."
+            },
+            {
+              "type": "p",
+              "text": "The User guarantees the truthfulness, accuracy, currency and authenticity of the personal data provided, and is liable for any damages that may result from breach of this guarantee. The User also undertakes to notify Ewala of any change or correction to their data through the means indicated in section 13."
+            },
+            {
+              "type": "p",
+              "text": "Impersonation, adopting false identities, providing third-party data as one’s own and providing any untruthful data are expressly prohibited, and records made under such conditions may be cancelled, without prejudice to appropriate legal measures."
+            }
+          ]
+        },
+        {
+          "title": "Third-party data",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If the User provides personal data of third parties, they must first have informed those third parties expressly, precisely and unequivocally of the content of this Privacy Policy and have the necessary authority to provide such data."
+            },
+            {
+              "type": "p",
+              "text": "In the event of non-compliance with this section, Ewala is exempt from any liability arising from the processing of data provided by the User in breach of legal requirements, the User being liable to Ewala or any third party for the damages caused."
+            }
+          ]
+        },
+        {
+          "title": "Data of minors",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala’s Website and the services offered by the company are aimed exclusively at persons over eighteen (18) years of age with sufficient legal capacity to contract."
+            },
+            {
+              "type": "p",
+              "text": "Ewala does not knowingly collect or process personal data of minors. If it becomes aware that data of a person under 18 has been collected without the consent of their legal representatives, it will delete it immediately."
+            },
+            {
+              "type": "p",
+              "text": "If a legal representative becomes aware that a minor under their responsibility has provided personal data to Ewala, they may contact us at [rgpd@ewala.es](mailto:rgpd@ewala.es) to request its deletion."
+            },
+            {
+              "type": "p",
+              "text": "If data of minors or persons without legal capacity is provided through the Website, the person providing it and acting on their behalf declares responsibly that they hold legal representation, parental authority or guardianship, or have the express authorisation of whoever holds it, and the company may require supporting documentation."
+            },
+            {
+              "type": "p",
+              "text": "Legal representatives shall in any case be considered responsible for the acts of the persons in their care, in accordance with applicable regulations."
+            }
+          ]
+        },
+        {
+          "title": "Security measures",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala adopts and implements the technical and organisational measures necessary to guarantee the security of personal data, as required by article 32 of the GDPR, with the aim of ensuring the ongoing confidentiality, integrity, availability and resilience of processing systems and services."
+            },
+            {
+              "type": "p",
+              "text": "The measures applied include, among others: encryption in transit and at rest, multi-factor authentication (MFA), access management based on the principle of least privilege, continuous monitoring, encrypted and verified backups, data leakage prevention measures, periodic access reviews, confidentiality agreements with all staff and periodic training in data protection and information security."
+            },
+            {
+              "type": "p",
+              "text": "However, the User should be aware that security measures on the Internet are not infallible. Ewala will process personal data with due confidentiality and duty of secrecy."
+            },
+            {
+              "type": "p",
+              "text": "Ewala shall not be responsible for the processing and subsequent use of personal data that may be carried out by third-party information society service providers acting outside the Website."
+            }
+          ]
+        },
+        {
+          "title": "Social media",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Ewala maintains a presence on professional social networks in order to inform users about its activity, products and services. The processing of personal data of those who follow the corporate profiles is based on the consent expressed by following those profiles or interacting with them (art. 6.1.a GDPR)."
+            },
+            {
+              "type": "p",
+              "text": "The processing of personal data carried out on those networks is also subject to each platform’s terms of use, legal terms and privacy policies, which Users are advised to consult. Ewala is not responsible for the processing carried out by the platforms themselves on their users’ data."
+            }
+          ]
+        },
+        {
+          "title": "Duration and modification of the Privacy Policy",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The applicable Privacy Policy will be the one published on the Website at any given time. Ewala reserves the right to modify, in whole or in part, at any time, the content of this Privacy Policy by way of expansion, improvement, clarification or updating, whether due to legislative or case-law changes or changes in business strategy, without such modification having retroactive effect."
+            },
+            {
+              "type": "p",
+              "text": "The Privacy Policy will always be accessible through a link at the bottom of the Website, indicating its version and publication date."
+            }
+          ]
+        },
+        {
+          "title": "Invalidity and effectiveness",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "If any of the clauses included in this document is declared null, the rest of the document shall remain fully effective and binding on the same terms, provided it can subsist without the clause declared null."
+            }
+          ]
+        },
+        {
+          "title": "Governing law and jurisdiction",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The applicable law is Spanish law. Unless specific regulations establishing another jurisdiction apply, in particular consumer and user protection regulations, the parties submit to the Courts and Tribunals of Gijón (Spain) for any dispute, without prejudice to Ewala’s willingness to resolve any dispute amicably beforehand."
+            }
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "meta": {
+        "title": "Cookie policy | Ewala",
+        "description": "Cookie policy of www.ewala.es: which cookies are used, their purpose, who sets them, how long they last and how to accept, reject or withdraw consent."
+      },
+      "breadcrumb": "Cookie policy",
+      "title": "Cookie policy",
+      "subtitle": "Which cookies www.ewala.es uses, for what purpose, who sets them and for how long, and how you can accept, reject or withdraw your consent at any time. Courtesy translation: the Spanish version prevails in case of discrepancy.",
+      "updated": "October 26, 2026",
+      "sections": [
+        {
+          "title": "Party responsible for installing cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "This Cookie Policy is published in compliance with article 22.2 of Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSICE), Regulation (EU) 2016/679 (GDPR), Spanish Organic Law 3/2018 (LOPDGDD) and the guidelines of the Spanish Data Protection Agency on cookies."
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Owner",
+                  "def": "Ewala IT Services S.L."
+                },
+                {
+                  "term": "Tax ID (C.I.F.)",
+                  "def": "B42987651"
+                },
+                {
+                  "term": "Address",
+                  "def": "Calle Peña Brava 21, oficina 1B, PI de Silvota, 33192 Llanera (Asturias), Spain"
+                },
+                {
+                  "term": "Website",
+                  "def": "www.ewala.es"
+                },
+                {
+                  "term": "Data protection contact",
+                  "def": "[rgpd@ewala.es](mailto:rgpd@ewala.es)"
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "This website uses a technical cookie, necessary to remember your choice about cookies, and, only if you consent, third-party cookies to analyse its use in order to improve it. No cookies are used for advertising purposes or to build profiles from your browsing habits. The analytics cookies are set by Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Ireland), as the provider of Google Analytics, through Google Tag Manager; its terms and privacy information are available at [policies.google.com](https://policies.google.com). The cookie notice and preferences panel are provided by Usercentrics A/S (Cookiebot), based in Denmark, as data processor."
+            }
+          ]
+        },
+        {
+          "title": "Consent to the use of cookies",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "When you first access this website, a cookie notice is displayed that lets you decide freely on their use, with the same ease for accepting as for rejecting: you can accept them all, reject them all or configure your choice by category in the preferences panel. Rejecting cookies is as easy as accepting them."
+            },
+            {
+              "type": "p",
+              "text": "No cookies other than technical or strictly necessary ones are installed until you give your consent. No pre-ticked boxes in favour of acceptance are used: if you save your choice without ticking any category, it is equivalent to rejecting all non-necessary cookies. Access to the website and its content is not conditional on accepting cookies."
+            },
+            {
+              "type": "p",
+              "text": "Continuing to browse, scrolling the page or closing the notice without choosing are not, under any circumstances, valid ways of giving consent."
+            },
+            {
+              "type": "p",
+              "text": "You can change or withdraw your consent at any time, as easily as you gave it, from the \"Cookie preferences\" link in the footer. Withdrawing it does not affect the lawfulness of processing carried out beforehand."
+            },
+            {
+              "type": "p",
+              "text": "You will be asked for consent again 12 months after you gave or last renewed it, and also if the cookies used or their purposes change substantially."
+            },
+            {
+              "type": "p",
+              "text": "Your choice and the date you made it are stored in a technical cookie (CookieConsent) in your browser. In addition, Cookiebot keeps a record of your consent (a random identifier, the date, the options chosen and your anonymised IP address) so that it can be proven, as required by the GDPR. Your choice applies only to the browser and device from which you make it, and to the ewala.es domain."
+            },
+            {
+              "type": "p",
+              "text": "You can find more information about who we are, how to contact us and how we process your personal data in our [Privacy Policy](/privacidad), accessible from the footer."
+            }
+          ]
+        },
+        {
+          "title": "What is a cookie?",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "A cookie is a small text file that is downloaded to your device (computer, phone or tablet) when you visit certain web pages. It allows the site to store and retrieve information about your visit: for example, remembering a preference you have chosen or counting how many people have read a page."
+            },
+            {
+              "type": "p",
+              "text": "Besides cookies, there are other technologies with the same function (browser local storage, tracking pixels or device identifiers) and also fingerprinting techniques, which combine information to identify the device without needing to store anything on it. When this policy says \"cookies\", it refers to all of them."
+            },
+            {
+              "type": "p",
+              "text": "Information obtained through cookies may constitute personal data when it allows you to be identified directly or indirectly; in that case, its processing is governed by our [Privacy Policy](/privacidad)."
+            }
+          ]
+        },
+        {
+          "title": "What types of cookies are there?",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Cookies are classified in three different ways, and each cookie belongs to one category in each group."
+            },
+            {
+              "type": "p",
+              "text": "**By who manages them**"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "First-party",
+                  "def": "Sent from equipment managed by the website owner."
+                },
+                {
+                  "term": "Third-party",
+                  "def": "Sent from equipment managed by another entity, which is the one that processes the data obtained."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "**By how long they last**"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Session",
+                  "def": "Deleted when you close the browser."
+                },
+                {
+                  "term": "Persistent",
+                  "def": "Remain on the device for the period indicated in the table, unless you delete them earlier."
+                }
+              ]
+            },
+            {
+              "type": "p",
+              "text": "**By what they are for**"
+            },
+            {
+              "type": "dl",
+              "rows": [
+                {
+                  "term": "Technical or necessary",
+                  "def": "Allow browsing and the operation of the site, or save the choice you have made about other cookies. They are exempt from consent under article 22.2 LSSICE, because without them the service you requested cannot be provided."
+                },
+                {
+                  "term": "Analytics or measurement",
+                  "def": "Allow visits to be counted and how the site is used to be understood in aggregate, in order to improve content. They require your prior consent."
+                },
+                {
+                  "term": "Behavioural advertising",
+                  "def": "Allow browsing habits to be profiled in order to show personalised ads. This website does not use them."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Cookies used on this website",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The following table lists all the cookies and similar technologies that may be installed on your device, with their owner, purpose, duration and category. Analytics cookies are not installed until you accept them. Technical storage is installed without the need for consent, under the exception in article 22.2 LSSICE, as it is essential to remember your choice."
+            },
+            {
+              "type": "table",
+              "head": [
+                "Name",
+                "Owner",
+                "Purpose",
+                "Duration",
+                "Category"
+              ],
+              "rows": [
+                [
+                  "_ga",
+                  "Google Ireland Limited (third party)",
+                  "Distinguish one browser from another so that unique visitors can be counted and aggregated usage statistics produced.",
+                  "2 years",
+                  "Analytics"
+                ],
+                [
+                  "_ga_<measurement ID>",
+                  "Google Ireland Limited (third party)",
+                  "Maintain the Google Analytics 4 session state to know whether a visit is new or continues a previous one.",
+                  "2 years",
+                  "Analytics"
+                ],
+                [
+                  "CookieConsent",
+                  "Ewala (first party), managed by Usercentrics A/S (Cookiebot)",
+                  "Remember your choice about cookies and the date you made it.",
+                  "12 months",
+                  "Technical"
+                ]
+              ]
+            },
+            {
+              "type": "p",
+              "text": "If a tool that installs new cookies is added in the future, this table will be updated before it is activated."
+            }
+          ]
+        },
+        {
+          "title": "International data transfers",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The processing of data obtained through cookies is generally carried out in the European Economic Area or in countries for which the European Commission has declared an adequate level of protection."
+            },
+            {
+              "type": "p",
+              "text": "The provider of the analytics cookies is Google Ireland Limited, based in the European Union. The data may be processed by Google LLC in the United States, an entity certified under the EU-US Data Privacy Framework, declared adequate by the European Commission through Implementing Decision (EU) 2023/1795 of July 10, 2023. As a complementary safeguard, the Standard Contractual Clauses signed with Google apply. Usercentrics A/S (Cookiebot) processes consent records on servers located in the European Union."
+            },
+            {
+              "type": "p",
+              "text": "Google Analytics 4 does not log or store the IP address: it uses it to infer an approximate location and then discards it."
+            }
+          ]
+        },
+        {
+          "title": "How can the use of cookies be managed on this website?",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "In the cookie preferences panel, accessible at any time from the \"Cookie preferences\" link in the footer, you can view all information about the cookies used (including their purpose, duration and whether they are first-party or third-party) and enable or disable those that are not strictly necessary for the site to work."
+            },
+            {
+              "type": "p",
+              "text": "When you disable a cookie, it is removed from your browser whenever possible and, if it cannot be removed, it is blocked: a cookie you have rejected is never used. Some removal mechanisms depend on the third party responsible for the cookie and are outside our control."
+            },
+            {
+              "type": "p",
+              "text": "Alternatively, you can block or delete cookies from your own browser settings, including third-party cookies you previously accepted. Note that this affects all websites you visit, not just this one:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Chrome: Settings → Privacy and security → Cookies and other site data.",
+                "Firefox: Settings → Privacy & Security → Cookies and Site Data.",
+                "Safari: Settings → Privacy → Manage Website Data.",
+                "Edge: Settings → Cookies and site permissions → Manage and delete cookies."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "On mobile, the path is within the browser’s own settings, not the system settings."
+            },
+            {
+              "type": "p",
+              "text": "This option can be exercised at any time. The panel and browser settings are specific to each device: if you want your choice to apply on another one, you will need to configure it there too."
+            }
+          ]
+        },
+        {
+          "title": "What happens if cookies are disabled?",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Nothing that affects your visit. The site works the same, all pages remain accessible and the contact form is sent normally. The only effect is that your visit is not counted in our statistics."
+            },
+            {
+              "type": "p",
+              "text": "If you block all storage from your browser, including technical storage, we may not be able to remember your choice and the notice may appear again on every visit. Under no circumstances does rejecting non-necessary cookies prevent access to the website or its essential content and services."
+            }
+          ]
+        },
+        {
+          "title": "User rights",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "To the extent that information obtained through cookies constitutes personal data, you may exercise the rights of access, rectification, erasure, restriction of processing, portability and objection, as well as withdraw the consent given at any time, by writing to [rgpd@ewala.es](mailto:rgpd@ewala.es), under the terms set out in our [Privacy Policy](/privacidad)."
+            },
+            {
+              "type": "p",
+              "text": "You also have the right to lodge a complaint with the Spanish Data Protection Agency (C/ Jorge Juan 6, 28001 Madrid, Spain — [www.aepd.es](https://www.aepd.es)), especially if you have not obtained a satisfactory response when exercising your rights."
+            }
+          ]
+        },
+        {
+          "title": "Updating the Cookie Policy",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "This Cookie Policy may be updated when the cookies used, applicable regulations or the criteria of supervisory authorities change. We recommend reviewing it periodically; the applicable version is always the one published on this page."
+            },
+            {
+              "type": "p",
+              "text": "When significant changes occur in the cookies installed or their purposes, we will notify you through the website and you will be asked for consent again. If you have any questions, you can write to [rgpd@ewala.es](mailto:rgpd@ewala.es)."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

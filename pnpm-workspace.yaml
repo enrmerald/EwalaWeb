@@ -1,0 +1,20 @@
+# Protección de la cadena de suministro (se aplica también en el build de Netlify).
+# Antigüedad mínima (en minutos) de cualquier versión instalada, directa o transitiva: 3 días.
+# pnpm la reaplica al lockfile en cada install. Si un paquete concreto lo impide, usar
+# minimumReleaseAgeExclude solo para él y con comentario; no bajar este valor.
+minimumReleaseAge: 4320
+# Falla si una versión tiene menos garantías de publicación (firmas/provenance) que las anteriores.
+trustPolicy: no-downgrade
+# Excepciones por versión EXACTA (nunca por nombre): dependencias transitivas ya presentes en el
+# lockfile (octubre 2026) de líneas antiguas, publicadas sin las garantías de versiones posteriores.
+# No son una dependencia nuestra; si una actualización las mueve de versión, volver a evaluar.
+trustPolicyExclude:
+  - 'eslint-import-resolver-typescript@3.10.1'
+  - 'semver@6.3.1'
+  - 'undici-types@6.21.0'
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  sharp: false
+  unrs-resolver: false

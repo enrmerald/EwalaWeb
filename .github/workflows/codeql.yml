@@ -1,0 +1,55 @@
+# CodeQL · análisis estático de seguridad del código propio (app/, components/, lib/, netlify/) y de
+# los propios workflows (lenguaje `actions`: detecta inyección de expresiones, permisos excesivos…).
+#
+# Se ejecuta en PR, en push a main y cada lunes (para pillar consultas nuevas sin cambios de código).
+# Los resultados aparecen en Security → Code scanning. Repositorio público: gratis.
+# build-mode none: JavaScript/TypeScript y Actions no necesitan compilar para analizarse.
+#
+# Seguridad: permisos mínimos por job (security-events: write solo aquí, para subir los resultados),
+# sin secretos y sin pull_request_target.
+
+name: CodeQL
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  analizar:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript-typescript, actions]
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Inicializar CodeQL
+        uses: github/codeql-action/init@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+
+      - name: Analizar
+        uses: github/codeql-action/analyze@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+        with:
+          category: "/language:${{ matrix.language }}"

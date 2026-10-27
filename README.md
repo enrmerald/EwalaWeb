@@ -1,109 +1,133 @@
-# Ewala.es — Sitio web corporativo
+# Ewala · web corporativa (ewala.es)
 
-Repositorio del sitio web oficial de **Ewala IT Services**, empresa de ciberseguridad IT e industrial. El sitio se publica en **[https://ewala.es](https://ewala.es)** y está desplegado en **Netlify**.
+Web de **Ewala IT Services**: Next.js 16 + React 19 + Tailwind CSS 4, exportada como **sitio estático** y
+publicada en **Netlify**, con dos **Netlify Functions** (formulario de contacto con Resend y sumidero de
+informes CSP). Idiomas: español (`/es/`) e inglés (`/en/`).
 
-## Estructura del proyecto
+> Documentación técnica: [`CLAUDE.md`](CLAUDE.md) (resumen y reglas) y
+> [`docs/arquitectura.md`](docs/arquitectura.md) (detalle y motivos). La web anterior (HTML + blog Hugo)
+> está en la rama `backup-web-antigua`.
 
-El repositorio contiene dos partes diferenciadas que conviven en el mismo repo:
+## Requisitos
 
-```
-/                          ← raíz = document root publicado en ewala.es
-├── index.html             ← página principal
-├── kit-digital.html
-├── kit-consulting.html
-├── kit-digital-ciberseguridad-gestionada.html
-├── grc-gobernanza-riesgo-cumplimiento.html
-├── faq.html
-├── aviso-legal.html
-├── politica-privacidad.html
-├── politica-cookies.html
-├── sitemap.xml            ← gestionado manualmente
-├── robots.txt
-├── *.pdf                  ← políticas corporativas publicadas (no mover ni borrar)
-├── assets/
-│   ├── css/               ← estilos (.css y .min.css de cada archivo)
-│   ├── js/                ← scripts (app.js / app.min.js, main.js / main.min.js, …)
-│   ├── img/
-│   └── vendor/            ← Bootstrap, jQuery, AOS, Owl Carousel… (sin npm)
-├── particles/
-├── build/                 ← blog Hugo (ver sección Blog más abajo)
-└── netlify.toml           ← configuración de despliegue (fuente de verdad)
-```
+- **Node.js 24.18** (ver `.nvmrc`). Con nvm: `nvm use`.
+- **pnpm 12.6** (fijado en `package.json`). La forma más sencilla: `corepack enable` (en Windows, desde
+  una terminal de administrador) o `npm install -g pnpm@12.6.0`.
+- Git.
 
-> Los archivos con sufijo `_` o `.old` en `assets/` son copias de respaldo — ignorar salvo petición explícita.
-> Los HTML con sufijos tipo `-con-popupkaront3` o `test.html` son variantes de trabajo, no páginas en producción.
+> ⚠️ Si el repositorio está dentro de **OneDrive**, pausa la sincronización mientras trabajas: OneDrive
+> bloquea `node_modules`, `.next` y `out` y provoca errores `EPERM` en el build.
 
-## Sitio principal estático
-
-Las páginas de la raíz están construidas con **HTML5 + Bootstrap 5 + jQuery + AOS**. No existe proceso de build — los archivos se editan y despliegan tal cual.
-
-### Desarrollo local
-
-Usar cualquier servidor local. Con VSCode:
-- Instalar la extensión **Live Server** y pulsar "Go Live".
-
-### Consideraciones al añadir páginas nuevas
-
-1. Añadir la entrada correspondiente en `sitemap.xml`.
-2. Copiar el bloque de Google Analytics (`G-RJFWRZVCTC`) y Google Tag Manager (`GTM-T48SB3HV`) del `<head>` de cualquier página existente.
-3. Añadir el `<link rel="canonical">` correspondiente.
-
-### Estilos y scripts
-
-`assets/css/` y `assets/js/` tienen versiones fuente y minificadas del mismo archivo. Los HTML referencian la versión `.min`. Al editar, modificar **ambas versiones** (no hay pipeline de minificación automático).
-
-## Blog (Hugo)
-
-El blog vive en `build/` y se publica bajo `https://ewala.es/blog/`.
-
-```
-build/
-├── hugo.toml              ← configuración Hugo (baseURL, tema, parámetros)
-├── content/posts/         ← posts del blog en Markdown (aquí se añade contenido nuevo)
-├── themes/paper/          ← tema Hugo con Tailwind (su propio package.json)
-├── static/                ← imágenes y assets estáticos del blog
-└── docs/                  ← output generado por Hugo (no editar manualmente)
-```
-
-### Añadir un post
-
-1. Crear un archivo `.md` en `build/content/posts/` siguiendo el frontmatter de posts existentes.
-2. Previsualizar en local antes de publicar (ver más abajo).
-
-### Desarrollo local del blog
+## Puesta en marcha
 
 ```bash
-cd build
-hugo server -D          # -D incluye posts en draft; accesible en http://localhost:1313
+pnpm install          # instala dependencias (respeta pnpm-lock.yaml)
+pnpm dev              # http://localhost:3000 — desarrollo con recarga en caliente
 ```
 
-### Build de producción
+`pnpm dev` **no** aplica `netlify.toml` (redirecciones, cabeceras) ni ejecuta las funciones. Para probar
+como en producción:
 
 ```bash
-cd build
-hugo --minify --destination ./docs
+pnpm build                                                         # genera out/
+pnpm dlx --package=netlify-cli netlify dev --dir out --offline     # http://localhost:8888
 ```
 
-> La carpeta `/blog/` en producción **no está en el repo**: se genera en cada deploy mediante el `cp` anterior.
+## Comandos
+
+| Comando | Qué hace |
+|---|---|
+| `pnpm dev` | Servidor de desarrollo |
+| `pnpm build` | Genera el sitio estático en `out/` (incluye comprobación de tipos y el contenido del blog) |
+| `pnpm lint` | ESLint (debe terminar con 0 errores) |
+| `pnpm typecheck` | Comprueba tipos sin hacer build (incluye las funciones de `netlify/`) |
+| `pnpm verify:seo` | Audita el SEO de cada página de `out/` (ejecutar tras `pnpm build`) |
+| `pnpm verify:redirects [url]` | Comprueba que las URLs de la web antigua redirigen (301) o están retiradas (410) y que las nuevas responden 200. Por defecto contra `http://localhost:8888`; también `pnpm verify:redirects https://ewala.es` |
+
+## Estructura
+
+```
+app/                 páginas (App Router) — app/[locale]/… es cada página en es/en
+components/ewala/    componentes propios de la web
+components/ui/       componentes shadcn/ui (no editar a mano)
+content/blog/        artículos del blog en Markdown (es/ y en/)
+i18n/                internacionalización propia
+lib/                 utilidades (SEO, JSON-LD, contrato del formulario, analítica…)
+messages/            TODOS los textos de la web (es.json, en.json)
+netlify/functions/   funciones de servidor (formulario, informes CSP)
+netlify/lib/         código compartido por las funciones
+public/              ficheros públicos (imágenes, PDFs institucionales, gtm.js, 410.html)
+scripts/             scripts de build y de verificación
+docs/                documentación interna (no se publica)
+netlify.toml         build, redirecciones, cabeceras de seguridad y caché de Netlify
+```
+
+## Variables de entorno
+
+Copia `.env.local.example` a `.env.local` para desarrollo (nunca se sube a git). En Netlify se definen en
+**Site configuration → Environment variables**:
+
+| Variable | Scope | Para qué |
+|---|---|---|
+| `RESEND_API_KEY` | Functions · **secreto** | Clave de Resend («Sending access», limitada al dominio de envío) |
+| `RESEND_FROM` | Functions | Remitente verificado, p. ej. `Web Ewala <web@notify.ewala.es>` |
+| `CONTACT_MAILBOX_TO` | Functions | Buzón que recibe las consultas (`info@ewala.es`) |
+| `MAIL_ENVIRONMENT` | Functions | `production` en producción; en previews, p. ej. `staging` (se añade al asunto) |
+| `NEXT_PUBLIC_SITE_URL` | Builds | Opcional. Por defecto `https://ewala.es` |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Builds | Opcional. Verificación de Search Console por metaetiqueta |
+| `NEXT_PUBLIC_SHOW_DEMO_CTA` | Builds | `true` muestra los botones de demo (por defecto ocultos) |
+
+Sin las variables de Resend, el formulario funciona en **modo prueba**: valida, no envía y lo indica en
+pantalla. Las variables `NEXT_PUBLIC_*` se incrustan en el build: tras cambiarlas hay que redesplegar.
 
 ## Despliegue
 
-El despliegue es **automático en Netlify** al hacer push a `main`. La configuración está en `netlify.toml`:
+Netlify compila automáticamente con cada push:
 
-- **Build command**: `hugo --minify --source build --destination build/docs && cp -R build/docs blog`
-- **Publish directory**: `/` (la raíz entera del repo es el document root)
-- **Hugo version**: 0.157.0 (fijada en `[build.environment]`)
+- **`main` → producción** (`ewala.es`).
+- **Otras ramas / Pull Requests → previews** (`*.netlify.app`). Las previews salen con `noindex` y
+  `robots.txt` cerrado, así que no afectan al SEO.
 
-Los contextos `deploy-preview` y `branch-deploy` construyen con `-b $DEPLOY_PRIME_URL` para que los enlaces del blog apunten al preview correcto. Útil para revisar posts con fecha futura (añadir `--buildFuture`).
+El comando de build, la carpeta publicada y las versiones de Node y pnpm están en `netlify.toml`; no hay
+que configurarlos en el panel. **Rollback:** Netlify → *Deploys* → elegir un deploy anterior → *Publish deploy*.
 
-Las redirecciones 301 de `www.` y `http://` a `https://ewala.es` están configuradas en `netlify.toml` — no en el servidor.
+## Tareas habituales
 
-## SEO
+### Añadir un artículo al blog
 
-- `sitemap.xml` y `robots.txt` en la raíz se gestionan **manualmente**.
-- El blog genera su propio `sitemap.xml` bajo `/blog/`.
-- Analytics: Google Analytics `G-RJFWRZVCTC` + GTM `GTM-T48SB3HV` en el `<head>` de cada página del sitio principal.
+1. Crea `content/blog/es/<slug>.md` y `content/blog/en/<slug>.md` (mismo `<slug>`, en minúsculas y con
+   guiones). Copia el front matter de un artículo existente y rellénalo (ver la sección «Blog» de
+   `CLAUDE.md`: límites de caracteres y categorías).
+2. La imagen va en `public/` con nombre sin tildes, ñ ni espacios.
+3. En el cuerpo **no uses `#`** (el título ya es el H1): empieza con `##`.
+4. Enlaces internos relativos y con barra final: `/es/blog/otro-articulo/`.
+5. `pnpm build && pnpm verify:seo`.
 
-## Licencia
+### Añadir una redirección
 
-Copyright © Ewala IT Services. Todos los derechos reservados.
+1. Edita `netlify.toml` y añade el bloque `[[redirects]]` **antes** de la regla final `/*` → `/404.html`
+   y antes de cualquier comodín que pudiera capturarlo (p. ej. `/blog/*`).
+2. Usa `status = 301` para contenido que se ha movido y `410` (con `to = "/410.html"`) para contenido
+   retirado definitivamente.
+3. Prueba con `netlify dev` + `pnpm verify:redirects`.
+
+### Cambiar un texto
+
+Todos los textos están en `messages/es.json` y `messages/en.json`: cambia **los dos** (misma clave). Si
+es un texto legal, actualiza también su fecha `updated`.
+
+### Antes de cada commit
+
+```bash
+pnpm lint && pnpm typecheck && pnpm build && pnpm verify:seo
+```
+
+## Servicios externos
+
+| Servicio | Uso |
+|---|---|
+| Netlify | Hosting, funciones, redirecciones, cabeceras |
+| Resend | Envío del correo del formulario de contacto (dominio `notify.ewala.es`) |
+| Google Tag Manager (`GTM-KG3ZWVWW`) | Analítica (GA4 configurado dentro del contenedor) |
+| Cookiebot | Banner y registro del consentimiento de cookies (configurado en GTM) |
+| Google Search Console | Indexación y sitemap (`https://ewala.es/sitemap.xml`) |

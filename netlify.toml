@@ -1,58 +1,446 @@
+# Netlify · ewala.es · sitio 100 % estático (Next.js output: 'export') + Netlify Functions.
+#
+# Next genera todo el HTML en build (carpeta out/) y lo sirve el CDN de Netlify. Lo único
+# que ejecuta código en servidor son las funciones de netlify/functions/, que Netlify
+# despliega aparte: Next no las compila ni las conoce.
+#
+# IMPORTANTE: redirects(), rewrites() y headers() de next.config NO funcionan con
+# output: 'export'. Todas las redirecciones y cabeceras viven en este fichero.
+
 [build]
-  command = "hugo --minify --source build --destination build/docs && cp -R build/docs blog"
-  publish = "/"
+  command = "corepack enable && pnpm install --frozen-lockfile && pnpm build"
+  publish = "out"
+  functions = "netlify/functions"
 
-  [build.environment]
-    HUGO_VERSION = "0.162.0"
+[build.environment]
+  # Mismas versiones que .nvmrc y package.json (packageManager / engines).
+  NODE_VERSION = "24.18.0"
+  PNPM_VERSION = "12.6.0"
+  # No es opcional: sin ella el plugin de Next de Netlify puede montar funciones SSR
+  # y convertir en híbrido un sitio que queremos estático.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_TELEMETRY_DISABLED = "1"
 
-[context.production]
-  environment = { HUGO_VERSION = "0.162.0", HUGO_ENV = "production", HUGO_ENABLEGITINFO = "true" }
+[functions]
+  node_bundler = "esbuild"
 
-[context.split1]
-  command = "hugo --gc --minify --enableGitInfo"
+# ── Cabeceras ────────────────────────────────────────────────────────────────
+# Netlify aplica TODAS las reglas [[headers]] que casan con una ruta y concatena las
+# cabeceras con el mismo nombre. Por eso Cache-Control NO se pone nunca en "/*".
 
-  [context.split1.environment]
-    HUGO_ENV = "production"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), display-capture=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    # Cross-Origin-Resource-Policy NO va aquí: ver las reglas «/es/*», «/en/*» y «/_next/static/*».
+    # Un año, con subdominios. SIN `preload` a propósito: entrar en la lista precargada
+    # de los navegadores es prácticamente irreversible y obliga a HTTPS en todo
+    # subdominio presente y futuro. Es una decisión de infraestructura, no una cabecera más.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    # Destino de los informes de la CSP (grupo "csp" de `report-to`). El `report-uri` clásico
+    # apunta al mismo sitio para navegadores sin Reporting API.
+    Reporting-Endpoints = "csp=\"/api/csp-report\""
+    # Dos CSP a la vez (cabeceras de distinto nombre, no se concatenan):
+    #  - `Content-Security-Policy` (BLOQUEA): solo las directivas que no dependen de scripts de
+    #    terceros y que la web no necesita relajar: object-src, base-uri, frame-ancestors y form-action.
+    #    Cierran vectores clásicos (plugins, <base> inyectado, enmarcado, formularios hacia otro sitio).
+    #  - `Content-Security-Policy-Report-Only` (INFORMA, no bloquea): la política completa. Las
+    #    infracciones llegan a netlify/functions/csp-report.mts (Netlify → Logs → Functions). No pasar
+    #    ESA a bloqueo sin revisar antes esos informes con tráfico real: una CSP escrita de memoria
+    #    rompe la web en silencio.
+    #   script-src   'unsafe-inline' es obligatorio por Next (scripts de hidratación en línea y
+    #                sin servidor no hay nonce). GTM sirve gtm.js/gtag.js; Cookiebot su uc.js.
+    #   connect-src  balizas de GA4 (varios subdominios según región) y API de Cookiebot.
+    #   img-src      píxel de respaldo de GA/GTM e imágenes del banner de Cookiebot.
+    #   frame-src    iframe <noscript> de GTM y el de Cookiebot.
+    #   Las fuentes las auto-aloja next/font (/_next/static/media): font-src 'self'.
+    Content-Security-Policy = "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; report-uri /api/csp-report; report-to csp"
+    Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.cookiebot.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; frame-src https://www.googletagmanager.com https://consentcdn.cookiebot.com; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests; report-uri /api/csp-report; report-to csp"
 
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+# Cross-Origin-Resource-Policy: same-origin solo en las páginas y en el código de la web. NO en «/*»:
+# los ficheros de public/ (logo, PDFs, favicons) deben poder cargarse desde otros orígenes y Netlify
+# concatena las cabeceras de igual nombre de varias reglas, así que una regla más específica no puede
+# sustituir a la de «/*». En concreto, el correo interno del formulario (netlify/lib/contact-email.ts)
+# carga /logo_ewala_blanco.png desde el cliente de correo: con same-origin los webmail que piden la
+# imagen directamente desde el navegador la bloqueaban y el correo salía sin logo.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "same-origin"
 
-[context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+[[headers]]
+  for = "/en/*"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "same-origin"
 
-[context.next.environment]
-  HUGO_ENABLEGITINFO = "true"
+# Activos con hash en el nombre (JS, CSS, fuentes): un año, inmutables.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# Favicons: cambian muy poco, una semana.
+[[headers]]
+  for = "/favicon/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Imagen Open Graph generada por Next (app/[locale]/opengraph-image.tsx). Se exporta como
+# fichero SIN extensión y Netlify deduce el Content-Type por la extensión: sin esto,
+# LinkedIn/WhatsApp/X podrían no mostrar la vista previa.
+[[headers]]
+  for = "/es/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/en/opengraph-image"
+  [headers.values]
+    Content-Type = "image/png"
+    Cache-Control = "public, max-age=86400"
+
+# El resto (HTML, PDFs, imágenes de public/) usa el valor por defecto de Netlify:
+# "public, max-age=0, must-revalidate" + ETag. Así cada despliegue se ve al instante.
+
+# ── Redirecciones ────────────────────────────────────────────────────────────
+# Netlify evalúa las reglas DE ARRIBA ABAJO y aplica la primera que casa: las reglas
+# concretas van siempre antes que los comodines (/*).
+#
+# Notas para quien edite esto:
+#   - Netlify normaliza la barra final al comparar `from`: "/kit-digital" casa también
+#     con "/kit-digital/". Las variantes ".html" sí hay que listarlas aparte.
+#   - `force = true` hace que la regla gane aunque exista un fichero real en out/.
+#     NUNCA usar force en una regla "/x" → "/x/" (se redirige a sí misma: bucle).
+#   - Inventario de URLs antiguas: `git show origin/backup-web-antigua:sitemap.xml`.
+
+# 0) API propia (Netlify Functions), mismo origen: sin CORS. Las dos funciones NO llevan regla aquí:
+#    - Formulario de contacto (netlify/functions/contact.mts): ruta `config.path = '/api/contact'` y
+#      límite `config.rateLimit` de 10/min por IP.
+#    - Informes de la CSP (netlify/functions/csp-report.mts): ruta `config.path = '/api/csp-report'` y
+#      límite `config.rateLimit` de 60/min por IP (`Reporting-Endpoints` y `report-uri` apuntan ahí).
+#    El límite corta el abuso ANTES de invocar la función (sin gastar ejecuciones ni, en contact, cuota de
+#    Resend). El plan Free admite 2 reglas de límite por proyecto: están las 2 usadas; una tercera
+#    función con límite exigiría cambiar de plan o repartir el de una de ellas.
+#    Una función con `config.path` deja de servirse en /.netlify/functions/<nombre> (cierra la vía que
+#    esquivaba el límite) y una regla de reescritura hacia esa ruta, que tiene prioridad sobre la ruta
+#    de la función, apuntaría a algo inexistente: el deploy daría 404 en /api/... (comprobado en el
+#    preview del PR #7 con contact). NO añadir `[[redirects]]` de /api/contact ni /api/csp-report.
+
+# 1) Dominio canónico: todo a https://ewala.es (además de configurarlo en
+#    Domain management → Primary domain y Force HTTPS en el panel de Netlify).
+[[redirects]]
+  from = "https://www.ewala.es/*"
+  to = "https://ewala.es/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "http://www.ewala.es/*"
   to = "https://ewala.es/:splat"
   status = 301
+  force = true
 
 [[redirects]]
   from = "http://ewala.es/*"
   to = "https://ewala.es/:splat"
   status = 301
+  force = true
+
+# 2) Raíz → idioma por defecto. `force` porque out/index.html existe (es solo un
+#    respaldo en cliente generado por app/page.tsx).
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 301
+  force = true
 
 [[redirects]]
-  from = "https://www.ewala.es/*"
-  to = "https://ewala.es/:splat"
+  from = "/index.html"
+  to = "/es/"
   status = 301
+  force = true
 
 [[redirects]]
-  from = "https://ewala.es/"
-  to = "https://ewala.es"
+  from = "/index"
+  to = "/es/"
   status = 301
+  force = true
 
+# 3) Páginas legales de la web antigua → equivalentes nuevas.
+[[redirects]]
+  from = "/politica-privacidad"
+  to = "/es/privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-privacidad.html"
+  to = "/es/privacidad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/aviso-legal.html"
+  to = "/es/aviso-legal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-cookies"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politica-cookies.html"
+  to = "/es/cookies/"
+  status = 301
+  force = true
+
+# 4) Blog: los 4 artículos que existen en la web nueva conservan su posicionamiento
+#    con un 301 directo (sin saltos intermedios). DEBEN ir antes del comodín /blog/*.
+[[redirects]]
+  from = "/blog"
+  to = "/es/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/cpg-2-convergencia-it-ot"
+  to = "/es/blog/cpg-2-convergencia-it-ot/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/dispositivos-iot-y-las-capas-de-la-ciberseguridad"
+  to = "/es/blog/dispositivos-iot-y-las-capas-de-la-ciberseguridad/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/ndr-en-ot"
+  to = "/es/blog/ndr-en-ot/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/posts/sistemas-y-redes-industriales-ot"
+  to = "/es/blog/sistemas-y-redes-industriales-ot/"
+  status = 301
+  force = true
+
+# El sitemap del blog estaba dado de alta en Search Console: se envía al nuevo.
+[[redirects]]
+  from = "/blog/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
+
+# 5) Contenido retirado de forma permanente → 410 Gone (Google lo desindexa antes que
+#    un 404). Se sirve public/410.html con el estado 410.
+#
+#    Resto del blog Hugo: 22 artículos no migrados, slugs históricos (con tildes,
+#    "livet--…", "2024-11-22-…"), /blog/tags/*, /blog/categories/*, /blog/page/*,
+#    RSS (/blog/index.xml), CMS (/blog/admin/*) e imágenes del tema.
 [[redirects]]
   from = "/blog/*"
-  to = "/blog/:splat/"
-  status = 200
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Landings antiguas (decisión: no se migran).
+[[redirects]]
+  from = "/kit-digital"
+  to = "/410.html"
+  status = 410
+  force = true
 
 [[redirects]]
-  from = "/blog/tags/*"
-  to = "/blog/tags/:splat/"
-  status = 200
+  from = "/kit-digital.html"
+  to = "/410.html"
+  status = 410
+  force = true
 
+[[redirects]]
+  from = "/kit-consulting"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-consulting.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-digital-ciberseguridad-gestionada"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/kit-digital-ciberseguridad-gestionada.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/grc-gobernanza-riesgo-cumplimiento"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/grc-gobernanza-riesgo-cumplimiento.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Copias de trabajo y plantillas que la web antigua publicaba sin querer.
+[[redirects]]
+  from = "/index-con-popupkaront3"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/index-con-popupkaront3.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/faq"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/inner-page"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/inner-page.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/test"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/test.html"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# Activos y ficheros internos de la web antigua. Ninguna de estas carpetas existe en la
+# web nueva (comprobado contra out/: _next, es, en, favicon, recursos, sellos, team,
+# capturas-sentry). Si alguna vez se crea una con estos nombres, quitar su regla.
+[[redirects]]
+  from = "/assets/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/particles/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/particles.json"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/sitemap.xsd"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/static/*"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/410.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# 6) PDFs. El sitemap antiguo enlazaba una versión "-00-" de la política de seguridad
+#    que nunca existió; se envía a la vigente ("-01-"). La política medioambiental
+#    de 2023 se retiró (sustituida por EWA-POL-0002).
+[[redirects]]
+  from = "/POL-0001-00-SGI POLITICA DE SEGURIDAD DE LA INFORMACION.pdf"
+  to = "/POL-0001-01-SGI%20POLITICA%20DE%20SEGURIDAD%20DE%20LA%20INFORMACION.pdf"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/PAM-0001-08-Politica_Medioambiental_2023.pdf"
+  to = "/410.html"
+  status = 410
+  force = true
+
+# 7) La URL /404 estaba en el sitemap antiguo: que responda 404 de verdad, no 200
+#    (también si se pide el fichero directamente). Es una reescritura, no un bucle.
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/404.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# ── 404 única. SIEMPRE AL FINAL del fichero: Netlify evalúa las reglas de arriba
+# abajo y un comodín por encima de una ruta real se la come. Sin `force`, solo actúa
+# cuando no existe un fichero real en out/. ─────────────────────────────────────
 [[redirects]]
   from = "/*"
   to = "/404.html"

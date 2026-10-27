@@ -1,130 +1,205 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guía para Claude Code (claude.ai/code) al trabajar en este repositorio. Resumen operativo; el detalle y
+el «por qué» están en [`docs/arquitectura.md`](docs/arquitectura.md) (**lectura obligatoria antes de
+tocar código**).
 
-## Visión general
+## Qué es esto
 
-Sitio web corporativo de **Ewala IT Services** (ciberseguridad IT e industrial). Es un sitio **estático** servido desde `https://ewala.es` con dos partes diferenciadas que conviven en el mismo repositorio:
+Web corporativa de **Ewala IT Services** (`https://ewala.es`): **Next.js 16 (App Router) + React 19 +
+Tailwind v4 + shadcn/ui**, exportada a **HTML estático** (`output: 'export'` → `out/`) y desplegada en
+**Netlify** junto a dos **Netlify Functions** (`/api/contact`, `/api/csp-report`). Bilingüe `/es/` y `/en/`.
 
-1. **Sitio principal** — páginas HTML estáticas en la raíz (`index.html`, `kit-digital.html`, `faq.html`, `politica-privacidad.html`, etc.) construidas con HTML5 + Bootstrap + jQuery + AOS, sin ningún proceso de build.
-2. **Blog** — sitio Hugo dentro de `build/`, que se compila a `build/docs/` y se publica bajo `/blog/`.
+Producto en la home: **SentryN3t Protection** (NDR de ciberseguridad industrial OT/IoT con machine
+learning y asistente de IA). Posicionamiento: **startup europea de ciberseguridad industrial**. LIVET
+**no** está en la web (contenido archivado fuera del repo).
 
-El despliegue se hace en **Netlify** (ver `netlify.toml`). El README.md menciona Azure Blob Storage / App Services, pero la configuración activa de despliegue actualmente es Netlify — si hay contradicción, `netlify.toml` es la fuente de verdad.
+Páginas: home, `/compania`, `/blog` (+ artículos), `/contacto`, legales (`/aviso-legal`, `/privacidad`,
+`/cookies`) y una página oculta (`/sellos-y-reconocimientos`, `noindex`, ver `docs/arquitectura.md`).
+
+> Este repositorio sustituyó en 2026 a la web antigua (HTML/Bootstrap + blog Hugo). La web antigua
+> completa está en la rama `backup-web-antigua`. Sus URLs se redirigen (301) o se retiran (410) en
+> `netlify.toml`.
 
 ## Comandos
 
-No existe `package.json` en la raíz ni pipeline de test/lint. El único build real es el del blog Hugo:
+Gestor de paquetes: **pnpm 12** (versión fijada en `package.json` → `packageManager`). Node **24.18**
+(`.nvmrc`).
 
 ```bash
-# Build del blog (tal como lo ejecuta Netlify — requiere Hugo 0.162.0)
-hugo --minify --source build --destination build/docs && cp -R build/docs blog
+pnpm install              # dependencias
+pnpm dev                  # desarrollo en http://localhost:3000 (sin redirecciones ni funciones)
+pnpm build                # build estático → out/ (comprueba tipos)
+pnpm lint                 # ESLint 9 (eslint.config.mjs)
+pnpm typecheck            # tipos sin hacer build (incluye netlify/**/*.mts)
+pnpm verify:seo           # auditoría SEO de out/ (tras pnpm build)
+pnpm verify:redirects     # URLs antiguas → 301/410, rutas nuevas → 200 (contra http://localhost:8888)
 
-# Desarrollo local del blog (dentro de build/)
-cd build && hugo server -D
+# Probar como en producción (redirecciones, cabeceras y funciones de netlify.toml):
+pnpm build && pnpm dlx --package=netlify-cli netlify dev --dir out --offline   # http://localhost:8888
 ```
 
-Para el sitio principal estático, servir los archivos con cualquier servidor local (p.ej. la extensión **Live Server** de VSCode, como indica el README) — no hay proceso de build; los HTML se editan y suben tal cual.
+No hay tests unitarios. **Cómo comprobar un cambio:** `pnpm lint` (0 errores; hay 6 avisos previos
+conocidos, sobre todo reglas del React Compiler, que el proyecto no usa), `pnpm typecheck`, `pnpm build`, `pnpm verify:seo` y, si
+tocas `netlify.toml` o funciones, `netlify dev` + `pnpm verify:redirects`.
 
-## Arquitectura clave (lo no evidente)
+Avisos de entorno (Windows + OneDrive):
+- Si `pnpm build` falla con `EPERM … .next`, es OneDrive bloqueando la caché: borrar `.next/` y repetir.
+- `corepack enable` (lo usa el build de Netlify) necesita administrador en Windows; en local no hace falta.
+- En PowerShell 5.1, `curl.exe --data '{"a":1}'` pierde las comillas: enviar JSON desde fichero
+  (`--data-binary @fichero.json`).
 
-### Dualidad sitio estático / blog Hugo
+## Regla nº1: Next.js sin servidor
 
-- La **raíz** del repo *es* el document root que se publica (`publish = "/"` en `netlify.toml`). Por eso los HTML sueltos (`index.html`, `kit-consulting.html`, `grc-gobernanza-riesgo-cumplimiento.html`, …) son páginas navegables directamente.
-- El **blog Hugo** vive en `build/` con su propio `hugo.toml`. Su `publishDir = "docs"` significa que Hugo genera `build/docs/`, y el script de Netlify copia ese directorio a `/blog/` en la raíz del sitio publicado. El `baseURL` del blog es `https://ewala.es/blog/`, así que cualquier enlace absoluto generado por el tema ya incluye ese prefijo.
-- La carpeta `/blog/` que ves en producción **no está commiteada**: se genera en cada deploy mediante `cp -R build/docs blog`. No la crees manualmente en el repo.
-- Los posts del blog viven en `build/content/posts/` (Hugo se invoca con `--source build`, así que esa es la ubicación canónica). La carpeta `content/posts/` en la raíz del repo es **residual/legacy** y no se compila — no añadir contenido nuevo allí.
-- El tema Hugo es `paper`, ubicado en `build/themes/paper/`. Tiene su propio `package.json` y Tailwind para el tema — el sitio principal **no** usa Tailwind.
+El CDN sirve `out/` tal cual. **Prohibido** en código de Next: API Routes (`app/api/`), `'use server'` /
+Server Actions, `headers()`, `cookies()`, `middleware.ts`, `next-intl/server`, dependencias de servidor y
+`redirects/rewrites/headers` en `next.config` (no existen con export: van en `netlify.toml`).
 
-### Contextos de build en Netlify
+- **Código de servidor = solo Netlify Functions** en `netlify/functions/*.mts`. Extensión **`.mts`
+  obligatoria** (con `.ts` Netlify las trata como CommonJS con la firma antigua de Lambda y no reciben un
+  `Request`). Helpers en `netlify/lib/` (fuera de `functions/` para que no se desplieguen como funciones).
+  **Sin dependencias de `node_modules`** en `netlify/` y solo rutas relativas (no `@/`).
+- **Secretos** solo en variables de entorno de Netlify con scope «Functions» (p. ej. `RESEND_API_KEY`);
+  nunca en código ni en `NEXT_PUBLIC_*` (todo lo `NEXT_PUBLIC_*` acaba en el bundle público).
+- `useSearchParams()` necesita `<Suspense>` en export; el formulario lee `window.location` en un efecto.
 
-Además del build por defecto, `netlify.toml` define comandos específicos para:
-- `context.split1`: `hugo --gc --minify --enableGitInfo` (producción alternativa)
-- `context.deploy-preview`: añade `--buildFuture -b $DEPLOY_PRIME_URL` — útil al revisar previews de PRs con posts de fecha futura
-- `context.branch-deploy`: usa `-b $DEPLOY_PRIME_URL` para que los enlaces apunten al preview
-
-Si un preview muestra URLs/enlaces rotos, revisar que el `baseURL` efectivo sea el del contexto correcto.
-
-### Archivos HTML duplicados / variantes
-
-Hay varios HTML tipo `index-con-popupkaront3.html`, `kit-digital-ciberseguridad-gestionada.html`, `test.html`, y antes existieron `index-old1.html`, etc. Son **variantes o copias de trabajo** de landing pages — no confundir con el `index.html` real. Antes de editar una página, confirmar con el usuario cuál está en producción (típicamente el nombre "limpio" sin sufijos).
-
-### Assets y vendors
-
-- `assets/vendor/` contiene librerías de terceros ya commiteadas (Bootstrap, jQuery, AOS, Owl Carousel, Venobox, Icofont, Boxicons). No se gestionan con npm — se actualizan manualmente.
-- `assets/css/` incluye versiones `.css` y `.min.css` del mismo archivo (`style.css`, `popup.css`, `styleparticle.css`). Al editar estilos, modificar la versión fuente y regenerar la minificada (o editar ambas si no hay pipeline automático).
-- `assets/js/` igual: `app.js` / `app.min.js`, `main.js` / `main.min.js`, `particles.js` / `particles.min.js`. Los HTML suelen referenciar la versión `.min`.
-- Archivos con sufijo `_` (p.ej. `app.js_`, `particles.json_`) y `.old` son copias de respaldo — ignorar salvo petición explícita.
-
-### Redirects y SEO
-
-- `netlify.toml` fuerza redirección 301 de `www.ewala.es` y `http://` hacia `https://ewala.es`, y normaliza URLs del blog con trailing slash.
-- El sitio tiene `sitemap.xml` y `robots.txt` gestionados manualmente en la raíz. Al añadir páginas nuevas, actualizar `sitemap.xml`.
-- Se usan Google Analytics (`G-RJFWRZVCTC`) y Google Tag Manager (`GTM-T48SB3HV`) inyectados inline en los `<head>` de los HTML — replicar ese bloque en cualquier página nueva.
-
-### PDFs institucionales
-
-En la raíz hay múltiples PDFs de políticas (código ético, medioambiental, seguridad de la información, antifraude, conciliación, etc.). **Son contenido publicado** enlazado desde la web — no borrar ni mover sin confirmar.
-
-## Idioma
-
-Todo el contenido de usuario está en español (`lang="es"`, `languageCode = 'es-ES'`). Mantener copy, comentarios de contenido y metadatos SEO en español.
-
-## Jerarquía de encabezados en posts del blog
-
-El tema Hugo `paper` ya renderiza el campo `title` del frontmatter como `<h1>` en la página. Por tanto:
-
-- **Nunca usar `#` (H1) en el cuerpo del post** — genera un H1 duplicado que penaliza SEO y accesibilidad.
-- El cuerpo debe comenzar directamente con `##` (H2) o con un párrafo introductorio.
-- La jerarquía correcta es: `##` → `###` → `####`, sin saltar niveles.
-- Al crear o revisar un post, verificar que no existe ningún `# ` (almohadilla + espacio) fuera del frontmatter.
-
-## Generación de metadatos SEO/SEM para posts del blog
-
-Cuando el usuario pida generar metadatos SEO para un post (habitualmente tras redactar o revisar un `.md` en `build/content/posts/`), adopta el rol de **experto en Marketing Digital especializado en SEO/SEM con conocimiento profundo en ciberseguridad y tecnología**.
-
-### Entregables obligatorios (siempre los cuatro, en este orden)
-
-1. **Title SEO** — **máximo 47 caracteres** (contar incluyendo espacios). Orientado a posicionamiento, debe incluir al menos una keyword relevante del post. Conciso, sin relleno.
-2. **Metadescripción SEO** — **máximo 160 caracteres**. Debe incluir keyword principal, proponer un beneficio/hook claro y, cuando encaje, un CTA suave.
-3. **Subtítulo** — alineado con el **título principal** del post (no con el Title SEO). Humano, enganchador, no optimizado para buscadores.
-4. **Descripción corta** — resumen de 1-2 frases del contenido del post; tono editorial, no SEO.
-
-> **Importante:** validar mentalmente el conteo de caracteres antes de entregar. Si un entregable se pasa del límite, reescribirlo — no entregarlo "casi dentro".
-
-### Fuentes de keywords
-
-Usar preferentemente las keywords ya establecidas en el blog (declaradas en `build/hugo.toml` bajo `[params.seo].keywords`) y ampliarlas con términos específicos del post cuando aporten valor semántico:
+## Arquitectura (mapa)
 
 ```
-"Ciberseguridad", "Ewala IT Services", "Noticias Ciberseguridad",
-"Qué es la ciberseguridad", "Para qué sirve la ciberseguridad",
-"En qué consiste la ciberseguridad", "Qué es SIEM en ciberseguridad",
-"Qué significa ciberseguridad", "De qué trata la ciberseguridad",
-"Qué es la ciberseguridad y para qué sirve",
-"Ciberseguridad: por qué es importante",
-"Para qué sirve la ciberseguridad en las empresas",
-"Malware", "Ransomware"
+app/
+  layout.tsx              ← raíz transparente (devuelve children; el <html> lo pone cada idioma)
+  page.tsx                ← respaldo: redirect('/es/') (en producción responde antes un 301 de Netlify)
+  not-found.tsx           ← 404 global (out/404.html) con su propio <html lang="es">, noindex
+  fonts.ts                ← next/font (Noto Sans, Space Mono), compartido por layout y 404
+  sitemap.ts, robots.ts   ← estáticos; robots y noindex cambian si el build no es de producción
+  [locale]/
+    layout.tsx            ← <html lang>, metadatos comunes, JSON-LD Organization + WebSite, GTM, I18nProvider
+    page.tsx              ← home (SentryN3t + partners + sellos)
+    compania/ blog/ blog/[slug]/ contacto/ aviso-legal/ privacidad/ cookies/ sellos-y-reconocimientos/
+    opengraph-image.tsx   ← imagen social 1200×630 por idioma (colores y logo corporativos)
+  globals.css             ← Tailwind v4 + tema
+
+i18n/        config.ts (locales, PAGES, isLocale, localizedPath, alternatesFor) · client.tsx · types.ts
+lib/
+  site.ts               ← SITE_URL, IS_PRODUCTION_DEPLOY (CONTEXT de Netlify), SOCIAL_LINKS, withTrailingSlash
+  jsonld.ts             ← Organization, WebSite, BreadcrumbList, BlogPosting (enlazados por @id)
+  metadata.ts           ← pageOpenGraph(): hereda el openGraph del layout
+  analytics.ts          ← GTM_ID (debe coincidir con public/gtm.js)
+  contact.ts            ← contrato del formulario (límites, NEED_VALUES, tipos) — cliente y función
+  contact-client.ts     ← envío a /api/contact desde el navegador
+  blog.ts, products.ts, features.ts (SHOW_DEMO_CTA), utils.ts
+netlify/
+  functions/contact.mts     ← formulario → Resend
+  functions/csp-report.mts  ← sumidero de informes CSP (registra sin datos personales)
+  lib/                      ← http, validación, Resend, plantilla de correo
+messages/{es,en}.json   ← TODOS los textos (es.json es la fuente de verdad del tipo)
+content/blog/{es,en}/*.md ← artículos (ver «Blog»)
+public/                 ← se publica tal cual: PDFs institucionales, gtm.js, 410.html, imágenes, favicon/
+scripts/                ← build-blog-content.mjs (build), verificar-*.mjs, generar-*.py (manuales)
+components/ewala/       ← componentes propios (sections/ = Server Components de la landing)
+components/ui/          ← shadcn/ui: no editar a mano (excluido del lint)
+docs/                   ← arquitectura.md + documentación interna (no se publica)
+netlify.toml            ← build, funciones, redirecciones 301/410, cabeceras de seguridad y caché
 ```
 
-### Taxonomías existentes (reutilizar antes de inventar nuevas)
+## Netlify (`netlify.toml`)
 
-**Categorías** usadas en el blog:
-- `ciberseguridad`
-- `gestión-de-incidentes`
-- `tecnologías-de-seguridad`
+- Build: `corepack enable && pnpm install --frozen-lockfile && pnpm build`, publica `out/`,
+  `NETLIFY_NEXT_PLUGIN_SKIP=true` (impide que el plugin convierta la web en SSR).
+- **Las reglas `[[redirects]]` se evalúan de arriba abajo**: las concretas antes que los comodines y la
+  regla `/*` → `/404.html` (404) **siempre la última**. Nunca `force = true` en una regla `/x` → `/x/` (bucle).
+- Redirecciones de la web antigua: legales → `/es/…`, 4 posts conservados → `/es/blog/<slug>/`, el resto de
+  `/blog/*`, landings kit-digital/kit-consulting/grc y restos antiguos → **410** (`public/410.html`).
+  Inventario: `git show origin/backup-web-antigua:sitemap.xml`. Tras tocarlas: `pnpm verify:redirects`.
+- Cabeceras: HSTS, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y
+  **CSP**: en bloqueo solo `object-src`, `base-uri`, `frame-ancestors` y `form-action`; la completa sigue en
+  `Report-Only` (informes en Netlify → Logs → Functions → `csp-report`). Caché inmutable solo en
+  `/_next/static/*`; **nunca** `Cache-Control` en `/*` (Netlify concatena cabeceras). CORP `same-origin`
+  solo en `/es/*`, `/en/*` y `/_next/static/*` (no en `/*`: el logo de `public/` lo carga el correo del formulario).
+- `netlify dev` en local **no** emula `Cache-Control` ni `Content-Type` personalizados: comprobarlos en el
+  deploy de la rama.
 
-**Tags** usados en el blog:
-- `ataques-ransomware`, `ciberseguridad`, `ciberseguridad-avanzada`, `cybersecurity`
-- `edr`, `kit-digital`, `mdr`, `protección-24`, `siem-y-xdr`
-- `soc`, `soc-mdr`, `siem`, `soar`
-- `detección-de-amenazas`, `automatización-de-seguridad`, `seguridad-en-tiempo-real`
-- `centro-de-operaciones-de-seguridad`, `compliance`, `protección-de-datos`
+## Formulario de contacto (Resend)
 
-Si se propone una categoría o tag nuevos, justificar brevemente por qué no encaja con los existentes.
+`contact-form.tsx` → `POST /api/contact` → `netlify/functions/contact.mts` → API de Resend → buzón de Ewala.
+Validación en cliente (zod) **y** en servidor (`netlify/lib/contact-validation.ts`, sin dependencias),
+honeypot + tiempo mínimo de 3 s, `Idempotency-Key`, rate limit de 10/min/IP en Netlify, todo escapado
+en la plantilla. Variables (Netlify, scope Functions): `RESEND_API_KEY`, `RESEND_FROM`,
+`CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT`. Sin ellas → **modo prueba** (no envía y lo avisa). Si Resend
+falla → 503. Ver `.env.local.example`.
 
-### Formato de salida
+## Analítica y cookies
 
-Devolver los cuatro entregables claramente etiquetados, indicando el **conteo de caracteres real** entre paréntesis para Title y Metadescripción. Ejemplo:
+Solo se carga **GTM `GTM-KG3ZWVWW`** (`public/gtm.js`, con **Consent Mode v2 todo denegado por defecto**).
+GA4 y el banner **Cookiebot** se configuran **en el contenedor GTM**, no en el código; no añadir `gtag.js`
+directo ni otros scripts de terceros fuera de GTM. El footer muestra «Preferencias de cookies» solo si
+Cookiebot está cargado (`Cookiebot.renew()`). Si cambian cookies o proveedores, actualizar
+`legal.cookies` / `legal.privacy` en ambos idiomas (y su `updated`) y la tabla de cookies.
+
+## SEO (reglas)
+
+- Canonical **autorreferenciado por idioma** + hreflang `es`/`en`/`x-default` (`alternatesFor`). No
+  apuntar el canonical de `/en` a `/es`.
+- `trailingSlash: true`: toda URL interna termina en `/`. En `<a>` nativos, sitemap y JSON-LD usar
+  `localizedPath()` / `withTrailingSlash()`; `<Link>` ya la añade.
+- Next no fusiona `openGraph` entre layout y página: las páginas interiores usan `pageOpenGraph()`. El
+  layout define `twitter` **solo** con `card`.
+- Un único `<h1>` por página (lo pone `HeroInterior` en las interiores). `alt` en todas las imágenes.
+- Title ≤ 60 caracteres, meta description 120–160. Comprobar con `pnpm verify:seo`.
+- Sitemap: al cambiar el contenido de una página fija, actualizar su fecha en `PAGE_LAST_MODIFIED`
+  (`app/sitemap.ts`); los posts usan su `date`.
+- JSON-LD: solo datos reales (empresa, perfiles de `SOCIAL_LINKS`). No inventar autores, reseñas ni ratings.
+- Previews de Netlify: `noindex` + `robots.txt` cerrado automáticamente (`IS_PRODUCTION_DEPLOY`).
+
+## Blog
+
+Artículos en `content/blog/{es,en}/<slug>.md` (mismo slug en ambos idiomas). `scripts/build-blog-content.mjs`
+los valida y genera `src/generated/blog.json` en `predev`/`prebuild` (no se versiona). URL:
+`/{locale}/blog/<slug>/`. Imágenes en `public/` con nombres **ASCII** en minúscula con guiones (sin tildes,
+ñ ni espacios).
+
+Front matter:
+
+```yaml
+title: "Título visible (H1 de la página)"
+titleSeo: "Title SEO"            # <title> y og:title
+subtitle: "Subtítulo"            # opcional
+description: "Descripción corta" # entradilla y JSON-LD
+descriptionSeo: "Meta description"
+date: "AAAA-MM-DD"
+category: "ot-iot"               # cerrada: nis2 | ot-iot | mssp | idi (ampliar en build-blog-content.mjs)
+tags: ["ndr", "nis2"]
+image: "/nombre-imagen.webp"     # opcional
+imageAlt: "Texto alternativo"
+author: "Ewala"
+draft: false                     # opcional
+```
+
+- El build **falla** (nombrando fichero y campo) si `date` no es una fecha real `AAAA-MM-DD`, o si `image`
+  no es una ruta ASCII que exista en `public/` con exactamente las mismas mayúsculas (Netlify sirve desde
+  Linux, donde `/Foto.PNG` y `/foto.png` son ficheros distintos).
+- El Markdown **no admite HTML en bruto**: `<div>`, `<script>`… se escapan y se ven como texto, y los
+  enlaces/imágenes con esquema distinto de http(s)/mailto (`javascript:`, `data:`…) se reducen a su texto.
+  El cuerpo se inyecta con `dangerouslySetInnerHTML`, por eso se sanea en `build-blog-content.mjs`. ESLint
+  (`react/no-danger`) falla ante cualquier otro uso de `dangerouslySetInnerHTML` sin justificarlo.
+- **Nunca `#` (H1) en el cuerpo**: el `title` ya se pinta como `<h1>`. El cuerpo empieza con párrafo o
+  `##`, y la jerarquía es `##` → `###` → `####` sin saltar niveles.
+- Enlaces internos **relativos** y con barra final (`/es/blog/ndr-en-ot/`, `/es/contacto/`), nunca
+  `https://ewala.es/...` ni rutas de la web antigua (`/blog/posts/...`). No enlazar ni recomendar artículos
+  que no existan.
+
+### Metadatos SEO/SEM de un post (cuando el usuario los pida)
+
+Adoptar el rol de **experto en marketing digital SEO/SEM con conocimiento profundo de ciberseguridad**.
+Entregar **siempre los cuatro, en este orden**, con el conteo real de caracteres:
+
+1. **Title SEO** (`titleSeo`) — **máximo 47 caracteres** (con espacios). Incluye al menos una keyword.
+2. **Metadescripción** (`descriptionSeo`) — **máximo 160 caracteres**: keyword principal, beneficio/hook y,
+   si encaja, CTA suave.
+3. **Subtítulo** (`subtitle`) — alineado con el **título principal** (no con el Title SEO); humano, no SEO.
+4. **Descripción corta** (`description`) — 1-2 frases, tono editorial.
+
+Validar el conteo antes de entregar; si se pasa, reescribir. Formato:
 
 ```
 Title SEO (43/47): SOC vs MDR: qué elegir en ciberseguridad
@@ -132,3 +207,39 @@ Metadescripción (152/160): Descubre cuándo conviene un SOC interno o un MDR ge
 Subtítulo: Cuándo externalizar tu centro de operaciones de seguridad
 Descripción corta: Comparativa práctica entre SOC y MDR…
 ```
+
+Keywords de referencia: ciberseguridad industrial, OT/IoT, NDR, SentryN3t, NIS2, ENS, IEC 62443,
+convergencia IT/OT, SOC, MDR, SIEM, XDR, detección de amenazas, Ewala IT Services. Reutilizar las
+categorías existentes (`nis2`, `ot-iot`, `mssp`, `idi`) y tags ya usados antes de crear nuevos (justificar
+si se propone uno nuevo).
+
+## i18n
+
+- Implementación propia en `i18n/` (sin `next-intl`). Server Components leen su slice de `Messages`; islas
+  cliente usan `useTranslations('namespace')` → `t('clave')` / `t.raw('clave')`.
+- `t()` solo resuelve claves **planas**: `t('social.linkedin')` no funciona; usar `t.raw('social')`.
+- **Simetría ES/EN**: `en.json` debe tener exactamente las mismas claves que `es.json` (TypeScript no lo
+  comprueba). Todo texto visible sale de `messages/*.json`, nunca escrito en componentes.
+- No importar `i18n/config` en componentes cliente (arrastra los diccionarios al bundle).
+
+## Páginas legales y PDFs
+
+- Textos en `messages/{es,en}.json` → `legal.{common,notice,privacy,cookies}` como bloques tipados; los
+  pinta `legal-document.tsx` (sin `dangerouslySetInnerHTML`). Actualizar `updated` (ES y EN) al cambiar un
+  texto y pasar por asesoría antes de publicar cambios sustanciales.
+- Los 6 PDFs institucionales están en `public/` con su **nombre original** (es su URL pública desde la web
+  antigua): no renombrarlos. Se enlazan desde la columna «Políticas» del footer (`footer.sections`).
+
+## Estilos y convenciones
+
+- Tailwind v4 configurado en `app/globals.css` (no hay `tailwind.config.js`). Paleta: verde `#00e58d`
+  (`--primary`), gris `#2f2f2f` (`bg-section-dark`). Diseño oscuro forzado. `styles/globals.css` no se usa.
+- Fuentes: `font-sans` Noto Sans, `font-mono` Space Mono (`app/fonts.ts`).
+- Alias `@/*` → raíz. Named exports en secciones. Server Components por defecto; `"use client"` solo si
+  hace falta estado/efectos.
+- Imágenes con `next/image` y `width`/`height` reales.
+- Interruptor de demo: `NEXT_PUBLIC_SHOW_DEMO_CTA=true` (por defecto oculto; se incrusta en build).
+
+## Idioma
+
+Todo el contenido de usuario, los comentarios de código y los mensajes de commit en **español**.
