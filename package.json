@@ -8,8 +8,9 @@
   },
   "scripts": {
     "content:build": "node scripts/build-blog-content.mjs",
-    "predev": "pnpm content:build",
-    "prebuild": "pnpm content:build",
+    "sitemap:build": "node --no-warnings scripts/generar-sitemaps.mjs",
+    "predev": "pnpm content:build && pnpm sitemap:build",
+    "prebuild": "pnpm content:build && pnpm sitemap:build",
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint .",
