@@ -1,0 +1,40 @@
+# Revisión de dependencias · bloquea un PR que AÑADA o ACTUALICE a una versión con vulnerabilidades
+# conocidas (base de avisos de GitHub). Compara el lockfile del PR con el de la rama base: solo juzga
+# lo que el PR cambia, no las vulnerabilidades que ya estuvieran en main.
+#
+# Requiere el grafo de dependencias activo (Settings → Code security). Sin comentarios en el PR
+# (comment-summary-in-pr: never) para no pedir permiso de escritura: el resultado sale en la pestaña
+# Actions y en el check. Sin secretos y solo lectura.
+
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependency-review:
+    name: dependency-review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Revisar dependencias del PR
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: high
+          # Por defecto solo mira `runtime`. Aquí también `development`: las herramientas de build
+          # (Tailwind, PostCSS, ESLint…) se ejecutan en el build de Netlify y en el CI.
+          fail-on-scopes: runtime, development
+          comment-summary-in-pr: never
