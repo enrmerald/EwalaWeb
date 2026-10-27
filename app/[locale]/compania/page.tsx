@@ -54,7 +54,7 @@ export default async function CompanyPage({
   }>
 
   const breadcrumbs = [
-    { label: c.breadcrumbHome, href: `/${locale}` },
+    { label: c.breadcrumbHome, href: `/${locale}/` },
     { label: c.breadcrumbCompany },
   ]
 

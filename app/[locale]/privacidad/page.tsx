@@ -50,7 +50,7 @@ export default async function PrivacyPolicyPage({
   const common = dict.legal.common
 
   const breadcrumbs = [
-    { label: common.breadcrumbHome, href: `/${locale}` },
+    { label: common.breadcrumbHome, href: `/${locale}/` },
     { label: doc.breadcrumb },
   ]
 

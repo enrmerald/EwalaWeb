@@ -52,7 +52,7 @@ export default async function BlogPage({
   const categories = getCategories(locale)
 
   const breadcrumbs = [
-    { label: dict.blog.breadcrumbHome, href: `/${locale}` },
+    { label: dict.blog.breadcrumbHome, href: `/${locale}/` },
     { label: dict.blog.breadcrumbBlog },
   ]
 

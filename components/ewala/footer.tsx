@@ -116,8 +116,8 @@ export function Footer() {
   function resolveHref(href: string) {
     if (!href.startsWith("/")) return href // externos
     if (isPdf(href)) return href // PDFs institucionales: viven en la raíz, sin prefijo de idioma
-    if (href === "/") return `/${locale}`
-    if (href.startsWith("/#")) return `/${locale}${href.slice(1)}` // ancla de la home → /es#showcase
+    if (href === "/") return `/${locale}/`
+    if (href.startsWith("/#")) return `/${locale}/#${href.slice(2)}` // ancla de la home → /es/#showcase
     return `/${locale}${href}`
   }
 

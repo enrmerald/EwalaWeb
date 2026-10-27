@@ -107,7 +107,7 @@ export function ContactRail({ t, locale }: ContactRailProps) {
           <li>{t.dataProtection.rights}</li>
           <li>
             <Link
-              href={`/${locale}/privacidad`}
+              href={`/${locale}/privacidad/`}
               className="text-[var(--primary)] underline underline-offset-2 hover:text-white transition-colors"
             >
               {t.dataProtection.moreInfo}

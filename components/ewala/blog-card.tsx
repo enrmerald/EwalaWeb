@@ -20,7 +20,7 @@ interface BlogCardProps {
  * CSS en cliente sobre `data-category`, nunca desmonta esta tarjeta.
  */
 export function BlogCard({ post, locale, categoryLabel, readingMinutesLabel, featured = false }: BlogCardProps) {
-  const href = `/${locale}/blog/${post.slug}`
+  const href = `/${locale}/blog/${post.slug}/`
   const minutesLabel = readingMinutesLabel.replace('{minutes}', String(post.readingMinutes))
   const dateLabel = formatBlogDate(locale, post.date)
 

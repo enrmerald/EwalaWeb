@@ -259,8 +259,8 @@ export function Header({ locale }: HeaderProps) {
   // construcción (ver _livet-spa/README.md) y está oculto con `hidden: true`; si se vuelve a mostrar,
   // su enlace lleva a Contacto (el formulario ya no tiene opción LIVET). MSSP lo presta SecNorth Labs (web externa).
   const PRODUCT_CONFIG: Array<Pick<ProductItem, "icon" | "href" | "external">> = [
-    { icon: SentryN3tIcon, href: `/${locale}#showcase` },
-    { icon: RadioTower, href: `/${locale}/contacto` },
+    { icon: SentryN3tIcon, href: `/${locale}/#showcase` },
+    { icon: RadioTower, href: `/${locale}/contacto/` },
     { icon: Users, href: "https://secnorthlabs.eu/", external: true },
   ]
 
@@ -271,7 +271,7 @@ export function Header({ locale }: HeaderProps) {
       ...(PRODUCT_CONFIG[index] ?? { icon: Shield, href: `/${locale}/#showcase` }),
     }))
     .filter((product) => !product.hidden)
-  const SECTOR_HREF = `/${locale}#sectors`
+  const SECTOR_HREF = `/${locale}/#sectors`
   // Orden fijo de messages/*.json → nav.mobile_items: Soluciones, Sectores, Compañía, Blog, Contacto.
   const MOBILE_SIMPLE_HREFS = [
     `/${locale}/#showcase`,
@@ -306,7 +306,7 @@ export function Header({ locale }: HeaderProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link
-            href={`/${locale}`}
+            href={`/${locale}/`}
             aria-label="Ewala"
             className="rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
           >
@@ -365,7 +365,7 @@ export function Header({ locale }: HeaderProps) {
 
           <div className="flex items-center gap-3">
             <Link
-              href={`/${altLocale}`}
+              href={`/${altLocale}/`}
               className={[
                 "hidden rounded-lg border px-2.5 py-1.5 font-mono text-xs uppercase transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40 lg:inline-flex",
                 isScrolled
@@ -420,7 +420,7 @@ export function Header({ locale }: HeaderProps) {
             <div className="p-6">
               <div className="mb-8 flex items-center justify-between">
                 <Link
-                  href={`/${locale}`}
+                  href={`/${locale}/`}
                   aria-label="Ewala"
                   className="rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
                   onClick={() => setMobileMenuOpen(false)}
@@ -503,7 +503,7 @@ export function Header({ locale }: HeaderProps) {
                 )}
 
                 <Link
-                  href={`/${altLocale}`}
+                  href={`/${altLocale}/`}
                   className="block w-full rounded-xl border border-white/15 px-6 py-3 text-center font-mono text-sm uppercase text-white/60 transition-all duration-200 hover:border-white/25 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
                   onClick={() => setMobileMenuOpen(false)}
                 >

@@ -86,8 +86,8 @@ export default async function BlogArticlePage({
   const categoryLabels = dict.blog.categories as Record<BlogCategory, string>
 
   const breadcrumbs = [
-    { label: dict.blog.breadcrumbHome, href: `/${locale}` },
-    { label: dict.blog.breadcrumbBlog, href: `/${locale}/blog` },
+    { label: dict.blog.breadcrumbHome, href: `/${locale}/` },
+    { label: dict.blog.breadcrumbBlog, href: `/${locale}/blog/` },
     { label: post.title },
   ]
 

@@ -50,7 +50,7 @@ export default async function SellosYReconocimientosPage({
   const t = dict.sellos
 
   const breadcrumbs = [
-    { label: t.breadcrumbHome, href: `/${locale}` },
+    { label: t.breadcrumbHome, href: `/${locale}/` },
     { label: t.breadcrumbCurrent },
   ]
 
