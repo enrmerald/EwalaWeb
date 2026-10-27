@@ -1,0 +1,81 @@
+# CI · se ejecuta en cada PR hacia main y en cada push a main.
+#
+# Reproduce lo que pide CLAUDE.md para dar un cambio por bueno: lint, tipos, build estático y auditoría
+# SEO. Las versiones de pnpm y Node NO se declaran aquí: pnpm/setup las lee de package.json
+# (packageManager) y .nvmrc, las mismas que usa Netlify. No definir CONTEXT: sin él el build es de
+# «producción» y verify:seo audita canonical, hreflang y Open Graph completos.
+#
+# Seguridad: sin secretos, solo lectura del repositorio, sin pull_request_target y todas las actions
+# fijadas por SHA de commit (Dependabot actualiza el SHA y el comentario de versión).
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Un PR nuevo cancela la ejecución anterior de ese mismo PR; los push a main nunca se cancelan.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  calidad:
+    name: calidad
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Instala pnpm y Node (según package.json y .nvmrc) y ejecuta `pnpm install --frozen-lockfile`.
+      # Las políticas de pnpm-workspace.yaml (antigüedad mínima, trustPolicy) se aplican aquí también.
+      - name: Instalar pnpm, Node y dependencias
+        uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        with:
+          cache: true
+          require-lockfile: true
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Tipos
+        run: pnpm typecheck
+
+      - name: Build estático
+        run: pnpm build
+
+      - name: Auditoría SEO
+        run: pnpm verify:seo
+
+      # La clave de Resend (re_…) solo debe vivir en las variables de Netlify, nunca en el bundle público.
+      - name: Comprobar que out/ no contiene claves de Resend
+        run: |
+          if grep -rEq '\bre_[A-Za-z0-9]{20,}' out/; then
+            echo "::error::Posible clave de Resend dentro de out/ (bundle público)"
+            exit 1
+          fi
+
+  simetria-i18n:
+    name: simetria-i18n
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Sin dependencias: basta el Node que trae el runner.
+      - name: Comprobar simetría de claves es/en
+        run: node scripts/verificar-i18n.mjs
