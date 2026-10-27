@@ -371,8 +371,11 @@ navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──
     `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).
   - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y `elapsedMs` < 3000 →
     responde éxito sin enviar.
-  - `resend.ts`: `fetch` a la API de Resend con `Idempotency-Key` (sin duplicados por doble clic), timeout de
-    3,5 s y un reintento solo ante errores transitorios. `Reply-To` = email del visitante.
+  - `resend.ts`: `fetch` a la API de Resend con `Idempotency-Key` = `submissionId` + huella SHA-256 del contenido
+    (sin duplicados por doble clic; Resend exige el mismo cuerpo por clave y el correo lleva la hora, así
+    que el 409 `invalid_idempotent_request` se trata como «ya enviado» y el 409
+    `concurrent_idempotent_requests` como transitorio), timeout de 3,5 s y un reintento solo ante errores
+    transitorios. `Reply-To` = email del visitante.
   - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) + texto; **todo** dato del formulario pasa
     por `esc()`.
   - Sin `RESEND_API_KEY`, `RESEND_FROM` o `CONTACT_MAILBOX_TO` → **modo prueba** (`delivery: "skipped"`).

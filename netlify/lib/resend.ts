@@ -20,12 +20,17 @@ export interface OutgoingEmail {
   html: string
   text: string
   replyTo?: string
-  /** Mismo valor ⇒ Resend no envía dos veces (doble clic, reintento del navegador…). */
+  /** Mismo valor ⇒ Resend no envía dos veces (doble clic, reintento del navegador…). Máx. 256 caracteres. */
   idempotencyKey: string
   tags?: Record<string, string>
 }
 
-export type SendResult = { ok: true; id: string } | { ok: false; status: number }
+/** `code` es el `name` del error de Resend (p. ej. `invalid_idempotent_request`), si lo devolvió. */
+export type SendResult = { ok: true; id: string } | { ok: false; status: number; code?: string }
+
+/** Errores 409 de Resend por la clave de idempotencia (https://resend.com/docs/dashboard/emails/idempotency-keys). */
+export const IDEMPOTENT_CONFLICT = 'invalid_idempotent_request' // misma clave con otro cuerpo: el original ya se aceptó
+const IDEMPOTENT_IN_PROGRESS = 'concurrent_idempotent_requests' // el original sigue en curso: reintentar
 
 /** Elimina caracteres de control: impide la inyección de cabeceras (CRLF) en asunto y Reply-To. */
 const singleLine = (value: string) => value.replace(/[\p{Cc}]+/gu, ' ').trim()
@@ -56,8 +61,10 @@ export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
   for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
     last = await attempt_(body, apiKey, email.idempotencyKey)
     if (last.ok) return last
-    // Solo se reintenta lo transitorio: red caída (0), límite de Resend (429) o error suyo (5xx).
-    const transient = last.status === 0 || last.status === 429 || last.status >= 500
+    // Solo se reintenta lo transitorio: red caída (0), límite de Resend (429), error suyo (5xx) o
+    // una petición idéntica todavía en curso (409 concurrent_idempotent_requests).
+    const transient =
+      last.status === 0 || last.status === 429 || last.status >= 500 || last.code === IDEMPOTENT_IN_PROGRESS
     if (!transient) return last
     if (attempt < ATTEMPTS - 1) await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS))
   }
@@ -80,7 +87,17 @@ async function attempt_(body: string, apiKey: string, idempotencyKey: string): P
   } catch {
     return { ok: false, status: 0 }
   }
-  if (!response.ok) return { ok: false, status: response.status }
+  if (!response.ok) {
+    // Solo se lee el nombre del error (identificador corto de Resend), nunca el cuerpo completo.
+    let code: string | undefined
+    try {
+      const err = (await response.json()) as { name?: unknown }
+      if (typeof err.name === 'string' && /^[a-z_]{1,64}$/.test(err.name)) code = err.name
+    } catch {
+      /* cuerpo no JSON: se queda solo con el estado */
+    }
+    return { ok: false, status: response.status, ...(code ? { code } : {}) }
+  }
   try {
     const data = (await response.json()) as { id?: unknown }
     return typeof data.id === 'string' ? { ok: true, id: data.id } : { ok: false, status: response.status }

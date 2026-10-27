@@ -14,10 +14,11 @@
  *
  * Extensión .mts: ver la nota de netlify/functions/csp-report.mts.
  */
+import { createHash } from 'node:crypto'
 import esMessages from '../../messages/es.json'
-import { MIN_FILL_SECONDS, type NeedValue } from '../../lib/contact'
+import { MIN_FILL_SECONDS, type ContactRequest, type NeedValue } from '../../lib/contact'
 import { fail, json, log, readJsonRequest } from '../lib/http'
-import { isEmailConfigured, sendEmail } from '../lib/resend'
+import { IDEMPOTENT_CONFLICT, isEmailConfigured, sendEmail } from '../lib/resend'
 import { contactEmail, contactSubject } from '../lib/contact-email'
 import { validateContact } from '../lib/contact-validation'
 
@@ -25,6 +26,17 @@ const NEED_LABELS = esMessages.contact.form.need.options as Record<NeedValue, st
 
 /** Referencia corta y legible para que la persona pueda citarla (8 caracteres del UUID). */
 const shortReference = (id: string) => id.replace(/-/g, '').slice(0, 8).toUpperCase()
+
+/**
+ * Huella del CONTENIDO enviado (no incluye la hora de recepción). Resend exige que una misma
+ * Idempotency-Key lleve siempre el mismo cuerpo; como el correo incluye la hora, la clave se ata al
+ * contenido: reintentar lo mismo es idempotente y editar el mensaje genera un envío nuevo.
+ */
+const contentHash = (d: ContactRequest) =>
+  createHash('sha256')
+    .update(JSON.stringify([d.locale, d.firstName, d.lastName, d.company, d.email, d.phone, d.role, d.need, d.message, d.marketing]))
+    .digest('hex')
+    .slice(0, 16)
 
 export default async function handler(request: Request): Promise<Response> {
   const started = Date.now()
@@ -78,10 +90,16 @@ export default async function handler(request: Request): Promise<Response> {
     html,
     text,
     replyTo: data.email,
-    idempotencyKey: `ewala/${environment}/contact/${data.submissionId}`,
+    idempotencyKey: `ewala/${environment}/contact/${data.submissionId}/${contentHash(data)}`,
     tags: { type: 'contact', environment, need: data.need },
   })
 
+  // 409 invalid_idempotent_request: la misma clave (mismo envío y mismo contenido) ya la aceptó
+  // Resend en un intento anterior cuya respuesta no llegó a la persona. El correo ya salió.
+  if (!result.ok && result.code === IDEMPOTENT_CONFLICT) {
+    trace('sent_idempotent')
+    return json({ ok: true, reference, delivery: 'sent' })
+  }
   if (!result.ok) {
     trace(`email_failed_${result.status}`)
     return fail('unavailable', 503)
