@@ -316,7 +316,9 @@ las dos Netlify Functions (`/api/contact`, `/api/csp-report`), pequeñas, sin de
 sus propias defensas (ver «Formularios y envío de email»).
 
 Cabeceras de seguridad (todas en `netlify.toml`): HSTS de 1 año sin `preload`, `X-Frame-Options: DENY`,
-`nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y CSP en modo `Report-Only` con sumidero.
+`nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y dos CSP: una en **bloqueo** con solo
+`object-src 'none'`, `base-uri 'self'`, `frame-ancestors 'none'` y `form-action 'self'` (no dependen de
+scripts de terceros) y la política completa en modo `Report-Only` con sumidero.
 CORP `same-origin` va solo en las páginas (`/es/*`, `/en/*`) y en `/_next/static/*`, **no** en `/*`: los
 ficheros de `public/` (logo, PDFs, favicons) deben poder cargarse desde otros orígenes; en concreto el
 correo interno del formulario carga `/logo_ewala_blanco.png` desde el cliente de correo y, con

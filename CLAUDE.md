@@ -112,7 +112,8 @@ netlify.toml            ← build, funciones, redirecciones 301/410, cabeceras d
   `/blog/*`, landings kit-digital/kit-consulting/grc y restos antiguos → **410** (`public/410.html`).
   Inventario: `git show origin/backup-web-antigua:sitemap.xml`. Tras tocarlas: `pnpm verify:redirects`.
 - Cabeceras: HSTS, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y
-  **CSP en `Report-Only`** (informes en Netlify → Logs → Functions → `csp-report`). Caché inmutable solo en
+  **CSP**: en bloqueo solo `object-src`, `base-uri`, `frame-ancestors` y `form-action`; la completa sigue en
+  `Report-Only` (informes en Netlify → Logs → Functions → `csp-report`). Caché inmutable solo en
   `/_next/static/*`; **nunca** `Cache-Control` en `/*` (Netlify concatena cabeceras). CORP `same-origin`
   solo en `/es/*`, `/en/*` y `/_next/static/*` (no en `/*`: el logo de `public/` lo carga el correo del formulario).
 - `netlify dev` en local **no** emula `Cache-Control` ni `Content-Type` personalizados: comprobarlos en el
