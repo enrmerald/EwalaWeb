@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
+import { pageOpenGraph } from '@/lib/metadata'
 import { getDictionary, isLocale, defaultLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/config'
 import { Header } from '@/components/ewala/header'
@@ -23,11 +24,14 @@ export function generateStaticParams({ params }: { params: { locale: string } })
   return getAllPosts(params.locale).map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: Locale; slug: string }>
-}): Promise<Metadata> {
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: Promise<{ locale: Locale; slug: string }>
+  },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { locale, slug } = await params
   const post = getPostBySlug(locale, slug)
   if (!post) return {}
@@ -48,17 +52,21 @@ export async function generateMetadata({
       canonical,
       languages,
     },
+    // Next no fusiona openGraph con el del layout: pageOpenGraph() hereda siteName y la imagen social
+    // (opengraph-image) y aquí solo se pisa lo propio del artículo. Sin `image` en el front matter el
+    // artículo conserva la imagen social del sitio; con ella, la suya.
     openGraph: {
-      title: post.titleSeo,
-      description: post.descriptionSeo,
-      locale,
-      url: canonical,
-      siteName: 'Ewala',
+      ...(await pageOpenGraph(parent, {
+        title: post.titleSeo,
+        description: post.descriptionSeo,
+        locale,
+        url: canonical,
+      })),
       type: 'article',
       publishedTime: post.date,
       tags: post.tags,
       ...(post.image ? { images: [{ url: post.image, alt: post.imageAlt ?? post.title }] } : {}),
-    },
+    } as Metadata['openGraph'],
   }
 }
 
