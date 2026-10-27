@@ -19,7 +19,7 @@ headers HTTP, API routes, Server Actions) es incompatible con este modelo y romp
 
 La única excepción controlada son las **Netlify Functions** de `netlify/functions/`: código de servidor
 que Netlify despliega aparte (Next no las compila ni las conoce) y que se expone como `/api/*` mediante
-reglas de `netlify.toml`. Hoy hay dos: `contact.mts` (formulario → Resend) y `csp-report.mts`
+su propia `config.path` (sin reglas en `netlify.toml`, ver «Formularios y envío de email»). Hoy hay dos: `contact.mts` (formulario → Resend) y `csp-report.mts`
 (sumidero de informes CSP). Ver «Formularios y envío de email».
 
 Lo que corre **solo en el pipeline de build** (una vez, nunca en producción):
@@ -236,7 +236,11 @@ configuran **dentro del contenedor**, no en el código. Nada no esencial funcion
 - El footer muestra «Preferencias de cookies» **solo si Cookiebot está cargado** (`window.Cookiebot`,
   evento `CookiebotOnLoad`) y lo reabre con `Cookiebot.renew()`.
 - La CSP (`netlify.toml`) ya permite los dominios de GTM, GA4 y Cookiebot. Va en modo **Report-Only** y
-  los informes llegan a `netlify/functions/csp-report.mts` (Netlify → Logs → Functions).
+  los informes llegan a `netlify/functions/csp-report.mts` (Netlify → Logs → Functions). La función es
+  pública y sin autenticación, por eso declara `config.path = '/api/csp-report'` y `config.rateLimit`
+  (60/min/IP, en el borde de Netlify), solo atiende esa ruta, acota el cuerpo (16 KB leídos por
+  trozos), los informes por petición (20) y la longitud de cada campo registrado, y responde siempre 204.
+  Es la 2.ª y última regla de límite del plan Free (la otra es `contact.mts`).
 
 Comprobación mínima tras tocar esta zona: en DevTools, el `dataLayer` debe tener `consent default` antes
 de `gtm.js`; sin aceptar, *Application → Cookies* no debe tener `_ga`; aceptando en Cookiebot, sí.
