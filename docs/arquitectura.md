@@ -317,6 +317,10 @@ sus propias defensas (ver «Formularios y envío de email»).
 
 Cabeceras de seguridad (todas en `netlify.toml`): HSTS de 1 año sin `preload`, `X-Frame-Options: DENY`,
 `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y CSP en modo `Report-Only` con sumidero.
+CORP `same-origin` va solo en las páginas (`/es/*`, `/en/*`) y en `/_next/static/*`, **no** en `/*`: los
+ficheros de `public/` (logo, PDFs, favicons) deben poder cargarse desde otros orígenes; en concreto el
+correo interno del formulario carga `/logo_ewala_blanco.png` desde el cliente de correo y, con
+`same-origin`, los webmail que piden la imagen directamente desde el navegador la bloqueaban.
 `'unsafe-inline'` en `script-src` es obligatorio por Next (scripts de hidratación en línea, sin nonce al no
 haber servidor): con él la CSP es higiene y no una defensa completa frente a XSS.
 

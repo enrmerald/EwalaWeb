@@ -36,7 +36,7 @@
     X-Frame-Options = "DENY"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     Cross-Origin-Opener-Policy = "same-origin"
-    Cross-Origin-Resource-Policy = "same-origin"
+    # Cross-Origin-Resource-Policy NO va aquí: ver las reglas «/es/*», «/en/*» y «/_next/static/*».
     # Un año, con subdominios. SIN `preload` a propósito: entrar en la lista precargada
     # de los navegadores es prácticamente irreversible y obliga a HTTPS en todo
     # subdominio presente y futuro. Es una decisión de infraestructura, no una cabecera más.
@@ -55,11 +55,28 @@
     #   Las fuentes las auto-aloja next/font (/_next/static/media): font-src 'self'.
     Content-Security-Policy-Report-Only = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.cookiebot.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://consent.cookiebot.com https://consentcdn.cookiebot.com; frame-src https://www.googletagmanager.com https://consentcdn.cookiebot.com; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests; report-uri /api/csp-report; report-to csp"
 
+# Cross-Origin-Resource-Policy: same-origin solo en las páginas y en el código de la web. NO en «/*»:
+# los ficheros de public/ (logo, PDFs, favicons) deben poder cargarse desde otros orígenes y Netlify
+# concatena las cabeceras de igual nombre de varias reglas, así que una regla más específica no puede
+# sustituir a la de «/*». En concreto, el correo interno del formulario (netlify/lib/contact-email.ts)
+# carga /logo_ewala_blanco.png desde el cliente de correo: con same-origin los webmail que piden la
+# imagen directamente desde el navegador la bloqueaban y el correo salía sin logo.
+[[headers]]
+  for = "/es/*"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "same-origin"
+
+[[headers]]
+  for = "/en/*"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "same-origin"
+
 # Activos con hash en el nombre (JS, CSS, fuentes): un año, inmutables.
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Cross-Origin-Resource-Policy = "same-origin"
 
 # Favicons: cambian muy poco, una semana.
 [[headers]]
