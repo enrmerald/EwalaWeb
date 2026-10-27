@@ -24,6 +24,8 @@ export interface BlogPost {
   imageAlt: string | null
   author: string
   readingMinutes: number
+  /** `##` del artículo (id del ancla y texto plano), generados en build para el índice (TOC). */
+  headings: Heading[]
   html: string
 }
 
@@ -85,8 +87,3 @@ export interface Heading {
   text: string
 }
 
-/** Extrae los `<h2 id="...">` del HTML del artículo para construir el índice (TOC). */
-export function extractHeadings(html: string): Heading[] {
-  const matches = [...html.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)]
-  return matches.map((m) => ({ id: m[1], text: m[2].replace(/<[^>]+>/g, '').trim() }))
-}

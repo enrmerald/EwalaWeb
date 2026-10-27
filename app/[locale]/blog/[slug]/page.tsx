@@ -15,7 +15,6 @@ import {
   getPostBySlug,
   getRelatedPosts,
   getLocalesForSlug,
-  extractHeadings,
 } from '@/lib/blog'
 import type { BlogCategory } from '@/lib/blog'
 
@@ -81,7 +80,6 @@ export default async function BlogArticlePage({
 
   if (!post) notFound()
 
-  const headings = extractHeadings(post.html)
   const related = getRelatedPosts(post, 3)
   const categoryLabels = dict.blog.categories as Record<BlogCategory, string>
 
@@ -111,7 +109,7 @@ export default async function BlogArticlePage({
       <HeroInterior locale={locale} breadcrumbs={breadcrumbs} title={post.title} subtitle={post.subtitle ?? post.description} />
       <BlogArticulo
         post={post}
-        headings={headings}
+        headings={post.headings}
         categoryLabel={categoryLabels[post.category]}
         readingMinutesLabel={dict.blog.readingMinutesLabel}
         authorLabel={dict.blog.authorLabel}

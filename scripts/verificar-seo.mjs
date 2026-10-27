@@ -26,8 +26,9 @@ const pages = walk(out).filter(
   (f) => f.endsWith('.html') && !f.includes(`${sep}_next${sep}`) && !f.endsWith('410.html') && relative(out, f) !== 'index.html',
 )
 
+// `&amp;` va el ÚLTIMO: si fuera el primero, `&amp;lt;` se desescaparía dos veces y acabaría en `<`.
 const decode = (s) =>
-  s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  s.replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
 const meta = (h, attr, key) => {
   const m = h.match(new RegExp(`<meta ${attr}="${key}" content="([^"]*)"`))
   return m ? decode(m[1]) : ''

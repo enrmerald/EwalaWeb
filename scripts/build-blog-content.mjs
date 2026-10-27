@@ -99,6 +99,10 @@ function slugify(text) {
     .replace(/(^-+|-+$)/g, '')
 }
 
+/** Texto plano de los tokens inline de un encabezado (sin marcado, HTML en bruto ni entidades). */
+const plainTextOf = (tokens) =>
+  tokens.map((t) => (t.type === 'html' ? '' : t.tokens ? plainTextOf(t.tokens) : (t.text ?? ''))).join('')
+
 const escapeHtml = (text) =>
   text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 
@@ -128,6 +132,7 @@ function isSafeUrl(href, { allowMailto }) {
 function renderMarkdown(markdown) {
   const renderer = new marked.Renderer()
   const seenIds = new Map()
+  const headings = [] // `##` del artículo, para el índice (TOC): { id, text }
   const base = new marked.Renderer()
 
   renderer.html = ({ text }) => escapeHtml(text)
@@ -146,15 +151,18 @@ function renderMarkdown(markdown) {
 
   renderer.heading = function heading({ tokens, depth }) {
     const html = this.parser.parseInline(tokens)
-    const plainText = html.replace(/<[^>]+>/g, '')
-    let id = slugify(plainText)
+    // Texto plano sacado de los tokens, no quitando etiquetas del HTML: sin entidades (`&#39;`) en el
+    // índice ni en el id, y sin depender de una expresión regular sobre HTML.
+    const text = plainTextOf(tokens).replace(/\s+/g, ' ').trim()
+    let id = slugify(text)
     const count = seenIds.get(id) ?? 0
     seenIds.set(id, count + 1)
     if (count > 0) id = `${id}-${count}`
+    if (depth === 2) headings.push({ id, text })
     return `<h${depth} id="${id}">${html}</h${depth}>\n`
   }
 
-  return marked.parse(markdown, { renderer })
+  return { html: marked.parse(markdown, { renderer }), headings }
 }
 
 function countWords(markdown) {
@@ -193,7 +201,7 @@ function readPostsForLocale(locale) {
 
     const words = countWords(content)
     const readingMinutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))
-    const html = renderMarkdown(content)
+    const { html, headings } = renderMarkdown(content)
 
     posts.push({
       slug,
@@ -210,6 +218,7 @@ function readPostsForLocale(locale) {
       imageAlt: fm.imageAlt ?? null,
       author: fm.author,
       readingMinutes,
+      headings,
       html,
     })
   }
