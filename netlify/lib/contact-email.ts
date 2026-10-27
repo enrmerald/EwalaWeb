@@ -63,7 +63,7 @@ export function contactEmail(data: ContactEmailData): { html: string; text: stri
     row('Nombre', esc(name)),
     row('Empresa', esc(data.company)),
     row('Cargo', role ? esc(role) : muted(notGiven)),
-    row('Email', link(`mailto:${data.email}`, data.email)),
+    row('Email', link(`mailto:${mailtoAddress(data.email)}`, data.email)),
     row('Teléfono', phone ? link(`tel:${phone.replace(/[^\d+]/g, '')}`, phone) : muted(notGiven)),
     row('Idioma de la web', data.locale.toUpperCase()),
   ].join('')
@@ -118,7 +118,7 @@ ${heading('Mensaje')}
 <tr><td style="padding:28px 28px 0 28px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
 <td bgcolor="${GREEN}" style="background-color:${GREEN};border-radius:6px;">
-<a href="${esc(`mailto:${data.email}?subject=${encodeURIComponent(replySubject)}`)}" style="display:inline-block;padding:12px 22px;font-family:${FONT_BODY};font-size:14px;font-weight:700;color:${ON_GREEN};text-decoration:none;">Responder a ${esc(data.firstName)}</a>
+<a href="${esc(`mailto:${mailtoAddress(data.email)}?subject=${encodeURIComponent(replySubject)}`)}" style="display:inline-block;padding:12px 22px;font-family:${FONT_BODY};font-size:14px;font-weight:700;color:${ON_GREEN};text-decoration:none;">Responder a ${esc(data.firstName)}</a>
 </td>
 </tr></table>
 </td></tr>
@@ -179,6 +179,12 @@ const muted = (value: string) => `<span style="color:${MUTED};">${esc(value)}</s
 
 const link = (href: string, label: string) =>
   `<a href="${esc(href)}" style="color:${GREEN};text-decoration:underline;">${esc(label)}</a>`
+
+/**
+ * Dirección para un `mailto:`: se codifica todo salvo la `@` (que los clientes esperan literal), de modo
+ * que `?`, `&`, `#` o `%` nunca puedan abrir parámetros (`?bcc=…`) aunque la validación fallara.
+ */
+const mailtoAddress = (email: string) => encodeURIComponent(email).replace(/%40/g, '@')
 
 /** Escapado HTML de todo dato que venga del formulario. */
 export function esc(value: string): string {

@@ -9,8 +9,10 @@ import { CONTACT_LIMITS as L, MAX_ELAPSED_MS, NEED_VALUES, PHONE_PATTERN, type C
 
 const SINGLE_LINE = /^[^\p{Cc}]*$/u
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-// Formato razonable de email (el navegador ya valida; aquí se evita basura y cabeceras).
-const EMAIL = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]{2,}$/
+// Formato razonable de email (el navegador ya valida; aquí se evita basura y cabeceras). Se excluyen
+// también `?`, `&`, `#` y `%`: en el `mailto:` del botón «Responder» abrirían parámetros del cliente de
+// correo (`?bcc=…`, `%40`) y no aparecen en direcciones reales de quien rellena un formulario.
+const EMAIL = /^[^\s@<>()[\]\\,;:"?&#%]+@[^\s@<>()[\]\\,;:"?&#%]+\.[^\s@<>()[\]\\,;:"?&#%]{2,}$/
 
 const ALLOWED_KEYS = new Set<keyof ContactRequest>([
   'submissionId', 'locale', 'elapsedMs', 'firstName', 'lastName', 'company', 'email',
