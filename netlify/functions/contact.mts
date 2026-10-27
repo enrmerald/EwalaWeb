@@ -1,5 +1,6 @@
 /**
- * `POST /api/contact` (netlify.toml la reescribe aquí) · formulario de contacto → correo vía Resend.
+ * `POST /api/contact` (ruta propia de la función, ver `config` más abajo; netlify.toml NO la reescribe)
+ * · formulario de contacto → correo vía Resend.
  *
  * Flujo: comprobaciones HTTP → validación estricta (netlify/lib/contact-validation.ts, sin
  * dependencias externas para no empaquetar node_modules) → antispam (honeypot + tiempo mínimo) →
@@ -38,13 +39,14 @@ const contentHash = (d: ContactRequest) =>
     .digest('hex')
     .slice(0, 16)
 
-/** Ruta pública del formulario. Netlify la sirve por `config.path` y por la regla de netlify.toml. */
+/** Ruta pública del formulario: la sirve Netlify por `config.path`, sin regla en netlify.toml. */
 const CONTACT_PATH = '/api/contact'
 
 /**
- * Límite de envíos en el borde de Netlify, ANTES de ejecutar la función. Va aquí (y no solo en la
- * regla de redirección de netlify.toml) porque Netlify aplica los límites de funciones a la ruta de la
- * función. Debe ser un literal: Netlify lo lee del código sin ejecutarlo. El plan Free admite 2 reglas.
+ * Ruta y límite de envíos en el borde de Netlify, ANTES de ejecutar la función. Con `path`, la función
+ * deja de servirse en /.netlify/functions/contact. Una regla de reescritura de netlify.toml hacia esa
+ * ruta (que tiene prioridad) apuntaría a algo inexistente y daría 404, por eso no existe. Debe ser un
+ * literal: Netlify lo lee del código sin ejecutarlo. El plan Free admite 2 reglas de límite.
  */
 export const config = {
   path: '/api/contact',
@@ -52,8 +54,8 @@ export const config = {
 }
 
 export default async function handler(request: Request): Promise<Response> {
-  // La función sigue siendo alcanzable en /.netlify/functions/contact, donde no aplica la regla de
-  // redirección de netlify.toml. Solo se atiende la ruta pública; el resto se trata como inexistente.
+  // Defensa en profundidad: solo se atiende la ruta pública; cualquier otra (p. ej. si algún día se
+  // vuelve a servir en /.netlify/functions/contact, sin el límite) se trata como inexistente.
   const pathname = new URL(request.url).pathname.replace(/\/+$/, '')
   if (pathname !== CONTACT_PATH) return fail('generic', 404)
 

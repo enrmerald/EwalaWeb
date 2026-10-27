@@ -354,12 +354,12 @@ haber servidor): con él la CSP es higiene y no una defensa completa frente a XS
 ## Formularios y envío de email
 
 El formulario de contacto (`/{locale}/contacto`, `components/ewala/contact-form.tsx`) envía un `POST`
-JSON a **`/api/contact`**, que `netlify.toml` reescribe a la Netlify Function
-`netlify/functions/contact.mts`. La función manda un correo con **[Resend](https://resend.com)** al
+JSON a **`/api/contact`**, ruta que declara la propia Netlify Function
+`netlify/functions/contact.mts` (`config.path`; **sin** regla en `netlify.toml`). La función manda un correo con **[Resend](https://resend.com)** al
 buzón de Ewala.
 
 ```
-navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──▶ contact.mts ──fetch──▶ API de Resend
+navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) ──▶ contact.mts ──fetch──▶ API de Resend
                                                                         │
                                        contrato compartido: lib/contact.ts (límites, need, tipos)
 ```
@@ -372,9 +372,11 @@ navegador ──POST /api/contact──▶ Netlify (rate limit 10/min/IP) ──
   en modo prueba, un aviso.
 - **Función** (`contact.mts` + `netlify/lib/`):
   - Ruta y límite: `contact.mts` exporta `config` (`path: '/api/contact'` + `rateLimit` 10/min/IP) y solo
-    atiende esa ruta; en cualquier otra (p. ej. `/.netlify/functions/contact`, donde no aplicaría la
-    regla de netlify.toml) responde 404. Además de ese límite hay otro en la regla `/api/contact` de
-    `netlify.toml` (el plan Free admite 2 reglas por proyecto).
+    atiende esa ruta (en cualquier otra responde 404). Con `config.path` Netlify deja de servir la función
+    en `/.netlify/functions/contact`, que era la vía que esquivaba el límite. **No añadir** una regla
+    `[[redirects]]` de `/api/contact` hacia esa ruta en `netlify.toml`: tiene prioridad sobre la ruta de
+    la función, apunta a algo inexistente y el formulario da 404 (ocurrió en el preview del PR #7). El plan
+    Free admite 2 reglas de límite por proyecto.
   - `http.ts`: solo `POST` JSON ≤ 32 KB; origen: `Sec-Fetch-Site` debe ser `same-origin` o, si falta
     (navegador antiguo, curl), `Origin` del mismo host, si no 403 (CSRF y scripts ingenuos; **no es
     autenticación**: un cliente que no sea navegador puede falsificar las cabeceras, el freno al abuso
