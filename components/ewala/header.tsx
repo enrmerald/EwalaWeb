@@ -300,6 +300,10 @@ export function Header({ locale }: HeaderProps) {
   // mientras el Dialog siga montado, así que se desplaza a mano cuando ya se ha desmontado. Otras rutas
   // y enlaces externos conservan su comportamiento nativo.
   function handleMobileNavigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    // Ctrl/Cmd/Shift/Alt-clic o botón no primario: el navegador abre pestaña o ventana nueva; no se
+    // intercepta ni se cierra el menú.
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+
     setMobileMenuOpen(false)
 
     const hashIndex = href.indexOf("#")
