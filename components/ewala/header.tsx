@@ -347,7 +347,7 @@ export function Header({ locale }: HeaderProps) {
             <EwalaLogo light={!isScrolled} />
           </Link>
 
-          <NavigationMenu.Root className="relative hidden lg:block">
+          <NavigationMenu.Root aria-label={t("mainNavigation")} className="relative hidden lg:block">
             <NavigationMenu.List className="flex items-center gap-1">
               <NavigationMenu.Item>
                 <DesktopNavTrigger scrolled={isScrolled}>{t("solutions")}</DesktopNavTrigger>
