@@ -163,13 +163,13 @@ Páginas públicas actuales: home, `/blog` (+ `/blog/[slug]`), `/contacto`, `/co
 página pública nueva:
 1. `app/[locale]/[ruta]/page.tsx`, con `generateMetadata` que use `alternatesFor('/ruta', locale)` y,
    si define `openGraph`, `pageOpenGraph(parent, …)` de `lib/metadata.ts`.
-2. Añadir la ruta a `PAGES` en `i18n/config.ts` (entra sola en `app/sitemap.ts`) y su fecha en
-   `PAGE_LAST_MODIFIED` de `app/sitemap.ts`.
+2. Añadir la ruta a `PAGES` en `i18n/config.ts` y sus metadatos (`lastmod`, `changefreq`, `priority`) a
+   `SITEMAP_PAGES` en `lib/sitemap-data.mjs`; si faltara alguna, el build falla (ver «Sitemaps»).
 3. Añadir las claves en **ambos** `messages/es.json` y `messages/en.json`.
 4. Usar `HeroInterior` (aporta el único `<h1>`) y, si procede, `JsonLd` con `breadcrumbJsonLd`.
 
-`app/sitemap.ts` (PAGES × locales + artículos del blog, con hreflang y `lastmod` fijo por página) y
-`app/robots.ts` son estáticos (`dynamic = 'force-static'`). El dominio sale de `lib/site.ts`
+`app/robots.ts` es estático (`dynamic = 'force-static'`) y los sitemaps los genera
+`scripts/generar-sitemaps.mjs` en el build (ver «Sitemaps»). El dominio sale de `lib/site.ts`
 (`NEXT_PUBLIC_SITE_URL`, por defecto `https://ewala.es`). Con `trailingSlash: true`, todas las URLs
 (canonical, hreflang, sitemap, JSON-LD) terminan en `/`; `localizedPath()` y `withTrailingSlash()` lo
 garantizan donde Next no lo hace solo.
@@ -192,7 +192,47 @@ garantizan donde Next no lo hace solo.
 - Posicionamiento de la empresa en textos públicos: *startup europea de ciberseguridad industrial,
   redes OT/IoT, machine learning y asistente de IA*. LIVET no se menciona (ni navbar, ni footer, ni
   meta, ni JSON-LD, ni `/compania`).
-- Auditoría automática: `pnpm build && pnpm verify:seo` (`scripts/verificar-seo.mjs`).
+- Auditoría automática: `pnpm build && pnpm verify:seo` (`scripts/verificar-seo.mjs`) y
+  `pnpm verify:sitemap` (`scripts/verificar-sitemaps.mjs`).
+
+### Sitemaps
+
+Se publican dos, con las mismas URL (hoy 22: 7 páginas × 2 idiomas + 4 artículos × 2 idiomas):
+
+| Fichero | Contenido | Uso |
+|---|---|---|
+| `/sitemap-google.xml` | `loc` + `lastmod` | **El que se envía a Search Console.** Mínimo y sin ambigüedad: Google lee el hreflang del `<link rel="alternate">` de cada página e ignora `priority` y `changefreq` |
+| `/sitemap.xml` | `loc`, `lastmod`, `changefreq`, `priority`, `xhtml:link` (hreflang) e `image:image` | Bing, Yandex y herramientas SEO. Se conserva la URL que ya estaba publicada |
+
+**Por qué un script y no `app/sitemap.ts`.** La API de Next emite un solo fichero y, con `output: 'export'`,
+no permite `image:image` ni `changefreq` de forma limpia. El script (`scripts/generar-sitemaps.mjs`) se
+ejecuta en `predev`/`prebuild` tras `content:build`, escribe `public/sitemap.xml` y `public/sitemap-google.xml`
+(ignorados por git) y Next los copia a `out/`. Es un script de build, no código de servidor. Si existiera
+también `app/sitemap.ts`, ambos competirían por la misma ruta. El patrón viene de SecnorthlabsWeb.
+
+**Fuentes únicas.** Idiomas, páginas y `localizedPath()` se importan de `i18n/config.ts` (Node 24 importa los
+`.ts`, de ahí `--no-warnings` en el script); `SITE_URL` de `lib/site.ts`; los metadatos por página de
+`lib/sitemap-data.mjs`. El generador falla el build si las claves de `SITEMAP_PAGES` no coinciden con
+`PAGES`, si falta `blog.json`, si una fecha no es real o es futura (según Europe/Madrid, no UTC), o si hay
+`<loc>` duplicadas. Un artículo con `date` futura no llega al sitemap: `build-blog-content.mjs` lo trata como
+borrador hasta ese día (hace falta un build ese día para publicarlo). La validación de fechas vive en
+`lib/fechas.mjs`.
+
+**Decisiones deliberadas:**
+- `lastmod` se mantiene **a mano** (nunca la fecha del build): si cambiara en cada despliegue sin que cambie
+  la página, Google dejaría de fiarse de él. `/blog` toma la fecha del artículo más reciente.
+- Quedan fuera las páginas `noindex` (`/sellos-y-reconocimientos/`) y de error (404/410).
+- Los artículos solo anuncian los idiomas donde existen, y declaran `x-default` con la misma regla que su
+  página (idioma por defecto si existe; si no, el primero disponible). El sitemap debe decir lo mismo que el
+  HTML: lo comprueba `verify:sitemap`.
+- No se incluye la imagen social de la home: su URL lleva un hash que cambia en cada build.
+- Sin sitemap index: 22 URL, muy por debajo de las 50.000 del protocolo. Replantearlo si el blog crece mucho.
+- Cabeceras (`netlify.toml`): solo `Content-Type: application/xml; charset=utf-8`; el `Cache-Control` por
+  defecto de Netlify revalida en cada despliegue.
+
+**Search Console.** Propiedad de dominio (o prefijo exacto `https://ewala.es/`, no `www` ni `http`). Enviar
+`https://ewala.es/sitemap-google.xml` (opcionalmente `sitemap.xml` en Bing Webmaster Tools) y eliminar
+sitemaps antiguos: `/blog/sitemap.xml` redirige con 301 y Search Console sigue mal las redirecciones.
 
 ## Páginas legales
 
