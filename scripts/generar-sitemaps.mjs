@@ -23,11 +23,10 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defaultLocale, locales, localizedPath, PAGES } from '../i18n/config.ts'
 import { isFutureDate, isRealIsoDate } from '../lib/fechas.mjs'
-import { SITE_URL as RAW_SITE_URL } from '../lib/site.ts'
+import { SITE_URL } from '../lib/site.ts'
 import { SITEMAP_PAGES, SITEMAP_POST } from '../lib/sitemap-data.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const SITE_URL = RAW_SITE_URL.replace(/\/+$/, '')
 const absolute = (path) => `${SITE_URL}${path}`
 
 const errors = []

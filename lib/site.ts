@@ -1,5 +1,7 @@
 // Dominio de producción. Se puede sobrescribir con NEXT_PUBLIC_SITE_URL (p. ej. en previews de Netlify).
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ewala.es'
+// Se normaliza aquí, una sola vez: sin espacios ni barra final (todos los usos son `${SITE_URL}/ruta`) y
+// con `?.trim() ||` para que una variable vacía o en blanco (`NEXT_PUBLIC_SITE_URL=`) use el valor por defecto.
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://ewala.es').replace(/\/+$/, '')
 
 /**
  * Netlify inyecta CONTEXT en el build: 'production', 'deploy-preview', 'branch-deploy'…
