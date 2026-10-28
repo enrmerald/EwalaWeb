@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useSyncExternalStore } from "react"
 import { usePathname } from "next/navigation"
 import * as Accordion from "@radix-ui/react-accordion"
-import { Linkedin, Github, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
+import { Linkedin, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
 import { useTranslations } from "@/i18n/client"
 import { SOCIAL_LINKS } from "@/lib/site"
 
@@ -20,7 +20,6 @@ function SocialLinks() {
   const t = useTranslations("footer")
   const profiles = [
     { label: t("social.linkedin"), href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
-    { label: t("social.github"), href: SOCIAL_LINKS.github, Icon: Github },
     { label: t("social.youtube"), href: SOCIAL_LINKS.youtube, Icon: Youtube },
   ]
   return (
