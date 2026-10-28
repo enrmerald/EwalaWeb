@@ -108,6 +108,21 @@ function DesktopSimpleLink({
   )
 }
 
+/**
+ * Desplaza a un ancla de la página actual y la refleja en la URL como haría la navegación nativa:
+ * solo añade una entrada al historial si el hash cambia (pulsar dos veces el mismo enlace no apila
+ * entradas) y no toca nada si el elemento no existe.
+ */
+function scrollToAnchor(href: string) {
+  const hash = href.slice(href.indexOf("#"))
+  const target = document.getElementById(hash.slice(1))
+  if (!target) return
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
+  if (window.location.hash !== hash) window.history.pushState(null, "", href)
+}
+
 type NavigateHandler = (event: React.MouseEvent<HTMLAnchorElement>) => void
 
 function ProductMenuItem({
@@ -321,12 +336,20 @@ export function Header({ locale }: HeaderProps) {
     pendingAnchorRef.current = href
   }
 
-  function scrollToPendingAnchor(href: string) {
-    const id = href.slice(href.indexOf("#") + 1)
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
-    window.history.pushState(null, "", href)
-  }
+  // Un mismo href para el enlace (sin JS, Ctrl-clic) y para el manejador: una sola fuente.
+  const mobileSimpleHref = (index: number) => MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`
+
+  // Red de seguridad: si el Dialog se desmonta sin disparar onCloseAutoFocus, el ancla pendiente se
+  // desplaza igualmente (si onCloseAutoFocus ya la consumió, la referencia está a null y no hace nada).
+  useEffect(() => {
+    if (mobileMenuOpen) return
+    const timeout = window.setTimeout(() => {
+      const href = pendingAnchorRef.current
+      pendingAnchorRef.current = null
+      if (href) scrollToAnchor(href)
+    }, 600)
+    return () => window.clearTimeout(timeout)
+  }, [mobileMenuOpen])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -461,7 +484,7 @@ export function Header({ locale }: HeaderProps) {
               const href = pendingAnchorRef.current
               pendingAnchorRef.current = null
               if (href) {
-                scrollToPendingAnchor(href)
+                scrollToAnchor(href)
                 return
               }
               menuButtonRef.current?.focus({ preventScroll: true })
@@ -544,9 +567,9 @@ export function Header({ locale }: HeaderProps) {
                       </>
                     ) : (
                       <a
-                        href={MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`}
+                        href={mobileSimpleHref(index)}
                         className="block py-4 font-mono text-lg font-medium text-white/80 transition-colors duration-200 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
-                        onClick={(event) => handleMobileNavigate(event, MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`)}
+                        onClick={(event) => handleMobileNavigate(event, mobileSimpleHref(index))}
                       >
                         {item.name}
                       </a>
