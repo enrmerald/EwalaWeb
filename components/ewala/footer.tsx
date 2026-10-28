@@ -18,9 +18,11 @@ const isPdf = (href: string) => /\.pdf$/i.test(href)
 
 function SocialLinks() {
   const t = useTranslations("footer")
+  // `t()` solo resuelve claves planas: el grupo anidado `social` se lee con t.raw.
+  const social = t.raw("social") as { linkedin: string; youtube: string }
   const profiles = [
-    { label: t("social.linkedin"), href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
-    { label: t("social.youtube"), href: SOCIAL_LINKS.youtube, Icon: Youtube },
+    { label: social.linkedin, href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
+    { label: social.youtube, href: SOCIAL_LINKS.youtube, Icon: Youtube },
   ]
   return (
     <>
