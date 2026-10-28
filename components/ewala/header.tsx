@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import * as NavigationMenu from "@radix-ui/react-navigation-menu"
@@ -108,16 +108,22 @@ function DesktopSimpleLink({
   )
 }
 
+type NavigateHandler = (event: React.MouseEvent<HTMLAnchorElement>) => void
+
 function ProductMenuItem({
   product,
   dark = false,
+  onNavigate,
 }: {
   product: ProductItem
   dark?: boolean
+  /** Solo el menú móvil la usa: cierra el Dialog y gestiona las anclas de la propia página. */
+  onNavigate?: NavigateHandler
 }) {
   return (
     <a
       href={product.href}
+      onClick={onNavigate}
       {...(product.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={[
         "group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all duration-200 hover:translate-x-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40",
@@ -170,14 +176,17 @@ function SectorMenuItem({
   sector,
   href,
   dark = false,
+  onNavigate,
 }: {
   sector: SectorItem
   href: string
   dark?: boolean
+  onNavigate?: NavigateHandler
 }) {
   return (
     <a
       href={href}
+      onClick={onNavigate}
       className={[
         "group flex flex-col gap-0.5 rounded-lg border border-transparent px-3 py-2.5 font-mono text-sm transition-all duration-200 hover:translate-x-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40",
         dark
@@ -239,6 +248,9 @@ export function Header({ locale }: HeaderProps) {
   const t = useTranslations("nav")
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  // El botón de la hamburguesa no es un Dialog.Trigger (el Dialog es controlado), así que Radix no sabe
+  // a dónde devolver el foco al cerrar: se hace a mano en onCloseAutoFocus.
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
   const productsList = t.raw("products_list") as Array<{
     name: string
@@ -282,6 +294,28 @@ export function Header({ locale }: HeaderProps) {
   ]
 
   const altLocale: Locale = locale === "es" ? "en" : "es"
+
+  // Menú móvil: siempre cierra el Dialog. Si el destino es un ancla de la página actual (/es/#showcase
+  // estando en /es/) el navegador solo cambia el hash y Radix mantiene el bloqueo de scroll del <body>
+  // mientras el Dialog siga montado, así que se desplaza a mano cuando ya se ha desmontado. Otras rutas
+  // y enlaces externos conservan su comportamiento nativo.
+  function handleMobileNavigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    setMobileMenuOpen(false)
+
+    const hashIndex = href.indexOf("#")
+    if (hashIndex === -1 || window.location.pathname !== href.slice(0, hashIndex)) return
+
+    event.preventDefault()
+    const id = href.slice(hashIndex + 1)
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    // Dos frames: el primero desmonta el Dialog y el segundo ya encuentra el <body> sin bloqueo.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
+        window.history.pushState(null, "", href)
+      }),
+    )
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -386,6 +420,7 @@ export function Header({ locale }: HeaderProps) {
             )}
 
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               className={[
@@ -406,7 +441,12 @@ export function Header({ locale }: HeaderProps) {
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out" />
 
-          <Dialog.Content className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
+          <Dialog.Content
+            onCloseAutoFocus={(event) => {
+              event.preventDefault()
+              menuButtonRef.current?.focus({ preventScroll: true })
+            }}
+            className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
             <VisuallyHidden.Root>
               <Dialog.Title>{t("mobileMenuTitle")}</Dialog.Title>
             </VisuallyHidden.Root>
@@ -457,7 +497,12 @@ export function Header({ locale }: HeaderProps) {
                               <SectionLabel dark>{t("products")}</SectionLabel>
 
                               {products.map((product) => (
-                                <ProductMenuItem key={product.name} product={product} dark />
+                                <ProductMenuItem
+                                  key={product.name}
+                                  product={product}
+                                  dark
+                                  onNavigate={(event) => handleMobileNavigate(event, product.href)}
+                                />
                               ))}
                             </div>
                           )}
@@ -470,6 +515,7 @@ export function Header({ locale }: HeaderProps) {
                                   sector={sector}
                                   href={SECTOR_HREF}
                                   dark
+                                  onNavigate={(event) => handleMobileNavigate(event, SECTOR_HREF)}
                                 />
                               ))}
                             </div>
@@ -480,7 +526,7 @@ export function Header({ locale }: HeaderProps) {
                       <a
                         href={MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`}
                         className="block py-4 font-mono text-lg font-medium text-white/80 transition-colors duration-200 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(event) => handleMobileNavigate(event, MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`)}
                       >
                         {item.name}
                       </a>
