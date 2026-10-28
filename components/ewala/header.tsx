@@ -394,7 +394,7 @@ export function Header({ locale }: HeaderProps) {
                   ? "border-black/10 bg-black/[0.03] text-on-light hover:border-black/20 hover:bg-black/[0.06]"
                   : "border-white/20 bg-white/[0.06] text-white hover:border-white/30 hover:bg-white/[0.1]",
               ].join(" ")}
-              aria-label="Abrir menú"
+              aria-label={t("openMenu")}
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -408,13 +408,11 @@ export function Header({ locale }: HeaderProps) {
 
           <Dialog.Content className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
             <VisuallyHidden.Root>
-              <Dialog.Title>Menú de navegación móvil</Dialog.Title>
+              <Dialog.Title>{t("mobileMenuTitle")}</Dialog.Title>
             </VisuallyHidden.Root>
 
             <VisuallyHidden.Root>
-              <Dialog.Description>
-                Menú principal de navegación para dispositivos móviles.
-              </Dialog.Description>
+              <Dialog.Description>{t("mobileMenuDescription")}</Dialog.Description>
             </VisuallyHidden.Root>
 
             <div className="p-6">
@@ -432,7 +430,7 @@ export function Header({ locale }: HeaderProps) {
                   <button
                     type="button"
                     className="rounded-xl border border-white/15 bg-white/[0.06] p-2 text-white/70 transition-all duration-200 hover:border-white/25 hover:bg-white/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
-                    aria-label="Cerrar menú"
+                    aria-label={t("closeMenu")}
                   >
                     <X className="h-6 w-6" />
                   </button>

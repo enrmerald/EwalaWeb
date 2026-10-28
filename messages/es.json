@@ -20,6 +20,11 @@
     "blog": "Blog",
     "contact": "Contacto",
     "cta": "Solicitar demo",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "mobileMenuTitle": "Menú de navegación móvil",
+    "mobileMenuDescription": "Menú principal de navegación para dispositivos móviles.",
+    "breadcrumb": "Ruta de navegación",
     "products_list": [
       {
         "name": "SentryN3t Protection",

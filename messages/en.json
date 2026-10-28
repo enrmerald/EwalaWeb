@@ -20,6 +20,11 @@
     "blog": "Blog",
     "contact": "Contact",
     "cta": "Request Demo",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mobileMenuTitle": "Mobile navigation menu",
+    "mobileMenuDescription": "Main navigation menu for mobile devices.",
+    "breadcrumb": "Breadcrumb",
     "products_list": [
       { "name": "SentryN3t Protection", "badge": "NDR", "badgeTitle": "Network Detection & Response", "description": "AI/ML anomaly detection for OT/IoT/IT networks" },
       { "name": "LIVET", "hidden": true, "description": "Secure extensive livestock management, built for cybersecurity from the ground up" },
