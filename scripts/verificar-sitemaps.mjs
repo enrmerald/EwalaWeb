@@ -26,7 +26,7 @@
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
-import { isRealIsoDate } from '../lib/fechas.mjs'
+import { isRealIsoDate, todayInMadrid } from '../lib/fechas.mjs'
 import { IS_PRODUCTION_DEPLOY, SITE_URL } from '../lib/site.ts'
 
 const out = process.argv[2] ?? 'out'
@@ -44,7 +44,7 @@ const decode = (s) =>
   s.replace(/&apos;|&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
 
 const read = (file) => (existsSync(file) ? readFileSync(file, 'utf8') : null)
-const today = new Date().toISOString().slice(0, 10)
+const today = todayInMadrid()
 
 /** Bien formado: etiquetas anidadas y cerradas, y ningún `&` sin escapar. Devuelve el problema o null. */
 function malformed(xml) {

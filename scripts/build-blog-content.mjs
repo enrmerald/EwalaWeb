@@ -12,7 +12,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { z } from 'zod'
-import { isRealIsoDate } from '../lib/fechas.mjs'
+import { isFutureDate, isRealIsoDate } from '../lib/fechas.mjs'
 import { renderMarkdown } from './lib/blog-markdown.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -116,6 +116,12 @@ function readPostsForLocale(locale) {
 
     const fm = parsed.data
     if (fm.draft) continue
+    // Fecha futura = borrador hasta ese día (Europe/Madrid): no se exporta, ni sale en el listado ni en los
+    // sitemaps. Hace falta un nuevo build el día de la fecha para que se publique.
+    if (isFutureDate(fm.date)) {
+      console.warn(`[build-blog-content] Aviso: ${locale}/${file} no se publica hasta ${fm.date} (fecha futura).`)
+      continue
+    }
 
     const words = countWords(content)
     const readingMinutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))

@@ -189,6 +189,9 @@ draft: false                     # opcional
 - El build **falla** (nombrando fichero y campo) si `date` no es una fecha real `AAAA-MM-DD`, o si `image`
   no es una ruta ASCII que exista en `public/` con exactamente las mismas mayúsculas (Netlify sirve desde
   Linux, donde `/Foto.PNG` y `/foto.png` son ficheros distintos).
+- Un artículo con `date` **futura** (según Europe/Madrid) se trata como borrador hasta ese día: no se exporta,
+  ni sale en el listado ni en los sitemaps, y el build avisa. Hace falta un build el día de la fecha (build
+  hook programado en Netlify o despliegue manual) para que se publique.
 - El Markdown **no admite HTML en bruto**: `<div>`, `<script>`… se escapan y se ven como texto, y los
   enlaces/imágenes con esquema distinto de http(s)/mailto (`javascript:`, `data:`…) se reducen a su texto.
   El cuerpo se inyecta con `dangerouslySetInnerHTML`, por eso se sanea en `build-blog-content.mjs`. ESLint
