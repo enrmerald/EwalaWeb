@@ -65,6 +65,7 @@ export default async function CompanyPage({
       <HeroInterior
         locale={locale}
         breadcrumbs={breadcrumbs}
+        breadcrumbLabel={dict.nav.breadcrumb}
         title={c.heroTitle}
         titleHighlight={c.heroTitleHighlight}
         subtitle={c.heroSubtitle}

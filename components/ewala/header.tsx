@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import * as NavigationMenu from "@radix-ui/react-navigation-menu"
@@ -108,16 +108,37 @@ function DesktopSimpleLink({
   )
 }
 
+/**
+ * Desplaza a un ancla de la página actual y la refleja en la URL como haría la navegación nativa:
+ * solo añade una entrada al historial si el hash cambia (pulsar dos veces el mismo enlace no apila
+ * entradas) y no toca nada si el elemento no existe.
+ */
+function scrollToAnchor(href: string) {
+  const hash = href.slice(href.indexOf("#"))
+  const target = document.getElementById(hash.slice(1))
+  if (!target) return
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
+  if (window.location.hash !== hash) window.history.pushState(null, "", href)
+}
+
+type NavigateHandler = (event: React.MouseEvent<HTMLAnchorElement>) => void
+
 function ProductMenuItem({
   product,
   dark = false,
+  onNavigate,
 }: {
   product: ProductItem
   dark?: boolean
+  /** Solo el menú móvil la usa: cierra el Dialog y gestiona las anclas de la propia página. */
+  onNavigate?: NavigateHandler
 }) {
   return (
     <a
       href={product.href}
+      onClick={onNavigate}
       {...(product.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={[
         "group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all duration-200 hover:translate-x-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40",
@@ -170,14 +191,17 @@ function SectorMenuItem({
   sector,
   href,
   dark = false,
+  onNavigate,
 }: {
   sector: SectorItem
   href: string
   dark?: boolean
+  onNavigate?: NavigateHandler
 }) {
   return (
     <a
       href={href}
+      onClick={onNavigate}
       className={[
         "group flex flex-col gap-0.5 rounded-lg border border-transparent px-3 py-2.5 font-mono text-sm transition-all duration-200 hover:translate-x-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40",
         dark
@@ -239,6 +263,12 @@ export function Header({ locale }: HeaderProps) {
   const t = useTranslations("nav")
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  // El botón de la hamburguesa no es un Dialog.Trigger (el Dialog es controlado), así que Radix no sabe
+  // a dónde devolver el foco al cerrar: se hace a mano en onCloseAutoFocus.
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  // Ancla de la propia página elegida en el menú móvil; se desplaza en onCloseAutoFocus, cuando Radix ya
+  // ha desmontado el Dialog y liberado el bloqueo de scroll del <body>.
+  const pendingAnchorRef = useRef<string | null>(null)
 
   const productsList = t.raw("products_list") as Array<{
     name: string
@@ -283,6 +313,44 @@ export function Header({ locale }: HeaderProps) {
 
   const altLocale: Locale = locale === "es" ? "en" : "es"
 
+  // Menú móvil: siempre cierra el Dialog. Si el destino es un ancla de la página actual (/es/#showcase
+  // estando en /es/) el navegador solo cambia el hash y Radix mantiene el bloqueo de scroll del <body>
+  // mientras el Dialog siga montado, así que el ancla se guarda y se desplaza en onCloseAutoFocus, ya
+  // desmontado. Otras rutas y enlaces externos conservan su comportamiento nativo.
+  function handleMobileNavigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    // Ctrl/Cmd/Shift/Alt-clic o botón no primario: el navegador abre pestaña o ventana nueva; no se
+    // intercepta ni se cierra el menú.
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+
+    setMobileMenuOpen(false)
+
+    const hashIndex = href.indexOf("#")
+    if (hashIndex === -1) return
+
+    // Un pathname sin barra final (posible en dev) también cuenta como la misma página.
+    const { pathname } = window.location
+    const currentPath = pathname.endsWith("/") ? pathname : `${pathname}/`
+    if (currentPath !== href.slice(0, hashIndex)) return
+
+    event.preventDefault()
+    pendingAnchorRef.current = href
+  }
+
+  // Un mismo href para el enlace (sin JS, Ctrl-clic) y para el manejador: una sola fuente.
+  const mobileSimpleHref = (index: number) => MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`
+
+  // Red de seguridad: si el Dialog se desmonta sin disparar onCloseAutoFocus, el ancla pendiente se
+  // desplaza igualmente (si onCloseAutoFocus ya la consumió, la referencia está a null y no hace nada).
+  useEffect(() => {
+    if (mobileMenuOpen) return
+    const timeout = window.setTimeout(() => {
+      const href = pendingAnchorRef.current
+      pendingAnchorRef.current = null
+      if (href) scrollToAnchor(href)
+    }, 600)
+    return () => window.clearTimeout(timeout)
+  }, [mobileMenuOpen])
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 80)
@@ -313,7 +381,7 @@ export function Header({ locale }: HeaderProps) {
             <EwalaLogo light={!isScrolled} />
           </Link>
 
-          <NavigationMenu.Root className="relative hidden lg:block">
+          <NavigationMenu.Root aria-label={t("mainNavigation")} className="relative hidden lg:block">
             <NavigationMenu.List className="flex items-center gap-1">
               <NavigationMenu.Item>
                 <DesktopNavTrigger scrolled={isScrolled}>{t("solutions")}</DesktopNavTrigger>
@@ -386,15 +454,19 @@ export function Header({ locale }: HeaderProps) {
             )}
 
             <button
+              ref={menuButtonRef}
               type="button"
-              onClick={() => setMobileMenuOpen(true)}
+              onClick={() => {
+                pendingAnchorRef.current = null
+                setMobileMenuOpen(true)
+              }}
               className={[
                 "rounded-xl border p-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40 lg:hidden",
                 isScrolled
                   ? "border-black/10 bg-black/[0.03] text-on-light hover:border-black/20 hover:bg-black/[0.06]"
                   : "border-white/20 bg-white/[0.06] text-white hover:border-white/30 hover:bg-white/[0.1]",
               ].join(" ")}
-              aria-label="Abrir menú"
+              aria-label={t("openMenu")}
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -406,15 +478,24 @@ export function Header({ locale }: HeaderProps) {
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out" />
 
-          <Dialog.Content className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
+          <Dialog.Content
+            onCloseAutoFocus={(event) => {
+              event.preventDefault()
+              const href = pendingAnchorRef.current
+              pendingAnchorRef.current = null
+              if (href) {
+                scrollToAnchor(href)
+                return
+              }
+              menuButtonRef.current?.focus({ preventScroll: true })
+            }}
+            className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
             <VisuallyHidden.Root>
-              <Dialog.Title>Menú de navegación móvil</Dialog.Title>
+              <Dialog.Title>{t("mobileMenuTitle")}</Dialog.Title>
             </VisuallyHidden.Root>
 
             <VisuallyHidden.Root>
-              <Dialog.Description>
-                Menú principal de navegación para dispositivos móviles.
-              </Dialog.Description>
+              <Dialog.Description>{t("mobileMenuDescription")}</Dialog.Description>
             </VisuallyHidden.Root>
 
             <div className="p-6">
@@ -432,7 +513,7 @@ export function Header({ locale }: HeaderProps) {
                   <button
                     type="button"
                     className="rounded-xl border border-white/15 bg-white/[0.06] p-2 text-white/70 transition-all duration-200 hover:border-white/25 hover:bg-white/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
-                    aria-label="Cerrar menú"
+                    aria-label={t("closeMenu")}
                   >
                     <X className="h-6 w-6" />
                   </button>
@@ -459,7 +540,12 @@ export function Header({ locale }: HeaderProps) {
                               <SectionLabel dark>{t("products")}</SectionLabel>
 
                               {products.map((product) => (
-                                <ProductMenuItem key={product.name} product={product} dark />
+                                <ProductMenuItem
+                                  key={product.name}
+                                  product={product}
+                                  dark
+                                  onNavigate={(event) => handleMobileNavigate(event, product.href)}
+                                />
                               ))}
                             </div>
                           )}
@@ -472,6 +558,7 @@ export function Header({ locale }: HeaderProps) {
                                   sector={sector}
                                   href={SECTOR_HREF}
                                   dark
+                                  onNavigate={(event) => handleMobileNavigate(event, SECTOR_HREF)}
                                 />
                               ))}
                             </div>
@@ -480,9 +567,9 @@ export function Header({ locale }: HeaderProps) {
                       </>
                     ) : (
                       <a
-                        href={MOBILE_SIMPLE_HREFS[index] ?? `/${locale}/`}
+                        href={mobileSimpleHref(index)}
                         className="block py-4 font-mono text-lg font-medium text-white/80 transition-colors duration-200 hover:text-[var(--primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40"
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(event) => handleMobileNavigate(event, mobileSimpleHref(index))}
                       >
                         {item.name}
                       </a>

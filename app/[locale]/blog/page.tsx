@@ -63,6 +63,7 @@ export default async function BlogPage({
       <HeroInterior
         locale={locale}
         breadcrumbs={breadcrumbs}
+        breadcrumbLabel={dict.nav.breadcrumb}
         title={dict.blog.heroTitle}
         titleHighlight={dict.blog.heroTitleHighlight}
         subtitle={dict.blog.heroSubtitle}

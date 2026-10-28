@@ -61,6 +61,7 @@ export default async function PrivacyPolicyPage({
       <HeroInterior
         locale={locale}
         breadcrumbs={breadcrumbs}
+        breadcrumbLabel={dict.nav.breadcrumb}
         title={doc.title}
         subtitle={doc.subtitle}
       />

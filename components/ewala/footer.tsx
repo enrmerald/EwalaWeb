@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useSyncExternalStore } from "react"
 import { usePathname } from "next/navigation"
 import * as Accordion from "@radix-ui/react-accordion"
-import { Linkedin, Github, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
+import { Linkedin, Youtube, ChevronDown, ArrowUpRight, FileText } from "lucide-react"
 import { useTranslations } from "@/i18n/client"
 import { SOCIAL_LINKS } from "@/lib/site"
 
@@ -18,10 +18,11 @@ const isPdf = (href: string) => /\.pdf$/i.test(href)
 
 function SocialLinks() {
   const t = useTranslations("footer")
+  // `t()` solo resuelve claves planas: el grupo anidado `social` se lee con t.raw.
+  const social = t.raw("social") as { linkedin: string; youtube: string }
   const profiles = [
-    { label: t("social.linkedin"), href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
-    { label: t("social.github"), href: SOCIAL_LINKS.github, Icon: Github },
-    { label: t("social.youtube"), href: SOCIAL_LINKS.youtube, Icon: Youtube },
+    { label: social.linkedin, href: SOCIAL_LINKS.linkedin, Icon: Linkedin },
+    { label: social.youtube, href: SOCIAL_LINKS.youtube, Icon: Youtube },
   ]
   return (
     <>

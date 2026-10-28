@@ -14,7 +14,6 @@ export const IS_PRODUCTION_DEPLOY = (process.env.CONTEXT ?? 'production') === 'p
 // Perfiles oficiales confirmados por Ewala (footer y, más adelante, `sameAs` del JSON-LD).
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/company/e-wala-it-services',
-  github: 'https://github.com/EwalaIT',
   youtube: 'https://www.youtube.com/channel/UCMcvwAIxQNsI8WloxR9r_gg',
 } as const
 

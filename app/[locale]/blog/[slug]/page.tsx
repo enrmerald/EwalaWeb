@@ -106,7 +106,7 @@ export default async function BlogArticlePage({
         })}
       />
       <Header locale={locale} />
-      <HeroInterior locale={locale} breadcrumbs={breadcrumbs} title={post.title} subtitle={post.subtitle ?? post.description} />
+      <HeroInterior locale={locale} breadcrumbs={breadcrumbs} breadcrumbLabel={dict.nav.breadcrumb} title={post.title} subtitle={post.subtitle ?? post.description} />
       <BlogArticulo
         post={post}
         headings={post.headings}

@@ -69,7 +69,7 @@ export function contactEmail(data: ContactEmailData): { html: string; text: stri
   ].join('')
 
   const consents = [
-    row('Política de privacidad', `<span style="color:${GREEN};">Aceptada</span>`),
+    row('Política de privacidad', `<span style="color:${GREEN};">Leída</span>`),
     row('Comunicaciones comerciales', data.marketing ? `<span style="color:${GREEN};">Sí</span>` : muted('No')),
   ].join('')
 
@@ -157,7 +157,7 @@ ${heading('Consentimientos')}
     message ?? 'Sin mensaje.',
     '',
     '-- Consentimientos --',
-    'Política de privacidad: Aceptada',
+    'Política de privacidad: Leída',
     `Comunicaciones comerciales: ${data.marketing ? 'Sí' : 'No'}`,
     '',
     'Responde a este correo para escribir directamente a la persona. La web promete respuesta en menos de 24 h laborables.',
