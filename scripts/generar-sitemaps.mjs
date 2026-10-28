@@ -67,7 +67,14 @@ const entries = []
 for (const page of PAGES) {
   const meta = SITEMAP_PAGES[page]
   if (!meta) continue
-  const lastmod = page === '/blog' ? latestPostDate : meta.lastmod
+  let lastmod = meta.lastmod
+  if (lastmod === null) {
+    // Página sin lastmod fijo (/blog): fecha del artículo más reciente o, sin artículos publicados, la de respaldo.
+    lastmod = latestPostDate ?? meta.fallbackLastmod ?? null
+    if (lastmod === null) fail(`lastmod de ${page}: no hay artículos publicados ni fallbackLastmod en lib/sitemap-data.mjs`)
+    else if (!latestPostDate)
+      console.warn(`[generar-sitemaps] Aviso: sin artículos publicados; lastmod de ${page} = ${lastmod} (fallbackLastmod)`)
+  }
   if (lastmod) checkDate(lastmod, `lastmod de ${page}`)
   const alternates = [
     ...locales.map((l) => [l, absolute(localizedPath(l, page))]),
