@@ -33,6 +33,8 @@ pnpm build                # build estático → out/ (comprueba tipos)
 pnpm lint                 # ESLint 9 (eslint.config.mjs)
 pnpm typecheck            # tipos sin hacer build (incluye netlify/**/*.mts)
 pnpm verify:seo           # auditoría SEO de out/ (tras pnpm build)
+pnpm verify:sitemap       # auditoría de los sitemaps y robots.txt de out/ (tras pnpm build)
+pnpm sitemap:build        # regenera public/sitemap*.xml (ya lo hace prebuild/predev; necesita content:build antes)
 pnpm verify:redirects     # URLs antiguas → 301/410, rutas nuevas → 200 (contra http://localhost:8888)
 
 # Probar como en producción (redirecciones, cabeceras y funciones de netlify.toml):
@@ -40,7 +42,7 @@ pnpm build && pnpm dlx --package=netlify-cli netlify dev --dir out --offline   #
 ```
 
 No hay tests unitarios. **Cómo comprobar un cambio:** `pnpm lint` (0 errores; hay 6 avisos previos
-conocidos, sobre todo reglas del React Compiler, que el proyecto no usa), `pnpm typecheck`, `pnpm build`, `pnpm verify:seo` y, si
+conocidos, sobre todo reglas del React Compiler, que el proyecto no usa), `pnpm typecheck`, `pnpm build`, `pnpm verify:seo`, `pnpm verify:sitemap` y, si
 tocas `netlify.toml` o funciones, `netlify dev` + `pnpm verify:redirects`.
 
 Avisos de entorno (Windows + OneDrive):
@@ -71,7 +73,7 @@ app/
   page.tsx                ← respaldo: redirect('/es/') (en producción responde antes un 301 de Netlify)
   not-found.tsx           ← 404 global (out/404.html) con su propio <html lang="es">, noindex
   fonts.ts                ← next/font (Noto Sans, Space Mono), compartido por layout y 404
-  sitemap.ts, robots.ts   ← estáticos; robots y noindex cambian si el build no es de producción
+  robots.ts               ← estático; declara ambos sitemaps (cerrado si el build no es de producción)
   [locale]/
     layout.tsx            ← <html lang>, metadatos comunes, JSON-LD Organization + WebSite, GTM, I18nProvider
     page.tsx              ← home (SentryN3t + partners + sellos)
@@ -87,6 +89,7 @@ lib/
   analytics.ts          ← GTM_ID (debe coincidir con public/gtm.js)
   contact.ts            ← contrato del formulario (límites, NEED_VALUES, tipos) — cliente y función
   contact-client.ts     ← envío a /api/contact desde el navegador
+  sitemap-data.mjs      ← lastmod, changefreq y priority de cada página fija (JS puro: lo lee Node en el prebuild)
   blog.ts, products.ts, features.ts (SHOW_DEMO_CTA), utils.ts
 netlify/
   functions/contact.mts     ← formulario → Resend
@@ -95,7 +98,7 @@ netlify/
 messages/{es,en}.json   ← TODOS los textos (es.json es la fuente de verdad del tipo)
 content/blog/{es,en}/*.md ← artículos (ver «Blog»)
 public/                 ← se publica tal cual: PDFs institucionales, gtm.js, 410.html, imágenes, favicon/
-scripts/                ← build-blog-content.mjs (build), verificar-*.mjs, generar-*.py (manuales)
+scripts/                ← build-blog-content.mjs y generar-sitemaps.mjs (build), verificar-*.mjs, generar-*.py (manuales)
 components/ewala/       ← componentes propios (sections/ = Server Components de la landing)
 components/ui/          ← shadcn/ui: no editar a mano (excluido del lint)
 docs/                   ← arquitectura.md + documentación interna (no se publica)
@@ -116,6 +119,8 @@ netlify.toml            ← build, funciones, redirecciones 301/410, cabeceras d
   `Report-Only` (informes en Netlify → Logs → Functions → `csp-report`). Caché inmutable solo en
   `/_next/static/*`; **nunca** `Cache-Control` en `/*` (Netlify concatena cabeceras). CORP `same-origin`
   solo en `/es/*`, `/en/*` y `/_next/static/*` (no en `/*`: el logo de `public/` lo carga el correo del formulario).
+  Los sitemaps llevan solo `Content-Type: application/xml; charset=utf-8`: sin `Cache-Control` propio, vale el de
+  por defecto de Netlify (revalida en cada despliegue).
 - `netlify dev` en local **no** emula `Cache-Control` ni `Content-Type` personalizados: comprobarlos en el
   deploy de la rama.
 
@@ -146,8 +151,14 @@ Cookiebot está cargado (`Cookiebot.renew()`). Si cambian cookies o proveedores,
   layout define `twitter` **solo** con `card`.
 - Un único `<h1>` por página (lo pone `HeroInterior` en las interiores). `alt` en todas las imágenes.
 - Title ≤ 60 caracteres, meta description 120–160. Comprobar con `pnpm verify:seo`.
-- Sitemap: al cambiar el contenido de una página fija, actualizar su fecha en `PAGE_LAST_MODIFIED`
-  (`app/sitemap.ts`); los posts usan su `date`.
+- **Dos sitemaps**, generados en el build por `scripts/generar-sitemaps.mjs` (no hay `app/sitemap.ts`: con
+  uno y otro en `public/` chocarían). `sitemap-google.xml` es mínimo (`loc` + `lastmod`) y **es el que se envía
+  a Search Console**; `sitemap.xml` es el completo (hreflang, `priority`, `changefreq`, imágenes) para Bing y
+  herramientas SEO. `robots.txt` declara ambos. No se versionan (`.gitignore`).
+- Al cambiar el contenido de una página fija, actualizar su `lastmod` en `lib/sitemap-data.mjs` (a mano, nunca
+  la fecha del build); los posts usan su `date`. Una página nueva: añadirla a `PAGES` y a `SITEMAP_PAGES`
+  (el build falla si no coinciden). Excluidas a propósito: páginas `noindex` y de error.
+- Comprobar con `pnpm verify:sitemap`. El hreflang del sitemap debe coincidir con el del HTML de cada página.
 - JSON-LD: solo datos reales (empresa, perfiles de `SOCIAL_LINKS`). No inventar autores, reseñas ni ratings.
 - Previews de Netlify: `noindex` + `robots.txt` cerrado automáticamente (`IS_PRODUCTION_DEPLOY`).
 
@@ -178,6 +189,9 @@ draft: false                     # opcional
 - El build **falla** (nombrando fichero y campo) si `date` no es una fecha real `AAAA-MM-DD`, o si `image`
   no es una ruta ASCII que exista en `public/` con exactamente las mismas mayúsculas (Netlify sirve desde
   Linux, donde `/Foto.PNG` y `/foto.png` son ficheros distintos).
+- Un artículo con `date` **futura** (según Europe/Madrid) se trata como borrador hasta ese día: no se exporta,
+  ni sale en el listado ni en los sitemaps, y el build avisa. Hace falta un build el día de la fecha (build
+  hook programado en Netlify o despliegue manual) para que se publique.
 - El Markdown **no admite HTML en bruto**: `<div>`, `<script>`… se escapan y se ven como texto, y los
   enlaces/imágenes con esquema distinto de http(s)/mailto (`javascript:`, `data:`…) se reducen a su texto.
   El cuerpo se inyecta con `dangerouslySetInnerHTML`, por eso se sanea en `build-blog-content.mjs`. ESLint
@@ -239,6 +253,7 @@ si se propone uno nuevo).
   hace falta estado/efectos.
 - Imágenes con `next/image` y `width`/`height` reales.
 - Interruptor de demo: `NEXT_PUBLIC_SHOW_DEMO_CTA=true` (por defecto oculto; se incrusta en build).
+- **Commits y PRs**: nunca añadir firma, co-autoría ni ninguna referencia a Claude en mensajes de commit ni en cuerpos de pull request.
 
 ## Idioma
 

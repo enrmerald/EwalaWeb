@@ -73,7 +73,7 @@ Copia `.env.local.example` a `.env.local` para desarrollo (nunca se sube a git).
 | `RESEND_FROM` | Functions | Remitente verificado, p. ej. `Web Ewala <web@notify.ewala.es>` |
 | `CONTACT_MAILBOX_TO` | Functions | Buzón que recibe las consultas (`info@ewala.es`) |
 | `MAIL_ENVIRONMENT` | Functions | `production` en producción; en previews, p. ej. `staging` (se añade al asunto) |
-| `NEXT_PUBLIC_SITE_URL` | Builds | Opcional. Por defecto `https://ewala.es` |
+| `NEXT_PUBLIC_SITE_URL` | Builds | Opcional. Por defecto `https://ewala.es` (vacía = por defecto; la barra final se ignora) |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Builds | Opcional. Verificación de Search Console por metaetiqueta |
 | `NEXT_PUBLIC_SHOW_DEMO_CTA` | Builds | `true` muestra los botones de demo (por defecto ocultos) |
 

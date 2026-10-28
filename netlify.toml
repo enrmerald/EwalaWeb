@@ -105,6 +105,20 @@
     Content-Type = "image/png"
     Cache-Control = "public, max-age=86400"
 
+# Sitemaps generados en build (scripts/generar-sitemaps.mjs). Netlify ya los sirve como application/xml
+# por la extensión; aquí se fija el charset para que ningún rastreador tenga que adivinar la codificación.
+# Sin Cache-Control a propósito: vale el de por defecto (ver abajo) y así Search Console ve siempre la
+# última versión tras cada despliegue.
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+  for = "/sitemap-google.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
 # El resto (HTML, PDFs, imágenes de public/) usa el valor por defecto de Netlify:
 # "public, max-age=0, must-revalidate" + ETag. Así cada despliegue se ve al instante.
 

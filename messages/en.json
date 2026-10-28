@@ -536,7 +536,7 @@
         "phone": "+34 984 10 90 69",
         "address": "Calle Peña Brava nº 21, Office 1B, Silvota Industrial Estate, 33192 Llanera, Asturias, Spain",
         "hours": [
-          { "period": "September 15 to June 15", "detail": "Monday to Thursday, 8:00 AM to 6:00 PM. Friday, 8:00 AM to 3:00 PM." },
+          { "period": "September 16 to June 14", "detail": "Monday to Thursday, 8:00 AM to 6:00 PM. Friday, 8:00 AM to 3:00 PM." },
           { "period": "June 15 to September 15 (summer hours)", "detail": "Monday to Friday, 8:00 AM to 3:00 PM." }
         ]
       },

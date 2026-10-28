@@ -17,6 +17,8 @@ export default function robots(): MetadataRoute.Robots {
       // Páginas de error y contenido retirado: no aportan nada al índice.
       disallow: ['/404/', '/404.html', '/410.html'],
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    // Los genera scripts/generar-sitemaps.mjs. El de Google (mínimo) va primero: es el que se envía a
+    // Search Console; el completo (hreflang, imágenes) queda para Bing y herramientas SEO.
+    sitemap: [`${SITE_URL}/sitemap-google.xml`, `${SITE_URL}/sitemap.xml`],
   }
 }

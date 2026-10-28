@@ -12,6 +12,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { z } from 'zod'
+import { isFutureDate, isRealIsoDate } from '../lib/fechas.mjs'
 import { renderMarkdown } from './lib/blog-markdown.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -26,12 +27,6 @@ const WORDS_PER_MINUTE = 200
 
 // Enum cerrado de categorías. Ampliar aquí si se añaden nuevas.
 const CATEGORIES = ['nis2', 'ot-iot', 'mssp', 'idi']
-
-/** `AAAA-MM-DD` y además una fecha real (rechaza 2026-02-31). El resto del código asume este formato. */
-const isRealIsoDate = (value) => {
-  const d = new Date(`${value}T00:00:00Z`)
-  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === value
-}
 
 /**
  * ¿Existe el fichero en public/ con EXACTAMENTE ese nombre (mayúsculas incluidas)? Netlify sirve desde
@@ -121,6 +116,12 @@ function readPostsForLocale(locale) {
 
     const fm = parsed.data
     if (fm.draft) continue
+    // Fecha futura = borrador hasta ese día (Europe/Madrid): no se exporta, ni sale en el listado ni en los
+    // sitemaps. Hace falta un nuevo build el día de la fecha para que se publique.
+    if (isFutureDate(fm.date)) {
+      console.warn(`[build-blog-content] Aviso: ${locale}/${file} no se publica hasta ${fm.date} (fecha futura).`)
+      continue
+    }
 
     const words = countWords(content)
     const readingMinutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))
