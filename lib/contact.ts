@@ -50,6 +50,11 @@ export interface ContactRequest {
   role?: string
   need: NeedValue
   message?: string
+  /**
+   * Confirma que la persona ha leído la política de privacidad (casilla «He leído la…»). No es un consentimiento
+   * al tratamiento —la base es la aplicación de medidas precontractuales—; el nombre se mantiene por
+   * compatibilidad con el contrato cliente/función. El único consentimiento real es `marketing`.
+   */
   privacy: true
   marketing: boolean
   /** Honeypot: campo invisible para personas. Si llega con contenido, es un bot. */
