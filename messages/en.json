@@ -487,9 +487,9 @@
         "counter": "{count}/1000"
       },
       "privacy": {
-        "label": "I have read and accept the",
+        "label": "I have read the",
         "linkLabel": "privacy policy",
-        "error": "You must accept the privacy policy to continue."
+        "error": "You must confirm that you have read the privacy policy to continue."
       },
       "marketing": {
         "label": "I want to receive product updates and content from Ewala by email."
@@ -560,11 +560,11 @@
       "dataProtection": {
         "summary": "Basic data protection information",
         "controller": "Controller: Ewala IT Services S.L.",
-        "purpose": "Purpose: to handle your contact request.",
-        "legitimation": "Legal basis: consent of the data subject.",
-        "recipients": "Recipients: the form submission is handled through Netlify (website hosting) and Resend (email delivery), based in the USA, acting as data processors. No data is shared with other third parties, except when legally required.",
+        "purpose": "Purpose: to handle your request and, if you tick the box, to send you news from Ewala.",
+        "legitimation": "Legal basis: pre-contractual measures taken at your request; consent for sending news.",
+        "recipients": "Recipients: the form submission is handled through Netlify (website hosting) and Resend (email delivery), based in the USA, which act as data processors and participate in the EU-US Data Privacy Framework. If your enquiry concerns the MSSP service, we will forward it to Innovation and Security North Labs, S.L., the company that provides it, so that it can handle it. No data is shared with other third parties, except when legally required.",
         "rights": "Rights: access, rectification, erasure, objection, restriction and portability, by writing to rgpd@ewala.es.",
-        "moreInfo": "More information in the privacy policy"
+        "moreInfo": "More information in the privacy policy."
       }
     }
   },
@@ -785,14 +785,14 @@
       "breadcrumb": "Privacy policy",
       "title": "Privacy policy",
       "subtitle": "How Ewala IT Services S.L. processes the personal data provided through this website and other communication channels, in accordance with the GDPR and Spanish data protection law. Courtesy translation: the Spanish version prevails in case of discrepancy.",
-      "updated": "October 26, 2026",
+      "updated": "October 28, 2026",
       "sections": [
         {
           "title": "Content and compliance",
           "blocks": [
             {
               "type": "p",
-              "text": "In compliance with Regulation (EU) 2016/679 of the European Parliament and of the Council of April 27, 2016, on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (\"GDPR\"), Spanish Organic Law 3/2018 of December 5 on the Protection of Personal Data and the Guarantee of Digital Rights (\"LOPDGDD\"), and other applicable data protection regulations."
+              "text": "In compliance with Regulation (EU) 2016/679 of the European Parliament and of the Council of April 27, 2016, on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (\"GDPR\"), Spanish Organic Law 3/2018 of December 5 on the Protection of Personal Data and the Guarantee of Digital Rights (\"LOPDGDD\"), and other applicable data protection regulations, Ewala informs Users about the processing of their personal data on the terms set out below."
             },
             {
               "type": "p",
@@ -816,7 +816,7 @@
             },
             {
               "type": "p",
-              "text": "Where personal data is requested through forms, the User will be provided with a table of basic data protection information, as well as an acceptance checkbox stating that they have read and accept this Privacy Policy, with a direct link to it."
+              "text": "Where personal data is requested through forms, the User will be provided with a table of basic data protection information, as well as a checkbox by which the User declares that they have read this Privacy Policy, with a direct link to it."
             },
             {
               "type": "p",
@@ -858,7 +858,7 @@
             },
             {
               "type": "p",
-              "text": "To exercise data protection rights, data subjects may contact the postal or email address above, following the procedure described in section 13."
+              "text": "To exercise data protection rights, data subjects may contact the postal or email addresses above, following the procedure described in section 13."
             }
           ]
         },
@@ -905,7 +905,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "In the course of providing its cybersecurity, technological innovation and IT services, Ewala may act as a data processor on behalf of its customers, processing personal data in accordance with the customer’s documented instructions and the data processing agreement (DPA) signed between the parties."
+              "text": "In the course of providing its cybersecurity, technological innovation and IT services, Ewala may act as a data processor on behalf of its customers, including interested organisations during demonstrations or proofs of concept, processing personal data in accordance with the customer’s documented instructions and the data processing agreement (DPA) signed between the parties."
             },
             {
               "type": "p",
@@ -913,12 +913,16 @@
             },
             {
               "type": "p",
-              "text": "Ewala will not access or process its customers’ personal data for purposes other than those set out in the corresponding data processing agreement."
+              "text": "Before starting any demonstration or proof of concept that involves processing personal data of the interested organisation, the corresponding data processing agreement will be signed."
+            },
+            {
+              "type": "p",
+              "text": "Ewala will not access its customers’ personal data or process it for purposes other than those set out in the corresponding data processing agreement."
             }
           ]
         },
         {
-          "title": "Data protection information regarding customers",
+          "title": "Data protection information regarding customers and prospective customers",
           "blocks": [
             {
               "type": "dl",
@@ -929,19 +933,19 @@
                 },
                 {
                   "term": "Data processed and source",
-                  "def": "Data comes from what is provided in the commercial and contractual relationship: quotes, contracts, invoices, requests, emails and any other communication arising from the customer relationship. The categories of data processed include: identification data (first name, surname, ID/tax ID, position), contact data (address, telephone, email), commercial data (services contracted, proposals, quotes), economic, financial and banking data (invoicing, payment method, payment history) and technical data arising from the provision of the service (IP addresses, activity logs, configurations)."
+                  "def": "Data comes from what is provided in the commercial and contractual relationship: quotes, contracts, invoices, requests, emails and any other communication arising from the customer relationship. The categories of data processed include: identification data (first name, surname, ID/tax ID, position), contact data (address, telephone, email), commercial data (services contracted, proposals, quotes), economic, financial and banking data (invoicing, payment method, payment history) and technical data arising from the provision of the service (IP addresses, activity logs, configurations). For prospective customers, data comes from the requests for information, quotes, demonstrations or proofs of concept they send to Ewala and, where applicable, from professional or publicly accessible sources (professional profiles and directories, trade fairs, industry events and conferences, tender documents and procurement procedures, or introductions by partner organisations). In these cases only professional contact data and the position held are processed. Where the data has not been obtained from the data subject, they will be informed of its source no later than the first communication addressed to them."
                 },
                 {
                   "term": "Purpose",
-                  "def": "Contracting of products and/or services and their management, provision and support of the contracted services, incident management, invoicing and collection, and preparation of aggregated and anonymised statistical reports on the company’s activity."
+                  "def": "Contracting of products or services and their management, provision and support of the contracted services, incident management, invoicing and collection, and preparation of aggregated and anonymised statistical reports on the company’s activity. For prospective customers: handling their requests, preparing proposals and offers, carrying out demonstrations or proofs of concept and maintaining professional contact with the organisation they work for."
                 },
                 {
                   "term": "Legal basis",
-                  "def": "Performance of a contract or pre-contractual measures (art. 6.1.b GDPR), compliance with legal, tax and accounting obligations (art. 6.1.c GDPR) and legitimate interest in processing the data of contact persons of legal entities, sole traders and professionals (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                  "def": "Performance of a contract or pre-contractual measures (art. 6.1.b GDPR), compliance with legal, tax and accounting obligations (art. 6.1.c GDPR) and legitimate interest in processing the data of contact persons of legal entities, sole traders and professionals (art. 6.1.f GDPR and art. 19 LOPDGDD). For prospective customers: pre-contractual measures taken at their request (art. 6.1.b GDPR) and legitimate interest in professional contact with the organisation they work for (art. 6.1.f GDPR and art. 19 LOPDGDD). Commercial communications by electronic means will only be sent to prospective customers with their prior consent, in accordance with section 9."
                 },
                 {
                   "term": "Categories of recipients",
-                  "def": "Tax, accounting and labour advisers; the Spanish Tax Agency (AEAT) and other competent Public Administrations; financial institutions for the management of collections and payments; professionals and providers whose involvement is necessary to provide the service, with a data processing agreement in place; and, where legally required, State Security Forces and Bodies and Courts and Tribunals."
+                  "def": "Tax, accounting and labour advisers; the Spanish Tax Agency (AEAT) and other competent Public Administrations; financial institutions for the management of collections and payments; professionals and providers whose involvement is necessary to provide the service, with a data processing agreement in place; and, where legally required, State Security Forces and Bodies and Courts and Tribunals. For prospective customers interested in managed security services (MSSP), Innovation and Security North Labs, S.L., the company that provides those services, for the sole purpose of handling their request."
                 },
                 {
                   "term": "International transfers",
@@ -949,11 +953,11 @@
                 },
                 {
                   "term": "Retention periods",
-                  "def": "For the duration of the contractual relationship and, afterwards, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims."
+                  "def": "For the duration of the contractual relationship and, afterwards, for the periods legally established for compliance with tax, accounting and commercial obligations, as well as for the establishment, exercise or defence of legal claims. If no contractual relationship is formalised, prospective customers’ data will be kept for a maximum of twenty-four (24) months from the last contact and deleted after that period, or earlier if the data subject objects to the processing."
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out with customer data."
+                  "def": "No automated decisions are made and no profiles are created with the data of customers and prospective customers."
                 }
               ]
             }
@@ -995,7 +999,7 @@
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out."
+                  "def": "No automated decisions are made and no profiles are created."
                 }
               ]
             }
@@ -1033,11 +1037,11 @@
                 },
                 {
                   "term": "Retention periods",
-                  "def": "Candidates’ data will be kept for a maximum of twenty-four (24) months from receipt or last update. After that period, if the résumé has not been updated or used, it will be securely deleted, unless it must be kept for longer to comply with a legal obligation or for the establishment, exercise or defence of legal claims. If the candidate is hired as a result of the selection process, their data will become part of their employment file."
+                  "def": "Candidates’ data will be kept for a maximum of twenty-four (24) months from receipt or last update. After that period, if the résumé has not been updated or used, it will be securely deleted, unless it must be kept for longer to comply with a legal obligation or for the establishment, exercise or defence of legal claims. If, as a result of the selection process, the candidate is hired, their data will become part of their employment file."
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out in recruitment processes."
+                  "def": "No automated decisions are made and no profiles are created in recruitment processes."
                 }
               ]
             }
@@ -1079,7 +1083,7 @@
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out."
+                  "def": "No automated decisions are made and no profiles are created."
                 }
               ]
             }
@@ -1125,7 +1129,7 @@
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out."
+                  "def": "No automated decisions are made and no profiles are created."
                 }
               ]
             },
@@ -1147,23 +1151,23 @@
                 },
                 {
                   "term": "Data processed and source",
-                  "def": "Data comes from completing the contact forms and using the means of communication available on the Website. The data processed includes first name, surname, location, email, telephone, company, IP address and message content, as well as information obtained through cookies, which, unless technical, are only installed with the User’s prior consent. Where fields are marked with an asterisk (*) or indicated as mandatory, completing them is necessary; if they are not provided, Ewala may not accept or handle the enquiry."
+                  "def": "Data comes from completing the contact forms and using the means of communication available on the Website. The data processed includes first name, surname, email, telephone, company, position, type of enquiry, IP address and message content, as well as information obtained through cookies, which, unless technical, are only installed with the User’s prior consent. Where fields are marked with an asterisk (*) or indicated as mandatory, completing them is necessary; if they are not provided, Ewala may be unable to handle the enquiry."
                 },
                 {
                   "term": "Purpose",
-                  "def": "To manage, handle and respond to enquiries received through the Website, as well as to send administrative, technical, organisational or commercial information about the products and services that are the subject of the request, and to prepare aggregated and anonymised statistical reports on the use of the Website."
+                  "def": "To manage, handle and respond to enquiries received through the Website, as well as to send administrative, technical, organisational or commercial information about the products and services that are the subject of the request; to send Ewala product news and content when the User has requested it by ticking the corresponding box; and to prepare aggregated and anonymised statistical reports on the use of the Website."
                 },
                 {
                   "term": "Legal basis",
-                  "def": "Consent of the data subject (art. 6.1.a GDPR), adoption of pre-contractual measures at the request of the data subject (art. 6.1.b GDPR) and legitimate interest in processing professional contact data (art. 6.1.f GDPR and art. 19 LOPDGDD)."
+                  "def": "Pre-contractual measures taken at the request of the data subject to handle their enquiry or their request for information, a demonstration or a proposal (art. 6.1.b GDPR); legitimate interest in processing professional contact data (art. 6.1.f GDPR and art. 19 LOPDGDD); and the data subject’s consent to receive news, when they tick the corresponding box (art. 6.1.a GDPR)."
                 },
                 {
                   "term": "Categories of recipients",
-                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc. (website hosting and form processing) and Resend, Inc. (email delivery), both based in the United States, acting as data processors. Also, the other categories indicated in the previous sections where applicable."
+                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc., for website hosting and form processing, and Plus Five Five, Inc. (Resend), for email delivery, both based in the United States, which act as data processors and participate in the EU-US Data Privacy Framework. If the enquiry concerns managed security services (MSSP), the data provided will be communicated to Innovation and Security North Labs, S.L., the company that provides those services, for the sole purpose of handling it, as a pre-contractual measure requested by the data subject (art. 6.1.b GDPR). Where applicable, the other categories of recipients indicated in the previous sections may also receive the data."
                 },
                 {
                   "term": "International transfers",
-                  "def": "Submitting the contact form involves a transfer to Netlify, Inc. and Resend, Inc. (United States), under the safeguards described in section 12."
+                  "def": "Submitting the contact form involves a transfer to Netlify, Inc. and Plus Five Five, Inc. (Resend), both based in the United States, covered by the EU-US Data Privacy Framework, as detailed in section 12."
                 },
                 {
                   "term": "Retention periods",
@@ -1171,7 +1175,7 @@
                 },
                 {
                   "term": "Automated decisions",
-                  "def": "No automated decision-making or profiling is carried out."
+                  "def": "No automated decisions are made and no profiles are created."
                 }
               ]
             }
@@ -1195,11 +1199,18 @@
           "blocks": [
             {
               "type": "p",
-              "text": "In general, Ewala does not carry out international transfers of personal data, except those arising from the use of providers based in the United States: Netlify, Inc. and Resend, Inc., for handling the contact form, and Google LLC, for web analytics, the latter only if the User has given consent (see the [Cookie Policy](/cookies))."
+              "text": "In general, Ewala does not carry out international transfers of personal data. The only transfers envisaged are the following:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Netlify, Inc., for hosting the Website and processing the contact form, and Plus Five Five, Inc. (Resend), for delivering the contact form email, both based in the United States and participating in the EU-US Data Privacy Framework, declared adequate by Commission Implementing Decision (EU) 2023/1795 of July 10, 2023. Their data processing agreements also include Standard Contractual Clauses as an additional safeguard.",
+                "Web analytics, only if the User has consented to analytics cookies: the provider is Google Ireland Limited, based in the European Union. The data may be processed by Google LLC in the United States, which participates in the EU-US Data Privacy Framework, with Standard Contractual Clauses as an additional safeguard (see the [Cookie Policy](/cookies))."
+              ]
             },
             {
               "type": "p",
-              "text": "Should personal data be transferred internationally as a result of its processing, such transfers will be carried out in accordance with applicable data protection regulations and, in particular, to countries whose level of protection has been declared adequate by an Adequacy Decision adopted by the European Commission, including, where the recipient has joined it, the EU-US Data Privacy Framework (Implementing Decision (EU) 2023/1795)."
+              "text": "Each entity’s participation in the Data Privacy Framework can be checked at [www.dataprivacyframework.gov](https://www.dataprivacyframework.gov). Data subjects may request information about the safeguards applied, or a copy of them, by writing to [rgpd@ewala.es](mailto:rgpd@ewala.es)."
             },
             {
               "type": "p",
@@ -1272,15 +1283,11 @@
             },
             {
               "type": "p",
-              "text": "To exercise rights, the data subject must provide:"
+              "text": "To exercise rights, the data subject must state the right they wish to exercise and provide the data needed to identify them. Only where there are reasonable doubts about their identity may Ewala request the additional information necessary to confirm it (art. 12.6 GDPR)."
             },
             {
-              "type": "ul",
-              "items": [
-                "A signed written request stating the right they wish to exercise.",
-                "A copy of their identity document (national ID, passport or equivalent), only where there are reasonable doubts about the applicant’s identity.",
-                "If acting through a representative: documentation proving the representation (power of attorney, express authorisation or proof of parental authority or guardianship)."
-              ]
+              "type": "p",
+              "text": "If the data subject acts through a representative, the representation must be proven by any legally valid means."
             },
             {
               "type": "p",
@@ -1323,23 +1330,11 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Ewala’s Website and the services offered by the company are aimed exclusively at persons over eighteen (18) years of age with sufficient legal capacity to contract."
+              "text": "Ewala does not process personal data of minors. The Website and Ewala’s services are aimed at companies and professionals and are not intended for minors."
             },
             {
               "type": "p",
-              "text": "Ewala does not knowingly collect or process personal data of minors. If it becomes aware that data of a person under 18 has been collected without the consent of their legal representatives, it will delete it immediately."
-            },
-            {
-              "type": "p",
-              "text": "If a legal representative becomes aware that a minor under their responsibility has provided personal data to Ewala, they may contact us at [rgpd@ewala.es](mailto:rgpd@ewala.es) to request its deletion."
-            },
-            {
-              "type": "p",
-              "text": "If data of minors or persons without legal capacity is provided through the Website, the person providing it and acting on their behalf declares responsibly that they hold legal representation, parental authority or guardianship, or have the express authorisation of whoever holds it, and the company may require supporting documentation."
-            },
-            {
-              "type": "p",
-              "text": "Legal representatives shall in any case be considered responsible for the acts of the persons in their care, in accordance with applicable regulations."
+              "text": "If, despite this, Ewala receives data from a minor, it will delete it as soon as it becomes aware of it. The minor’s legal representative may request its deletion at [rgpd@ewala.es](mailto:rgpd@ewala.es)."
             }
           ]
         },
@@ -1348,7 +1343,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Ewala adopts and implements the technical and organisational measures necessary to guarantee the security of personal data, as required by article 32 of the GDPR, with the aim of ensuring the ongoing confidentiality, integrity, availability and resilience of processing systems and services."
+              "text": "Ewala adopts and implements the technical and organisational measures necessary to guarantee the security of personal data, as required by article 32 of the GDPR, in order to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services."
             },
             {
               "type": "p",
@@ -1369,11 +1364,15 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Ewala maintains a presence on professional social networks in order to inform users about its activity, products and services. The processing of personal data of those who follow the corporate profiles is based on the consent expressed by following those profiles or interacting with them (art. 6.1.a GDPR)."
+              "text": "Ewala maintains corporate profiles on LinkedIn and YouTube to inform about its activity, products and services. It processes the data of those who interact with those profiles to manage its corporate presence and respond to the messages and comments it receives. The legal basis is its legitimate interest (art. 6.1.f GDPR), and it only processes the data that each platform makes available to it."
             },
             {
               "type": "p",
-              "text": "The processing of personal data carried out on those networks is also subject to each platform’s terms of use, legal terms and privacy policies, which Users are advised to consult. Ewala is not responsible for the processing carried out by the platforms themselves on their users’ data."
+              "text": "On LinkedIn, the platform produces aggregated statistics on visits and interactions with the company page (Page Insights). For that processing, Ewala and LinkedIn Ireland Unlimited Company are joint controllers (art. 26 GDPR), under the agreement published by LinkedIn at [https://legal.linkedin.com/pages-joint-controller-addendum](https://legal.linkedin.com/pages-joint-controller-addendum). Data subjects may exercise their rights against either of them, although LinkedIn holds the data and manages it directly. Ewala only receives aggregated data."
+            },
+            {
+              "type": "p",
+              "text": "Otherwise, each platform processes its users’ data as controller, under its own terms and privacy policies, which Users are advised to consult."
             }
           ]
         },
@@ -1386,7 +1385,7 @@
             },
             {
               "type": "p",
-              "text": "The Privacy Policy will always be accessible through a link at the bottom of the Website, indicating its version and publication date."
+              "text": "The Privacy Policy will always be accessible through a link at the bottom of the Website. Each version states its number and publication date."
             }
           ]
         },
@@ -1404,7 +1403,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "The applicable law is Spanish law. Unless specific regulations establishing another jurisdiction apply, in particular consumer and user protection regulations, the parties submit to the Courts and Tribunals of Gijón (Spain) for any dispute, without prejudice to Ewala’s willingness to resolve any dispute amicably beforehand."
+              "text": "The applicable law is Spanish law. Unless specific regulations establishing a different venue apply, in particular consumer and user protection regulations, the parties submit to the Courts and Tribunals of Gijón (Spain) for any dispute, without prejudice to Ewala’s willingness to resolve any dispute amicably beforehand."
             }
           ]
         }

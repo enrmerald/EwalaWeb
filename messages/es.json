@@ -649,9 +649,9 @@
         "counter": "{count}/1000"
       },
       "privacy": {
-        "label": "He leído y acepto la",
+        "label": "He leído la",
         "linkLabel": "política de privacidad",
-        "error": "Debes aceptar la política de privacidad para continuar."
+        "error": "Debes confirmar que has leído la política de privacidad para continuar."
       },
       "marketing": {
         "label": "Quiero recibir novedades de producto y contenido de Ewala por email."
@@ -722,11 +722,11 @@
       "dataProtection": {
         "summary": "Información básica de protección de datos",
         "controller": "Responsable: Ewala IT Services S.L.",
-        "purpose": "Finalidad: gestionar tu solicitud de contacto.",
-        "legitimation": "Legitimación: consentimiento del interesado.",
-        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Netlify (alojamiento de la web) y Resend (envío del correo), con sede en EE. UU., que actúan como encargados del tratamiento. No se ceden datos a otros terceros, salvo obligación legal.",
+        "purpose": "Finalidad: gestionar tu solicitud y, si marcas la casilla, enviarte novedades de Ewala.",
+        "legitimation": "Legitimación: aplicación de medidas precontractuales a tu solicitud; consentimiento para el envío de novedades.",
+        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Netlify (alojamiento de la web) y Resend (envío del correo), con sede en EE. UU., que actúan como encargados del tratamiento y están adheridos al Marco de Privacidad de Datos UE-EE. UU. Si tu consulta se refiere al servicio MSSP, la remitiremos a Innovation and Security North Labs, S.L., entidad que lo presta, para que pueda atenderla. No se ceden datos a otros terceros, salvo obligación legal.",
         "rights": "Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a rgpd@ewala.es.",
-        "moreInfo": "Más información en la política de privacidad"
+        "moreInfo": "Más información en la política de privacidad."
       }
     }
   },
@@ -947,14 +947,14 @@
       "breadcrumb": "Política de privacidad",
       "title": "Política de privacidad",
       "subtitle": "Cómo trata Ewala IT Services S.L. los datos personales que se facilitan a través de este sitio web y de otros canales de comunicación, conforme al RGPD y a la LOPDGDD.",
-      "updated": "26 de octubre de 2026",
+      "updated": "28 de octubre de 2026",
       "sections": [
         {
           "title": "Contenido y conformidad",
           "blocks": [
             {
               "type": "p",
-              "text": "En cumplimiento del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos («RGPD»), de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y Garantía de los Derechos Digitales («LOPDGDD»), y de la restante normativa vigente en materia de protección de datos."
+              "text": "En cumplimiento del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos («RGPD»), de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y Garantía de los Derechos Digitales («LOPDGDD»), y de la restante normativa vigente en materia de protección de datos, Ewala informa a los Usuarios sobre el tratamiento de sus datos personales en los términos que se exponen a continuación."
             },
             {
               "type": "p",
@@ -978,7 +978,7 @@
             },
             {
               "type": "p",
-              "text": "Cuando se soliciten datos de carácter personal mediante formularios, se pondrá a disposición del Usuario un cuadro con información básica en protección de datos, así como una casilla de aceptación que indica que ha leído y acepta la presente Política de Privacidad, con enlace directo a la misma."
+              "text": "Cuando se soliciten datos de carácter personal mediante formularios, se pondrá a disposición del Usuario un cuadro con información básica sobre protección de datos, así como una casilla mediante la que el Usuario declara haber leído la presente Política de Privacidad, con enlace directo a ella."
             },
             {
               "type": "p",
@@ -1020,7 +1020,7 @@
             },
             {
               "type": "p",
-              "text": "Para el ejercicio de derechos en materia de protección de datos, el interesado podrá dirigirse a la dirección postal o electrónica indicadas, conforme al procedimiento descrito en el apartado 13."
+              "text": "Para el ejercicio de derechos en materia de protección de datos, el interesado podrá dirigirse a las direcciones postal o electrónica indicadas, conforme al procedimiento descrito en el apartado 13."
             }
           ]
         },
@@ -1067,7 +1067,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "En el marco de la prestación de sus servicios de ciberseguridad, innovación tecnológica y servicios IT, Ewala puede actuar como encargado del tratamiento por cuenta de sus clientes, tratando datos personales conforme a las instrucciones documentadas del cliente y al acuerdo de encargo de tratamiento (DPA) suscrito entre ambas partes."
+              "text": "En el marco de la prestación de sus servicios de ciberseguridad, innovación tecnológica y servicios IT, Ewala puede actuar como encargado del tratamiento por cuenta de sus clientes, incluidas las entidades interesadas durante demostraciones o pruebas de concepto, tratando datos personales conforme a las instrucciones documentadas del cliente y al acuerdo de encargo de tratamiento (DPA) suscrito entre ambas partes."
             },
             {
               "type": "p",
@@ -1075,12 +1075,16 @@
             },
             {
               "type": "p",
-              "text": "Ewala no accederá ni tratará los datos personales de sus clientes para fines distintos de los establecidos en el correspondiente acuerdo de encargo de tratamiento."
+              "text": "Antes del inicio de cualquier demostración o prueba de concepto que implique el tratamiento de datos personales de la entidad interesada, se suscribirá el correspondiente acuerdo de encargo de tratamiento."
+            },
+            {
+              "type": "p",
+              "text": "Ewala no accederá a los datos personales de sus clientes ni los tratará para fines distintos de los establecidos en el correspondiente acuerdo de encargo de tratamiento."
             }
           ]
         },
         {
-          "title": "Información sobre protección de datos en relación con los clientes",
+          "title": "Información sobre protección de datos en relación con los clientes y potenciales clientes",
           "blocks": [
             {
               "type": "dl",
@@ -1091,19 +1095,19 @@
                 },
                 {
                   "term": "Datos tratados y procedencia",
-                  "def": "Los datos proceden de los facilitados en la relación comercial y contractual: presupuestos, contratos, facturas, solicitudes, correos electrónicos y cualquier otra comunicación derivada de la relación como cliente. Las categorías de datos tratados incluyen: datos identificativos (nombre, apellidos, DNI/CIF, cargo), datos de contacto (dirección, teléfono, correo electrónico), datos comerciales (servicios contratados, propuestas, presupuestos), datos económicos, financieros y bancarios (facturación, forma de pago, historial de pagos) y datos técnicos derivados de la prestación del servicio (direcciones IP, registros de actividad, configuraciones)."
+                  "def": "Los datos proceden de los facilitados en la relación comercial y contractual: presupuestos, contratos, facturas, solicitudes, correos electrónicos y cualquier otra comunicación derivada de la relación como cliente. Las categorías de datos tratados incluyen: datos identificativos (nombre, apellidos, DNI/CIF, cargo), datos de contacto (dirección, teléfono, correo electrónico), datos comerciales (servicios contratados, propuestas, presupuestos), datos económicos, financieros y bancarios (facturación, forma de pago, historial de pagos) y datos técnicos derivados de la prestación del servicio (direcciones IP, registros de actividad, configuraciones). En el caso de potenciales clientes, los datos proceden de las solicitudes de información, presupuesto, demostración o prueba de concepto que dirijan a Ewala y, en su caso, de fuentes profesionales o de acceso público (perfiles y directorios profesionales, ferias, eventos y jornadas sectoriales, pliegos y procedimientos de contratación o presentación por entidades colaboradoras). En estos casos solo se tratan datos de contacto profesional y el cargo o puesto desempeñado. Cuando los datos no se hayan obtenido del propio interesado, se le informará de su origen, como tarde, en la primera comunicación que se le dirija."
                 },
                 {
                   "term": "Finalidad",
-                  "def": "Contratación de productos y/o servicios y su correspondiente gestión, prestación y soporte de los servicios contratados, gestión de incidencias, facturación y cobro, y elaboración de informes estadísticos agregados y anonimizados sobre la actividad de la empresa."
+                  "def": "Contratación de productos o servicios y su correspondiente gestión, prestación y soporte de los servicios contratados, gestión de incidencias, facturación y cobro, y elaboración de informes estadísticos agregados y anonimizados sobre la actividad de la empresa. Respecto de potenciales clientes: atender sus solicitudes, elaborar propuestas y ofertas, realizar demostraciones o pruebas de concepto y mantener el contacto profesional con la entidad en la que prestan sus servicios."
                 },
                 {
                   "term": "Base jurídica",
-                  "def": "Ejecución del contrato o de medidas precontractuales (art. 6.1.b RGPD), cumplimiento de obligaciones legales, fiscales y contables (art. 6.1.c RGPD) e interés legítimo para el tratamiento de los datos de las personas de contacto de personas jurídicas, empresarios individuales y profesionales (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+                  "def": "Ejecución del contrato o de medidas precontractuales (art. 6.1.b RGPD), cumplimiento de obligaciones legales, fiscales y contables (art. 6.1.c RGPD) e interés legítimo para el tratamiento de los datos de las personas de contacto de personas jurídicas, empresarios individuales y profesionales (art. 6.1.f RGPD y art. 19 LOPDGDD). Respecto de potenciales clientes: aplicación de medidas precontractuales adoptadas a su solicitud (art. 6.1.b RGPD) e interés legítimo en el contacto profesional con la entidad en la que prestan sus servicios (art. 6.1.f RGPD y art. 19 LOPDGDD). Las comunicaciones comerciales por medios electrónicos a potenciales clientes solo se remitirán con su consentimiento previo, conforme al apartado 9."
                 },
                 {
                   "term": "Categorías de destinatarios",
-                  "def": "Asesoría fiscal, contable y laboral; Agencia Estatal de Administración Tributaria (AEAT) y demás Administraciones Públicas competentes; entidades financieras para la gestión de cobros y pagos; profesionales y proveedores cuya intervención resulte necesaria para la prestación del servicio, con acuerdo de encargo de tratamiento suscrito; y, cuando exista obligación legal, Fuerzas y Cuerpos de Seguridad del Estado y Juzgados y Tribunales."
+                  "def": "Asesoría fiscal, contable y laboral; Agencia Estatal de Administración Tributaria (AEAT) y demás Administraciones Públicas competentes; entidades financieras para la gestión de cobros y pagos; profesionales y proveedores cuya intervención resulte necesaria para la prestación del servicio, con acuerdo de encargo de tratamiento suscrito; y, cuando exista obligación legal, Fuerzas y Cuerpos de Seguridad del Estado y Juzgados y Tribunales. En el caso de potenciales clientes interesados en servicios de seguridad gestionada (MSSP), Innovation and Security North Labs, S.L., entidad que presta dichos servicios, con la única finalidad de que pueda atender su solicitud."
                 },
                 {
                   "term": "Transferencias internacionales",
@@ -1111,11 +1115,11 @@
                 },
                 {
                   "term": "Plazos de conservación",
-                  "def": "Durante la vigencia de la relación contractual y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones fiscales, contables y mercantiles, así como para la formulación, el ejercicio o la defensa de reclamaciones."
+                  "def": "Durante la vigencia de la relación contractual y, posteriormente, durante los plazos legalmente establecidos para el cumplimiento de obligaciones fiscales, contables y mercantiles, así como para la formulación, el ejercicio o la defensa de reclamaciones. Si no llega a formalizarse la relación contractual, los datos de potenciales clientes se conservarán durante un máximo de veinticuatro (24) meses desde el último contacto y se suprimirán transcurrido dicho plazo, o antes si el interesado se opone al tratamiento."
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles con los datos de clientes."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles con los datos de clientes y potenciales clientes."
                 }
               ]
             }
@@ -1157,7 +1161,7 @@
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles."
                 }
               ]
             }
@@ -1195,11 +1199,11 @@
                 },
                 {
                   "term": "Plazos de conservación",
-                  "def": "Los datos de los candidatos se conservarán durante un plazo máximo de veinticuatro (24) meses desde su recepción o última actualización. Transcurrido dicho plazo sin que el currículum haya sido actualizado o utilizado, se procederá a su eliminación segura, salvo que deba conservarse durante un período superior para el cumplimiento de una obligación legal o para la formulación, el ejercicio o la defensa de reclamaciones. Si como resultado del proceso de selección el candidato fuese contratado, sus datos pasarán a formar parte de su expediente laboral."
+                  "def": "Los datos de los candidatos se conservarán durante un plazo máximo de veinticuatro (24) meses desde su recepción o última actualización. Transcurrido dicho plazo sin que el currículum haya sido actualizado o utilizado, se procederá a su eliminación segura, salvo que deba conservarse durante un período superior para el cumplimiento de una obligación legal o para la formulación, el ejercicio o la defensa de reclamaciones. Si, como resultado del proceso de selección, el candidato fuese contratado, sus datos pasarán a formar parte de su expediente laboral."
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles en los procesos de selección."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles en los procesos de selección."
                 }
               ]
             }
@@ -1241,7 +1245,7 @@
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles."
                 }
               ]
             }
@@ -1287,7 +1291,7 @@
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles."
                 }
               ]
             },
@@ -1309,23 +1313,23 @@
                 },
                 {
                   "term": "Datos tratados y procedencia",
-                  "def": "Los datos proceden de la cumplimentación de los formularios de contacto y de la utilización de los medios de comunicación habilitados en el Sitio Web. Los datos tratados incluyen nombre, apellidos, localización, correo electrónico, teléfono, empresa, dirección IP y contenido del mensaje, así como la información obtenida mediante cookies, que solo se instalan con el consentimiento previo del Usuario cuando no son técnicas. Cuando los campos estén marcados con un asterisco (*) o se indiquen como obligatorios, su cumplimentación será necesaria; si no se aportan, Ewala podrá no aceptar o gestionar la consulta formulada."
+                  "def": "Los datos proceden de la cumplimentación de los formularios de contacto y de la utilización de los medios de comunicación habilitados en el Sitio Web. Los datos tratados incluyen nombre, apellidos, correo electrónico, teléfono, empresa, cargo, tipo de consulta, dirección IP y contenido del mensaje, así como la información obtenida mediante cookies, que solo se instalan con el consentimiento previo del Usuario cuando no son técnicas. Cuando los campos estén marcados con un asterisco (*) o se indiquen como obligatorios, su cumplimentación será necesaria; si no se aportan, Ewala podrá no atender la consulta formulada."
                 },
                 {
                   "term": "Finalidad",
-                  "def": "Gestionar, atender y dar respuesta a las consultas recibidas a través del Sitio Web, así como remitir información administrativa, técnica, organizativa o comercial sobre los productos y servicios objeto de la solicitud, y elaborar informes estadísticos agregados y anonimizados sobre el uso del Sitio Web."
+                  "def": "Gestionar, atender y dar respuesta a las consultas recibidas a través del Sitio Web, así como remitir información administrativa, técnica, organizativa o comercial sobre los productos y servicios objeto de la solicitud; enviar novedades de producto y contenido de Ewala cuando el Usuario lo haya solicitado marcando la casilla correspondiente; y elaborar informes estadísticos agregados y anonimizados sobre el uso del Sitio Web."
                 },
                 {
                   "term": "Base jurídica",
-                  "def": "Consentimiento del interesado (art. 6.1.a RGPD), adopción de medidas precontractuales a solicitud del interesado (art. 6.1.b RGPD) e interés legítimo para el tratamiento de datos de contacto profesional (art. 6.1.f RGPD y art. 19 LOPDGDD)."
+                  "def": "Aplicación de medidas precontractuales a solicitud del interesado para atender su consulta o su solicitud de información, demostración o propuesta (art. 6.1.b RGPD); interés legítimo en el tratamiento de los datos de contacto profesional (art. 6.1.f RGPD y art. 19 LOPDGDD); y consentimiento del interesado para el envío de novedades, cuando marque la casilla correspondiente (art. 6.1.a RGPD)."
                 },
                 {
                   "term": "Categorías de destinatarios",
-                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Netlify, Inc. (alojamiento de la web y procesamiento del formulario) y Resend, Inc. (envío del correo electrónico), ambos con sede en Estados Unidos, que actúan como encargados del tratamiento. También, las demás categorías indicadas en los apartados anteriores cuando resulte aplicable."
+                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Netlify, Inc., para el alojamiento de la web y el procesamiento del formulario, y de Plus Five Five, Inc. (Resend), para el envío del correo electrónico, ambos con sede en Estados Unidos, que actúan como encargados del tratamiento y están adheridos al Marco de Privacidad de Datos UE-EE. UU. Si la consulta se refiere a servicios de seguridad gestionada (MSSP), los datos facilitados se comunicarán a Innovation and Security North Labs, S.L., entidad que presta dichos servicios, con la única finalidad de que pueda atenderla, como medida precontractual solicitada por el interesado (art. 6.1.b RGPD). Cuando resulte aplicable, también podrán recibir los datos las demás categorías de destinatarios indicadas en los apartados anteriores."
                 },
                 {
                   "term": "Transferencias internacionales",
-                  "def": "El envío del formulario de contacto implica una transferencia a Netlify, Inc. y Resend, Inc. (Estados Unidos), conforme a las garantías indicadas en el apartado 12."
+                  "def": "El envío del formulario de contacto implica una transferencia a Netlify, Inc. y a Plus Five Five, Inc. (Resend), ambas con sede en Estados Unidos, amparada en el Marco de Privacidad de Datos UE-EE. UU., según se detalla en el apartado 12."
                 },
                 {
                   "term": "Plazos de conservación",
@@ -1333,7 +1337,7 @@
                 },
                 {
                   "term": "Decisiones automatizadas",
-                  "def": "No se realizan decisiones automatizadas ni elaboración de perfiles."
+                  "def": "No se adoptan decisiones automatizadas ni se elaboran perfiles."
                 }
               ]
             }
@@ -1357,11 +1361,18 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Con carácter general, Ewala no realiza transferencias internacionales de datos personales, salvo las derivadas del uso de proveedores con sede en Estados Unidos: Netlify, Inc. y Resend, Inc., para la gestión del formulario de contacto, y Google LLC, para la analítica web, esta última solo si el Usuario ha prestado su consentimiento (véase la [Política de Cookies](/cookies))."
+              "text": "Con carácter general, Ewala no realiza transferencias internacionales de datos personales. Las únicas previstas son las siguientes:"
+            },
+            {
+              "type": "ul",
+              "items": [
+                "Netlify, Inc., para el alojamiento del Sitio Web y el procesamiento del formulario de contacto, y Plus Five Five, Inc. (Resend), para el envío del correo electrónico del formulario, ambas con sede en Estados Unidos y adheridas al Marco de Privacidad de Datos UE-EE. UU., declarado adecuado mediante la Decisión de Ejecución (UE) 2023/1795 de la Comisión, de 10 de julio de 2023. Sus acuerdos de encargo de tratamiento incorporan, además, Cláusulas Contractuales Tipo como garantía complementaria.",
+                "Analítica web, únicamente si el Usuario ha consentido las cookies de análisis: el proveedor es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad adherida al Marco de Privacidad de Datos UE-EE. UU., con Cláusulas Contractuales Tipo como garantía complementaria (véase la [Política de Cookies](/cookies))."
+              ]
             },
             {
               "type": "p",
-              "text": "En caso de que los datos personales sean transferidos internacionalmente como consecuencia de su tratamiento, dichas transferencias se realizarán de conformidad con la normativa aplicable en materia de protección de datos y, en particular, a países cuyo nivel de protección haya sido declarado adecuado mediante una Decisión de Adecuación adoptada por la Comisión Europea, incluido, cuando el destinatario esté adherido a él, el Marco de Privacidad de Datos UE-EE. UU. (Decisión de Ejecución (UE) 2023/1795)."
+              "text": "La adhesión de cada entidad al Marco de Privacidad de Datos puede consultarse en [www.dataprivacyframework.gov](https://www.dataprivacyframework.gov). El interesado puede solicitar información sobre las garantías aplicadas, o una copia de ellas, dirigiéndose a [rgpd@ewala.es](mailto:rgpd@ewala.es)."
             },
             {
               "type": "p",
@@ -1381,7 +1392,7 @@
               "rows": [
                 {
                   "term": "Derecho de acceso",
-                  "def": "Obtener confirmación de si se están tratando datos personales que le conciernan y, en tal caso, acceder a los mismos y a la información sobre los fines del tratamiento, las categorías de datos, los destinatarios, los plazos de conservación previstos, la existencia de otros derechos y el origen de los datos cuando no se hayan obtenido del interesado."
+                  "def": "Obtener confirmación de si se están tratando datos personales que le conciernan y, en tal caso, acceder a ellos y a la información sobre los fines del tratamiento, las categorías de datos, los destinatarios, los plazos de conservación previstos, la existencia de otros derechos y el origen de los datos cuando no se hayan obtenido del interesado."
                 },
                 {
                   "term": "Derecho de rectificación",
@@ -1434,15 +1445,11 @@
             },
             {
               "type": "p",
-              "text": "Para ejercitar los derechos, el interesado deberá aportar:"
+              "text": "Para ejercitar los derechos, el interesado deberá indicar el derecho que desea ejercitar y facilitar los datos necesarios para identificarle. Solo cuando existan dudas razonables sobre su identidad, Ewala podrá solicitarle la información adicional necesaria para confirmarla (art. 12.6 RGPD)."
             },
             {
-              "type": "ul",
-              "items": [
-                "Solicitud por escrito y firmada, indicando el derecho que desea ejercitar.",
-                "Copia de su documento de identidad (DNI, pasaporte o documento equivalente), únicamente cuando existan dudas razonables sobre la identidad del solicitante.",
-                "En caso de actuar mediante representante: documentación acreditativa de la representación (poder notarial, autorización expresa o acreditación de la patria potestad o tutela)."
-              ]
+              "type": "p",
+              "text": "Si el interesado actúa mediante representante, deberá acreditarse la representación por cualquier medio válido en Derecho."
             },
             {
               "type": "p",
@@ -1463,7 +1470,7 @@
             },
             {
               "type": "p",
-              "text": "Queda expresamente prohibida la suplantación de identidad, la adopción de identidades falsas, la aportación de datos de terceros como propios y la aportación de cualquier dato no veraz, pudiendo anularse los registros efectuados en tales condiciones, sin perjuicio de las medidas legales oportunas."
+              "text": "Quedan expresamente prohibidas la suplantación de identidad, la adopción de identidades falsas, la aportación de datos de terceros como propios y la aportación de cualquier dato no veraz, pudiendo anularse los registros efectuados en tales condiciones, sin perjuicio de las medidas legales oportunas."
             }
           ]
         },
@@ -1485,23 +1492,11 @@
           "blocks": [
             {
               "type": "p",
-              "text": "El Sitio Web de Ewala y los servicios ofrecidos por la empresa están dirigidos exclusivamente a personas mayores de dieciocho (18) años con capacidad legal suficiente para contratar."
+              "text": "Ewala no trata datos personales de menores de edad. El Sitio Web y los servicios de Ewala se dirigen a empresas y profesionales y no están destinados a menores."
             },
             {
               "type": "p",
-              "text": "Ewala no recoge ni trata de forma intencionada datos de carácter personal de menores de edad. Si tuviera conocimiento de que se han recogido datos de un menor de 18 años sin el consentimiento de sus representantes legales, procederá a su eliminación inmediata."
-            },
-            {
-              "type": "p",
-              "text": "Si un representante legal tiene conocimiento de que un menor bajo su responsabilidad ha facilitado datos personales a Ewala, puede contactar a través de [rgpd@ewala.es](mailto:rgpd@ewala.es) para solicitar su supresión."
-            },
-            {
-              "type": "p",
-              "text": "En caso de facilitarse datos de menores de edad o de personas sin capacidad legal a través del Sitio Web, quien los facilite y actúe en su representación declara responsablemente ostentar la representación legal, la patria potestad o la tutela, o disponer de autorización expresa de quien la ostente, pudiendo la empresa exigir la documentación acreditativa correspondiente."
-            },
-            {
-              "type": "p",
-              "text": "Los representantes legales serán considerados, en cualquier caso, responsables de los actos que realicen las personas que se encuentren a su cargo, conforme a lo dispuesto en la normativa vigente."
+              "text": "Si, pese a ello, Ewala recibiera datos de un menor, los suprimirá en cuanto tenga conocimiento de ello. El representante legal del menor puede solicitar su supresión en [rgpd@ewala.es](mailto:rgpd@ewala.es)."
             }
           ]
         },
@@ -1510,11 +1505,11 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Ewala adopta e implementa las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales, conforme a lo exigido por el artículo 32 del RGPD, con el objetivo de garantizar la confidencialidad, integridad, disponibilidad y resiliencia permanentes de los sistemas y servicios de tratamiento."
+              "text": "Ewala adopta e implementa las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales, conforme a lo exigido por el artículo 32 del RGPD, con el fin de asegurar la confidencialidad, integridad, disponibilidad y resiliencia permanentes de los sistemas y servicios de tratamiento."
             },
             {
               "type": "p",
-              "text": "Entre las medidas aplicadas se incluyen, entre otras: cifrado en tránsito y en reposo, autenticación multifactor (MFA), gestión de accesos basada en el principio de mínimo privilegio, monitorización continua, copias de seguridad cifradas y verificadas, medidas de prevención de fuga de información, revisiones periódicas de accesos, acuerdos de confidencialidad con todo el personal y formación periódica en protección de datos y seguridad de la información."
+              "text": "Las medidas aplicadas incluyen, entre otras: cifrado en tránsito y en reposo, autenticación multifactor (MFA), gestión de accesos basada en el principio de mínimo privilegio, monitorización continua, copias de seguridad cifradas y verificadas, medidas de prevención de fuga de información, revisiones periódicas de accesos, acuerdos de confidencialidad con todo el personal y formación periódica en protección de datos y seguridad de la información."
             },
             {
               "type": "p",
@@ -1531,11 +1526,15 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Ewala mantiene presencia en redes sociales profesionales con la finalidad de informar a los usuarios sobre su actividad, productos y servicios. El tratamiento de los datos personales de quienes sigan los perfiles corporativos se basa en el consentimiento manifestado al seguir dichos perfiles o interactuar con ellos (art. 6.1.a RGPD)."
+              "text": "Ewala mantiene perfiles corporativos en LinkedIn y YouTube para informar sobre su actividad, productos y servicios. Trata los datos de quienes interactúan con dichos perfiles para gestionar su presencia corporativa y atender los mensajes y comentarios que reciba. La base jurídica es su interés legítimo (art. 6.1.f RGPD), y solo trata los datos que cada plataforma pone a su disposición."
             },
             {
               "type": "p",
-              "text": "El tratamiento de datos personales realizado en dichas redes está sujeto, además, a las condiciones de uso, términos legales y políticas de privacidad de cada plataforma, cuya consulta se recomienda al Usuario. Ewala no es responsable del tratamiento que las propias plataformas realicen sobre los datos de sus usuarios."
+              "text": "En LinkedIn, la plataforma elabora estadísticas agregadas sobre las visitas e interacciones con la página corporativa (Page Insights). Respecto de ese tratamiento, Ewala y LinkedIn Ireland Unlimited Company son corresponsables (art. 26 RGPD), conforme al acuerdo publicado por LinkedIn en [https://legal.linkedin.com/pages-joint-controller-addendum](https://legal.linkedin.com/pages-joint-controller-addendum). El interesado puede ejercer sus derechos ante cualquiera de los dos, aunque LinkedIn es quien dispone de los datos y los gestiona directamente. Ewala solo recibe datos agregados."
+            },
+            {
+              "type": "p",
+              "text": "En lo demás, cada plataforma trata los datos de sus usuarios como responsable, conforme a sus propias condiciones y políticas de privacidad, cuya consulta se recomienda."
             }
           ]
         },
@@ -1548,7 +1547,7 @@
             },
             {
               "type": "p",
-              "text": "La Política de Privacidad estará siempre accesible mediante enlace en la parte inferior del Sitio Web, con indicación de su versión y fecha de publicación."
+              "text": "La Política de Privacidad estará siempre accesible mediante enlace en la parte inferior del Sitio Web. Cada versión indica su número y fecha de publicación."
             }
           ]
         },
@@ -1566,7 +1565,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "La legislación aplicable es la española. Salvo que resulte de aplicación normativa específica que establezca otra jurisdicción, en particular la normativa de protección de los consumidores y usuarios, las partes se someten a los Juzgados y Tribunales de Gijón para cualquier controversia, sin perjuicio de la disposición de Ewala a la resolución previa de cualquier controversia de forma amistosa."
+              "text": "La legislación aplicable es la española. Salvo que resulte de aplicación normativa específica que establezca un fuero distinto, en particular la normativa de protección de los consumidores y usuarios, las partes se someten a los Juzgados y Tribunales de Gijón para cualquier controversia, sin perjuicio de la disposición de Ewala a la resolución previa de cualquier controversia de forma amistosa."
             }
           ]
         }
