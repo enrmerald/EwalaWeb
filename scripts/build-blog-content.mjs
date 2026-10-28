@@ -12,6 +12,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import matter from 'gray-matter'
 import { z } from 'zod'
+import { isRealIsoDate } from '../lib/fechas.mjs'
 import { renderMarkdown } from './lib/blog-markdown.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -26,12 +27,6 @@ const WORDS_PER_MINUTE = 200
 
 // Enum cerrado de categorías. Ampliar aquí si se añaden nuevas.
 const CATEGORIES = ['nis2', 'ot-iot', 'mssp', 'idi']
-
-/** `AAAA-MM-DD` y además una fecha real (rechaza 2026-02-31). El resto del código asume este formato. */
-const isRealIsoDate = (value) => {
-  const d = new Date(`${value}T00:00:00Z`)
-  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === value
-}
 
 /**
  * ¿Existe el fichero en public/ con EXACTAMENTE ese nombre (mayúsculas incluidas)? Netlify sirve desde

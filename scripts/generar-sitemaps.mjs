@@ -22,6 +22,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defaultLocale, locales, localizedPath, PAGES } from '../i18n/config.ts'
+import { isRealIsoDate } from '../lib/fechas.mjs'
 import { SITE_URL as RAW_SITE_URL } from '../lib/site.ts'
 import { SITEMAP_PAGES, SITEMAP_POST } from '../lib/sitemap-data.mjs'
 
@@ -34,9 +35,7 @@ const fail = (message) => errors.push(message)
 
 /** Fecha real AAAA-MM-DD (rechaza 2026-02-31) y no posterior a hoy (UTC). */
 function checkDate(value, origin) {
-  const real =
-    /^\d{4}-\d{2}-\d{2}$/.test(value) && new Date(`${value}T00:00:00Z`).toISOString().slice(0, 10) === value
-  if (!real) return fail(`${origin}: «${value}» no es una fecha real AAAA-MM-DD`)
+  if (!isRealIsoDate(value)) return fail(`${origin}: «${value}» no es una fecha real AAAA-MM-DD`)
   if (value > new Date().toISOString().slice(0, 10)) fail(`${origin}: «${value}» es una fecha futura`)
 }
 

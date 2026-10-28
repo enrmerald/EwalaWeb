@@ -26,6 +26,7 @@
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
+import { isRealIsoDate } from '../lib/fechas.mjs'
 import { IS_PRODUCTION_DEPLOY, SITE_URL } from '../lib/site.ts'
 
 const out = process.argv[2] ?? 'out'
@@ -44,7 +45,6 @@ const decode = (s) =>
 
 const read = (file) => (existsSync(file) ? readFileSync(file, 'utf8') : null)
 const today = new Date().toISOString().slice(0, 10)
-const isRealDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v) && new Date(`${v}T00:00:00Z`).toISOString().slice(0, 10) === v
 
 /** Bien formado: etiquetas anidadas y cerradas, y ningún `&` sin escapar. Devuelve el problema o null. */
 function malformed(xml) {
@@ -156,7 +156,7 @@ for (const name of [GOOGLE, FULL]) {
     const blocked = IS_PRODUCTION_DEPLOY && disallows.find((d) => path.startsWith(d))
     if (blocked) fail(where, `robots.txt la bloquea (Disallow: ${blocked})`)
     if (!u.lastmod) fail(where, 'sin <lastmod>')
-    else if (!isRealDate(u.lastmod)) fail(where, `lastmod «${u.lastmod}» no es una fecha real AAAA-MM-DD`)
+    else if (!isRealIsoDate(u.lastmod)) fail(where, `lastmod «${u.lastmod}» no es una fecha real AAAA-MM-DD`)
     else if (u.lastmod > today) fail(where, `lastmod «${u.lastmod}» es futuro`)
 
     const page = pageInfo(u.loc)
