@@ -251,6 +251,9 @@ export function Header({ locale }: HeaderProps) {
   // El botón de la hamburguesa no es un Dialog.Trigger (el Dialog es controlado), así que Radix no sabe
   // a dónde devolver el foco al cerrar: se hace a mano en onCloseAutoFocus.
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+  // Ancla de la propia página elegida en el menú móvil; se desplaza en onCloseAutoFocus, cuando Radix ya
+  // ha desmontado el Dialog y liberado el bloqueo de scroll del <body>.
+  const pendingAnchorRef = useRef<string | null>(null)
 
   const productsList = t.raw("products_list") as Array<{
     name: string
@@ -297,8 +300,8 @@ export function Header({ locale }: HeaderProps) {
 
   // Menú móvil: siempre cierra el Dialog. Si el destino es un ancla de la página actual (/es/#showcase
   // estando en /es/) el navegador solo cambia el hash y Radix mantiene el bloqueo de scroll del <body>
-  // mientras el Dialog siga montado, así que se desplaza a mano cuando ya se ha desmontado. Otras rutas
-  // y enlaces externos conservan su comportamiento nativo.
+  // mientras el Dialog siga montado, así que el ancla se guarda y se desplaza en onCloseAutoFocus, ya
+  // desmontado. Otras rutas y enlaces externos conservan su comportamiento nativo.
   function handleMobileNavigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
     // Ctrl/Cmd/Shift/Alt-clic o botón no primario: el navegador abre pestaña o ventana nueva; no se
     // intercepta ni se cierra el menú.
@@ -307,18 +310,22 @@ export function Header({ locale }: HeaderProps) {
     setMobileMenuOpen(false)
 
     const hashIndex = href.indexOf("#")
-    if (hashIndex === -1 || window.location.pathname !== href.slice(0, hashIndex)) return
+    if (hashIndex === -1) return
+
+    // Un pathname sin barra final (posible en dev) también cuenta como la misma página.
+    const { pathname } = window.location
+    const currentPath = pathname.endsWith("/") ? pathname : `${pathname}/`
+    if (currentPath !== href.slice(0, hashIndex)) return
 
     event.preventDefault()
-    const id = href.slice(hashIndex + 1)
+    pendingAnchorRef.current = href
+  }
+
+  function scrollToPendingAnchor(href: string) {
+    const id = href.slice(href.indexOf("#") + 1)
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    // Dos frames: el primero desmonta el Dialog y el segundo ya encuentra el <body> sin bloqueo.
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
-        window.history.pushState(null, "", href)
-      }),
-    )
+    document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
+    window.history.pushState(null, "", href)
   }
 
   useEffect(() => {
@@ -426,7 +433,10 @@ export function Header({ locale }: HeaderProps) {
             <button
               ref={menuButtonRef}
               type="button"
-              onClick={() => setMobileMenuOpen(true)}
+              onClick={() => {
+                pendingAnchorRef.current = null
+                setMobileMenuOpen(true)
+              }}
               className={[
                 "rounded-xl border p-2 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/40 lg:hidden",
                 isScrolled
@@ -448,6 +458,12 @@ export function Header({ locale }: HeaderProps) {
           <Dialog.Content
             onCloseAutoFocus={(event) => {
               event.preventDefault()
+              const href = pendingAnchorRef.current
+              pendingAnchorRef.current = null
+              if (href) {
+                scrollToPendingAnchor(href)
+                return
+              }
               menuButtonRef.current?.focus({ preventScroll: true })
             }}
             className="fixed bottom-0 right-0 top-0 z-50 w-full max-w-sm overflow-y-auto border-l border-white/[0.08] bg-section-dark shadow-2xl shadow-black/50 data-[state=open]:animate-in data-[state=open]:slide-in-from-right data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right">
