@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
-import { getDictionary, type Locale } from '@/i18n/config'
+import type { Locale } from '@/i18n/config'
 
 export interface Breadcrumb {
   label: string
@@ -10,6 +10,8 @@ export interface Breadcrumb {
 interface HeroInteriorProps {
   locale: Locale
   breadcrumbs: Breadcrumb[]
+  /** `aria-label` del <nav> del breadcrumb (`dict.nav.breadcrumb`); lo aporta la página, que ya tiene el diccionario. */
+  breadcrumbLabel: string
   title: string
   titleHighlight?: string
   subtitle?: string
@@ -21,9 +23,7 @@ interface HeroInteriorProps {
  * Hero reutilizable para páginas interiores (Blog, Contacto, artículo individual…).
  * Regla: un solo <h1> por página — este componente es siempre el que lo aporta.
  */
-export async function HeroInterior({ locale, breadcrumbs, title, titleHighlight, subtitle, kicker }: HeroInteriorProps) {
-  const dict = await getDictionary(locale)
-
+export function HeroInterior({ locale, breadcrumbs, breadcrumbLabel, title, titleHighlight, subtitle, kicker }: HeroInteriorProps) {
   return (
     <section className="relative overflow-hidden bg-section-dark pt-28 pb-14 lg:pt-32 lg:pb-20 border-b border-white/[0.06]">
       <div
@@ -32,7 +32,7 @@ export async function HeroInterior({ locale, breadcrumbs, title, titleHighlight,
       />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label={dict.nav.breadcrumb} className="mb-6">
+        <nav aria-label={breadcrumbLabel} className="mb-6">
           <ol className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-white/45">
             {breadcrumbs.map((crumb, i) => (
               <li key={`${crumb.label}-${i}`} className="flex items-center gap-1.5">

@@ -60,6 +60,7 @@ export default async function SellosYReconocimientosPage({
       <HeroInterior
         locale={locale}
         breadcrumbs={breadcrumbs}
+        breadcrumbLabel={dict.nav.breadcrumb}
         title={t.heroTitle}
         subtitle={t.heroSubtitle}
       />

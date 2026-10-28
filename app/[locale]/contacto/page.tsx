@@ -60,6 +60,7 @@ export default async function ContactoPage({
       <HeroInterior
         locale={locale}
         breadcrumbs={breadcrumbs}
+        breadcrumbLabel={dict.nav.breadcrumb}
         title={dict.contact.heroTitle}
         titleHighlight={dict.contact.heroTitleHighlight}
         subtitle={dict.contact.heroSubtitle}
