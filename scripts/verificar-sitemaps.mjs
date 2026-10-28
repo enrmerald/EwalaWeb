@@ -20,12 +20,14 @@
  * Con `CONTEXT` distinto de `production` (previews de Netlify) no se exigen el noindex ausente, el
  * robots abierto ni la completitud: allí todo está cerrado a propósito.
  *
- * Sin dependencias: el XML lo genera scripts/generar-sitemaps.mjs con un formato fijo, así que bastan
- * expresiones regulares acotadas (como en verificar-seo.mjs). Se ejecuta con `--no-warnings` porque
- * importa lib/site.ts directamente (type stripping de Node 24).
+ * El XML lo genera scripts/generar-sitemaps.mjs con un formato fijo, así que se lee con expresiones
+ * regulares acotadas. El HTML exportado lo emite Next y su formato (orden de atributos, `hrefLang`) no
+ * está bajo nuestro control: se analiza con `node-html-parser` (devDependency), no con regex. Se ejecuta
+ * con `--no-warnings` porque importa lib/site.ts directamente (type stripping de Node 24).
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
+import { parse } from 'node-html-parser'
 import { isRealIsoDate, todayInMadrid } from '../lib/fechas.mjs'
 import { IS_PRODUCTION_DEPLOY, SITE_URL } from '../lib/site.ts'
 
@@ -74,20 +76,35 @@ function parseUrls(xml) {
   }))
 }
 
-/** Metadatos del HTML exportado de una URL del sitemap (null si no existe el fichero). */
-function pageInfo(loc) {
-  const file = join(out, new URL(loc).pathname, 'index.html')
+/** Análisis del HTML por fichero: cada `index.html` se lee y se analiza una sola vez. */
+const htmlCache = new Map()
+
+/**
+ * Metadatos del HTML exportado (null si no existe el fichero). `getAttribute` no distingue mayúsculas
+ * (`hrefLang`/`hreflang`) y decodifica las entidades; el orden de los atributos no importa.
+ */
+function htmlInfo(file) {
+  if (htmlCache.has(file)) return htmlCache.get(file)
   const html = read(file)
-  if (html === null) return null
-  const robots = html.match(/<meta name="robots" content="([^"]*)"/g) ?? []
-  return {
-    noindex: robots.some((m) => /noindex/.test(m)),
-    canonical: decode(html.match(/rel="canonical" href="([^"]+)"/)?.[1] ?? ''),
-    alternates: [...html.matchAll(/<link rel="alternate" hrefLang="([^"]+)" href="([^"]+)"/g)].map(
-      (m) => `${m[1]}|${decode(m[2])}`,
-    ),
+  let info = null
+  if (html !== null) {
+    const root = parse(html)
+    const attr = (selector, name) => root.querySelectorAll(selector).map((el) => el.getAttribute(name) ?? '')
+    info = {
+      noindex: attr('meta[name="robots"]', 'content').some((content) => /noindex/i.test(content)),
+      canonical: attr('link[rel="canonical"]', 'href')[0] ?? '',
+      alternates: root
+        .querySelectorAll('link[rel="alternate"]')
+        .filter((el) => el.getAttribute('hreflang'))
+        .map((el) => `${el.getAttribute('hreflang')}|${el.getAttribute('href') ?? ''}`),
+    }
   }
+  htmlCache.set(file, info)
+  return info
 }
+
+/** Metadatos del HTML exportado de una URL del sitemap (null si no existe el fichero). */
+const pageInfo = (loc) => htmlInfo(join(out, new URL(loc).pathname, 'index.html'))
 
 // ── robots.txt ────────────────────────────────────────────────────────────────────────────────────
 const robotsTxt = read(join(out, 'robots.txt'))
@@ -163,7 +180,8 @@ for (const name of [GOOGLE, FULL]) {
     if (!page) fail(where, `no existe ${join(out, path, 'index.html')}`)
     else {
       if (page.noindex && IS_PRODUCTION_DEPLOY) fail(where, 'la página tiene noindex y no debe estar en el sitemap')
-      if (page.canonical !== u.loc) fail(where, `canonical «${page.canonical}» distinto de la <loc>`)
+      if (!page.canonical) fail(where, 'el HTML no tiene <link rel="canonical">')
+      else if (page.canonical !== u.loc) fail(where, `canonical «${page.canonical}» distinto de la <loc>`)
     }
   }
 }
@@ -233,9 +251,7 @@ if (IS_PRODUCTION_DEPLOY && (full ?? google) && existsSync(out)) {
   for (const file of walk(out)) {
     const rel = relative(out, file).split(sep).join('/')
     if (!rel.endsWith('.html') || rel.startsWith('_next/') || IGNORED.has(rel)) continue
-    const html = readFileSync(file, 'utf8')
-    const noindex = (html.match(/<meta name="robots" content="([^"]*)"/g) ?? []).some((m) => /noindex/.test(m))
-    if (noindex) continue
+    if (htmlInfo(file)?.noindex) continue
     const loc = `${ORIGIN}/${rel.replace(/index\.html$/, '')}`
     if (!inSitemap.has(loc)) fail('completitud', `${loc} es indexable pero no está en el sitemap`)
   }
