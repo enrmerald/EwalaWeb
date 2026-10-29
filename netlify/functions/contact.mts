@@ -1,13 +1,14 @@
 /**
  * `POST /api/contact` (ruta propia de la función, ver `config` más abajo; netlify.toml NO la reescribe)
- * · formulario de contacto → correo vía Resend.
+ * · formulario de contacto → correo vía Microsoft Graph.
  *
  * Flujo: comprobaciones HTTP → validación estricta (netlify/lib/contact-validation.ts, sin
  * dependencias externas para no empaquetar node_modules) → antispam (honeypot + tiempo mínimo) →
  * correo a CONTACT_MAILBOX_TO con Reply-To del visitante → respuesta con número de referencia.
  *
  * Variables de entorno (Netlify, scope «Functions»):
- *   RESEND_API_KEY, RESEND_FROM   ver netlify/lib/resend.ts
+ *   MS_TENANT_ID, MS_CLIENT_ID,
+ *   MS_CLIENT_SECRET, MS_SENDER   ver netlify/lib/graph-mail.ts
  *   CONTACT_MAILBOX_TO            buzón que recibe las consultas (p. ej. info@ewala.es)
  *   MAIL_ENVIRONMENT              "production" en producción; otro valor añade [VALOR] al asunto
  * Si falta alguna, la función entra en MODO PRUEBA: valida, no envía y responde delivery "skipped"
@@ -15,11 +16,10 @@
  *
  * Extensión .mts: ver la nota de netlify/functions/csp-report.mts.
  */
-import { createHash } from 'node:crypto'
 import esMessages from '../../messages/es.json'
-import { MIN_FILL_SECONDS, type ContactRequest, type NeedValue } from '../../lib/contact'
+import { MIN_FILL_SECONDS, type NeedValue } from '../../lib/contact'
 import { fail, json, log, readJsonRequest } from '../lib/http'
-import { IDEMPOTENT_CONFLICT, isEmailConfigured, sendEmail } from '../lib/resend'
+import { isEmailConfigured, sendEmail } from '../lib/graph-mail'
 import { contactEmail, contactSubject } from '../lib/contact-email'
 import { validateContact } from '../lib/contact-validation'
 
@@ -27,17 +27,6 @@ const NEED_LABELS = esMessages.contact.form.need.options as Record<NeedValue, st
 
 /** Referencia corta y legible para que la persona pueda citarla (8 caracteres del UUID). */
 const shortReference = (id: string) => id.replace(/-/g, '').slice(0, 8).toUpperCase()
-
-/**
- * Huella del CONTENIDO enviado (no incluye la hora de recepción). Resend exige que una misma
- * Idempotency-Key lleve siempre el mismo cuerpo; como el correo incluye la hora, la clave se ata al
- * contenido: reintentar lo mismo es idempotente y editar el mensaje genera un envío nuevo.
- */
-const contentHash = (d: ContactRequest) =>
-  createHash('sha256')
-    .update(JSON.stringify([d.locale, d.firstName, d.lastName, d.company, d.email, d.phone, d.role, d.need, d.message, d.marketing]))
-    .digest('hex')
-    .slice(0, 16)
 
 /** Ruta pública del formulario: la sirve Netlify por `config.path`, sin regla en netlify.toml. */
 const CONTACT_PATH = '/api/contact'
@@ -102,26 +91,20 @@ export default async function handler(request: Request): Promise<Response> {
     message: data.message,
     marketing: data.marketing,
   }
-  const { html, text } = contactEmail(emailData)
+  const { html } = contactEmail(emailData)
 
   const result = await sendEmail({
     to: mailbox,
     subject: contactSubject(emailData),
     html,
-    text,
     replyTo: data.email,
-    idempotencyKey: `ewala/${environment}/contact/${data.submissionId}/${contentHash(data)}`,
-    tags: { type: 'contact', environment, need: data.need },
+    reference: data.submissionId,
+    environment,
   })
 
-  // 409 invalid_idempotent_request: la misma clave (mismo envío y mismo contenido) ya la aceptó
-  // Resend en un intento anterior cuya respuesta no llegó a la persona. El correo ya salió.
-  if (!result.ok && result.code === IDEMPOTENT_CONFLICT) {
-    trace('sent_idempotent')
-    return json({ ok: true, reference, delivery: 'sent' })
-  }
   if (!result.ok) {
-    trace(`email_failed_${result.status}`)
+    // `code` ya viene saneado (AADSTS… o código de Graph): nunca datos personales.
+    trace(`email_failed_${result.status}${result.code ? `_${result.code}` : ''}`)
     return fail('unavailable', 503)
   }
   trace('sent')
