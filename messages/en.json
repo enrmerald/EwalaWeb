@@ -567,7 +567,7 @@
         "controller": "Controller: Ewala IT Services S.L.",
         "purpose": "Purpose: to handle your request and, if you tick the box, to send you news from Ewala.",
         "legitimation": "Legal basis: pre-contractual measures taken at your request; consent for sending news.",
-        "recipients": "Recipients: the form submission is handled through Netlify (website hosting) and Resend (email delivery), based in the USA, which act as data processors and participate in the EU-US Data Privacy Framework. If your enquiry concerns the MSSP service, we will forward it to Innovation and Security North Labs, S.L., the company that provides it, so that it can handle it. No data is shared with other third parties, except when legally required.",
+        "recipients": "Recipients: the form submission is handled through Netlify (website hosting), based in the USA and participating in the EU-US Data Privacy Framework, and Microsoft Ireland Operations Limited (email delivery through Microsoft 365), based in the European Union, which act as data processors. If your enquiry concerns the MSSP service, we will forward it to Innovation and Security North Labs, S.L., the company that provides it, so that it can handle it. No data is shared with other third parties, except when legally required.",
         "rights": "Rights: access, rectification, erasure, objection, restriction and portability, by writing to rgpd@ewala.es.",
         "moreInfo": "More information in the privacy policy."
       }
@@ -790,7 +790,7 @@
       "breadcrumb": "Privacy policy",
       "title": "Privacy policy",
       "subtitle": "How Ewala IT Services S.L. processes the personal data provided through this website and other communication channels, in accordance with the GDPR and Spanish data protection law. Courtesy translation: the Spanish version prevails in case of discrepancy.",
-      "updated": "October 28, 2026",
+      "updated": "October 29, 2026",
       "sections": [
         {
           "title": "Content and compliance",
@@ -1168,11 +1168,11 @@
                 },
                 {
                   "term": "Categories of recipients",
-                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc., for website hosting and form processing, and Plus Five Five, Inc. (Resend), for email delivery, both based in the United States, which act as data processors and participate in the EU-US Data Privacy Framework. If the enquiry concerns managed security services (MSSP), the data provided will be communicated to Innovation and Security North Labs, S.L., the company that provides those services, for the sole purpose of handling it, as a pre-contractual measure requested by the data subject (art. 6.1.b GDPR). Where applicable, the other categories of recipients indicated in the previous sections may also receive the data."
+                  "def": "Hosting, maintenance and information management service providers, with a data processing agreement in place. In particular, submission of the contact form is handled through Netlify, Inc., for website hosting and form processing, based in the United States and participating in the EU-US Data Privacy Framework, and Microsoft Ireland Operations Limited (Microsoft 365), based in the European Union, for email delivery, which act as data processors. If the enquiry concerns managed security services (MSSP), the data provided will be communicated to Innovation and Security North Labs, S.L., the company that provides those services, for the sole purpose of handling it, as a pre-contractual measure requested by the data subject (art. 6.1.b GDPR). Where applicable, the other categories of recipients indicated in the previous sections may also receive the data."
                 },
                 {
                   "term": "International transfers",
-                  "def": "Submitting the contact form involves a transfer to Netlify, Inc. and Plus Five Five, Inc. (Resend), both based in the United States, covered by the EU-US Data Privacy Framework, as detailed in section 12."
+                  "def": "Submitting the contact form involves a transfer to Netlify, Inc., based in the United States, covered by the EU-US Data Privacy Framework, as detailed in section 12."
                 },
                 {
                   "term": "Retention periods",
@@ -1209,7 +1209,7 @@
             {
               "type": "ul",
               "items": [
-                "Netlify, Inc., for hosting the Website and processing the contact form, and Plus Five Five, Inc. (Resend), for delivering the contact form email, both based in the United States and participating in the EU-US Data Privacy Framework, declared adequate by Commission Implementing Decision (EU) 2023/1795 of July 10, 2023. Their data processing agreements also include Standard Contractual Clauses as an additional safeguard.",
+                "Netlify, Inc., for hosting the Website and processing the contact form, based in the United States and participating in the EU-US Data Privacy Framework, declared adequate by Commission Implementing Decision (EU) 2023/1795 of July 10, 2023. Its data processing agreement also includes Standard Contractual Clauses as an additional safeguard. The contact form email is delivered by Microsoft Ireland Operations Limited (Microsoft 365), based in the European Union, under a data processing agreement.",
                 "Web analytics, only if the User has consented to analytics cookies: the provider is Google Ireland Limited, based in the European Union. The data may be processed by Google LLC in the United States, which participates in the EU-US Data Privacy Framework, with Standard Contractual Clauses as an additional safeguard (see the [Cookie Policy](/cookies))."
               ]
             },

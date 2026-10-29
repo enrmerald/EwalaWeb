@@ -729,7 +729,7 @@
         "controller": "Responsable: Ewala IT Services S.L.",
         "purpose": "Finalidad: gestionar tu solicitud y, si marcas la casilla, enviarte novedades de Ewala.",
         "legitimation": "Legitimación: aplicación de medidas precontractuales a tu solicitud; consentimiento para el envío de novedades.",
-        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Netlify (alojamiento de la web) y Resend (envío del correo), con sede en EE. UU., que actúan como encargados del tratamiento y están adheridos al Marco de Privacidad de Datos UE-EE. UU. Si tu consulta se refiere al servicio MSSP, la remitiremos a Innovation and Security North Labs, S.L., entidad que lo presta, para que pueda atenderla. No se ceden datos a otros terceros, salvo obligación legal.",
+        "recipients": "Destinatarios: el envío del formulario se gestiona a través de Netlify (alojamiento de la web), con sede en EE. UU. y adherida al Marco de Privacidad de Datos UE-EE. UU., y Microsoft Ireland Operations Limited (envío del correo mediante Microsoft 365), con sede en la Unión Europea, que actúan como encargados del tratamiento. Si tu consulta se refiere al servicio MSSP, la remitiremos a Innovation and Security North Labs, S.L., entidad que lo presta, para que pueda atenderla. No se ceden datos a otros terceros, salvo obligación legal.",
         "rights": "Derechos: acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a rgpd@ewala.es.",
         "moreInfo": "Más información en la política de privacidad."
       }
@@ -952,7 +952,7 @@
       "breadcrumb": "Política de privacidad",
       "title": "Política de privacidad",
       "subtitle": "Cómo trata Ewala IT Services S.L. los datos personales que se facilitan a través de este sitio web y de otros canales de comunicación, conforme al RGPD y a la LOPDGDD.",
-      "updated": "28 de octubre de 2026",
+      "updated": "29 de octubre de 2026",
       "sections": [
         {
           "title": "Contenido y conformidad",
@@ -1330,11 +1330,11 @@
                 },
                 {
                   "term": "Categorías de destinatarios",
-                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Netlify, Inc., para el alojamiento de la web y el procesamiento del formulario, y de Plus Five Five, Inc. (Resend), para el envío del correo electrónico, ambos con sede en Estados Unidos, que actúan como encargados del tratamiento y están adheridos al Marco de Privacidad de Datos UE-EE. UU. Si la consulta se refiere a servicios de seguridad gestionada (MSSP), los datos facilitados se comunicarán a Innovation and Security North Labs, S.L., entidad que presta dichos servicios, con la única finalidad de que pueda atenderla, como medida precontractual solicitada por el interesado (art. 6.1.b RGPD). Cuando resulte aplicable, también podrán recibir los datos las demás categorías de destinatarios indicadas en los apartados anteriores."
+                  "def": "Proveedores de servicios de alojamiento, mantenimiento y gestión de la información, con acuerdo de encargo de tratamiento suscrito. En particular, el envío del formulario de contacto se gestiona a través de Netlify, Inc., para el alojamiento de la web y el procesamiento del formulario, con sede en Estados Unidos y adherida al Marco de Privacidad de Datos UE-EE. UU., y de Microsoft Ireland Operations Limited (Microsoft 365), con sede en la Unión Europea, para el envío del correo electrónico, que actúan como encargados del tratamiento. Si la consulta se refiere a servicios de seguridad gestionada (MSSP), los datos facilitados se comunicarán a Innovation and Security North Labs, S.L., entidad que presta dichos servicios, con la única finalidad de que pueda atenderla, como medida precontractual solicitada por el interesado (art. 6.1.b RGPD). Cuando resulte aplicable, también podrán recibir los datos las demás categorías de destinatarios indicadas en los apartados anteriores."
                 },
                 {
                   "term": "Transferencias internacionales",
-                  "def": "El envío del formulario de contacto implica una transferencia a Netlify, Inc. y a Plus Five Five, Inc. (Resend), ambas con sede en Estados Unidos, amparada en el Marco de Privacidad de Datos UE-EE. UU., según se detalla en el apartado 12."
+                  "def": "El envío del formulario de contacto implica una transferencia a Netlify, Inc., con sede en Estados Unidos, amparada en el Marco de Privacidad de Datos UE-EE. UU., según se detalla en el apartado 12."
                 },
                 {
                   "term": "Plazos de conservación",
@@ -1371,7 +1371,7 @@
             {
               "type": "ul",
               "items": [
-                "Netlify, Inc., para el alojamiento del Sitio Web y el procesamiento del formulario de contacto, y Plus Five Five, Inc. (Resend), para el envío del correo electrónico del formulario, ambas con sede en Estados Unidos y adheridas al Marco de Privacidad de Datos UE-EE. UU., declarado adecuado mediante la Decisión de Ejecución (UE) 2023/1795 de la Comisión, de 10 de julio de 2023. Sus acuerdos de encargo de tratamiento incorporan, además, Cláusulas Contractuales Tipo como garantía complementaria.",
+                "Netlify, Inc., para el alojamiento del Sitio Web y el procesamiento del formulario de contacto, con sede en Estados Unidos y adherida al Marco de Privacidad de Datos UE-EE. UU., declarado adecuado mediante la Decisión de Ejecución (UE) 2023/1795 de la Comisión, de 10 de julio de 2023. Su acuerdo de encargo de tratamiento incorpora, además, Cláusulas Contractuales Tipo como garantía complementaria. El envío del correo electrónico del formulario lo realiza Microsoft Ireland Operations Limited (Microsoft 365), con sede en la Unión Europea, con acuerdo de encargo de tratamiento suscrito.",
                 "Analítica web, únicamente si el Usuario ha consentido las cookies de análisis: el proveedor es Google Ireland Limited, con sede en la Unión Europea. Los datos pueden ser tratados por Google LLC en Estados Unidos, entidad adherida al Marco de Privacidad de Datos UE-EE. UU., con Cláusulas Contractuales Tipo como garantía complementaria (véase la [Política de Cookies](/cookies))."
               ]
             },
