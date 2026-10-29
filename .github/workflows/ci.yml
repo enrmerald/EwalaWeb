@@ -63,11 +63,13 @@ jobs:
       - name: Auditoría del saneado del blog
         run: pnpm verify:blog
 
-      # La clave de Resend (re_…) solo debe vivir en las variables de Netlify, nunca en el bundle público.
-      - name: Comprobar que out/ no contiene claves de Resend
+      # El secreto de Microsoft (MS_CLIENT_SECRET) solo debe vivir en las variables de Netlify (scope Functions).
+      # No tiene un formato reconocible, así que se vigila que el bundle público no toque Microsoft Graph:
+      # el navegador solo habla con /api/contact.
+      - name: Comprobar que out/ no contiene credenciales ni endpoints de Microsoft
         run: |
-          if grep -rEq '\bre_[A-Za-z0-9]{20,}' out/; then
-            echo "::error::Posible clave de Resend dentro de out/ (bundle público)"
+          if grep -rEq 'login\.microsoftonline\.com|graph\.microsoft\.com|MS_CLIENT_SECRET' out/; then
+            echo "::error::Credenciales o endpoints de Microsoft dentro de out/ (bundle público)"
             exit 1
           fi
 

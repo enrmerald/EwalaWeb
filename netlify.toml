@@ -138,8 +138,8 @@
 #      límite `config.rateLimit` de 10/min por IP.
 #    - Informes de la CSP (netlify/functions/csp-report.mts): ruta `config.path = '/api/csp-report'` y
 #      límite `config.rateLimit` de 60/min por IP (`Reporting-Endpoints` y `report-uri` apuntan ahí).
-#    El límite corta el abuso ANTES de invocar la función (sin gastar ejecuciones ni, en contact, cuota de
-#    Resend). El plan Free admite 2 reglas de límite por proyecto: están las 2 usadas; una tercera
+#    El límite corta el abuso ANTES de invocar la función (sin gastar ejecuciones ni, en contact, llamadas a
+#    Microsoft Graph). El plan Free admite 2 reglas de límite por proyecto: están las 2 usadas; una tercera
 #    función con límite exigiría cambiar de plan o repartir el de una de ellas.
 #    Una función con `config.path` deja de servirse en /.netlify/functions/<nombre> (cierra la vía que
 #    esquivaba el límite) y una regla de reescritura hacia esa ruta, que tiene prioridad sobre la ruta
