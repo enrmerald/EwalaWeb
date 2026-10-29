@@ -61,7 +61,7 @@ Server Actions, `headers()`, `cookies()`, `middleware.ts`, `next-intl/server`, d
   obligatoria** (con `.ts` Netlify las trata como CommonJS con la firma antigua de Lambda y no reciben un
   `Request`). Helpers en `netlify/lib/` (fuera de `functions/` para que no se desplieguen como funciones).
   **Sin dependencias de `node_modules`** en `netlify/` y solo rutas relativas (no `@/`).
-- **Secretos** solo en variables de entorno de Netlify con scope «Functions» (p. ej. `RESEND_API_KEY`);
+- **Secretos** solo en variables de entorno de Netlify con scope «Functions» (p. ej. `MS_CLIENT_SECRET`);
   nunca en código ni en `NEXT_PUBLIC_*` (todo lo `NEXT_PUBLIC_*` acaba en el bundle público).
 - `useSearchParams()` necesita `<Suspense>` en export; el formulario lee `window.location` en un efecto.
 
@@ -92,9 +92,9 @@ lib/
   sitemap-data.mjs      ← lastmod, changefreq y priority de cada página fija (JS puro: lo lee Node en el prebuild)
   blog.ts, products.ts, features.ts (SHOW_DEMO_CTA), utils.ts
 netlify/
-  functions/contact.mts     ← formulario → Resend
+  functions/contact.mts     ← formulario → Microsoft Graph
   functions/csp-report.mts  ← sumidero de informes CSP (registra sin datos personales)
-  lib/                      ← http, validación, Resend, plantilla de correo
+  lib/                      ← http, validación, graph-mail (Microsoft Graph), plantilla de correo
 messages/{es,en}.json   ← TODOS los textos (es.json es la fuente de verdad del tipo)
 content/blog/{es,en}/*.md ← artículos (ver «Blog»)
 public/                 ← se publica tal cual: PDFs institucionales, gtm.js, 410.html, imágenes, favicon/
@@ -124,14 +124,19 @@ netlify.toml            ← build, funciones, redirecciones 301/410, cabeceras d
 - `netlify dev` en local **no** emula `Cache-Control` ni `Content-Type` personalizados: comprobarlos en el
   deploy de la rama.
 
-## Formulario de contacto (Resend)
+## Formulario de contacto (Microsoft Graph)
 
-`contact-form.tsx` → `POST /api/contact` → `netlify/functions/contact.mts` → API de Resend → buzón de Ewala.
+`contact-form.tsx` → `POST /api/contact` → `netlify/functions/contact.mts` → `netlify/lib/graph-mail.ts` →
+Microsoft Graph (`/users/{MS_SENDER}/sendMail`) → buzón de Ewala. Solo `fetch` nativo (sin SDK de Azure).
 Validación en cliente (zod) **y** en servidor (`netlify/lib/contact-validation.ts`, sin dependencias),
-honeypot + tiempo mínimo de 3 s, `Idempotency-Key`, rate limit de 10/min/IP en Netlify, todo escapado
-en la plantilla. Variables (Netlify, scope Functions): `RESEND_API_KEY`, `RESEND_FROM`,
-`CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT`. Sin ellas → **modo prueba** (no envía y lo avisa). Si Resend
-falla → 503. Ver `.env.local.example`.
+honeypot + tiempo mínimo de 3 s, rate limit de 10/min/IP en Netlify, todo escapado en la plantilla.
+Variables (Netlify, scope Functions): `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET` (secreto),
+`MS_SENDER` (buzón compartido remitente, p. ej. `web@ewala.es`), `CONTACT_MAILBOX_TO` (destino, p. ej.
+`operaciones@ewala.es`) y `MAIL_ENVIRONMENT`. Sin ellas → **modo prueba** (no envía y lo avisa). Si Graph
+falla → 503. Graph no tiene idempotencia: **no se reintenta tras un timeout** (solo ante 429/5xx).
+La app de Entra ID debe poder enviar **solo como `MS_SENDER`** (RBAC for Applications de Exchange): no
+conceder `Mail.Send` de aplicación en Entra (valdría para todos los buzones). El secreto caduca (6 meses):
+rotación en `docs/arquitectura.md`. Ver `.env.local.example`.
 
 ## Analítica y cookies
 
