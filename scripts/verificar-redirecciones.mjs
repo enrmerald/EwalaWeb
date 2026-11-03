@@ -45,7 +45,7 @@ try {
 for (const p of ['/blog/tags/soc/', '/blog/categories/ciberseguridad/', '/blog/page/2/', '/blog/admin/', '/blog/index.xml',
   '/assets/img/favicon.png', '/particles/particles.js', '/docs/README.md', '/README.md', '/CLAUDE.md']) add(p, [410])
 for (const p of ['/es/', '/en/', '/es/blog/', '/en/blog/', '/es/compania/', '/es/contacto/', '/en/contacto/', '/es/privacidad/',
-  '/es/aviso-legal/', '/es/cookies/', '/sitemap.xml', '/robots.txt', '/favicon/favicon.ico', '/es/opengraph-image', '/gtm.js',
+  '/politica-de-privacidad', '/es/aviso-legal/', '/es/cookies/', '/sitemap.xml', '/robots.txt', '/favicon/favicon.ico', '/es/opengraph-image', '/gtm.js',
   '/COE-0001-02-CODIGO_ETICO.pdf']) add(p, [200])
 add('/no-existe-esta-ruta/', [404])
 
