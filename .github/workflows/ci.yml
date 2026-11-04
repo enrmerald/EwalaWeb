@@ -52,8 +52,16 @@ jobs:
       - name: Tipos
         run: pnpm typecheck
 
+      # Las variables MS_* llevan valores FICTICIOS (no hay secretos en este job). MS_CLIENT_SECRET es un
+      # «canario» distinto en cada ejecución: si algún camino del build lo copiara a out/, el paso
+      # «Comprobar que el secreto de Microsoft no llega a out/» lo detectaría. Los valores no son
+      # NEXT_PUBLIC_*, así que Next no los incrusta en el navegador: esto vigila que siga siendo así.
       - name: Build estático
         run: pnpm build
+        env:
+          MS_TENANT_ID: 00000000-0000-0000-0000-000000000000
+          MS_CLIENT_ID: 00000000-0000-0000-0000-000000000001
+          MS_CLIENT_SECRET: ci-canary-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Auditoría SEO
         run: pnpm verify:seo
@@ -64,12 +72,31 @@ jobs:
         run: pnpm verify:blog
 
       # El secreto de Microsoft (MS_CLIENT_SECRET) solo debe vivir en las variables de Netlify (scope Functions).
-      # No tiene un formato reconocible, así que se vigila que el bundle público no toque Microsoft Graph:
-      # el navegador solo habla con /api/contact.
-      - name: Comprobar que out/ no contiene credenciales ni endpoints de Microsoft
+      # No tiene un formato reconocible, así que se vigila de tres formas. Primero, que el JS que ejecuta el
+      # navegador (out/_next/static) no hable con Microsoft: solo habla con /api/contact. Se busca solo ahí
+      # y no en todo out/ para que un artículo o un texto legal que mencione Microsoft Graph no rompa el CI.
+      - name: Comprobar que el JS del navegador no contiene endpoints de Microsoft
         run: |
-          if grep -rEq 'login\.microsoftonline\.com|graph\.microsoft\.com|MS_CLIENT_SECRET' out/; then
-            echo "::error::Credenciales o endpoints de Microsoft dentro de out/ (bundle público)"
+          if grep -rEq 'login\.microsoftonline\.com|graph\.microsoft\.com' out/_next/static; then
+            echo "::error::El JS público (out/_next/static) contiene endpoints de Microsoft"
+            exit 1
+          fi
+
+      # Segundo: el canario de MS_CLIENT_SECRET (ver «Build estático») no debe aparecer en NINGÚN fichero de
+      # out/ (HTML, JS, JSON de datos…). Si aparece, el build está copiando una variable de servidor.
+      - name: Comprobar que el secreto de Microsoft no llega a out/
+        run: |
+          if grep -rqF "ci-canary-${GITHUB_RUN_ID}-" out/; then
+            echo "::error::El valor de MS_CLIENT_SECRET aparece dentro de out/ (se está publicando un secreto)"
+            exit 1
+          fi
+
+      # Tercero: ninguna variable de Microsoft puede declararse como pública (todo NEXT_PUBLIC_* acaba en el
+      # bundle). Se excluye este fichero para que el nombre citado aquí no active la regla.
+      - name: Comprobar que no hay variables MS_* públicas
+        run: |
+          if git grep -nE 'NEXT_PUBLIC_MS_' -- . ':!.github/workflows/ci.yml'; then
+            echo "::error::Hay una variable NEXT_PUBLIC_MS_*: iría al bundle público. Las MS_* son solo de la función"
             exit 1
           fi
 
