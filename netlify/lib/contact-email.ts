@@ -9,6 +9,10 @@
  *    propios: si el cliente bloquea imágenes se lee «Ewala» igualmente.
  *  - TODO lo que viene del formulario pasa por esc(): un `<img onerror=…>` en el mensaje se
  *    ejecutaría en el cliente de correo de quien lo lee.
+ *  - Solo se envía HTML (Microsoft Graph admite un único cuerpo): no se genera versión de texto plano.
+ *
+ * Jerarquía: 1) quién escribe y por qué (título + interés), 2) identificación del envío (referencia y
+ * fecha), 3) datos de contacto, 4) mensaje, 5) acción (responder), 6) consentimientos, 7) pie.
  */
 import { SITE_URL } from '../../lib/site'
 
@@ -17,6 +21,7 @@ export interface ContactEmailData {
   submissionId: string
   locale: 'es' | 'en'
   receivedAt: Date
+  /** Solo para el prefijo del asunto fuera de producción; no se muestra en el cuerpo. */
   environment: string
   firstName: string
   lastName?: string
@@ -25,7 +30,7 @@ export interface ContactEmailData {
   phone?: string
   role?: string
   needLabel: string
-  message?: string
+  message: string
   marketing: boolean
 }
 
@@ -50,17 +55,16 @@ export function contactSubject(data: ContactEmailData): string {
   return `${prefix}Contacto web · ${data.needLabel} · Ref. ${data.reference}`
 }
 
-export function contactEmail(data: ContactEmailData): { html: string; text: string } {
+export function contactEmail(data: ContactEmailData): { html: string } {
   const name = `${data.firstName} ${data.lastName ?? ''}`.trim()
   const received = `${new Intl.DateTimeFormat('es-ES', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Madrid' }).format(data.receivedAt)} (hora peninsular)`
   const phone = data.phone?.trim() || null
   const role = data.role?.trim() || null
-  const message = data.message?.trim() || null
   const notGiven = 'No indicado'
-  const replySubject = `Re: Ref. ${data.reference} · SentryN3t`
+  const replySubject = `Re: Ref. ${data.reference}`
 
   const rows = [
-    row('Nombre', esc(name)),
+    row('Nombre', esc(name), true),
     row('Empresa', esc(data.company)),
     row('Cargo', role ? esc(role) : muted(notGiven)),
     row('Email', link(`mailto:${mailtoAddress(data.email)}`, data.email)),
@@ -68,10 +72,9 @@ export function contactEmail(data: ContactEmailData): { html: string; text: stri
     row('Idioma de la web', data.locale.toUpperCase()),
   ].join('')
 
-  const consents = [
-    row('Política de privacidad', `<span style="color:${GREEN};">Leída</span>`),
-    row('Comunicaciones comerciales', data.marketing ? `<span style="color:${GREEN};">Sí</span>` : muted('No')),
-  ].join('')
+  const consents = `Política de privacidad: <span style="color:${GREEN};">leída</span>&nbsp;&nbsp;·&nbsp;&nbsp;Comunicaciones comerciales: ${
+    data.marketing ? `<span style="color:${GREEN};">sí</span>` : 'no'
+  }`
 
   const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
@@ -80,7 +83,7 @@ export function contactEmail(data: ContactEmailData): { html: string; text: stri
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="dark" />
 <meta name="supported-color-schemes" content="dark" />
-<title>Nueva consulta sobre SentryN3t</title>
+<title>Nueva consulta web</title>
 </head>
 <body style="margin:0;padding:0;background-color:${PAGE};color:${TEXT};" bgcolor="${PAGE}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${esc(`${data.needLabel} · ${data.company} · Ref. ${data.reference}`)}</div>
@@ -92,43 +95,49 @@ export function contactEmail(data: ContactEmailData): { html: string; text: stri
 </td></tr>
 <tr><td>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${BG}" style="background-color:${BG};border:1px solid ${BORDER};border-top:3px solid ${GREEN};border-radius:10px;">
-<tr><td style="padding:28px 28px 20px 28px;">
-<p style="margin:0;font-family:${FONT_MONO};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:${GREEN};">SentryN3t Protection · Contacto web</p>
-<h1 style="margin:10px 0 0 0;font-family:${FONT_BODY};font-size:24px;line-height:1.25;font-weight:700;color:${TEXT};">Nueva consulta de ${esc(data.company)}</h1>
-<p style="margin:12px 0 0 0;font-family:${FONT_BODY};font-size:15px;line-height:1.5;color:${MUTED};">Interés: <strong style="color:${TEXT};">${esc(data.needLabel)}</strong></p>
+<tr><td style="padding:32px 32px 24px 32px;">
+<p style="margin:0;font-family:${FONT_MONO};font-size:11px;letter-spacing:2px;text-transform:uppercase;color:${GREEN};">Ewala · Contacto web</p>
+<h1 style="margin:12px 0 0 0;font-family:${FONT_BODY};font-size:26px;line-height:1.25;font-weight:700;color:${TEXT};">Nueva consulta de ${esc(data.company)}</h1>
+<p style="margin:14px 0 0 0;font-family:${FONT_BODY};font-size:15px;line-height:1.5;color:${MUTED};">Interés: <strong style="font-size:16px;color:${TEXT};">${esc(data.needLabel)}</strong></p>
 </td></tr>
-<tr><td style="padding:0 28px;">
+<tr><td style="padding:0 32px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${CARD}" style="background-color:${CARD};border:1px solid ${BORDER};border-radius:8px;">
-<tr><td style="padding:14px 16px;font-family:${FONT_BODY};font-size:13px;line-height:1.6;color:${MUTED};">
-Referencia: <strong style="font-family:${FONT_MONO};font-size:15px;color:${GREEN};">${esc(data.reference)}</strong><br />
-Recibido: ${esc(received)}
-</td></tr>
+<tr>
+<td width="50%" style="padding:14px 18px;vertical-align:top;">
+<p style="margin:0;font-family:${FONT_MONO};font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Referencia</p>
+<p style="margin:6px 0 0 0;font-family:${FONT_MONO};font-size:17px;font-weight:bold;color:${GREEN};">${esc(data.reference)}</p>
+</td>
+<td width="50%" style="padding:14px 18px;vertical-align:top;border-left:1px solid ${BORDER};">
+<p style="margin:0;font-family:${FONT_MONO};font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">Recibido</p>
+<p style="margin:6px 0 0 0;font-family:${FONT_BODY};font-size:13px;line-height:1.5;color:${TEXT};">${esc(received)}</p>
+</td>
+</tr>
 </table>
 </td></tr>
-<tr><td style="padding:28px 28px 0 28px;">
+<tr><td style="padding:32px 32px 0 32px;">
 ${heading('Contacto')}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>
 </td></tr>
-<tr><td style="padding:28px 28px 0 28px;">
+<tr><td style="padding:32px 32px 0 32px;">
 ${heading('Mensaje')}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${CARD}" style="background-color:${CARD};border-left:3px solid ${GREEN};border-radius:4px;">
-<tr><td style="padding:16px 18px;font-family:${FONT_BODY};font-size:15px;line-height:1.7;color:${message ? TEXT : MUTED};">${message ? esc(message).replace(/\r?\n/g, '<br />') : 'Sin mensaje.'}</td></tr>
+<tr><td style="padding:18px 20px;font-family:${FONT_BODY};font-size:15px;line-height:1.7;color:${TEXT};">${esc(data.message).replace(/\r?\n/g, '<br />')}</td></tr>
 </table>
 </td></tr>
-<tr><td style="padding:28px 28px 0 28px;">
+<tr><td style="padding:28px 32px 0 32px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
 <td bgcolor="${GREEN}" style="background-color:${GREEN};border-radius:6px;">
-<a href="${esc(`mailto:${mailtoAddress(data.email)}?subject=${encodeURIComponent(replySubject)}`)}" style="display:inline-block;padding:12px 22px;font-family:${FONT_BODY};font-size:14px;font-weight:700;color:${ON_GREEN};text-decoration:none;">Responder a ${esc(data.firstName)}</a>
+<a href="${esc(`mailto:${mailtoAddress(data.email)}?subject=${encodeURIComponent(replySubject)}`)}" style="display:inline-block;padding:13px 26px;font-family:${FONT_BODY};font-size:14px;font-weight:700;color:${ON_GREEN};text-decoration:none;">Responder a ${esc(data.firstName)}</a>
 </td>
 </tr></table>
 </td></tr>
-<tr><td style="padding:28px 28px 0 28px;">
+<tr><td style="padding:32px 32px 0 32px;">
 ${heading('Consentimientos')}
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${consents}</table>
+<p style="margin:0;font-family:${FONT_BODY};font-size:13px;line-height:1.6;color:${MUTED};">${consents}</p>
 </td></tr>
-<tr><td style="padding:28px;">
-<p style="margin:0;padding-top:18px;border-top:1px solid ${BORDER};font-family:${FONT_BODY};font-size:12px;line-height:1.6;color:${TEXT};">También puedes responder a este correo: llegará directamente a la persona. La web promete respuesta en menos de 24 h laborables.</p>
-<p style="margin:10px 0 0 0;font-family:${FONT_MONO};font-size:11px;line-height:1.6;color:${MUTED};">Envío ${esc(data.submissionId)} · entorno ${esc(data.environment)} · mensaje automático de ewala.es</p>
+<tr><td style="padding:32px;">
+<p style="margin:0;padding-top:18px;border-top:1px solid ${BORDER};font-family:${FONT_BODY};font-size:12px;line-height:1.6;color:${TEXT};">También puedes responder a este correo: llegará directamente a la persona.</p>
+<p style="margin:10px 0 0 0;font-family:${FONT_MONO};font-size:11px;line-height:1.6;color:${MUTED};">Envío ${esc(data.submissionId)} · mensaje automático de ewala.es</p>
 </td></tr>
 </table>
 </td></tr>
@@ -138,41 +147,17 @@ ${heading('Consentimientos')}
 </body>
 </html>`
 
-  const text = [
-    'NUEVA CONSULTA SOBRE SENTRYN3T',
-    '',
-    `Interés: ${data.needLabel}`,
-    `Referencia: ${data.reference}`,
-    `Recibido: ${received}`,
-    '',
-    '-- Contacto --',
-    `Nombre: ${name}`,
-    `Empresa: ${data.company}`,
-    `Cargo: ${role ?? notGiven}`,
-    `Email: ${data.email}`,
-    `Teléfono: ${phone ?? notGiven}`,
-    `Idioma de la web: ${data.locale.toUpperCase()}`,
-    '',
-    '-- Mensaje --',
-    message ?? 'Sin mensaje.',
-    '',
-    '-- Consentimientos --',
-    'Política de privacidad: Leída',
-    `Comunicaciones comerciales: ${data.marketing ? 'Sí' : 'No'}`,
-    '',
-    'Responde a este correo para escribir directamente a la persona. La web promete respuesta en menos de 24 h laborables.',
-    `Envío ${data.submissionId} · entorno ${data.environment} · mensaje automático de ewala.es`,
-  ].join('\n')
-
-  return { html, text }
+  return { html }
 }
 
+/** Título de sección: etiqueta en mono sobre una línea fina, para separar bloques con claridad. */
 const heading = (label: string) =>
-  `<p style="margin:0 0 10px 0;font-family:${FONT_MONO};font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">${esc(label)}</p>`
+  `<p style="margin:0 0 12px 0;padding-bottom:8px;border-bottom:1px solid ${BORDER};font-family:${FONT_MONO};font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:${MUTED};">${esc(label)}</p>`
 
-const row = (label: string, value: string) => `<tr>
-<td width="34%" style="padding:6px 12px 6px 0;vertical-align:top;font-family:${FONT_BODY};font-size:13px;color:${MUTED};">${esc(label)}</td>
-<td style="padding:6px 0;vertical-align:top;font-family:${FONT_BODY};font-size:15px;color:${TEXT};">${value}</td>
+/** Fila etiqueta/valor con separador fino; `strong` destaca el dato principal (el nombre). */
+const row = (label: string, value: string, strong = false) => `<tr>
+<td width="34%" style="padding:9px 12px 9px 0;vertical-align:top;border-bottom:1px solid ${BORDER};font-family:${FONT_BODY};font-size:13px;color:${MUTED};">${esc(label)}</td>
+<td style="padding:9px 0;vertical-align:top;border-bottom:1px solid ${BORDER};font-family:${FONT_BODY};font-size:${strong ? 17 : 15}px;${strong ? 'font-weight:700;' : ''}color:${TEXT};">${value}</td>
 </tr>`
 
 const muted = (value: string) => `<span style="color:${MUTED};">${esc(value)}</span>`
