@@ -12,6 +12,25 @@ export const CONTACT_ENDPOINT = '/api/contact'
 export const NEED_VALUES = ['info', 'other'] as const
 export type NeedValue = (typeof NEED_VALUES)[number]
 
+/**
+ * Valores de `?need=` de la web anterior (ya hay enlaces compartidos en correos y redes): se traducen a
+ * «info». Es un `Map` y no un objeto literal para que `?need=__proto__` o `?need=constructor` no resuelvan
+ * a nada. Solo lo usa el navegador: el servidor sigue aceptando únicamente `NEED_VALUES`.
+ */
+const LEGACY_NEED_ALIASES = new Map<string, NeedValue>([
+  ['demo', 'info'],
+  ['pricing', 'info'],
+  ['integration', 'info'],
+  ['compliance', 'info'],
+])
+
+/** Valor de `?need=` → opción del selector (directa o por alias antiguo); `null` si no es ninguna. */
+export function resolveNeed(raw: string | null): NeedValue | null {
+  if (!raw) return null
+  const direct = NEED_VALUES.find((value) => value === raw)
+  return direct ?? LEGACY_NEED_ALIASES.get(raw) ?? null
+}
+
 /** Límites de longitud: el cliente los valida para dar feedback y el servidor los impone. */
 export const CONTACT_LIMITS = {
   firstName: { min: 2, max: 40 },

@@ -14,6 +14,7 @@ import {
   PHONE_PATTERN,
   isFreeEmailDomain,
   type ContactErrorCode,
+  resolveNeed,
   type NeedValue,
 } from '@/lib/contact'
 import { fillClock, newSubmissionId, submitContact, waitForMinimumFillTime } from '@/lib/contact-client'
@@ -115,10 +116,9 @@ export function ContactForm({ t, locale }: ContactFormProps) {
   // directamente en el navegador tras montar, sin bloquear el render inicial del formulario.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    const need = params.get('need')
-    if (need && (NEED_VALUES as readonly string[]).includes(need)) {
-      setValue('need', need as NeedValue)
-    }
+    // Acepta las opciones actuales y los valores antiguos (demo, pricing…); cualquier otro se ignora.
+    const need = resolveNeed(params.get('need'))
+    if (need) setValue('need', need)
   }, [setValue])
 
   const messageValue = watch('message') ?? ''

@@ -46,7 +46,8 @@ function ShowcaseBento({ t, locale }: { t: ProductLanding['showcase']; locale: L
             <ArrowRight className="w-4 h-4" />
           </a>
           {/* PoC: oculta junto con la demo. Sin documento descargable todavía, lleva a Contacto con
-              «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
+              «Más información sobre SentryN3t» preseleccionada (?need=info); si se publica el documento,
+              cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
               href={`/${locale}/contacto/?need=info`}
@@ -132,7 +133,8 @@ function ShowcaseFlow({ t, locale }: { t: ProductLanding['showcase']; locale: Lo
             <ArrowRight className="w-4 h-4" />
           </a>
           {/* PoC: oculta junto con la demo. Sin documento descargable todavía, lleva a Contacto con
-              «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
+              «Más información sobre SentryN3t» preseleccionada (?need=info); si se publica el documento,
+              cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
               href={`/${locale}/contacto/?need=info`}

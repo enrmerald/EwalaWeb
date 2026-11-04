@@ -495,7 +495,10 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     con fallos y revisión mensual del *Message trace* del buzón remitente.
 - El selector `need` ya no depende de `SHOW_DEMO_CTA` (`lib/features.ts`): solo hay dos opciones. Los
   enlaces de la landing a `/{locale}/contacto/?need=info` preseleccionan «Más información sobre
-  SentryN3t»; un `?need=` con otro valor se ignora. La web no promete plazos de respuesta: el paso 1 de
+  SentryN3t». Los valores antiguos `?need=demo|pricing|integration|compliance` (enlaces ya compartidos)
+  se traducen a «info» en el navegador con `resolveNeed()` (`lib/contact.ts`, mediante un `Map`); un `?need=`
+  con cualquier otro valor se ignora y el servidor sigue aceptando solo `info` u `other`. La web no
+  promete plazos de respuesta: el paso 1 de
   «Qué pasa después» dice «Un miembro del equipo de Ewala te contacta.».
 
 ## Notas de configuración
