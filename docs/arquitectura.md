@@ -460,8 +460,9 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
   - Reglas del formulario (`lib/contact.ts`, compartidas por navegador y función): `need` es `info`
     («Más información sobre SentryN3t») u `other` («Otra consulta»); el **mensaje es obligatorio**
     (1–1000 caracteres); el **email debe ser corporativo**: `isFreeEmailDomain()` rechaza proveedores
-    gratuitos y desechables (Gmail, Hotmail/Outlook/Live, Yahoo, iCloud, Proton, GMX, operadores habituales…,
-    con sus variantes por país y subdominios). La función lo vuelve a comprobar y responde
+    gratuitos y desechables (Gmail, Hotmail/Outlook/Live, Yahoo, iCloud, Proton, GMX, Fastmail, Hey, Libero,
+    T-Online, Free, Laposte…, con sus variantes por país y subdominios; **no** las operadoras españolas como
+    movistar.es, orange.es, telefonica.net o terra.es, que usan autónomos y pymes). La función lo vuelve a comprobar y responde
     `fields.email = "corporate"` para que el cliente muestre el texto específico. Es una **lista cerrada**
     (heurística): no detecta todos los proveedores ni un dominio propio personal; ampliarla solo en
     `FREE_EMAIL_DOMAINS` / `FREE_EMAIL_FAMILY`.

@@ -45,13 +45,15 @@ export const CONTACT_LIMITS = {
 /**
  * Proveedores de correo gratuito o desechable: el formulario exige un correo corporativo. Es una lista
  * cerrada y, por tanto, heurística: no detecta todos los proveedores ni a quien use un dominio propio
- * personal. Ampliarla aquí (la usan el navegador y la función).
+ * personal. Ampliarla aquí (la usan el navegador y la función). Los correos de las operadoras españolas
+ * (movistar.es, orange.es, telefonica.net, terra.es…) NO se bloquean a propósito: los usan autónomos y pymes.
  */
 const FREE_EMAIL_DOMAINS = new Set([
   'gmail.com', 'googlemail.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'proton.me', 'protonmail.com',
-  'pm.me', 'mail.com', 'web.de', 'yandex.com', 'yandex.ru', 'ya.ru', 'mail.ru', 'qq.com', '163.com', '126.com',
-  'zoho.com', 'zohomail.com', 'tutanota.com', 'tutamail.com', 'tuta.io', 'terra.es', 'telefonica.net',
-  'movistar.es', 'orange.es', 'ono.com', 'wanadoo.es', 'jazztel.es', 'ya.com',
+  'protonmail.ch', 'pm.me', 'mail.com', 'web.de', 'yandex.com', 'yandex.ru', 'ya.ru', 'mail.ru', 'qq.com',
+  '163.com', '126.com', 'zoho.com', 'zohomail.com', 'tutanota.com', 'tutamail.com', 'tuta.io',
+  'rocketmail.com', 'fastmail.com', 'fastmail.fm', 'hey.com', 'libero.it', 't-online.de', 'laposte.net',
+  'free.fr', 'orange.fr', 'seznam.cz', 'wp.pl',
   // Desechables
   'mailinator.com', 'yopmail.com', 'guerrillamail.com', '10minutemail.com', 'tempmail.com', 'temp-mail.org',
   'trashmail.com', 'sharklasers.com',
