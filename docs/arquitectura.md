@@ -292,8 +292,9 @@ de `gtm.js`; sin aceptar, *Application → Cookies* no debe tener `_ga`; aceptan
 único punto de lectura). Hoy: `SHOW_DEMO_CTA` (`NEXT_PUBLIC_SHOW_DEMO_CTA === 'true'`, **por defecto
 oculto**), que gobierna «Solicitar demo» (navbar escritorio y móvil), «Solicita una demo» (hero), el botón
 principal del CTA final (oculto → «Contáctanos»), los botones «Descargar cómo funciona una PoC» (que, sin
-documento todavía, llevan a contacto con `?need=demo`) y la opción «Demo SentryN3t» del selector del formulario. Se conservan las claves de texto
-en los JSON para poder reactivarlos sin reescribir nada.
+documento todavía, llevan a contacto con `?need=info`). El selector del formulario de contacto **no** depende
+de este interruptor (solo ofrece «Más información sobre SentryN3t» y «Otra consulta»). Se conservan las claves
+de texto en los JSON para poder reactivarlos sin reescribir nada.
 
 ## Sellos y reconocimientos (home)
 
@@ -438,8 +439,18 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     deshabilita al enviar y cada correo lleva la cabecera `X-Ewala-Submission` para detectar duplicados).
     `Reply-To` = email del visitante, `saveToSentItems: false` (no se guarda otra copia de datos personales)
     y solo se registran códigos de error (`AADSTS…` o el código de Graph), nunca cuerpos ni secretos.
-  - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) + texto; **todo** dato del formulario pasa
-    por `esc()`.
+  - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) con los colores y fuentes corporativos; solo
+    HTML (Graph envía un único cuerpo, no hay versión de texto plano); **todo** dato del formulario pasa
+    por `esc()`. El pie no muestra el entorno (solo el prefijo `[ENTORNO]` del asunto fuera de producción)
+    ni promete plazos de respuesta.
+  - Reglas del formulario (`lib/contact.ts`, compartidas por navegador y función): `need` es `info`
+    («Más información sobre SentryN3t») u `other` («Otra consulta»); el **mensaje es obligatorio**
+    (1–1000 caracteres); el **email debe ser corporativo**: `isFreeEmailDomain()` rechaza proveedores
+    gratuitos y desechables (Gmail, Hotmail/Outlook/Live, Yahoo, iCloud, Proton, GMX, operadores habituales…,
+    con sus variantes por país y subdominios). La función lo vuelve a comprobar y responde
+    `fields.email = "corporate"` para que el cliente muestre el texto específico. Es una **lista cerrada**
+    (heurística): no detecta todos los proveedores ni un dominio propio personal; ampliarla solo en
+    `FREE_EMAIL_DOMAINS` / `FREE_EMAIL_FAMILY`.
   - Sin `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_SENDER` (con formato válido) o
     `CONTACT_MAILBOX_TO` → **modo prueba** (`delivery: "skipped"`). Si Graph falla → **503**, nunca un falso éxito.
 - **Variables** (Netlify → Environment variables, scope «Functions»): `MS_TENANT_ID`, `MS_CLIENT_ID`,
@@ -465,8 +476,10 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     remitente.
   - *Monitorización recomendada:* alerta en los Sign-in logs de Entra (Service principal sign-ins) de la app
     con fallos y revisión mensual del *Message trace* del buzón remitente.
-- La opción «Demo SentryN3t» del selector `need` y `?need=demo` dependen de `SHOW_DEMO_CTA`
-  (`lib/features.ts`).
+- El selector `need` ya no depende de `SHOW_DEMO_CTA` (`lib/features.ts`): solo hay dos opciones. Los
+  enlaces de la landing a `/{locale}/contacto/?need=info` preseleccionan «Más información sobre
+  SentryN3t»; un `?need=` con otro valor se ignora. La web no promete plazos de respuesta: el paso 1 de
+  «Qué pasa después» dice «Un miembro del equipo de Ewala te contacta.».
 
 ## Notas de configuración
 

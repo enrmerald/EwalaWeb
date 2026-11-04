@@ -130,6 +130,9 @@ netlify.toml            ← build, funciones, redirecciones 301/410, cabeceras d
 Microsoft Graph (`/users/{MS_SENDER}/sendMail`) → buzón de Ewala. Solo `fetch` nativo (sin SDK de Azure).
 Validación en cliente (zod) **y** en servidor (`netlify/lib/contact-validation.ts`, sin dependencias),
 honeypot + tiempo mínimo de 3 s, rate limit de 10/min/IP en Netlify, todo escapado en la plantilla.
+Reglas del formulario (`lib/contact.ts`, compartidas cliente/función): `need` = `info` u `other`, mensaje
+**obligatorio** y email **corporativo** (`isFreeEmailDomain()` rechaza proveedores gratuitos; lista cerrada).
+La web no promete plazos de respuesta.
 Variables (Netlify, scope Functions): `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET` (secreto),
 `MS_SENDER` (buzón compartido remitente, p. ej. `web@ewala.es`), `CONTACT_MAILBOX_TO` (destino, p. ej.
 `operaciones@ewala.es`) y `MAIL_ENVIRONMENT`. Sin ellas → **modo prueba** (no envía y lo avisa). Si Graph
