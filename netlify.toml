@@ -187,6 +187,13 @@
   force = true
 
 # 3) Páginas legales de la web antigua → equivalentes nuevas.
+# URL de las firmas de correo corporativas: se mantiene y apunta a la página traducida.
+[[redirects]]
+  from = "/politica-de-privacidad"
+  to = "/es/privacidad/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/politica-privacidad"
   to = "/es/privacidad/"
