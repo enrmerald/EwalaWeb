@@ -13,8 +13,10 @@
  * Presupuesto de una función síncrona de Netlify (10 s): token 2000 ms + envío 2800 ms + espera 400 ms +
  * reintento 2800 ms = 8000 ms, y quedan 2 s para validar y responder.
  *
- * Graph NO tiene clave de idempotencia: por eso solo se reintenta cuando Graph respondió (429/5xx) y
- * nunca tras un timeout o un error de red, donde pudo haber aceptado ya el mensaje y duplicaría el correo.
+ * Graph NO tiene clave de idempotencia: por eso solo se reintenta (una vez) cuando es seguro que el mensaje
+ * NO se aceptó: un 429 (Graph limita antes de procesar) o un 503 con `Retry-After` explícito y ≤ 1 s.
+ * Nunca ante otros 5xx (un 500/502/504 del front-door puede llegar después de encolar el mensaje) ni tras un
+ * timeout o un error de red: duplicarían el correo.
  */
 import { EMAIL } from './contact-validation'
 
@@ -143,16 +145,25 @@ export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
     const { result, retryAfter } = await post(url, body, tokenResult.token)
     last = result
     if (last.ok) return last
-    // Solo se reintenta si Graph respondió con límite (429) o error suyo (5xx) y no pide esperar más de
-    // 1 s. Estado 0 (timeout o red caída): NO se reintenta, el mensaje pudo haberse aceptado.
-    const transient = last.status === 429 || last.status >= 500
-    if (!transient || retryAfter > MAX_RETRY_AFTER_S) return last
+    if (!isSafeToRetry(last.status, retryAfter)) return last
     if (attempt < SEND_ATTEMPTS - 1) await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS))
   }
   return last
 }
 
-async function post(url: string, body: string, token: string): Promise<{ result: SendResult; retryAfter: number }> {
+/**
+ * ¿Se puede repetir el POST sin riesgo de duplicar el correo? Solo si Graph respondió y todo indica que NO
+ * procesó el mensaje: 429 (límite, se emite antes de procesar) o 503 con `Retry-After` explícito. Con
+ * `Retry-After` > 1 s no se espera (presupuesto de la función). Estado 0 (timeout o red caída) y el resto de
+ * 5xx: NO, el mensaje pudo haberse aceptado ya. `retryAfter` es `null` si la cabecera falta o no es numérica.
+ */
+export function isSafeToRetry(status: number, retryAfter: number | null): boolean {
+  if (retryAfter !== null && retryAfter > MAX_RETRY_AFTER_S) return false
+  if (status === 429) return true
+  return status === 503 && retryAfter !== null
+}
+
+async function post(url: string, body: string, token: string): Promise<{ result: SendResult; retryAfter: number | null }> {
   let response: Response
   try {
     response = await fetch(url, {
@@ -162,16 +173,19 @@ async function post(url: string, body: string, token: string): Promise<{ result:
       signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
     })
   } catch {
-    return { result: { ok: false, status: 0 }, retryAfter: 0 }
+    return { result: { ok: false, status: 0 }, retryAfter: null }
   }
 
   // Éxito = 202 Accepted con cuerpo vacío.
-  if (response.status === 202) return { result: { ok: true }, retryAfter: 0 }
+  if (response.status === 202) return { result: { ok: true }, retryAfter: null }
 
   // Token revocado o inválido: se descarta la caché y no se reintenta en esta petición.
   if (response.status === 401) cached = null
 
-  const retryAfter = Number(response.headers.get('Retry-After'))
+  // `null` si la cabecera falta o no es un número de segundos (p. ej. una fecha HTTP).
+  const header = response.headers.get('Retry-After')
+  const seconds = header === null || header.trim() === '' ? NaN : Number(header)
+  const retryAfter = Number.isFinite(seconds) && seconds >= 0 ? seconds : null
   let code: string | undefined
   try {
     const err = (await response.json()) as { error?: { code?: unknown } }
@@ -182,6 +196,6 @@ async function post(url: string, body: string, token: string): Promise<{ result:
   }
   return {
     result: { ok: false, status: response.status, ...(code ? { code } : {}) },
-    retryAfter: Number.isFinite(retryAfter) ? retryAfter : 0,
+    retryAfter,
   }
 }

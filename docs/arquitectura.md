@@ -434,8 +434,9 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
   - `graph-mail.ts`: dos `fetch` nativos (sin SDK ni `node_modules`): token OAuth `client_credentials`
     (cacheado en memoria mientras le queden más de 5 min; timeout 2 s) y `POST /users/{MS_SENDER}/sendMail`
     (timeout 2,8 s). Presupuesto: 2000 + 2800 + 400 + 2800 = 8 s de los 10 s de la función. Graph **no
-    tiene clave de idempotencia**: solo se reintenta (una vez) si Graph respondió 429/5xx con `Retry-After`
-    ≤ 1 s; **nunca tras un timeout o error de red**, porque podría duplicar el correo (el botón se
+    tiene clave de idempotencia**: solo se reintenta (una vez) si Graph respondió **429**, o **503 con
+    `Retry-After` explícito ≤ 1 s** (`isSafeToRetry()`); **nunca ante otros 5xx (500/502/504) ni tras un
+    timeout o error de red**, porque el mensaje pudo haberse aceptado ya y se duplicaría el correo (el botón se
     deshabilita al enviar y cada correo lleva la cabecera `X-Ewala-Submission` para detectar duplicados).
     `Reply-To` = email del visitante, `saveToSentItems: false` (no se guarda otra copia de datos personales)
     y solo se registran códigos de error (`AADSTS…` o el código de Graph), nunca cuerpos ni secretos.
