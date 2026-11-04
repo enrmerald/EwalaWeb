@@ -9,7 +9,7 @@
 export const CONTACT_ENDPOINT = '/api/contact'
 
 /** Valores de «¿Qué necesitas?». Las etiquetas viven en messages/*.json → contact.form.need.options. */
-export const NEED_VALUES = ['demo', 'pricing', 'integration', 'compliance', 'other'] as const
+export const NEED_VALUES = ['info', 'other'] as const
 export type NeedValue = (typeof NEED_VALUES)[number]
 
 /** Límites de longitud: el cliente los valida para dar feedback y el servidor los impone. */
@@ -20,8 +20,34 @@ export const CONTACT_LIMITS = {
   email: { max: 160 },
   phone: { max: 32 },
   role: { max: 80 },
-  message: { max: 1000 },
+  message: { min: 1, max: 1000 },
 } as const
+
+/**
+ * Proveedores de correo gratuito o desechable: el formulario exige un correo corporativo. Es una lista
+ * cerrada y, por tanto, heurística: no detecta todos los proveedores ni a quien use un dominio propio
+ * personal. Ampliarla aquí (la usan el navegador y la función).
+ */
+const FREE_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'proton.me', 'protonmail.com',
+  'pm.me', 'mail.com', 'web.de', 'yandex.com', 'yandex.ru', 'ya.ru', 'mail.ru', 'qq.com', '163.com', '126.com',
+  'zoho.com', 'zohomail.com', 'tutanota.com', 'tutamail.com', 'tuta.io', 'terra.es', 'telefonica.net',
+  'movistar.es', 'orange.es', 'ono.com', 'wanadoo.es', 'jazztel.es', 'ya.com',
+  // Desechables
+  'mailinator.com', 'yopmail.com', 'guerrillamail.com', '10minutemail.com', 'tempmail.com', 'temp-mail.org',
+  'trashmail.com', 'sharklasers.com',
+])
+/** Familias con un dominio por país (hotmail.es, yahoo.co.uk, outlook.com…): nombre + sufijo público de país. */
+const FREE_EMAIL_FAMILY = /^(?:hotmail|outlook|live|msn|yahoo|ymail|gmx)\.(?:[a-z]{2,3}|(?:co|com)\.[a-z]{2})$/
+
+/** `true` si el dominio del correo es de un proveedor gratuito/desechable (o un subdominio suyo). */
+export function isFreeEmailDomain(email: string): boolean {
+  const domain = email.slice(email.lastIndexOf('@') + 1).trim().toLowerCase()
+  if (!domain) return false
+  if (FREE_EMAIL_FAMILY.test(domain)) return true
+  for (const free of FREE_EMAIL_DOMAINS) if (domain === free || domain.endsWith(`.${free}`)) return true
+  return false
+}
 
 /** Teléfono: dígitos, espacios, +, paréntesis, puntos y guiones. */
 export const PHONE_PATTERN = /^[+\d\s().-]*$/
@@ -49,7 +75,7 @@ export interface ContactRequest {
   phone?: string
   role?: string
   need: NeedValue
-  message?: string
+  message: string
   /**
    * Confirma que la persona ha leído la política de privacidad (casilla «He leído la…»). No es un consentimiento
    * al tratamiento —la base es la aplicación de medidas precontractuales—; el nombre se mantiene por

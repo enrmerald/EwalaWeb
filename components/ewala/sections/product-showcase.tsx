@@ -49,7 +49,7 @@ function ShowcaseBento({ t, locale }: { t: ProductLanding['showcase']; locale: L
               «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href={`/${locale}/contacto/?need=demo`}
+              href={`/${locale}/contacto/?need=info`}
               className="text-white/70 hover:text-white font-medium px-6 py-3 text-sm transition-colors inline-flex items-center gap-2"
             >
               {t.ctaSecondary}
@@ -135,7 +135,7 @@ function ShowcaseFlow({ t, locale }: { t: ProductLanding['showcase']; locale: Lo
               «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href={`/${locale}/contacto/?need=demo`}
+              href={`/${locale}/contacto/?need=info`}
               className="text-white/70 hover:text-white font-medium px-6 py-3 text-sm transition-colors inline-flex items-center gap-2"
             >
               {t.ctaSecondary}

@@ -5,7 +5,14 @@
  * Reglas: lista blanca de campos (cualquier campo extra se rechaza), tipos exactos, longitudes de
  * lib/contact.ts y sin caracteres de control en campos de una línea (anti inyección de cabeceras).
  */
-import { CONTACT_LIMITS as L, MAX_ELAPSED_MS, NEED_VALUES, PHONE_PATTERN, type ContactRequest } from '../../lib/contact'
+import {
+  CONTACT_LIMITS as L,
+  MAX_ELAPSED_MS,
+  NEED_VALUES,
+  PHONE_PATTERN,
+  isFreeEmailDomain,
+  type ContactRequest,
+} from '../../lib/contact'
 
 const SINGLE_LINE = /^[^\p{Cc}]*$/u
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
@@ -52,20 +59,20 @@ export function validateContact(input: unknown): ValidationResult {
   const company = line('company', L.company.min, L.company.max, true) ?? ''
   const email = line('email', 3, L.email.max, true) ?? ''
   if (email && !EMAIL.test(email)) bad('email')
+  // El formulario exige correo corporativo; el motivo concreto permite al cliente mostrar el texto adecuado.
+  else if (email && isFreeEmailDomain(email)) fields.email = 'corporate'
   const phone = line('phone', 0, L.phone.max, false)
   if (phone && !PHONE_PATTERN.test(phone)) bad('phone')
   const role = line('role', 0, L.role.max, false)
 
   const need = (NEED_VALUES as readonly unknown[]).includes(o.need) ? (o.need as ContactRequest['need']) : (bad('need'), 'other')
 
-  // Mensaje multilínea: se permiten saltos de línea y tabuladores, ningún otro carácter de control.
-  let message: string | undefined
-  if (o.message !== undefined) {
-    if (typeof o.message !== 'string') bad('message')
-    else {
-      message = o.message.replace(/\r\n/g, '\n').trim()
-      if (message.length > L.message.max || !SINGLE_LINE.test(message.replace(/[\n\t]/g, ''))) bad('message')
-    }
+  // Mensaje obligatorio y multilínea: se permiten saltos de línea y tabuladores, ningún otro carácter de control.
+  let message = ''
+  if (typeof o.message !== 'string') bad('message')
+  else {
+    message = o.message.replace(/\r\n/g, '\n').trim()
+    if (message.length < L.message.min || message.length > L.message.max || !SINGLE_LINE.test(message.replace(/[\n\t]/g, ''))) bad('message')
   }
 
   if (o.privacy !== true) bad('privacy')

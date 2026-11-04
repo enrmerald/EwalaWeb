@@ -604,13 +604,13 @@
   "contact": {
     "meta": {
       "title": "Contacto | Ewala",
-      "description": "Habla con el equipo de Ewala sobre SentryN3t, MSSP o cumplimiento NIS2/ENS. Te respondemos en menos de 24h laborables."
+      "description": "Habla con el equipo de Ewala sobre SentryN3t y la ciberseguridad industrial OT/IoT. Cuéntanos tu caso y un miembro del equipo te contactará."
     },
     "breadcrumbHome": "Home",
     "breadcrumbContact": "Contacto",
     "heroTitle": "Hablemos de tu",
     "heroTitleHighlight": "ciberseguridad OT/IoT",
-    "heroSubtitle": "Cuéntanos tu caso y te contactamos en menos de 24h laborables con los siguientes pasos.",
+    "heroSubtitle": "Cuéntanos tu caso y un miembro del equipo de Ewala te contactará.",
     "form": {
       "sectionLabel": "Formulario de contacto",
       "firstName": {
@@ -641,16 +641,13 @@
         "label": "¿Qué necesitas?",
         "placeholder": "Selecciona una opción",
         "options": {
-          "demo": "Demo de SentryN3t",
-          "pricing": "Precios y licencias de SentryN3t",
-          "integration": "Integración y despliegue en mi red OT",
-          "compliance": "SentryN3t para NIS2 / ENS / IEC 62443",
+          "info": "Más información sobre SentryN3t",
           "other": "Otra consulta"
         }
       },
       "message": {
         "label": "Mensaje",
-        "placeholder": "Cuéntanos brevemente tu necesidad (opcional)",
+        "placeholder": "Cuéntanos brevemente tu necesidad",
         "counter": "{count}/1000"
       },
       "privacy": {
@@ -666,7 +663,7 @@
       "retry": "Reintentar",
       "success": {
         "title": "Mensaje enviado",
-        "description": "Gracias por contactar con Ewala. Te responderemos en menos de 24h laborables.",
+        "description": "Gracias por contactar con Ewala. Un miembro del equipo te contactará.",
         "reference": "Referencia de tu consulta: {reference}",
         "testMode": "Modo de prueba: el formulario funciona, pero el envío de correo aún no está configurado, así que este mensaje no ha llegado a nadie."
       },
@@ -685,10 +682,12 @@
         "companyMin": "El nombre de la empresa debe tener al menos 2 caracteres.",
         "companyMax": "El nombre de la empresa no puede superar los 80 caracteres.",
         "emailInvalid": "Introduce un email válido.",
+        "emailCorporate": "Usa tu correo de empresa: no se admiten proveedores de correo gratuitos (Gmail, Outlook, Yahoo…).",
         "phoneInvalid": "Introduce un teléfono válido (solo números, espacios, +, guiones y paréntesis; máximo 32).",
         "roleMax": "El cargo no puede superar los 80 caracteres.",
         "needRequired": "Selecciona qué necesitas.",
         "messageMax": "El mensaje no puede superar los 1000 caracteres.",
+        "messageRequired": "Cuéntanos brevemente tu necesidad.",
         "invalid": "Revisa este campo."
       }
     },
@@ -712,15 +711,15 @@
         "steps": [
           {
             "title": "Te contactamos",
-            "description": "Un miembro del equipo de Ewala te responde en menos de 24h laborables."
+            "description": "Un miembro del equipo de Ewala te contacta."
           },
           {
             "title": "Diagnóstico breve",
             "description": "Charlamos sobre tu infraestructura OT/IoT y tus necesidades de cumplimiento."
           },
           {
-            "title": "Propuesta a medida",
-            "description": "Te preparamos una propuesta de demo, licencias o servicio MSSP ajustada a tu caso."
+            "title": "Información a tu medida",
+            "description": "Te facilitamos la información de SentryN3t que necesitas y, si te interesa, las opciones de licencias."
           }
         ]
       },

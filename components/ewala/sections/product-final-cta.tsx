@@ -41,7 +41,7 @@ export function ProductFinalCta({ t, locale }: ProductFinalCtaProps) {
               «Demo» preseleccionada; si se publica el documento, cambiar el href a su ruta. */}
           {SHOW_DEMO_CTA && (
             <a
-              href={`/${locale}/contacto/?need=demo`}
+              href={`/${locale}/contacto/?need=info`}
               className="border border-white/30 text-white hover:bg-white/[0.06] hover:border-white/50 font-semibold px-8 py-4 rounded-xl text-base transition-all inline-flex items-center justify-center"
             >
               {t.ctaSecondary}
