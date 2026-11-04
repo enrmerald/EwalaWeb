@@ -453,7 +453,10 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     (heurística): no detecta todos los proveedores ni un dominio propio personal; ampliarla solo en
     `FREE_EMAIL_DOMAINS` / `FREE_EMAIL_FAMILY`.
   - Sin `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_SENDER` (con formato válido) o
-    `CONTACT_MAILBOX_TO` → **modo prueba** (`delivery: "skipped"`). Si Graph falla → **503**, nunca un falso éxito.
+    `CONTACT_MAILBOX_TO` (un **único** correo válido: `readRecipient()`; una errata, una coma o varias
+    direcciones no valen) → **modo prueba** (`delivery: "skipped"`). Si el destinatario existe pero es
+    inválido, la traza es `test_mode_recipient_invalid` (en lugar de `test_mode`) para localizarlo en
+    Netlify → Logs → Functions; el valor de la variable nunca se registra. Si Graph falla → **503**, nunca un falso éxito.
 - **Variables** (Netlify → Environment variables, scope «Functions»): `MS_TENANT_ID`, `MS_CLIENT_ID`,
   `MS_CLIENT_SECRET` (secreto), `MS_SENDER`, `CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT` (`production` o el nombre del entorno, que se
   añade al asunto). Documentadas en `.env.local.example`.

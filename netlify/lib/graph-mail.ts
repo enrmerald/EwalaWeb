@@ -73,6 +73,20 @@ export function isEmailConfigured(): boolean {
   return readConfig() !== null
 }
 
+/** Destinatario de las consultas (CONTACT_MAILBOX_TO): un único correo con formato válido. */
+export type RecipientResult = { ok: true; address: string } | { ok: false; reason: 'missing' | 'invalid' }
+
+/**
+ * Una errata, una coma, dos direcciones separadas por «;» o «Nombre <a@b.es>» harían que Graph responda 400
+ * y todos los envíos den 503. `EMAIL` excluye espacios, `,`, `;`, `<` y `>`, así que solo admite un correo.
+ */
+export function readRecipient(): RecipientResult {
+  const address = process.env.CONTACT_MAILBOX_TO?.trim() ?? ''
+  if (!address) return { ok: false, reason: 'missing' }
+  if (!EMAIL.test(address)) return { ok: false, reason: 'invalid' }
+  return { ok: true, address }
+}
+
 async function getToken(cfg: GraphConfig): Promise<TokenResult> {
   if (cached && cached.expiresAt - Date.now() > TOKEN_MARGIN_MS) return { ok: true, token: cached.token }
 

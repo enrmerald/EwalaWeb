@@ -9,17 +9,17 @@
  * Variables de entorno (Netlify, scope «Functions»):
  *   MS_TENANT_ID, MS_CLIENT_ID,
  *   MS_CLIENT_SECRET, MS_SENDER   ver netlify/lib/graph-mail.ts
- *   CONTACT_MAILBOX_TO            buzón que recibe las consultas (p. ej. info@ewala.es)
+ *   CONTACT_MAILBOX_TO            buzón que recibe las consultas (un único correo, p. ej. info@ewala.es)
  *   MAIL_ENVIRONMENT              "production" en producción; otro valor añade [VALOR] al asunto
- * Si falta alguna, la función entra en MODO PRUEBA: valida, no envía y responde delivery "skipped"
- * (el formulario lo indica). Nunca responde éxito si el correo real ha fallado (503).
+ * Si falta alguna (o CONTACT_MAILBOX_TO no es un único correo válido), la función entra en MODO PRUEBA:
+ * valida, no envía y responde delivery "skipped" (el formulario lo indica). Nunca responde éxito si el correo real ha fallado (503).
  *
  * Extensión .mts: ver la nota de netlify/functions/csp-report.mts.
  */
 import esMessages from '../../messages/es.json'
 import { MIN_FILL_SECONDS, type NeedValue } from '../../lib/contact'
 import { fail, json, log, readJsonRequest } from '../lib/http'
-import { isEmailConfigured, sendEmail } from '../lib/graph-mail'
+import { isEmailConfigured, readRecipient, sendEmail } from '../lib/graph-mail'
 import { contactEmail, contactSubject } from '../lib/contact-email'
 import { validateContact } from '../lib/contact-validation'
 
@@ -69,9 +69,11 @@ export default async function handler(request: Request): Promise<Response> {
     return json({ ok: true, reference, delivery: 'skipped' })
   }
 
-  const mailbox = process.env.CONTACT_MAILBOX_TO
-  if (!isEmailConfigured() || !mailbox) {
-    trace('test_mode')
+  const recipient = readRecipient()
+  if (!isEmailConfigured() || !recipient.ok) {
+    // Un destinatario mal escrito se distingue de «no configurado» para localizarlo en los logs
+    // (nunca se registra el valor de la variable, solo el motivo).
+    trace(isEmailConfigured() && !recipient.ok && recipient.reason === 'invalid' ? 'test_mode_recipient_invalid' : 'test_mode')
     return json({ ok: true, reference, delivery: 'skipped' })
   }
 
@@ -94,7 +96,7 @@ export default async function handler(request: Request): Promise<Response> {
   const { html } = contactEmail(emailData)
 
   const result = await sendEmail({
-    to: mailbox,
+    to: recipient.address,
     subject: contactSubject(emailData),
     html,
     replyTo: data.email,
