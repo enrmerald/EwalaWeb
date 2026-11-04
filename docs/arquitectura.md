@@ -443,7 +443,20 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
   - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) con los colores y fuentes corporativos; solo
     HTML (Graph envía un único cuerpo, no hay versión de texto plano); **todo** dato del formulario pasa
     por `esc()`. El pie no muestra el entorno (solo el prefijo `[ENTORNO]` del asunto fuera de producción)
-    ni promete plazos de respuesta.
+    ni promete plazos de respuesta. Incluye la fila «Dominio del email» y un aviso encima del botón
+    «Responder» (ver «Riesgo aceptado: el email no está verificado»).
+  - **Riesgo aceptado: el email no está verificado.** El `Reply-To` y el botón «Responder» usan el email que
+    escribió el visitante y el servidor no puede comprobar que sea suyo. Vías de alteración: *en tránsito*
+    no es posible sin romper TLS (HSTS de 1 año en `netlify.toml`); *desde otra web* (CSRF) lo bloquea
+    `isSameOrigin()` (`netlify/lib/http.ts`); *dentro del correo* no puede haber discrepancias, porque
+    `data.email` es la única fuente del Reply-To, de la fila «Email» y del botón; *en el navegador del propio
+    visitante* (extensión maliciosa, malware, proxy con inspección TLS) o *un visitante que escribe a
+    propósito el correo de un tercero* **no son detectables desde el servidor**: una firma o HMAC del cliente
+    no sirve, porque su secreto estaría en el navegador. Mitigación sin estado: la fila «Dominio del email»
+    (para compararlo con la empresa declarada) y el aviso de la plantilla. **Procedimiento al responder:**
+    comprobar que el dominio corresponde a la empresa indicada; no enviar información sensible ni
+    presupuestos a un dominio inesperado; ante la duda, confirmar la identidad llamando a un número oficial
+    de la empresa. Mejora futura (requiere estado): doble confirmación por email antes de reenviar la consulta.
   - Reglas del formulario (`lib/contact.ts`, compartidas por navegador y función): `need` es `info`
     («Más información sobre SentryN3t») u `other` («Otra consulta»); el **mensaje es obligatorio**
     (1–1000 caracteres); el **email debe ser corporativo**: `isFreeEmailDomain()` rechaza proveedores

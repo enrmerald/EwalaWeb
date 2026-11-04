@@ -68,6 +68,8 @@ export function contactEmail(data: ContactEmailData): { html: string } {
     row('Empresa', esc(data.company)),
     row('Cargo', role ? esc(role) : muted(notGiven)),
     row('Email', link(`mailto:${mailtoAddress(data.email)}`, data.email)),
+    // Pista de coherencia: permite comparar de un vistazo el dominio con la empresa declarada.
+    row('Dominio del email', `<strong>${esc(emailDomain(data.email))}</strong>`),
     row('Teléfono', phone ? link(`tel:${phone.replace(/[^\d+]/g, '')}`, phone) : muted(notGiven)),
     row('Idioma de la web', data.locale.toUpperCase()),
   ].join('')
@@ -125,6 +127,7 @@ ${heading('Mensaje')}
 </table>
 </td></tr>
 <tr><td style="padding:28px 32px 0 32px;">
+<p style="margin:0 0 14px 0;font-family:${FONT_BODY};font-size:12px;line-height:1.6;color:${MUTED};">La dirección no está verificada: la ha escrito quien rellenó el formulario. Antes de enviar información o presupuestos, confirma que el dominio corresponde a la empresa indicada.</p>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
 <td bgcolor="${GREEN}" style="background-color:${GREEN};border-radius:6px;">
 <a href="${esc(`mailto:${mailtoAddress(data.email)}?subject=${encodeURIComponent(replySubject)}`)}" style="display:inline-block;padding:13px 26px;font-family:${FONT_BODY};font-size:14px;font-weight:700;color:${ON_GREEN};text-decoration:none;">Responder a ${esc(data.firstName)}</a>
@@ -136,7 +139,7 @@ ${heading('Consentimientos')}
 <p style="margin:0;font-family:${FONT_BODY};font-size:13px;line-height:1.6;color:${MUTED};">${consents}</p>
 </td></tr>
 <tr><td style="padding:32px;">
-<p style="margin:0;padding-top:18px;border-top:1px solid ${BORDER};font-family:${FONT_BODY};font-size:12px;line-height:1.6;color:${TEXT};">También puedes responder a este correo: llegará directamente a la persona.</p>
+<p style="margin:0;padding-top:18px;border-top:1px solid ${BORDER};font-family:${FONT_BODY};font-size:12px;line-height:1.6;color:${TEXT};">También puedes responder a este correo; se dirigirá a la dirección indicada en el formulario.</p>
 <p style="margin:10px 0 0 0;font-family:${FONT_MONO};font-size:11px;line-height:1.6;color:${MUTED};">Envío ${esc(data.submissionId)} · mensaje automático de ewala.es</p>
 </td></tr>
 </table>
@@ -159,6 +162,9 @@ const row = (label: string, value: string, strong = false) => `<tr>
 <td width="34%" style="padding:9px 12px 9px 0;vertical-align:top;border-bottom:1px solid ${BORDER};font-family:${FONT_BODY};font-size:13px;color:${MUTED};">${esc(label)}</td>
 <td style="padding:9px 0;vertical-align:top;border-bottom:1px solid ${BORDER};font-family:${FONT_BODY};font-size:${strong ? 17 : 15}px;${strong ? 'font-weight:700;' : ''}color:${TEXT};">${value}</td>
 </tr>`
+
+/** Dominio de un correo ya validado (`usuario@dominio`), en minúsculas. */
+const emailDomain = (email: string) => email.slice(email.lastIndexOf('@') + 1).trim().toLowerCase()
 
 const muted = (value: string) => `<span style="color:${MUTED};">${esc(value)}</span>`
 
