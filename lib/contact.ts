@@ -61,9 +61,13 @@ const FREE_EMAIL_DOMAINS = new Set([
 /** Familias con un dominio por país (hotmail.es, yahoo.co.uk, outlook.com…): nombre + sufijo público de país. */
 const FREE_EMAIL_FAMILY = /^(?:hotmail|outlook|live|msn|yahoo|ymail|gmx)\.(?:[a-z]{2,3}|(?:co|com)\.[a-z]{2})$/
 
-/** `true` si el dominio del correo es de un proveedor gratuito/desechable (o un subdominio suyo). */
+/**
+ * `true` si el dominio del correo es de un proveedor gratuito/desechable (o un subdominio suyo). Se quitan los
+ * puntos de los extremos (`gmail.com.`, `.gmail.com`): el regex de correo del servidor los admite y, sin
+ * normalizarlos, la búsqueda en la lista no los reconocería y se saltaría la regla.
+ */
 export function isFreeEmailDomain(email: string): boolean {
-  const domain = email.slice(email.lastIndexOf('@') + 1).trim().toLowerCase()
+  const domain = email.slice(email.lastIndexOf('@') + 1).trim().toLowerCase().replace(/^\.+|\.+$/g, '')
   if (!domain) return false
   if (FREE_EMAIL_FAMILY.test(domain)) return true
   for (const free of FREE_EMAIL_DOMAINS) if (domain === free || domain.endsWith(`.${free}`)) return true

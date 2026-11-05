@@ -59,6 +59,8 @@ export function validateContact(input: unknown): ValidationResult {
   const company = line('company', L.company.min, L.company.max, true) ?? ''
   const email = line('email', 3, L.email.max, true) ?? ''
   if (email && !EMAIL.test(email)) bad('email')
+  // Dominio con etiquetas vacías (`.ewala.es`, `ewala.es.`, `ewala..es`): no es una dirección entregable.
+  else if (email && email.slice(email.lastIndexOf('@') + 1).split('.').some((label) => label === '')) bad('email')
   // El formulario exige correo corporativo; el motivo concreto permite al cliente mostrar el texto adecuado.
   else if (email && isFreeEmailDomain(email)) fields.email = 'corporate'
   const phone = line('phone', 0, L.phone.max, false)
