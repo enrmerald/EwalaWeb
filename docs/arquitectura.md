@@ -437,7 +437,9 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     reglas. Además, un error de formato del email nunca queda sustituido por `corporate`.
   - `graph-mail.ts`: dos `fetch` nativos (sin SDK ni `node_modules`): token OAuth `client_credentials`
     (cacheado en memoria mientras le queden más de 5 min; timeout 2 s) y `POST /users/{MS_SENDER}/sendMail`
-    (timeout 2,8 s). Presupuesto: 2000 + 2800 + 400 + 2800 = 8 s de los 10 s de la función. Graph **no
+    (timeout 5 s). Presupuesto: plazo global de 8 s para `sendEmail` (token + envíos + esperas) de los 10 s de
+    la función; peor caso sin reintento 2000 + 5000 = 7 s, y el reintento solo se inicia si tras la espera de
+    400 ms quedan ≥ 1,5 s de plazo (su timeout se recorta a lo que quede). Graph **no
     tiene clave de idempotencia**: solo se reintenta (una vez) si Graph respondió **429**, o **503 con
     `Retry-After` explícito ≤ 1 s** (`isSafeToRetry()`); **nunca ante otros 5xx (500/502/504) ni tras un
     timeout o error de red**, porque el mensaje pudo haberse aceptado ya y se duplicaría el correo (el botón se

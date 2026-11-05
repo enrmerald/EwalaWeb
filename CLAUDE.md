@@ -136,7 +136,9 @@ La web no promete plazos de respuesta.
 Variables (Netlify, scope Functions): `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET` (secreto),
 `MS_SENDER` (buzón compartido remitente, p. ej. `web@ewala.es`), `CONTACT_MAILBOX_TO` (destino, p. ej.
 `operaciones@ewala.es`) y `MAIL_ENVIRONMENT`. Sin ellas → **modo prueba** (no envía y lo avisa). Si Graph
-falla → 503. Graph no tiene idempotencia: **no se reintenta tras un timeout** (solo ante 429/5xx).
+falla → 503. Graph no tiene idempotencia: se reintenta una vez **solo ante 429 o 503 con `Retry-After` ≤ 1 s**;
+**nunca** ante otros 5xx (500/502/504) ni tras un timeout o error de red (el mensaje pudo haberse aceptado ya
+y se duplicaría). Timeout de envío 5 s y plazo global de 8 s (la función de Netlify dura 10 s).
 La app de Entra ID debe poder enviar **solo como `MS_SENDER`** (RBAC for Applications de Exchange): no
 conceder `Mail.Send` de aplicación en Entra (valdría para todos los buzones). El secreto caduca (6 meses):
 rotación en `docs/arquitectura.md`. Ver `.env.local.example`.

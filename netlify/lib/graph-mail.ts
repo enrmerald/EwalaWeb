@@ -10,8 +10,10 @@
  *   MS_SENDER         Buzón remitente (compartido, sin login), p. ej. web@ewala.es. La app solo debe poder
  *                     enviar como ESTE buzón (RBAC for Applications de Exchange); ver docs/arquitectura.md.
  *
- * Presupuesto de una función síncrona de Netlify (10 s): token 2000 ms + envío 2800 ms + espera 400 ms +
- * reintento 2800 ms = 8000 ms, y quedan 2 s para validar y responder.
+ * Presupuesto de una función síncrona de Netlify (10 s): `sendEmail` tiene un plazo global de 8 s (token y
+ * envíos incluidos) y deja 2 s para validar y responder. Peor caso sin reintento: token 2000 ms + envío 5000 ms
+ * = 7 s. Un reintento solo se hace si, tras la espera de 400 ms, quedan al menos 1500 ms de plazo, y su timeout
+ * se recorta a lo que quede.
  *
  * Graph NO tiene clave de idempotencia: por eso solo se reintenta (una vez) cuando es seguro que el mensaje
  * NO se aceptó: un 429 (Graph limita antes de procesar) o un 503 con `Retry-After` explícito y ≤ 1 s.
@@ -24,7 +26,12 @@ const GUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const SCOPE = 'https://graph.microsoft.com/.default'
 
 const TOKEN_TIMEOUT_MS = 2000
-const SEND_TIMEOUT_MS = 2800
+/** `sendMail` pasa por Exchange Online y puede tardar varios segundos: 2,8 s hacía fallar envíos normales. */
+const SEND_TIMEOUT_MS = 5000
+/** Plazo global de `sendEmail` (token + envíos + esperas): la función de Netlify dura 10 s en total. */
+const TOTAL_BUDGET_MS = 8000
+/** Un reintento no se inicia si quedan menos de 1,5 s de plazo: no daría tiempo a que Graph responda. */
+const MIN_ATTEMPT_MS = 1500
 const SEND_ATTEMPTS = 2
 const RETRY_DELAY_MS = 400
 const MAX_RETRY_AFTER_S = 1
@@ -135,6 +142,7 @@ export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
   const cfg = readConfig()
   if (!cfg) return { ok: false, status: 0 }
 
+  const deadline = Date.now() + TOTAL_BUDGET_MS
   const tokenResult = await getToken(cfg)
   if (!tokenResult.ok) return tokenResult
 
@@ -156,11 +164,17 @@ export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
 
   let last: SendResult = { ok: false, status: 0 }
   for (let attempt = 0; attempt < SEND_ATTEMPTS; attempt++) {
-    const { result, retryAfter } = await post(url, body, tokenResult.token)
+    // El timeout de cada envío se recorta a lo que quede del plazo global.
+    const timeoutMs = Math.min(SEND_TIMEOUT_MS, deadline - Date.now())
+    const { result, retryAfter } = await post(url, body, tokenResult.token, timeoutMs)
     last = result
     if (last.ok) return last
+    // Un timeout (estado 0) nunca se reintenta: Graph pudo haber aceptado ya el mensaje.
     if (!isSafeToRetry(last.status, retryAfter)) return last
-    if (attempt < SEND_ATTEMPTS - 1) await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS))
+    if (attempt < SEND_ATTEMPTS - 1) {
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS))
+      if (deadline - Date.now() < MIN_ATTEMPT_MS) return last
+    }
   }
   return last
 }
@@ -177,14 +191,19 @@ export function isSafeToRetry(status: number, retryAfter: number | null): boolea
   return status === 503 && retryAfter !== null
 }
 
-async function post(url: string, body: string, token: string): Promise<{ result: SendResult; retryAfter: number | null }> {
+async function post(
+  url: string,
+  body: string,
+  token: string,
+  timeoutMs: number,
+): Promise<{ result: SendResult; retryAfter: number | null }> {
   let response: Response
   try {
     response = await fetch(url, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body,
-      signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
+      signal: AbortSignal.timeout(timeoutMs),
     })
   } catch {
     return { result: { ok: false, status: 0 }, retryAfter: null }
