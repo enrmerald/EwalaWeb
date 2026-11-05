@@ -19,6 +19,9 @@
  * NO se aceptó: un 429 (Graph limita antes de procesar) o un 503 con `Retry-After` explícito y ≤ 1 s.
  * Nunca ante otros 5xx (un 500/502/504 del front-door puede llegar después de encolar el mensaje) ni tras un
  * timeout o un error de red: duplicarían el correo.
+ * Excepción segura: un 401 de `sendMail` (token en caché revocado o secreto rotado) significa «no autenticado»,
+ * Graph no procesó nada; se descarta el token, se pide uno nuevo y se repite el envío UNA vez. Un segundo 401
+ * no se reintenta. Como máximo: 1 envío + 1 tras el 401 + 1 por 429/503 (todos dentro del plazo global).
  */
 import { EMAIL } from './contact-validation'
 
@@ -162,11 +165,27 @@ export async function sendEmail(email: OutgoingEmail): Promise<SendResult> {
     saveToSentItems: false,
   })
 
+  let token = tokenResult.token
+  let refreshed = false
   let last: SendResult = { ok: false, status: 0 }
   for (let attempt = 0; attempt < SEND_ATTEMPTS; attempt++) {
     // El timeout de cada envío se recorta a lo que quede del plazo global.
-    const timeoutMs = Math.min(SEND_TIMEOUT_MS, deadline - Date.now())
-    const { result, retryAfter } = await post(url, body, tokenResult.token, timeoutMs)
+    let outcome = await post(url, body, token, Math.min(SEND_TIMEOUT_MS, deadline - Date.now()))
+
+    // 401: el token en caché ya no vale (secreto rotado o token revocado). Graph NO procesó el mensaje, así que
+    // repetir el envío no puede duplicarlo. Se pide un token nuevo y se reintenta UNA sola vez (`post` ya ha
+    // vaciado la caché); un segundo 401 significa que las credenciales son inválidas y no se insiste.
+    if (!outcome.result.ok && outcome.result.status === 401 && !refreshed && deadline - Date.now() >= MIN_ATTEMPT_MS) {
+      refreshed = true
+      const fresh = await getToken(cfg)
+      if (!fresh.ok) return fresh
+      token = fresh.token
+      if (deadline - Date.now() >= MIN_ATTEMPT_MS) {
+        outcome = await post(url, body, token, Math.min(SEND_TIMEOUT_MS, deadline - Date.now()))
+      }
+    }
+
+    const { result, retryAfter } = outcome
     last = result
     if (last.ok) return last
     // Un timeout (estado 0) nunca se reintenta: Graph pudo haber aceptado ya el mensaje.

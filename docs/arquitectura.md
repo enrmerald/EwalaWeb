@@ -444,6 +444,10 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     `Retry-After` explícito ≤ 1 s** (`isSafeToRetry()`); **nunca ante otros 5xx (500/502/504) ni tras un
     timeout o error de red**, porque el mensaje pudo haberse aceptado ya y se duplicaría el correo (el botón se
     deshabilita al enviar y cada correo lleva la cabecera `X-Ewala-Submission` para detectar duplicados).
+    **Excepción segura: un 401 de `sendMail`** (token en caché revocado o caducado) significa «no
+    autenticado» y Graph no procesó nada: se descarta el token, se pide uno nuevo y se repite el envío **una
+    sola vez**; un segundo 401 (credenciales inválidas) no se reintenta y se responde 503. Así el primer
+    visitante tras una revocación no pierde su consulta.
     `Reply-To` = email del visitante, `saveToSentItems: false` (no se guarda otra copia de datos personales)
     y solo se registran códigos de error (`AADSTS…` o el código de Graph), nunca cuerpos ni secretos.
   - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) con los colores y fuentes corporativos; solo
