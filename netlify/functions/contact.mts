@@ -17,7 +17,7 @@
  * Extensión .mts: ver la nota de netlify/functions/csp-report.mts.
  */
 import esMessages from '../../messages/es.json'
-import { MIN_FILL_SECONDS, type NeedValue } from '../../lib/contact'
+import { MIN_FILL_SECONDS, isFreeEmailDomain, type NeedValue } from '../../lib/contact'
 import { fail, json, log, readJsonRequest } from '../lib/http'
 import { isEmailConfigured, readRecipient, sendEmail } from '../lib/graph-mail'
 import { contactEmail, contactSubject } from '../lib/contact-email'
@@ -67,6 +67,13 @@ export default async function handler(request: Request): Promise<Response> {
   if (data.website.trim() !== '' || data.elapsedMs < MIN_FILL_SECONDS * 1000) {
     trace('discarded_antispam')
     return json({ ok: true, reference, delivery: 'skipped' })
+  }
+
+  // Correo corporativo: se exige DESPUÉS del antispam para que un bot no reciba un 400 que revele las reglas
+  // (recibe el falso éxito de arriba). También se aplica en modo prueba. El cliente muestra el texto de `corporate`.
+  if (isFreeEmailDomain(data.email)) {
+    trace('rejected_free_email')
+    return fail('validation', 400, { email: 'corporate' })
   }
 
   const recipient = readRecipient()

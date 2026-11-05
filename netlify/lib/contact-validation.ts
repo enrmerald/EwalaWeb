@@ -10,7 +10,6 @@ import {
   MAX_ELAPSED_MS,
   NEED_VALUES,
   PHONE_PATTERN,
-  isFreeEmailDomain,
   type ContactRequest,
 } from '../../lib/contact'
 
@@ -61,8 +60,8 @@ export function validateContact(input: unknown): ValidationResult {
   if (email && !EMAIL.test(email)) bad('email')
   // Dominio con etiquetas vacías (`.ewala.es`, `ewala.es.`, `ewala..es`): no es una dirección entregable.
   else if (email && email.slice(email.lastIndexOf('@') + 1).split('.').some((label) => label === '')) bad('email')
-  // El formulario exige correo corporativo; el motivo concreto permite al cliente mostrar el texto adecuado.
-  else if (email && isFreeEmailDomain(email)) fields.email = 'corporate'
+  // La regla de correo corporativo NO se aplica aquí sino en contact.mts, tras el antispam: un bot no debe
+  // recibir un 400 que revele las reglas, y un error de formato del email no debe quedar sustituido por otro.
   const phone = line('phone', 0, L.phone.max, false)
   if (phone && !PHONE_PATTERN.test(phone)) bad('phone')
   const role = line('role', 0, L.role.max, false)

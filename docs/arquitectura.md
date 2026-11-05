@@ -431,6 +431,10 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).
   - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y `elapsedMs` < 3000 →
     responde éxito sin enviar.
+  - Orden de las comprobaciones: validación de formato (`contact-validation.ts`) → antispam → regla de
+    **correo corporativo** (`isFreeEmailDomain()`, en `contact.mts`). La regla va después del antispam a
+    propósito: un bot con honeypot relleno y correo gratuito recibe el falso éxito, no un 400 que revele las
+    reglas. Además, un error de formato del email nunca queda sustituido por `corporate`.
   - `graph-mail.ts`: dos `fetch` nativos (sin SDK ni `node_modules`): token OAuth `client_credentials`
     (cacheado en memoria mientras le queden más de 5 min; timeout 2 s) y `POST /users/{MS_SENDER}/sendMail`
     (timeout 2,8 s). Presupuesto: 2000 + 2800 + 400 + 2800 = 8 s de los 10 s de la función. Graph **no
