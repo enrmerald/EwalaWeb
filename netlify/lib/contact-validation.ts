@@ -5,14 +5,20 @@
  * Reglas: lista blanca de campos (cualquier campo extra se rechaza), tipos exactos, longitudes de
  * lib/contact.ts y sin caracteres de control en campos de una línea (anti inyección de cabeceras).
  */
-import { CONTACT_LIMITS as L, MAX_ELAPSED_MS, NEED_VALUES, PHONE_PATTERN, type ContactRequest } from '../../lib/contact'
+import {
+  CONTACT_LIMITS as L,
+  MAX_ELAPSED_MS,
+  PHONE_PATTERN,
+  resolveNeed,
+  type ContactRequest,
+} from '../../lib/contact'
 
 const SINGLE_LINE = /^[^\p{Cc}]*$/u
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 // Formato razonable de email (el navegador ya valida; aquí se evita basura y cabeceras). Se excluyen
 // también `?`, `&`, `#` y `%`: en el `mailto:` del botón «Responder» abrirían parámetros del cliente de
 // correo (`?bcc=…`, `%40`) y no aparecen en direcciones reales de quien rellena un formulario.
-const EMAIL = /^[^\s@<>()[\]\\,;:"?&#%]+@[^\s@<>()[\]\\,;:"?&#%]+\.[^\s@<>()[\]\\,;:"?&#%]{2,}$/
+export const EMAIL = /^[^\s@<>()[\]\\,;:"?&#%]+@[^\s@<>()[\]\\,;:"?&#%]+\.[^\s@<>()[\]\\,;:"?&#%]{2,}$/
 
 const ALLOWED_KEYS = new Set<keyof ContactRequest>([
   'submissionId', 'locale', 'elapsedMs', 'firstName', 'lastName', 'company', 'email',
@@ -52,20 +58,23 @@ export function validateContact(input: unknown): ValidationResult {
   const company = line('company', L.company.min, L.company.max, true) ?? ''
   const email = line('email', 3, L.email.max, true) ?? ''
   if (email && !EMAIL.test(email)) bad('email')
+  // Dominio con etiquetas vacías (`.ewala.es`, `ewala.es.`, `ewala..es`): no es una dirección entregable.
+  else if (email && email.slice(email.lastIndexOf('@') + 1).split('.').some((label) => label === '')) bad('email')
+  // La regla de correo corporativo NO se aplica aquí sino en contact.mts, tras el antispam: un bot no debe
+  // recibir un 400 que revele las reglas, y un error de formato del email no debe quedar sustituido por otro.
   const phone = line('phone', 0, L.phone.max, false)
   if (phone && !PHONE_PATTERN.test(phone)) bad('phone')
   const role = line('role', 0, L.role.max, false)
 
-  const need = (NEED_VALUES as readonly unknown[]).includes(o.need) ? (o.need as ContactRequest['need']) : (bad('need'), 'other')
+  // Acepta las opciones actuales y los valores de la web anterior (→ «info»); cualquier otro se rechaza.
+  const need = resolveNeed(typeof o.need === 'string' ? o.need : null) ?? (bad('need'), 'other')
 
-  // Mensaje multilínea: se permiten saltos de línea y tabuladores, ningún otro carácter de control.
-  let message: string | undefined
-  if (o.message !== undefined) {
-    if (typeof o.message !== 'string') bad('message')
-    else {
-      message = o.message.replace(/\r\n/g, '\n').trim()
-      if (message.length > L.message.max || !SINGLE_LINE.test(message.replace(/[\n\t]/g, ''))) bad('message')
-    }
+  // Mensaje obligatorio y multilínea: se permiten saltos de línea y tabuladores, ningún otro carácter de control.
+  let message = ''
+  if (typeof o.message !== 'string') bad('message')
+  else {
+    message = o.message.replace(/\r\n/g, '\n').trim()
+    if (message.length < L.message.min || message.length > L.message.max || !SINGLE_LINE.test(message.replace(/[\n\t]/g, ''))) bad('message')
   }
 
   if (o.privacy !== true) bad('privacy')

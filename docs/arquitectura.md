@@ -19,7 +19,7 @@ headers HTTP, API routes, Server Actions) es incompatible con este modelo y romp
 
 La única excepción controlada son las **Netlify Functions** de `netlify/functions/`: código de servidor
 que Netlify despliega aparte (Next no las compila ni las conoce) y que se expone como `/api/*` mediante
-su propia `config.path` (sin reglas en `netlify.toml`, ver «Formularios y envío de email»). Hoy hay dos: `contact.mts` (formulario → Resend) y `csp-report.mts`
+su propia `config.path` (sin reglas en `netlify.toml`, ver «Formularios y envío de email»). Hoy hay dos: `contact.mts` (formulario → Microsoft Graph) y `csp-report.mts`
 (sumidero de informes CSP). Ver «Formularios y envío de email».
 
 Lo que corre **solo en el pipeline de build** (una vez, nunca en producción):
@@ -254,7 +254,7 @@ las tres páginas comparten un único renderizador. Los textos admiten `**negrit
 |---|---|
 | Datos legales | Ewala IT Services S.L., CIF B42987651, `rgpd@ewala.es`, Registro Mercantil de Asturias (Tomo 4434, Folio 214, Inscripción 1, hoja AS-57378), tribunales de Gijón |
 | Conservación de CV | 24 meses (la web antigua de Ewala); ISN usa 1 año |
-| Formulario de contacto | Netlify, Inc. (alojamiento y función) y Resend, Inc. (envío de correo) se citan como encargados y como transferencia a EE. UU. (apartados 10 y 12 de privacidad). No se afirma certificación DPF: «cuando el destinatario esté adherido… o, en su defecto, Cláusulas Contractuales Tipo» |
+| Formulario de contacto | Netlify, Inc. (alojamiento y función) se cita como encargado y como transferencia a EE. UU., y Microsoft Ireland Operations Limited (envío de correo con Microsoft 365) como encargado en la UE (apartados 10 y 12 de privacidad). No se afirma certificación DPF: «cuando el destinatario esté adherido… o, en su defecto, Cláusulas Contractuales Tipo» |
 | Cookies | GA4 a través de Google Tag Manager; banner de Cookiebot (Usercentrics A/S). La tabla incluye `_ga`, `_ga_<ID>` y la cookie técnica `CookieConsent` |
 | Registro del consentimiento | Lo conserva Cookiebot en servidores de la UE (art. 7.1 RGPD) y el texto lo dice así |
 | Contenido que **no** se copió | El último párrafo de la política de cookies antigua («esta web no utiliza cookies») contradecía el resto del documento |
@@ -292,8 +292,9 @@ de `gtm.js`; sin aceptar, *Application → Cookies* no debe tener `_ga`; aceptan
 único punto de lectura). Hoy: `SHOW_DEMO_CTA` (`NEXT_PUBLIC_SHOW_DEMO_CTA === 'true'`, **por defecto
 oculto**), que gobierna «Solicitar demo» (navbar escritorio y móvil), «Solicita una demo» (hero), el botón
 principal del CTA final (oculto → «Contáctanos»), los botones «Descargar cómo funciona una PoC» (que, sin
-documento todavía, llevan a contacto con `?need=demo`) y la opción «Demo SentryN3t» del selector del formulario. Se conservan las claves de texto
-en los JSON para poder reactivarlos sin reescribir nada.
+documento todavía, llevan a contacto con `?need=info`). El selector del formulario de contacto **no** depende
+de este interruptor (solo ofrece «Más información sobre SentryN3t» y «Otra consulta»). Se conservan las claves
+de texto en los JSON para poder reactivarlos sin reescribir nada.
 
 ## Sellos y reconocimientos (home)
 
@@ -383,7 +384,7 @@ haber servidor): con él la CSP es higiene y no una defensa completa frente a XS
 | `app/api/` routes | Incompatible con `output: 'export'`. Los endpoints van en `netlify/functions/` |
 | `fetch()` con `{ cache: 'no-store' }` en componentes | Requiere runtime para revalidar |
 | Dependencias de servidor (drivers BD, ORMs) | Rompen el build con `output: 'export'` |
-| Secretos en código o en `NEXT_PUBLIC_*` | Todo el bundle es público. Los secretos (p. ej. `RESEND_API_KEY`) solo como variables de Netlify con scope «Functions» |
+| Secretos en código o en `NEXT_PUBLIC_*` | Todo el bundle es público. Los secretos (p. ej. `MS_CLIENT_SECRET`) solo como variables de Netlify con scope «Functions» |
 | `import` de `node_modules` en `netlify/` | La función dejaría de ser autocontenida (en Windows, además, `netlify dev` no puede servirla) |
 
 ### Permitido y seguro
@@ -399,11 +400,11 @@ haber servidor): con él la CSP es higiene y no una defensa completa frente a XS
 
 El formulario de contacto (`/{locale}/contacto`, `components/ewala/contact-form.tsx`) envía un `POST`
 JSON a **`/api/contact`**, ruta que declara la propia Netlify Function
-`netlify/functions/contact.mts` (`config.path`; **sin** regla en `netlify.toml`). La función manda un correo con **[Resend](https://resend.com)** al
-buzón de Ewala.
+`netlify/functions/contact.mts` (`config.path`; **sin** regla en `netlify.toml`). La función manda un correo con **Microsoft Graph** desde el buzón compartido
+`MS_SENDER` (p. ej. `web@ewala.es`) al buzón `CONTACT_MAILBOX_TO` (p. ej. `operaciones@ewala.es`).
 
 ```
-navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) ──▶ contact.mts ──fetch──▶ API de Resend
+navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) ──▶ contact.mts ──fetch──▶ Microsoft Graph
                                                                         │
                                        contrato compartido: lib/contact.ts (límites, need, tipos)
 ```
@@ -430,24 +431,88 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     `lib/contact.ts`, sin caracteres de control en campos de una línea → evita inyección de cabeceras).
   - Antispam: honeypot (`company_website` en el formulario → `website` en el JSON) y `elapsedMs` < 3000 →
     responde éxito sin enviar.
-  - `resend.ts`: `fetch` a la API de Resend con `Idempotency-Key` = `submissionId` + huella SHA-256 del contenido
-    (sin duplicados por doble clic; Resend exige el mismo cuerpo por clave y el correo lleva la hora, así
-    que el 409 `invalid_idempotent_request` se trata como «ya enviado» y el 409
-    `concurrent_idempotent_requests` como transitorio), timeout de 3,5 s y un reintento solo ante errores
-    transitorios. `Reply-To` = email del visitante.
-  - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) + texto; **todo** dato del formulario pasa
-    por `esc()`.
-  - Sin `RESEND_API_KEY`, `RESEND_FROM` o `CONTACT_MAILBOX_TO` → **modo prueba** (`delivery: "skipped"`).
-    Si Resend falla → **503**, nunca un falso éxito.
-- **Variables** (Netlify → Environment variables, scope «Functions»): `RESEND_API_KEY` (secreto),
-  `RESEND_FROM`, `CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT` (`production` o el nombre del entorno, que se
+  - Orden de las comprobaciones: validación de formato (`contact-validation.ts`) → antispam → regla de
+    **correo corporativo** (`isFreeEmailDomain()`, en `contact.mts`). La regla va después del antispam a
+    propósito: un bot con honeypot relleno y correo gratuito recibe el falso éxito, no un 400 que revele las
+    reglas. Además, un error de formato del email nunca queda sustituido por `corporate`.
+  - `graph-mail.ts`: dos `fetch` nativos (sin SDK ni `node_modules`): token OAuth `client_credentials`
+    (cacheado en memoria mientras le queden más de 5 min; timeout 2 s) y `POST /users/{MS_SENDER}/sendMail`
+    (timeout 5 s). Presupuesto: plazo global de 8 s para `sendEmail` (token + envíos + esperas) de los 10 s de
+    la función; peor caso sin reintento 2000 + 5000 = 7 s, y el reintento solo se inicia si tras la espera de
+    400 ms quedan ≥ 1,5 s de plazo (su timeout se recorta a lo que quede). Graph **no
+    tiene clave de idempotencia**: solo se reintenta (una vez) si Graph respondió **429**, o **503 con
+    `Retry-After` explícito ≤ 1 s** (`isSafeToRetry()`); **nunca ante otros 5xx (500/502/504) ni tras un
+    timeout o error de red**, porque el mensaje pudo haberse aceptado ya y se duplicaría el correo (el botón se
+    deshabilita al enviar y cada correo lleva la cabecera `X-Ewala-Submission` para detectar duplicados).
+    **Excepción segura: un 401 de `sendMail`** (token en caché revocado o caducado) significa «no
+    autenticado» y Graph no procesó nada: se descarta el token, se pide uno nuevo y se repite el envío **una
+    sola vez**; un segundo 401 (credenciales inválidas) no se reintenta y se responde 503. Así el primer
+    visitante tras una revocación no pierde su consulta.
+    `Reply-To` = email del visitante, `saveToSentItems: false` (no se guarda otra copia de datos personales)
+    y solo se registran códigos de error (`AADSTS…` o el código de Graph), nunca cuerpos ni secretos.
+  - `contact-email.ts`: plantilla HTML (tablas, CSS en línea) con los colores y fuentes corporativos; solo
+    HTML (Graph envía un único cuerpo, no hay versión de texto plano); **todo** dato del formulario pasa
+    por `esc()`. El pie no muestra el entorno (solo el prefijo `[ENTORNO]` del asunto fuera de producción)
+    ni promete plazos de respuesta. Incluye la fila «Dominio del email» y un aviso encima del botón
+    «Responder» (ver «Riesgo aceptado: el email no está verificado»).
+  - **Riesgo aceptado: el email no está verificado.** El `Reply-To` y el botón «Responder» usan el email que
+    escribió el visitante y el servidor no puede comprobar que sea suyo. Vías de alteración: *en tránsito*
+    no es posible sin romper TLS (HSTS de 1 año en `netlify.toml`); *desde otra web* (CSRF) lo bloquea
+    `isSameOrigin()` (`netlify/lib/http.ts`); *dentro del correo* no puede haber discrepancias, porque
+    `data.email` es la única fuente del Reply-To, de la fila «Email» y del botón; *en el navegador del propio
+    visitante* (extensión maliciosa, malware, proxy con inspección TLS) o *un visitante que escribe a
+    propósito el correo de un tercero* **no son detectables desde el servidor**: una firma o HMAC del cliente
+    no sirve, porque su secreto estaría en el navegador. Mitigación sin estado: la fila «Dominio del email»
+    (para compararlo con la empresa declarada) y el aviso de la plantilla. **Procedimiento al responder:**
+    comprobar que el dominio corresponde a la empresa indicada; no enviar información sensible ni
+    presupuestos a un dominio inesperado; ante la duda, confirmar la identidad llamando a un número oficial
+    de la empresa. Mejora futura (requiere estado): doble confirmación por email antes de reenviar la consulta.
+  - Reglas del formulario (`lib/contact.ts`, compartidas por navegador y función): `need` es `info`
+    («Más información sobre SentryN3t») u `other` («Otra consulta»); los valores de la web anterior (`demo`,
+    `pricing`, `integration`, `compliance`) se traducen a `info` tanto en el navegador (`?need=`) como en el
+    servidor (`resolveNeed()`), para no perder envíos de formularios en caché tras un despliegue; el **mensaje es obligatorio**
+    (1–1000 caracteres); el **email debe ser corporativo**: `isFreeEmailDomain()` rechaza proveedores
+    gratuitos y desechables (Gmail, Hotmail/Outlook/Live, Yahoo, iCloud, Proton, GMX, Fastmail, Hey, Libero,
+    T-Online, Free, Laposte…, con sus variantes por país y subdominios; **no** las operadoras españolas como
+    movistar.es, orange.es, telefonica.net o terra.es, que usan autónomos y pymes). La función lo vuelve a comprobar y responde
+    `fields.email = "corporate"` para que el cliente muestre el texto específico. Es una **lista cerrada**
+    (heurística): no detecta todos los proveedores ni un dominio propio personal; ampliarla solo en
+    `FREE_EMAIL_DOMAINS` / `FREE_EMAIL_FAMILY`.
+  - Sin `MS_TENANT_ID`, `MS_CLIENT_ID`, `MS_CLIENT_SECRET`, `MS_SENDER` (con formato válido) o
+    `CONTACT_MAILBOX_TO` (un **único** correo válido: `readRecipient()`; una errata, una coma o varias
+    direcciones no valen) → **modo prueba** (`delivery: "skipped"`). Si el destinatario existe pero es
+    inválido, la traza es `test_mode_recipient_invalid` (en lugar de `test_mode`) para localizarlo en
+    Netlify → Logs → Functions; el valor de la variable nunca se registra. Si Graph falla → **503**, nunca un falso éxito.
+- **Variables** (Netlify → Environment variables, scope «Functions»): `MS_TENANT_ID`, `MS_CLIENT_ID`,
+  `MS_CLIENT_SECRET` (secreto), `MS_SENDER`, `CONTACT_MAILBOX_TO`, `MAIL_ENVIRONMENT` (`production` o el nombre del entorno, que se
   añade al asunto). Documentadas en `.env.local.example`.
-- **Protección de datos:** Netlify (alojamiento y función) y Resend (envío) actúan como encargados, con
-  transferencia a EE. UU.; consta en la política de privacidad (apartados 10 y 12) y en el bloque
+- **Protección de datos:** Netlify (alojamiento y función, EE. UU.) y Microsoft Ireland Operations Limited
+  (envío con Microsoft 365, UE) actúan como encargados; consta en la política de privacidad (apartados 10 y 12) y en el bloque
   informativo del formulario (`contact.rail.dataProtection`). Si se cambia de proveedor o se añaden
   campos, actualizar esos textos. La casilla de privacidad enlaza a `/{locale}/privacidad`.
-- La opción «Demo SentryN3t» del selector `need` y `?need=demo` dependen de `SHOW_DEMO_CTA`
-  (`lib/features.ts`).
+- **Operación del envío con Microsoft Graph:**
+  - *Mínimo privilegio:* la app de Entra ID «Web Ewala - Contacto» solo debe poder enviar como `MS_SENDER`
+    (RBAC for Applications de Exchange: `New-ServicePrincipal`, `New-ManagementScope` con el filtro
+    `PrimarySmtpAddress -eq 'web@ewala.es'` y `New-ManagementRoleAssignment -Role "Application Mail.Send"`).
+    **No** conceder `Mail.Send` (Application) en Entra → API permissions: se suma al RBAC y permitiría enviar
+    como cualquier buzón del tenant. Comprobación: `Test-ServicePrincipalAuthorization` → `InScope = True`
+    para el buzón remitente y `False` para cualquier otro (p. ej. el de destino).
+  - *Rotación del secreto* (caduca a los 6 meses; recordatorio en el calendario 1 mes antes): crear un secreto
+    nuevo en Entra → actualizar `MS_CLIENT_SECRET` en Netlify → redesplegar → enviar un formulario de prueba
+    → borrar el secreto antiguo en Entra. El código no cambia. Un secreto caducado se ve en los logs de la
+    función como `email_failed_401_AADSTS7000222` (`AADSTS7000215` = secreto incorrecto).
+  - *Sospecha de filtración:* borrar el secreto en Entra (efecto inmediato para tokens nuevos; los ya emitidos
+    duran ≤ 1 h), crear otro, actualizarlo en Netlify y revisar el *Message trace* de Exchange del buzón
+    remitente.
+  - *Monitorización recomendada:* alerta en los Sign-in logs de Entra (Service principal sign-ins) de la app
+    con fallos y revisión mensual del *Message trace* del buzón remitente.
+- El selector `need` ya no depende de `SHOW_DEMO_CTA` (`lib/features.ts`): solo hay dos opciones. Los
+  enlaces de la landing a `/{locale}/contacto/?need=info` preseleccionan «Más información sobre
+  SentryN3t». Los valores antiguos `?need=demo|pricing|integration|compliance` (enlaces ya compartidos)
+  se traducen a «info» en el navegador con `resolveNeed()` (`lib/contact.ts`, mediante un `Map`); un `?need=`
+  con cualquier otro valor se ignora y el servidor sigue aceptando solo `info` u `other`. La web no
+  promete plazos de respuesta: el paso 1 de
+  «Qué pasa después» dice «Un miembro del equipo de Ewala te contacta.».
 
 ## Notas de configuración
 

@@ -8,12 +8,13 @@ import { Loader2, CheckCircle2, AlertTriangle } from 'lucide-react'
 import type { Locale } from '@/i18n/config'
 import type { Messages } from '@/i18n/types'
 import { cn } from '@/lib/utils'
-import { SHOW_DEMO_CTA } from '@/lib/features'
 import {
   CONTACT_LIMITS as L,
   NEED_VALUES,
   PHONE_PATTERN,
+  isFreeEmailDomain,
   type ContactErrorCode,
+  resolveNeed,
   type NeedValue,
 } from '@/lib/contact'
 import { fillClock, newSubmissionId, submitContact, waitForMinimumFillTime } from '@/lib/contact-client'
@@ -24,9 +25,6 @@ interface ContactFormProps {
   t: ContactFormMessages
   locale: Locale
 }
-
-// Mientras la demo no esté activa (lib/features.ts) no se ofrece «Demo» en el selector ni se admite ?need=demo.
-const VISIBLE_NEED_VALUES = NEED_VALUES.filter((value) => value !== 'demo' || SHOW_DEMO_CTA)
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
 
@@ -48,7 +46,8 @@ function buildSchema(t: ContactFormMessages) {
       .trim()
       .min(1, t.validation.emailInvalid)
       .max(L.email.max, t.validation.emailInvalid)
-      .email(t.validation.emailInvalid),
+      .email(t.validation.emailInvalid)
+      .refine((value) => !isFreeEmailDomain(value), t.validation.emailCorporate),
     phone: z
       .string()
       .trim()
@@ -57,7 +56,11 @@ function buildSchema(t: ContactFormMessages) {
       .optional(),
     role: z.string().trim().max(L.role.max, t.validation.roleMax).optional(),
     need: z.string().min(1, t.validation.needRequired),
-    message: z.string().trim().max(L.message.max, t.validation.messageMax).optional().or(z.literal('')),
+    message: z
+      .string()
+      .trim()
+      .min(L.message.min, t.validation.messageRequired)
+      .max(L.message.max, t.validation.messageMax),
     privacy: z.boolean().refine((v) => v === true, { message: t.privacy.error }),
     marketing: z.boolean().optional(),
     // Honeypot anti-spam: debe llegar vacío. Los bots suelen rellenar todos los campos.
@@ -113,10 +116,9 @@ export function ContactForm({ t, locale }: ContactFormProps) {
   // directamente en el navegador tras montar, sin bloquear el render inicial del formulario.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    const need = params.get('need')
-    if (need && (VISIBLE_NEED_VALUES as readonly string[]).includes(need)) {
-      setValue('need', need as NeedValue)
-    }
+    // Acepta las opciones actuales y los valores antiguos (demo, pricing…); cualquier otro se ignora.
+    const need = resolveNeed(params.get('need'))
+    if (need) setValue('need', need)
   }, [setValue])
 
   const messageValue = watch('message') ?? ''
@@ -136,7 +138,7 @@ export function ContactForm({ t, locale }: ContactFormProps) {
       phone: values.phone ?? '',
       role: values.role ?? '',
       need: values.need as NeedValue,
-      message: values.message ?? '',
+      message: values.message,
       privacy: true,
       marketing: values.marketing ?? false,
       website: values.company_website ?? '',
@@ -150,8 +152,10 @@ export function ContactForm({ t, locale }: ContactFormProps) {
     }
 
     // El servidor indica qué campos rechazó (nunca por qué): se marcan para que la persona los revise.
-    for (const field of Object.keys(response.fields ?? {})) {
-      if (field in values) setError(field as keyof ContactFormValues, { message: t.validation.invalid })
+    for (const [field, reason] of Object.entries(response.fields ?? {})) {
+      if (!(field in values)) continue
+      const message = field === 'email' && reason === 'corporate' ? t.validation.emailCorporate : t.validation.invalid
+      setError(field as keyof ContactFormValues, { message })
     }
     setErrorCode(response.error)
     setStatus('error')
@@ -294,7 +298,7 @@ export function ContactForm({ t, locale }: ContactFormProps) {
           <option value="" disabled className="bg-slate-900">
             {t.need.placeholder}
           </option>
-          {VISIBLE_NEED_VALUES.map((value) => (
+          {NEED_VALUES.map((value) => (
             <option key={value} value={value} className="bg-slate-900">
               {t.need.options[value]}
             </option>

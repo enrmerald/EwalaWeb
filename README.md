@@ -1,7 +1,7 @@
 # Ewala · web corporativa (ewala.es)
 
 Web de **Ewala IT Services**: Next.js 16 + React 19 + Tailwind CSS 4, exportada como **sitio estático** y
-publicada en **Netlify**, con dos **Netlify Functions** (formulario de contacto con Resend y sumidero de
+publicada en **Netlify**, con dos **Netlify Functions** (formulario de contacto con Microsoft Graph y sumidero de
 informes CSP). Idiomas: español (`/es/`) e inglés (`/en/`).
 
 > Documentación técnica: [`CLAUDE.md`](CLAUDE.md) (resumen y reglas) y
@@ -69,15 +69,17 @@ Copia `.env.local.example` a `.env.local` para desarrollo (nunca se sube a git).
 
 | Variable | Scope | Para qué |
 |---|---|---|
-| `RESEND_API_KEY` | Functions · **secreto** | Clave de Resend («Sending access», limitada al dominio de envío) |
-| `RESEND_FROM` | Functions | Remitente verificado, p. ej. `Web Ewala <web@notify.ewala.es>` |
-| `CONTACT_MAILBOX_TO` | Functions | Buzón que recibe las consultas (`info@ewala.es`) |
+| `MS_TENANT_ID` | Functions | GUID del tenant de Microsoft 365 |
+| `MS_CLIENT_ID` | Functions | GUID de la app de Entra ID «Web Ewala - Contacto» |
+| `MS_CLIENT_SECRET` | Functions · **secreto** | Secreto de cliente de esa app (caduca: ver rotación en `docs/arquitectura.md`) |
+| `MS_SENDER` | Functions | Buzón compartido remitente (`web@ewala.es`); la app solo puede enviar como él |
+| `CONTACT_MAILBOX_TO` | Functions | Buzón que recibe las consultas (`operaciones@ewala.es`) |
 | `MAIL_ENVIRONMENT` | Functions | `production` en producción; en previews, p. ej. `staging` (se añade al asunto) |
 | `NEXT_PUBLIC_SITE_URL` | Builds | Opcional. Por defecto `https://ewala.es` (vacía = por defecto; la barra final se ignora) |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Builds | Opcional. Verificación de Search Console por metaetiqueta |
 | `NEXT_PUBLIC_SHOW_DEMO_CTA` | Builds | `true` muestra los botones de demo (por defecto ocultos) |
 
-Sin las variables de Resend, el formulario funciona en **modo prueba**: valida, no envía y lo indica en
+Sin las variables de Microsoft Graph, el formulario funciona en **modo prueba**: valida, no envía y lo indica en
 pantalla. Las variables `NEXT_PUBLIC_*` se incrustan en el build: tras cambiarlas hay que redesplegar.
 
 ## Despliegue
@@ -127,7 +129,7 @@ pnpm lint && pnpm typecheck && pnpm build && pnpm verify:seo
 | Servicio | Uso |
 |---|---|
 | Netlify | Hosting, funciones, redirecciones, cabeceras |
-| Resend | Envío del correo del formulario de contacto (dominio `notify.ewala.es`) |
+| Microsoft 365 (Graph) | Envío del correo del formulario de contacto (buzón compartido `web@ewala.es`) |
 | Google Tag Manager (`GTM-KG3ZWVWW`) | Analítica (GA4 configurado dentro del contenedor) |
 | Cookiebot | Banner y registro del consentimiento de cookies (configurado en GTM) |
 | Google Search Console | Indexación y sitemap (`https://ewala.es/sitemap.xml`) |

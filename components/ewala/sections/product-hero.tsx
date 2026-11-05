@@ -92,10 +92,10 @@ export function ProductHero({ t, active, locale }: ProductHeroProps) {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5" />
               </a>
-              {/* Lleva al formulario con «Demo SentryN3t» preseleccionado (ContactForm lee ?need=). Oculto hasta que la demo esté activa. */}
+              {/* Lleva al formulario con «Más información sobre SentryN3t» preseleccionado (ContactForm lee ?need=). Oculto hasta que la demo esté activa. */}
               {SHOW_DEMO_CTA && (
                 <a
-                  href={`/${locale}/contacto/?need=demo`}
+                  href={`/${locale}/contacto/?need=info`}
                   className="border border-white/20 text-white hover:bg-white/[0.06] hover:border-white/30 font-semibold px-8 py-4 rounded-xl text-base transition-all inline-flex items-center justify-center gap-2"
                 >
                   {t.ctaSecondary}
