@@ -462,7 +462,9 @@ navegador ──POST /api/contact──▶ Netlify (config.rateLimit 10/min/IP) 
     presupuestos a un dominio inesperado; ante la duda, confirmar la identidad llamando a un número oficial
     de la empresa. Mejora futura (requiere estado): doble confirmación por email antes de reenviar la consulta.
   - Reglas del formulario (`lib/contact.ts`, compartidas por navegador y función): `need` es `info`
-    («Más información sobre SentryN3t») u `other` («Otra consulta»); el **mensaje es obligatorio**
+    («Más información sobre SentryN3t») u `other` («Otra consulta»); los valores de la web anterior (`demo`,
+    `pricing`, `integration`, `compliance`) se traducen a `info` tanto en el navegador (`?need=`) como en el
+    servidor (`resolveNeed()`), para no perder envíos de formularios en caché tras un despliegue; el **mensaje es obligatorio**
     (1–1000 caracteres); el **email debe ser corporativo**: `isFreeEmailDomain()` rechaza proveedores
     gratuitos y desechables (Gmail, Hotmail/Outlook/Live, Yahoo, iCloud, Proton, GMX, Fastmail, Hey, Libero,
     T-Online, Free, Laposte…, con sus variantes por país y subdominios; **no** las operadoras españolas como

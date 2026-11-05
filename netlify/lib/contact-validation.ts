@@ -8,8 +8,8 @@
 import {
   CONTACT_LIMITS as L,
   MAX_ELAPSED_MS,
-  NEED_VALUES,
   PHONE_PATTERN,
+  resolveNeed,
   type ContactRequest,
 } from '../../lib/contact'
 
@@ -66,7 +66,8 @@ export function validateContact(input: unknown): ValidationResult {
   if (phone && !PHONE_PATTERN.test(phone)) bad('phone')
   const role = line('role', 0, L.role.max, false)
 
-  const need = (NEED_VALUES as readonly unknown[]).includes(o.need) ? (o.need as ContactRequest['need']) : (bad('need'), 'other')
+  // Acepta las opciones actuales y los valores de la web anterior (→ «info»); cualquier otro se rechaza.
+  const need = resolveNeed(typeof o.need === 'string' ? o.need : null) ?? (bad('need'), 'other')
 
   // Mensaje obligatorio y multilínea: se permiten saltos de línea y tabuladores, ningún otro carácter de control.
   let message = ''

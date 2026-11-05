@@ -13,9 +13,10 @@ export const NEED_VALUES = ['info', 'other'] as const
 export type NeedValue = (typeof NEED_VALUES)[number]
 
 /**
- * Valores de `?need=` de la web anterior (ya hay enlaces compartidos en correos y redes): se traducen a
- * «info». Es un `Map` y no un objeto literal para que `?need=__proto__` o `?need=constructor` no resuelvan
- * a nada. Solo lo usa el navegador: el servidor sigue aceptando únicamente `NEED_VALUES`.
+ * Valores de `need` de la web anterior: se traducen a «info». Los usa el navegador (enlaces `?need=` ya
+ * compartidos en correos y redes) y también el servidor (`resolveNeed` en contact-validation.ts), para no
+ * rechazar un envío de una página o un JS antiguos que siguen en caché tras un despliegue. Es un `Map` y no un
+ * objeto literal para que `__proto__` o `constructor` no resuelvan a nada.
  */
 const LEGACY_NEED_ALIASES = new Map<string, NeedValue>([
   ['demo', 'info'],
