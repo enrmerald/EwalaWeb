@@ -8,6 +8,8 @@ type Props = {
 export function RegionalAid({ t }: Props) {
   const { poster } = t
 
+  // Sin padding superior a propósito: va justo después de `PostersGrid` (mismo fondo `bg-section-light` y su
+  // `py-16 lg:py-20`), que ya da el aire superior. Si se usa sin esa sección delante, añadir `pt-16 lg:pt-20`.
   return (
     <section className="bg-section-light pb-16 lg:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
