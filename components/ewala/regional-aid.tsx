@@ -27,6 +27,10 @@ export function RegionalAid({ t }: Props) {
             height={poster.height}
             className="h-auto w-full min-w-[560px]"
           />
+          <figcaption className="border-t border-black/10 p-4 text-sm text-on-light-muted">
+            <span className="block font-mono">{poster.title}</span>
+            <span className="mt-1 block leading-relaxed">{poster.caption}</span>
+          </figcaption>
         </figure>
       </div>
     </section>
