@@ -16,20 +16,28 @@ export function RegionalAid({ t }: Props) {
 
         {/*
           El cartel mide 1142×764 (no 1080×761 como los europeos): se pinta a su proporción natural, sin
-          `object-cover`, que recortaría el marco verde. Su texto legal es pequeño, así que en pantallas
-          estrechas la placa se desplaza en horizontal en vez de encoger la imagen.
+          `object-cover`, que recortaría el marco verde. Escala con el ancho (sin scroll horizontal): su texto
+          legal pequeño se lee completo en el pie y el enlace abre el cartel a tamaño real.
         */}
-        <figure className="mt-10 max-w-3xl overflow-x-auto rounded-xl border border-black/10 bg-white">
+        <figure className="mt-10 max-w-3xl overflow-hidden rounded-xl border border-black/10 bg-white">
           <Image
             src={poster.src}
             alt={poster.alt}
             width={poster.width}
             height={poster.height}
-            className="h-auto w-full min-w-[560px]"
+            className="h-auto w-full"
           />
           <figcaption className="border-t border-black/10 p-4 text-sm text-on-light-muted">
             <span className="block font-mono">{poster.title}</span>
             <span className="mt-1 block leading-relaxed">{poster.caption}</span>
+            <a
+              href={poster.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block font-mono underline underline-offset-4 hover:text-on-light"
+            >
+              {poster.viewFull}
+            </a>
           </figcaption>
         </figure>
       </div>

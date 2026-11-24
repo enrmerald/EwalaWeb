@@ -344,10 +344,11 @@ porque cada diseño original las tenía distintas.
 **Ayuda regional (Principado de Asturias).** `regional-aid.tsx` muestra el cartel de la ayuda «Impulso
 empresarial de autónomos y pymes 2026» (AYUD/2026/90837) entre los carteles europeos y el banner Kit. Mide
 **1142×764** (otra proporción que los europeos), así que se pinta a su proporción natural, **sin `object-cover`**
-(recortaría el marco verde), en una placa que desplaza en horizontal bajo 560 px porque su texto legal es pequeño.
+(recortaría el marco verde), en una placa que escala con el ancho (sin scroll horizontal en móvil).
 El `alt` es breve (expediente y organismo financiador); el texto legal completo se muestra como pie visible
-(`poster.title` + `poster.caption`), de modo que no depende de la imagen y es accesible. En EN el cartel sigue en
-español y el `alt` y el pie lo indican.
+(`poster.title` + `poster.caption`), de modo que no depende de la imagen y es accesible, y un enlace
+(`poster.viewFull`, `rel="noopener noreferrer"`) abre el WebP a tamaño real. En EN el cartel sigue en español y
+el `alt` y el pie lo indican.
 
 **Optimización de imágenes.** `images.unoptimized: true` (obligatorio con `output: 'export'`): `next/image` solo
 emite un `<img>`, sin WebP/AVIF ni `srcset`. Hay que optimizar **a mano antes de commitear**: este cartel pasó de
