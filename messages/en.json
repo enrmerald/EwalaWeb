@@ -262,7 +262,8 @@
         "links": [
           { "label": "Company", "href": "/compania" },
           { "label": "Blog", "href": "/blog" },
-          { "label": "Contact", "href": "/contacto" }
+          { "label": "Contact", "href": "/contacto" },
+          { "label": "Aid and grants", "href": "/sellos-y-reconocimientos" }
         ]
       },
       {

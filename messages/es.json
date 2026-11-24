@@ -419,7 +419,8 @@
         "links": [
           { "label": "Compañía", "href": "/compania" },
           { "label": "Blog", "href": "/blog" },
-          { "label": "Contacto", "href": "/contacto" }
+          { "label": "Contacto", "href": "/contacto" },
+          { "label": "Ayudas y subvenciones", "href": "/sellos-y-reconocimientos" }
         ]
       },
       {

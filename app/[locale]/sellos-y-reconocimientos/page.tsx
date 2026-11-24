@@ -8,9 +8,10 @@ import { PostersGrid } from '@/components/ewala/posters-grid'
 import { RegionalAid } from '@/components/ewala/regional-aid'
 import { FundingBanner } from '@/components/ewala/funding-banner'
 
-// Página oculta: solo se llega escribiendo la URL. No está en PAGES (sitemap), no se enlaza desde
-// ninguna parte, no declara canonical ni hreflang y lleva noindex. Tampoco se añade a robots.txt:
-// un `Disallow` publicaría la URL. No lleva JSON-LD.
+// Página discreta: solo se enlaza desde el footer («Ayudas y subvenciones»), para poder justificar las
+// ayudas. No está en PAGES (sitemap), no se enlaza desde ningún otro sitio, no declara canonical ni
+// hreflang y lleva noindex. Tampoco se añade a robots.txt: un `Disallow` publicaría la URL. No lleva
+// JSON-LD.
 // Contenido: carteles de proyectos europeos, cartel de ayuda regional (Principado de Asturias) y banner
 // Kit Digital/Consulting. Los sellos y reconocimientos se muestran en la home (SealsGrid); la URL se
 // conserva por si ya está compartida.

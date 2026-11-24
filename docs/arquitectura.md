@@ -309,7 +309,7 @@ el 03/03/2029.
 
 `/{locale}/sellos-y-reconocimientos` contiene hoy los **carteles de proyectos europeos** y el **banner Kit
 Digital/Kit Consulting** (los sellos se movieron a la home; la URL se conserva por si ya está compartida).
-Está pensada para que **solo se entre escribiendo la URL**:
+Desde la petición de justificar las ayudas ante el Principado, se enlaza **solo desde el footer** («Ayudas y subvenciones», sección Ewala); sigue sin estar indexada:
 
 | Qué | Cómo |
 |---|---|
@@ -317,7 +317,7 @@ Está pensada para que **solo se entre escribiendo la URL**:
 | Sin canonical ni hreflang | `alternates: {}` explícito: sin él heredaría los de la home y se presentaría como duplicado |
 | Sin `og:url`/imagen | `openGraph` propio mínimo (no usa `pageOpenGraph`) |
 | Fuera del sitemap | No está en `PAGES` |
-| Sin enlaces | Nada la enlaza (header, footer, home, otras páginas) |
+| Enlace discreto | Solo el footer (sección Ewala); ni header, ni home, ni otras páginas |
 | Sin `Disallow` en `robots.txt` | Un `Disallow` revelaría la URL |
 | Sin JSON-LD propio | Solo el `Organization` del layout |
 
