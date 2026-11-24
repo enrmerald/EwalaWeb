@@ -41,7 +41,7 @@ jobs:
       # Instala pnpm y Node (según package.json y .nvmrc) y ejecuta `pnpm install --frozen-lockfile`.
       # Las políticas de pnpm-workspace.yaml (antigüedad mínima, trustPolicy) se aplican aquí también.
       - name: Instalar pnpm, Node y dependencias
-        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
         with:
           cache: true
           require-lockfile: true
@@ -135,7 +135,7 @@ jobs:
 
       # Solo pnpm y Node (para `pnpm dlx` y el script): no hace falta instalar las dependencias del proyecto.
       - name: Instalar pnpm y Node
-        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
         with:
           install: false
 
