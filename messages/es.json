@@ -480,13 +480,13 @@
   },
   "sellos": {
     "meta": {
-      "title": "Proyectos y financiación europea | Ewala",
-      "description": "Carteles de los proyectos europeos y financiación pública de Ewala IT Services."
+      "title": "Proyectos, ayudas y financiación | Ewala",
+      "description": "Carteles de los proyectos europeos, ayudas públicas y financiación de Ewala IT Services."
     },
     "breadcrumbHome": "Inicio",
     "breadcrumbCurrent": "Proyectos y financiación",
-    "heroTitle": "Proyectos y financiación europea",
-    "heroSubtitle": "Los proyectos europeos de investigación e innovación y los programas de financiación pública en los que participa Ewala.",
+    "heroTitle": "Proyectos, ayudas y financiación",
+    "heroSubtitle": "Los proyectos europeos de investigación e innovación, las ayudas públicas y los programas de financiación en los que participa Ewala.",
     "sealsHeading": "Reconocimientos y sellos de calidad",
     "seals": [
       {
@@ -563,6 +563,16 @@
         "alt": "LIVET - GUARDIANS · Programa de investigación e innovación de la Unión Europea"
       }
     ],
+    "regionalAid": {
+      "heading": "Ayudas públicas regionales",
+      "intro": "Ewala IT Services S.L. ha recibido una ayuda del Gobierno del Principado de Asturias para el impulso empresarial de autónomos y pymes.",
+      "poster": {
+        "src": "/recursos/cartel-impulso-empresarial-de-autonomos-y-pymes-2026-1142x764.webp",
+        "width": 1142,
+        "height": 764,
+        "alt": "Ayudas para el impulso empresarial de autónomos y pymes 2026, expediente AYUD/2026/90837. Proyecto: acondicionamiento y mejora del centro de trabajo de Ewala en Silvota. Beneficiario: Ewala IT Services SL. Proyecto financiado por el Gobierno del Principado de Asturias a través de la Consejería de Ciencia, Industria y Empleo."
+      }
+    },
     "fundingBanner": {
       "headline": "Financiación pública europea",
       "description": "Ewala IT Services S.L. es Agente Digitalizador adherido a los programas Kit Digital y Kit Consulting, financiados por la Unión Europea (NextGenerationEU), en el marco del Plan de Recuperación, Transformación y Resiliencia, y gestionados por Red.es, entidad adscrita al Ministerio para la Transformación Digital y de la Función Pública.",
