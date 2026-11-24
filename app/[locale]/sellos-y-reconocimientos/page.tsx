@@ -5,13 +5,15 @@ import { Header } from '@/components/ewala/header'
 import { Footer } from '@/components/ewala/footer'
 import { HeroInterior } from '@/components/ewala/hero-interior'
 import { PostersGrid } from '@/components/ewala/posters-grid'
+import { RegionalAid } from '@/components/ewala/regional-aid'
 import { FundingBanner } from '@/components/ewala/funding-banner'
 
 // Página oculta: solo se llega escribiendo la URL. No está en PAGES (sitemap), no se enlaza desde
 // ninguna parte, no declara canonical ni hreflang y lleva noindex. Tampoco se añade a robots.txt:
 // un `Disallow` publicaría la URL. No lleva JSON-LD.
-// Contenido: carteles de proyectos europeos y banner Kit Digital/Consulting. Los sellos y
-// reconocimientos se muestran en la home (SealsGrid); la URL se conserva por si ya está compartida.
+// Contenido: carteles de proyectos europeos, cartel de ayuda regional (Principado de Asturias) y banner
+// Kit Digital/Consulting. Los sellos y reconocimientos se muestran en la home (SealsGrid); la URL se
+// conserva por si ya está compartida.
 export async function generateMetadata({
   params,
 }: {
@@ -65,6 +67,7 @@ export default async function SellosYReconocimientosPage({
         subtitle={t.heroSubtitle}
       />
       <PostersGrid t={t} />
+      <RegionalAid t={t.regionalAid} />
       <FundingBanner t={t.fundingBanner} />
       <Footer />
     </main>

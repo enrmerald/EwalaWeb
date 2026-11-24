@@ -318,13 +318,13 @@
   },
   "sellos": {
     "meta": {
-      "title": "European projects and funding | Ewala",
-      "description": "Posters of the European projects and public funding of Ewala IT Services."
+      "title": "Projects, aid and funding | Ewala",
+      "description": "Posters of the European projects, public aid and funding of Ewala IT Services."
     },
     "breadcrumbHome": "Home",
-    "breadcrumbCurrent": "Projects and funding",
-    "heroTitle": "European projects and funding",
-    "heroSubtitle": "The European research and innovation projects and public funding programmes Ewala takes part in.",
+    "breadcrumbCurrent": "Projects, aid and funding",
+    "heroTitle": "Projects, aid and funding",
+    "heroSubtitle": "The European research and innovation projects, public aid and funding programmes Ewala takes part in.",
     "sealsHeading": "Recognitions and quality seals",
     "seals": [
       {
@@ -401,6 +401,19 @@
         "alt": "LIVET - GUARDIANS · European Union Research & Innovation Programme"
       }
     ],
+    "regionalAid": {
+      "heading": "Regional public aid",
+      "intro": "Ewala IT Services S.L. has received aid from the Government of the Principality of Asturias for the business development of self-employed workers and SMEs.",
+      "poster": {
+        "src": "/recursos/cartel-impulso-empresarial-de-autonomos-y-pymes-2026-1142x764.webp",
+        "width": 1142,
+        "height": 764,
+        "alt": "Poster, in Spanish, of the 2026 aid for the business development of self-employed workers and SMEs, file AYUD/2026/90837, funded by the Government of the Principality of Asturias.",
+        "title": "AYUD/2026/90837 · Principality of Asturias",
+        "viewFull": "View the poster at full size",
+        "caption": "Aid for the business development of self-employed workers and SMEs 2026, file AYUD/2026/90837. Project: refurbishment and improvement of Ewala's workplace in Silvota. Beneficiary: Ewala IT Services S.L. Project funded by the Government of the Principality of Asturias through the Regional Ministry of Science, Industry and Employment. The original poster is in Spanish."
+      }
+    },
     "fundingBanner": {
       "headline": "European public funding",
       "description": "Ewala IT Services S.L. is a certified Digitalising Agent under the Kit Digital and Kit Consulting programmes, funded by the European Union (NextGenerationEU), within the Recovery, Transformation and Resilience Plan, and managed by Red.es, under the Ministry for Digital Transformation and Public Service.",

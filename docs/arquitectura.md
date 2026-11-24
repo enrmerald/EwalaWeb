@@ -341,6 +341,19 @@ arriba y mitad sobre la banda, y repite 1 columna; LIVET: copia byte a byte). Lo
 antigua en caché no sirva otra proporción. Las bandas negras inferiores no coinciden entre carteles
 porque cada diseño original las tenía distintas.
 
+**Ayuda regional (Principado de Asturias).** `regional-aid.tsx` muestra el cartel de la ayuda «Impulso
+empresarial de autónomos y pymes 2026» (AYUD/2026/90837) entre los carteles europeos y el banner Kit. Mide
+**1142×764** (otra proporción que los europeos), así que se pinta a su proporción natural, **sin `object-cover`**
+(recortaría el marco verde), en una placa que escala con el ancho (sin scroll horizontal en móvil).
+El `alt` es breve (expediente y organismo financiador); el texto legal completo se muestra como pie visible
+(`poster.title` + `poster.caption`), de modo que no depende de la imagen y es accesible, y un enlace
+(`poster.viewFull`, `rel="noopener noreferrer"`) abre el WebP a tamaño real. En EN el cartel sigue en español y
+el `alt` y el pie lo indican.
+
+**Optimización de imágenes.** `images.unoptimized: true` (obligatorio con `output: 'export'`): `next/image` solo
+emite un `<img>`, sin WebP/AVIF ni `srcset`. Hay que optimizar **a mano antes de commitear**: este cartel pasó de
+PNG (60 KB) a WebP lossless (26 KB; con pérdida q95 pesaba 71 KB por ser gráfica plana con texto).
+
 > `/recursos` fue la página anterior de carteles y banner Kit; se eliminó y su contenido pasó aquí.
 > Nunca llegó a publicarse en ewala.es, así que no necesita redirección.
 
